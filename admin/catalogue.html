@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catalogue — Délices de Provence</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    :root {
+      --bg: #f8f5f0;
+      --surface: #fff;
+      --border: #e5ddd4;
+      --primary: #c4913a;
+      --text: #2c1810;
+      --muted: #8b6e5a;
+      --danger: #d94f4f;
+      --success: #3a9a5c;
+      --r: 8px;
+      --shadow: 0 2px 8px rgba(44,24,16,.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── Login ─────────────────────────────────────────── */
+    #loginScreen { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; gap:1rem; }
+    #loginScreen h1 { font-size:1.3rem; }
+    #loginScreen p { color:var(--muted); font-size:.9rem; }
+    .btn-login { padding:.65rem 2rem; background:var(--primary); color:#fff; border:none; border-radius:var(--r); font-size:1rem; cursor:pointer; }
+    .btn-login:hover { opacity:.88; }
+
+    /* ── Admin layout ───────────────────────────────────── */
+    #adminScreen { display:none; }
+
+    .topbar {
+      background:var(--surface); border-bottom:1px solid var(--border);
+      padding:.65rem 1.25rem; display:flex; align-items:center; gap:.75rem;
+      position:sticky; top:0; z-index:100; box-shadow:var(--shadow); flex-wrap:wrap;
+    }
+    .topbar h1 { font-size:1rem; font-weight:600; flex:1; min-width:120px; }
+    .status { font-size:.78rem; padding:.25rem .65rem; border-radius:50px; }
+    .status.saving { color:var(--primary); background:rgba(196,145,58,.12); }
+    .status.saved  { color:var(--success); background:rgba(58,154,92,.12); }
+    .status.error  { color:var(--danger);  background:rgba(217,79,79,.12); }
+
+    /* ── Toolbar ─────────────────────────────────────────── */
+    .toolbar {
+      padding:.75rem 1.25rem; display:flex; gap:.6rem; flex-wrap:wrap; align-items:center;
+      background:var(--surface); border-bottom:1px solid var(--border);
+    }
+    .toolbar input[type="search"] {
+      flex:1; min-width:180px; padding:.45rem .7rem;
+      border:1.5px solid var(--border); border-radius:var(--r); font-size:.88rem; outline:none;
+    }
+    .toolbar input[type="search"]:focus { border-color:var(--primary); }
+    .toolbar select {
+      padding:.45rem .7rem; border:1.5px solid var(--border); border-radius:var(--r);
+      font-size:.88rem; background:#fff; outline:none;
+    }
+    .toolbar select:focus { border-color:var(--primary); }
+    .check-label { display:flex; align-items:center; gap:.35rem; cursor:pointer; font-size:.85rem; white-space:nowrap; }
+    .check-label input { accent-color:var(--primary); width:15px; height:15px; }
+
+    /* ── Buttons ─────────────────────────────────────────── */
+    .btn { padding:.45rem .9rem; border:none; border-radius:var(--r); font-size:.83rem; font-weight:500; cursor:pointer; transition:opacity .15s; }
+    .btn:hover { opacity:.85; }
+    .btn:disabled { opacity:.5; cursor:default; }
+    .btn-primary { background:var(--primary); color:#fff; }
+    .btn-danger  { background:var(--danger);  color:#fff; }
+    .btn-ghost   { background:transparent; border:1.5px solid var(--border); color:var(--text); }
+    .btn-sm      { padding:.28rem .55rem; font-size:.75rem; }
+    .btn-text    { background:none; border:none; color:var(--muted); font-size:.8rem; cursor:pointer; text-decoration:underline; }
+
+    /* ── Count bar ───────────────────────────────────────── */
+    .count-bar { padding:.4rem 1.25rem; font-size:.8rem; color:var(--muted); }
+
+    /* ── Table ───────────────────────────────────────────── */
+    .table-wrap { padding:0 1.25rem 3rem; overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; background:var(--surface); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden; }
+    thead th {
+      padding:.6rem 1rem; text-align:left; font-size:.73rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:.05em; color:var(--muted);
+      background:#faf8f5; border-bottom:1px solid var(--border);
+    }
+    tbody tr { border-bottom:1px solid var(--border); transition:background .12s; }
+    tbody tr:last-child { border-bottom:none; }
+    tbody tr:hover { background:#faf8f5; }
+    tbody tr.row-hidden { opacity:.55; }
+    td { padding:.5rem 1rem; vertical-align:middle; }
+    td.c-img { width:52px; padding:.35rem .65rem; }
+    td.c-img img { width:40px; height:40px; object-fit:cover; border-radius:4px; display:block; }
+    td.c-img .no-img { width:40px; height:40px; border-radius:4px; background:#f0ece6; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:1.2rem; }
+    td.c-nom { font-weight:500; max-width:200px; }
+    td.c-cat { font-size:.82rem; color:var(--muted); }
+    td.c-prix { width:90px; }
+    td.c-vis { width:64px; text-align:center; }
+    td.c-actions { width:82px; }
+    .row-btns { display:flex; gap:.3rem; }
+
+    /* ── Toggle switch ───────────────────────────────────── */
+    .toggle { position:relative; display:inline-block; width:34px; height:19px; }
+    .toggle input { opacity:0; width:0; height:0; }
+    .toggle .track {
+      position:absolute; inset:0; background:#ccc; border-radius:20px;
+      cursor:pointer; transition:background .2s;
+    }
+    .toggle .track::before {
+      content:''; position:absolute; width:13px; height:13px; left:3px; bottom:3px;
+      background:#fff; border-radius:50%; transition:transform .2s;
+    }
+    .toggle input:checked + .track { background:var(--success); }
+    .toggle input:checked + .track::before { transform:translateX(15px); }
+
+    /* ── Modal ───────────────────────────────────────────── */
+    .overlay {
+      display:none; position:fixed; inset:0; background:rgba(0,0,0,.45);
+      z-index:1000; overflow-y:auto; padding:2rem 1rem;
+    }
+    .overlay.open { display:flex; align-items:flex-start; justify-content:center; }
+    .modal {
+      background:var(--surface); border-radius:12px; width:100%; max-width:540px;
+      padding:1.5rem; box-shadow:0 24px 64px rgba(0,0,0,.28); position:relative; margin:auto;
+    }
+    .modal h2 { font-size:1.05rem; font-weight:600; margin-bottom:1.25rem; }
+    .modal-close {
+      position:absolute; top:.9rem; right:.9rem; background:none; border:none;
+      font-size:1.4rem; cursor:pointer; color:var(--muted); line-height:1; padding:.1rem .3rem;
+    }
+    .modal-close:hover { color:var(--text); }
+
+    /* ── Form ────────────────────────────────────────────── */
+    .fg { display:flex; flex-direction:column; gap:.3rem; margin-bottom:.9rem; }
+    .fg label { font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+    .fg input, .fg select, .fg textarea {
+      padding:.48rem .65rem; border:1.5px solid var(--border); border-radius:6px;
+      font-size:.9rem; font-family:inherit; outline:none; transition:border-color .2s; background:#fff;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color:var(--primary); }
+    .fg textarea { resize:vertical; min-height:68px; }
+    .fg .hint { font-size:.74rem; color:var(--muted); }
+    .frow { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
+    .fcheckrow { display:flex; gap:1.5rem; flex-wrap:wrap; margin-bottom:.9rem; }
+
+    /* ── Image zone ──────────────────────────────────────── */
+    .img-zone {
+      border:2px dashed var(--border); border-radius:8px; padding:.75rem;
+      text-align:center; cursor:pointer; position:relative; transition:border-color .2s;
+      min-height:80px; display:flex; align-items:center; justify-content:center;
+    }
+    .img-zone:hover { border-color:var(--primary); }
+    .img-zone input[type="file"] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+    .img-zone img { max-width:100%; max-height:110px; object-fit:contain; border-radius:4px; pointer-events:none; }
+    .img-placeholder { color:var(--muted); font-size:.85rem; pointer-events:none; }
+
+    /* ── Modal footer ────────────────────────────────────── */
+    .modal-footer {
+      display:flex; gap:.6rem; justify-content:flex-end;
+      margin-top:1.25rem; padding-top:1rem; border-top:1px solid var(--border);
+    }
+
+    /* ── Loading / empty ─────────────────────────────────── */
+    .placeholder { text-align:center; padding:2.5rem; color:var(--muted); }
+  </style>
+</head>
+<body>
+
+  <!-- ── Login ────────────────────────────────────────── -->
+  <div id="loginScreen">
+    <h1>Administration — Délices de Provence</h1>
+    <p>Connectez-vous pour gérer le catalogue</p>
+    <button class="btn-login" onclick="netlifyIdentity.open()">Se connecter</button>
+  </div>
+
+  <!-- ── Admin ─────────────────────────────────────────── -->
+  <div id="adminScreen">
+
+    <div class="topbar">
+      <h1>Catalogue produits</h1>
+      <span class="status" id="statusEl"></span>
+      <a href="boutique.html" target="_blank" class="btn btn-ghost btn-sm">Voir la boutique ↗</a>
+      <button class="btn btn-primary btn-sm" onclick="openModal(-1)">+ Ajouter un produit</button>
+      <button class="btn-text" onclick="netlifyIdentity.logout()">Déconnexion</button>
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="searchInput" placeholder="Rechercher…" oninput="renderTable()">
+      <select id="filterCat" onchange="renderTable()">
+        <option value="">Toutes les catégories</option>
+        <option value="alcools">Alcools &amp; Champagnes</option>
+        <option value="autour-olive">Autour de l'Olive</option>
+        <option value="bieres">Bières</option>
+        <option value="biscuits-sales">Biscuits Salés</option>
+        <option value="biscuits-sucres">Biscuits Sucrés</option>
+        <option value="cafe-the">Café, Thé &amp; Infusions</option>
+        <option value="chocolat">Chocolat &amp; Confiseries</option>
+        <option value="confitures">Confitures</option>
+        <option value="epices">Épices &amp; Lavande</option>
+        <option value="jus">Jus de Fruits</option>
+        <option value="miel">Miel</option>
+        <option value="pates-riz">Pâtes, Riz &amp; Ravioles</option>
+        <option value="plats-cuisines">Plats Cuisinés</option>
+        <option value="sel-camargue">Sel de Camargue</option>
+        <option value="sirops">Sirops</option>
+        <option value="terrines">Terrines &amp; Charcuteries</option>
+        <option value="vins">Vins</option>
+      </select>
+      <label class="check-label">
+        <input type="checkbox" id="filterHidden" onchange="renderTable()"> Masqués seulement
+      </label>
+    </div>
+
+    <div class="count-bar" id="countBar">Chargement…</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="c-img"></th>
+            <th>Nom</th>
+            <th>Catégorie</th>
+            <th>Prix</th>
+            <th class="c-vis">Visible</th>
+            <th class="c-actions"></th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr><td colspan="6" class="placeholder">Chargement…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Modal add/edit ────────────────────────────────── -->
+  <div class="overlay" id="overlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" onclick="closeModal()" aria-label="Fermer">&times;</button>
+      <h2 id="modalTitle">Nouveau produit</h2>
+
+      <div class="frow">
+        <div class="fg">
+          <label>Catégorie *</label>
+          <select id="f_cat">
+            <option value="alcools">Alcools &amp; Champagnes</option>
+            <option value="autour-olive">Autour de l'Olive</option>
+            <option value="bieres">Bières</option>
+            <option value="biscuits-sales">Biscuits Salés</option>
+            <option value="biscuits-sucres">Biscuits Sucrés</option>
+            <option value="cafe-the">Café, Thé &amp; Infusions</option>
+            <option value="chocolat">Chocolat &amp; Confiseries</option>
+            <option value="confitures">Confitures</option>
+            <option value="epices">Épices &amp; Lavande</option>
+            <option value="jus">Jus de Fruits</option>
+            <option value="miel">Miel</option>
+            <option value="pates-riz">Pâtes, Riz &amp; Ravioles</option>
+            <option value="plats-cuisines">Plats Cuisinés</option>
+            <option value="sel-camargue">Sel de Camargue</option>
+            <option value="sirops">Sirops</option>
+            <option value="terrines">Terrines &amp; Charcuteries</option>
+            <option value="vins">Vins</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Nom du produit *</label>
+          <input type="text" id="f_nom" placeholder="Ex : Miel de lavande">
+        </div>
+      </div>
+
+      <div class="fg">
+        <label>Photo</label>
+        <div class="img-zone" id="imgZone">
+          <input type="file" id="f_file" accept="image/*" onchange="onFileChange(this)">
+          <img id="imgPreview" src="" alt="" style="display:none">
+          <span class="img-placeholder" id="imgPlaceholder">📷 Cliquer pour choisir une photo</span>
+        </div>
+        <input type="hidden" id="f_img">
+      </div>
+
+      <div class="fg">
+        <label>Description</label>
+        <textarea id="f_desc" placeholder="Texte affiché au clic sur le produit dans la boutique"></textarea>
+      </div>
+
+      <div class="fg">
+        <label>Légende photo</label>
+        <input type="text" id="f_leg" placeholder="Ex : Produit artisanal de Provence">
+      </div>
+
+      <div class="frow">
+        <div class="fg">
+          <label>Prix</label>
+          <input type="text" id="f_prix" placeholder="Ex : 4,50 €">
+        </div>
+        <div class="fg">
+          <label>Contenance / Poids</label>
+          <input type="text" id="f_cont" placeholder="Ex : 250 g — 75 cL">
+        </div>
+      </div>
+
+      <div class="fg">
+        <label>Prix au détail</label>
+        <input type="text" id="f_prixU" placeholder="Ex : 1,80 € / 100g">
+      </div>
+
+      <div class="fcheckrow">
+        <label class="check-label">
+          <input type="checkbox" id="f_visible"> Produit visible sur le site
+        </label>
+        <label class="check-label">
+          <input type="checkbox" id="f_bs"> Best-seller (page d'accueil)
+        </label>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal()">Annuler</button>
+        <button class="btn btn-primary" id="saveBtn" onclick="saveProduct()">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    var CAT = {
+      'alcools':         'Alcools & Champagnes',
+      'autour-olive':    "Autour de l'Olive",
+      'bieres':          'Bières',
+      'biscuits-sales':  'Biscuits Salés',
+      'biscuits-sucres': 'Biscuits Sucrés',
+      'cafe-the':        'Café, Thé & Infusions',
+      'chocolat':        'Chocolat & Confiseries',
+      'confitures':      'Confitures',
+      'epices':          'Épices & Lavande',
+      'jus':             'Jus de Fruits',
+      'miel':            'Miel',
+      'pates-riz':       'Pâtes, Riz & Ravioles',
+      'plats-cuisines':  'Plats Cuisinés',
+      'sel-camargue':    'Sel de Camargue',
+      'sirops':          'Sirops',
+      'terrines':        'Terrines & Charcuteries',
+      'vins':            'Vins'
+    };
+
+    var GIT   = '/.netlify/git/github/contents/';
+    var FILE  = 'data/catalogue.json';
+    var products = [];
+    var fileSha  = '';
+    var editIdx  = -1;
+
+    // ── Auth ──────────────────────────────────────────────
+    netlifyIdentity.on('init',  function (u) { if (u) boot(u); });
+    netlifyIdentity.on('login', function (u) { netlifyIdentity.close(); boot(u); });
+    netlifyIdentity.on('logout', function () {
+      document.getElementById('adminScreen').style.display = 'none';
+      document.getElementById('loginScreen').style.display = 'flex';
+    });
+
+    function boot(user) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminScreen').style.display = 'block';
+      loadCatalogue();
+    }
+
+    function jwt() {
+      return netlifyIdentity.currentUser().jwt();
+    }
+
+    // ── Git Gateway ───────────────────────────────────────
+    function gitGet(path) {
+      return jwt().then(function (t) {
+        return fetch(GIT + path, { headers: { 'Authorization': 'Bearer ' + t } })
+          .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+      });
+    }
+
+    function gitPut(path, body) {
+      return jwt().then(function (t) {
+        return fetch(GIT + path, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + t },
+          body: JSON.stringify(body)
+        }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+      });
+    }
+
+    function loadCatalogue() {
+      setStatus('saving', 'Chargement…');
+      gitGet(FILE).then(function (data) {
+        fileSha  = data.sha;
+        products = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))))).produits || [];
+        setStatus('', '');
+        renderTable();
+      }).catch(function (e) {
+        setStatus('error', 'Erreur de chargement');
+        document.getElementById('tableBody').innerHTML =
+          '<tr><td colspan="6" class="placeholder">Impossible de charger le catalogue. Vérifiez votre connexion.</td></tr>';
+      });
+    }
+
+    function writeCatalogue(msg) {
+      setStatus('saving', 'Enregistrement…');
+      var content = btoa(unescape(encodeURIComponent(JSON.stringify({ produits: products }, null, 2))));
+      return gitPut(FILE, { message: msg, sha: fileSha, content: content })
+        .then(function (data) {
+          fileSha = data.content.sha;
+          setStatus('saved', 'Enregistré ✓');
+          setTimeout(function () { setStatus('', ''); }, 3000);
+        });
+    }
+
+    function uploadImage(file) {
+      return new Promise(function (res, rej) {
+        var reader = new FileReader();
+        reader.onerror = rej;
+        reader.onload = function (e) {
+          var b64    = e.target.result.split(',')[1];
+          var fname  = Date.now() + '_' + file.name.replace(/[^a-z0-9.\-_]/gi, '-').toLowerCase();
+          var path   = 'assets/catalogue/' + fname;
+          gitPut(path, { message: 'Photo : ' + fname, content: b64 })
+            .then(function () { res('assets/catalogue/' + fname); })
+            .catch(rej);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // ── Table ─────────────────────────────────────────────
+    function renderTable() {
+      var q    = (document.getElementById('searchInput').value  || '').toLowerCase();
+      var cat  = document.getElementById('filterCat').value;
+      var hide = document.getElementById('filterHidden').checked;
+
+      var list = products.filter(function (p) {
+        if (hide  && p.visible !== false) return false;
+        if (cat   && p.categorie !== cat) return false;
+        if (q     && (p.nom || '').toLowerCase().indexOf(q) === -1) return false;
+        return true;
+      });
+
+      document.getElementById('countBar').textContent =
+        list.length + ' produit' + (list.length > 1 ? 's' : '') + ' sur ' + products.length;
+
+      var tbody = document.getElementById('tableBody');
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="placeholder">Aucun produit trouvé</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = '';
+      list.forEach(function (p) {
+        var ri  = products.indexOf(p);
+        var vis = p.visible !== false;
+        var tr  = document.createElement('tr');
+        if (!vis) tr.className = 'row-hidden';
+        tr.innerHTML =
+          '<td class="c-img">' + (p.image
+            ? '<img src="' + esc(p.image) + '" alt="" loading="lazy">'
+            : '<div class="no-img">🖼</div>') + '</td>' +
+          '<td class="c-nom">' + eh(p.nom || '—') + '</td>' +
+          '<td class="c-cat">' + eh(CAT[p.categorie] || p.categorie || '—') + '</td>' +
+          '<td class="c-prix">' + eh(p.prix || '') + '</td>' +
+          '<td class="c-vis">' +
+            '<label class="toggle">' +
+              '<input type="checkbox"' + (vis ? ' checked' : '') +
+                ' onchange="toggleVis(' + ri + ',this.checked)">' +
+              '<span class="track"></span>' +
+            '</label>' +
+          '</td>' +
+          '<td class="c-actions"><div class="row-btns">' +
+            '<button class="btn btn-ghost btn-sm" onclick="openModal(' + ri + ')" title="Modifier">✏️</button>' +
+            '<button class="btn btn-danger btn-sm" onclick="del(' + ri + ')" title="Supprimer">🗑</button>' +
+          '</div></td>';
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ── Actions ───────────────────────────────────────────
+    window.toggleVis = function (i, v) {
+      products[i].visible = v;
+      writeCatalogue((v ? 'Affiche' : 'Masque') + ' : ' + products[i].nom).then(renderTable);
+    };
+
+    window.del = function (i) {
+      var nom = products[i].nom || 'ce produit';
+      if (!confirm('Supprimer "' + nom + '" ? Cette action est irréversible.')) return;
+      products.splice(i, 1);
+      writeCatalogue('Suppression : ' + nom).then(renderTable);
+    };
+
+    window.openModal = function (i) {
+      editIdx = i;
+      var p = i === -1 ? {} : products[i];
+      document.getElementById('modalTitle').textContent = i === -1 ? 'Nouveau produit' : 'Modifier le produit';
+      set('f_cat',    p.categorie     || 'vins');
+      set('f_nom',    p.nom           || '');
+      set('f_desc',   p.description   || '');
+      set('f_leg',    p.legende       || '');
+      set('f_prix',   p.prix          || '');
+      set('f_cont',   p.contenance    || '');
+      set('f_prixU',  p.prix_unitaire || '');
+      setChk('f_visible', p.visible !== false);
+      setChk('f_bs',      !!p.best_seller);
+      set('f_img', p.image || '');
+      set('f_file', '');
+      var prev = document.getElementById('imgPreview');
+      var ph   = document.getElementById('imgPlaceholder');
+      if (p.image) { prev.src = p.image; prev.style.display = 'block'; ph.style.display = 'none'; }
+      else         { prev.style.display = 'none'; ph.style.display = ''; }
+      document.getElementById('overlay').classList.add('open');
+      document.getElementById('f_cat').focus();
+    };
+
+    window.closeModal = function () {
+      document.getElementById('overlay').classList.remove('open');
+    };
+
+    window.onFileChange = function (input) {
+      if (!input.files || !input.files[0]) return;
+      var r = new FileReader();
+      r.onload = function (e) {
+        var img = document.getElementById('imgPreview');
+        img.src = e.target.result;
+        img.style.display = 'block';
+        document.getElementById('imgPlaceholder').style.display = 'none';
+      };
+      r.readAsDataURL(input.files[0]);
+    };
+
+    window.saveProduct = function () {
+      var nom = document.getElementById('f_nom').value.trim();
+      var cat = document.getElementById('f_cat').value;
+      if (!nom) { document.getElementById('f_nom').focus(); return; }
+
+      var saveBtn = document.getElementById('saveBtn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Enregistrement…';
+
+      var file = document.getElementById('f_file').files[0];
+
+      function commit(imgPath) {
+        var p = editIdx === -1 ? {} : products[editIdx];
+        p.nom           = nom;
+        p.categorie     = cat;
+        p.description   = document.getElementById('f_desc').value;
+        p.legende       = document.getElementById('f_leg').value;
+        p.prix          = document.getElementById('f_prix').value;
+        p.contenance    = document.getElementById('f_cont').value;
+        p.prix_unitaire = document.getElementById('f_prixU').value;
+        p.visible       = document.getElementById('f_visible').checked;
+        p.best_seller   = document.getElementById('f_bs').checked;
+        if (imgPath)   p.image = imgPath;
+        else if (!p.image) p.image = document.getElementById('f_img').value || '';
+        if (!p.id) p.id = 'p-' + Date.now();
+        if (editIdx === -1) products.push(p);
+        writeCatalogue((editIdx === -1 ? 'Ajout : ' : 'Modification : ') + nom)
+          .then(function () { closeModal(); renderTable(); })
+          .catch(function () { setStatus('error', 'Erreur sauvegarde'); })
+          .finally(function () { saveBtn.disabled = false; saveBtn.textContent = 'Enregistrer'; });
+      }
+
+      if (file) uploadImage(file).then(commit).catch(function () { commit(null); });
+      else      commit(null);
+    };
+
+    // ── Close overlay on backdrop click / Escape ──────────
+    document.getElementById('overlay').addEventListener('click', function (e) {
+      if (e.target === this) closeModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // ── Utils ─────────────────────────────────────────────
+    window.renderTable = renderTable;
+
+    function setStatus(type, msg) {
+      var el = document.getElementById('statusEl');
+      el.className = 'status' + (type ? ' ' + type : '');
+      el.textContent = msg;
+    }
+    function set(id, v)    { document.getElementById(id).value   = v; }
+    function setChk(id, v) { document.getElementById(id).checked = v; }
+    function esc(s)  { return String(s || '').replace(/"/g, '&quot;'); }
+    function eh(s)   { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  })();
+  </script>
+</body>
+</html>
