@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+  <!-- Tropical drink glass -->
+  <path d="M8 12h20l-3 18a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2z" fill="#E91E63" opacity=".3"/>
+  <path d="M8 12h20l-3 18a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2z" fill="none" stroke="#E91E63" stroke-width="1.5"/>
+  <!-- Drink -->
+  <path d="M9.5 16h17l-2.5 14a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2z" fill="#F06292"/>
+  <!-- Straw -->
+  <line x1="22" y1="4" x2="18" y2="18" stroke="#FDD835" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Umbrella -->
+  <path d="M22 4 Q26 4 28 8" fill="#4CAF50" stroke="#388E3C" stroke-width=".5"/>
+  <path d="M22 4 Q22 6 24 8" fill="#66BB6A" stroke="#388E3C" stroke-width=".5"/>
+  <!-- Fruit slice -->
+  <circle cx="12" cy="14" r="3" fill="#FF9800"/>
+  <path d="M12 14 L12 11 M12 14 L14.1 12.8 M12 14 L14.1 15.2 M12 14 L12 17 M12 14 L9.9 15.2 M12 14 L9.9 12.8" stroke="#FFF" stroke-width=".5"/>
+</svg>

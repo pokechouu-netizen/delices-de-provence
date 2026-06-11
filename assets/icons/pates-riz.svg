@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+  <!-- Plate -->
+  <ellipse cx="18" cy="28" rx="14" ry="5" fill="#E0E0E0"/>
+  <ellipse cx="18" cy="27" rx="12" ry="4" fill="#EEEEEE"/>
+  <!-- Spaghetti -->
+  <path d="M10 20 Q12 26 18 24 Q24 22 22 16" fill="none" stroke="#FFD54F" stroke-width="2" stroke-linecap="round"/>
+  <path d="M14 18 Q16 24 20 22 Q26 20 24 14" fill="none" stroke="#FFCA28" stroke-width="2" stroke-linecap="round"/>
+  <path d="M8 22 Q14 28 20 26 Q26 24 28 18" fill="none" stroke="#FFB300" stroke-width="2" stroke-linecap="round"/>
+  <path d="M12 16 Q14 22 18 20 Q22 18 20 12" fill="none" stroke="#FFC107" stroke-width="2" stroke-linecap="round"/>
+  <!-- Sauce -->
+  <ellipse cx="18" cy="18" rx="5" ry="3" fill="#D32F2F" opacity=".8"/>
+</svg>

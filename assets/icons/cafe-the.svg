@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+  <!-- Cup -->
+  <path d="M7 14h18v12a5 5 0 0 1-5 5h-8a5 5 0 0 1-5-5z" fill="#ECEFF1"/>
+  <!-- Coffee -->
+  <path d="M7 14h18v4a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1z" fill="#6D4C41"/>
+  <!-- Handle -->
+  <path d="M25 16h2a3 3 0 0 1 3 3v0a3 3 0 0 1-3 3h-2" fill="none" stroke="#ECEFF1" stroke-width="2" stroke-linecap="round"/>
+  <!-- Saucer -->
+  <ellipse cx="16" cy="31" rx="11" ry="2" fill="#CFD8DC"/>
+  <!-- Steam -->
+  <path d="M12 10 Q13 7 12 4" fill="none" stroke="#90A4AE" stroke-width="1.2" stroke-linecap="round" opacity=".6"/>
+  <path d="M16 9 Q17 6 16 3" fill="none" stroke="#90A4AE" stroke-width="1.2" stroke-linecap="round" opacity=".6"/>
+  <path d="M20 10 Q21 7 20 4" fill="none" stroke="#90A4AE" stroke-width="1.2" stroke-linecap="round" opacity=".6"/>
+</svg>

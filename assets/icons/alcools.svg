@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+  <!-- Champagne bottle -->
+  <path d="M16 30h4v3h-4z" fill="#546E7A"/>
+  <path d="M14 12h8l1 18h-10z" fill="#2E7D32"/>
+  <path d="M14 12h8l.3 5h-8.6z" fill="#388E3C"/>
+  <path d="M17 5h2v7h-2z" fill="#795548"/>
+  <rect x="14.5" y="18" width="7" height="5" rx="1" fill="#FDD835"/>
+  <!-- Cork popping -->
+  <rect x="20" y="2" width="3" height="4" rx="1" fill="#A1887F" transform="rotate(15 21.5 4)"/>
+  <!-- Bubbles -->
+  <circle cx="24" cy="6" r="1.2" fill="#FFF9C4" opacity=".7"/>
+  <circle cx="26" cy="9" r=".8" fill="#FFF9C4" opacity=".5"/>
+  <circle cx="22" cy="3" r=".9" fill="#FFF9C4" opacity=".6"/>
+</svg>

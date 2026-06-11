@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ddeprovence",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "8031", "."],
+      "port": 8031
+    }
+  ]
+}

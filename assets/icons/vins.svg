@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+  <!-- Wine glass stem and base -->
+  <rect x="16.5" y="22" width="3" height="8" fill="#BDBDBD"/>
+  <ellipse cx="18" cy="31" rx="6" ry="2" fill="#BDBDBD"/>
+  <!-- Glass bowl -->
+  <path d="M8 6h20v4a10 10 0 0 1-10 12 10 10 0 0 1-10-12z" fill="none" stroke="#BDBDBD" stroke-width="1.5"/>
+  <!-- Wine -->
+  <path d="M9 10h18a9 9 0 0 1-9 11 9 9 0 0 1-9-11z" fill="#B71C1C" opacity=".8"/>
+  <!-- Reflection -->
+  <path d="M22 8 Q24 10 23 14" fill="none" stroke="#FFF" stroke-width=".8" stroke-linecap="round" opacity=".4"/>
+</svg>

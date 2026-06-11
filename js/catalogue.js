@@ -1,0 +1,281 @@
+/*
+  catalogue.js — Délices de Provence
+  Chargement JSON GitHub · Filtres · Lightbox
+  Utilisé par boutique.html
+*/
+
+(function () {
+  'use strict';
+
+  var CATALOGUE_URL = 'data/catalogue.json';
+
+  var CATEGORY_DISPLAY = {
+    'alcools':         { name: 'Alcools & Champagnes',   icon: 'alcools' },
+    'autour-olive':    { name: "Autour de l'Olive",      icon: 'autour-olive' },
+    'bieres':          { name: 'Bières',                 icon: 'bieres' },
+    'biscuits-sales':  { name: 'Biscuits Salés',         icon: 'biscuits-sales' },
+    'biscuits-sucres': { name: 'Biscuits Sucrés',        icon: 'biscuits-sucres' },
+    'cafe-the':        { name: 'Café, Thé & Infusions',  icon: 'cafe-the' },
+    'chocolat':        { name: 'Chocolat & Confiseries', icon: 'chocolat' },
+    'confitures':      { name: 'Confitures',             icon: 'confitures' },
+    'epices':          { name: 'Épices & Lavande',       icon: 'epices' },
+    'jus':             { name: 'Jus de Fruits',          icon: 'jus' },
+    'miel':            { name: 'Miel',                   icon: 'miel' },
+    'pates-riz':       { name: 'Pâtes, Riz & Ravioles',  icon: 'pates-riz' },
+    'plats-cuisines':  { name: 'Plats Cuisinés',         icon: 'plats-cuisines' },
+    'sel-camargue':    { name: 'Sel de Camargue',        icon: 'sel-camargue' },
+    'sirops':          { name: 'Sirops',                 icon: 'sirops' },
+    'terrines':        { name: 'Terrines & Charcuteries',icon: 'terrines' },
+    'vins':            { name: 'Vins',                   icon: 'vins' }
+  };
+
+  var filtersContainer = document.getElementById('catalogueFilters');
+  var photoGrid        = document.getElementById('catalogueGridPhotos');
+  var countEl          = document.getElementById('catalogueCount');
+
+  if (!filtersContainer || !photoGrid) return;
+
+  // ── Build one product card ──
+  function buildCard(product) {
+    var cat  = product.categorie || '';
+    var disp = CATEGORY_DISPLAY[cat] || { name: cat, icon: cat };
+    var nom  = product.nom         || '';
+    var desc = product.description || '';
+    var leg  = product.legende     || '';
+    var prix = product.prix        || '';
+    var cont = product.contenance  || '';
+    var prixU = product.prix_unitaire || '';
+
+    var card = document.createElement('div');
+    card.className = 'photo-card reveal';
+    card.setAttribute('data-category', cat);
+    card.setAttribute('data-nom',         nom);
+    card.setAttribute('data-description', desc);
+    card.setAttribute('data-legende',     leg);
+    card.setAttribute('data-prix',        prix);
+    card.setAttribute('data-contenance',  cont);
+    card.setAttribute('data-prix-unitaire', prixU);
+
+    var prixHtml = '';
+    if (prix) {
+      prixHtml += '<span class="photo-card__prix">' + escHtml(prix) + '</span>';
+    }
+    if (cont) {
+      prixHtml += '<span class="photo-card__contenance">' + escHtml(cont) + '</span>';
+    }
+    if (prixU) {
+      prixHtml += '<span class="photo-card__prix-unit">' + escHtml(prixU) + '</span>';
+    }
+
+    card.innerHTML =
+      '<div class="photo-card__img-wrap">' +
+        '<img src="' + escAttr(product.image) + '" alt="' + escAttr(nom + ' — Délices de Provence Valréas') + '" loading="lazy">' +
+        '<div class="photo-card__overlay">' +
+          '<span class="photo-card__zoom">' + zoomSvg() + '</span>' +
+        '</div>' +
+      '</div>' +
+      (nom ? '<span class="photo-card__nom">' + escHtml(nom) + '</span>' : '') +
+      '<span class="photo-card__category"><img src="assets/icons/' + escAttr(disp.icon) + '.svg" alt="' + escAttr(disp.name) + '" class="icon-svg"> ' + escHtml(disp.name) + '</span>' +
+      (prixHtml ? '<div class="photo-card__prix-wrap">' + prixHtml + '</div>' : '');
+
+    return card;
+  }
+
+  function zoomSvg() {
+    return '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>';
+  }
+
+  function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function escAttr(str) {
+    return String(str).replace(/"/g,'&quot;');
+  }
+
+  // ── Filters logic ──
+  function initFilters(allCards) {
+    var filterBtns = filtersContainer.querySelectorAll('.catalogue__filter');
+
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filterBtns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var filter = btn.getAttribute('data-filter');
+        var visible = 0;
+
+        allCards.forEach(function (card) {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.classList.remove('hidden');
+            card.classList.add('fade-in');
+            setTimeout(function () { card.classList.remove('fade-in'); }, 400);
+            visible++;
+          } else {
+            card.classList.add('hidden');
+            card.classList.remove('fade-in');
+          }
+        });
+
+        if (countEl) countEl.textContent = visible + ' produit' + (visible > 1 ? 's' : '');
+      });
+    });
+
+    var activeBtn = filtersContainer.querySelector('.catalogue__filter.active');
+    if (activeBtn) activeBtn.click();
+    else if (filterBtns[0]) filterBtns[0].click();
+  }
+
+  // ── Lightbox ──
+  function initLightbox(allCards) {
+    var lightbox      = document.getElementById('lightbox');
+    var lightboxImg   = document.getElementById('lightboxImg');
+    var lightboxInfo  = document.getElementById('lightboxInfo');
+    var lightboxTitle = document.getElementById('lightboxTitle');
+    var lightboxDesc  = document.getElementById('lightboxDesc');
+    var lightboxPrice = document.getElementById('lightboxPrice');
+    var lightboxCont  = document.getElementById('lightboxContenance');
+    var lightboxPrixU = document.getElementById('lightboxPrixUnitaire');
+    var lightboxCat   = document.getElementById('lightboxCategory');
+    var lightboxLeg   = document.getElementById('lightboxLegende');
+    var lightboxClose = document.getElementById('lightboxClose');
+    var lightboxPrev  = document.getElementById('lightboxPrev');
+    var lightboxNext  = document.getElementById('lightboxNext');
+
+    if (!lightbox) return;
+
+    var currentIndex = 0;
+    var visibleCards = [];
+
+    function getVisible() {
+      return allCards.filter(function (c) { return !c.classList.contains('hidden'); });
+    }
+
+    function populate(card) {
+      var img     = card.querySelector('img');
+      var catEl   = card.querySelector('.photo-card__category');
+      var nom     = card.getAttribute('data-nom')           || '';
+      var desc    = card.getAttribute('data-description')   || '';
+      var leg     = card.getAttribute('data-legende')       || '';
+      var prix    = card.getAttribute('data-prix')          || '';
+      var cont    = card.getAttribute('data-contenance')    || '';
+      var prixU   = card.getAttribute('data-prix-unitaire') || '';
+
+      lightboxImg.src = img ? img.src : '';
+      lightboxImg.alt = img ? img.alt : '';
+      lightboxTitle.textContent = nom;
+      lightboxDesc.textContent  = desc;
+
+      if (lightboxPrice) lightboxPrice.textContent = prix;
+      if (lightboxCont)  lightboxCont.textContent  = cont;
+      if (lightboxPrixU) lightboxPrixU.textContent  = prixU;
+      if (lightboxLeg)   lightboxLeg.textContent   = leg;
+      if (lightboxCat)   lightboxCat.innerHTML = catEl ? catEl.innerHTML : '';
+
+      var hasInfo = nom || desc || prix || cont || prixU || leg;
+      lightboxInfo.classList.toggle('lightbox__info--empty', !hasInfo);
+    }
+
+    function open(index) {
+      visibleCards = getVisible();
+      if (index < 0 || index >= visibleCards.length) return;
+      currentIndex = index;
+      populate(visibleCards[currentIndex]);
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+      lightboxImg.src = '';
+    }
+
+    function navigate(dir) {
+      visibleCards = getVisible();
+      currentIndex = (currentIndex + dir + visibleCards.length) % visibleCards.length;
+      populate(visibleCards[currentIndex]);
+    }
+
+    allCards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        visibleCards = getVisible();
+        var idx = visibleCards.indexOf(card);
+        if (idx !== -1) open(idx);
+      });
+    });
+
+    lightboxClose.addEventListener('click', close);
+    lightboxPrev.addEventListener('click', function () { navigate(-1); });
+    lightboxNext.addEventListener('click', function () { navigate(1); });
+    lightbox.addEventListener('click', function (e) { if (e.target === lightbox) close(); });
+
+    document.addEventListener('keydown', function (e) {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape')     close();
+      if (e.key === 'ArrowLeft')  navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
+
+    var touchStartX = 0;
+    lightbox.addEventListener('touchstart', function (e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', function (e) {
+      var diff = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(diff) > 50) navigate(diff > 0 ? -1 : 1);
+    }, { passive: true });
+  }
+
+  // ── Scroll reveal for dynamically added cards ──
+  function observeCards(cards) {
+    if (!('IntersectionObserver' in window)) {
+      cards.forEach(function (c) { c.classList.add('visible'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    cards.forEach(function (c) { obs.observe(c); });
+  }
+
+  // ── Main loader ──
+  fetch(CATALOGUE_URL + '?v=' + Date.now())
+    .then(function (res) {
+      if (!res.ok) throw new Error('catalogue.json non disponible');
+      return res.json();
+    })
+    .then(function (data) {
+      var produits = data.produits || [];
+      if (produits.length === 0) throw new Error('Aucun produit');
+
+      photoGrid.innerHTML = '';
+      var allCards = [];
+
+      produits.forEach(function (p) {
+        var card = buildCard(p);
+        photoGrid.appendChild(card);
+        allCards.push(card);
+      });
+
+      if (countEl) countEl.textContent = allCards.length + ' produits';
+
+      observeCards(allCards);
+      initFilters(allCards);
+      initLightbox(allCards);
+    })
+    .catch(function (err) {
+      console.warn('catalogue.js :', err);
+      photoGrid.innerHTML =
+        '<div class="catalogue__fallback">' +
+          '<div class="catalogue__fallback-icon">🌿</div>' +
+          '<h3>Catalogue temporairement indisponible</h3>' +
+          '<p>Revenez dans quelques instants ou contactez-nous directement.</p>' +
+        '</div>';
+    });
+
+})();

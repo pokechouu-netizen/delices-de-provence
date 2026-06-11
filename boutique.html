@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Boutique — Délices de Provence, Épicerie Fine à Valréas</title>
+  <meta name="description" content="Découvrez tout notre catalogue de produits artisanaux de Provence : confitures, huile d'olive, terrines, miel, vins, sirops et bien plus. Épicerie fine à Valréas.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/jpeg" href="assets/images/badge-local-artisanal.jpg">
+  <link rel="apple-touch-icon" href="assets/images/badge-local-artisanal.jpg">
+</head>
+<body class="page-boutique">
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ===== NAV ===== -->
+  <nav class="nav" role="navigation" aria-label="Navigation principale">
+    <a href="index.html" class="nav__logo">
+      <img src="assets/images/badge-local-artisanal.jpg" alt="Logo Délices de Provence" class="nav__logo-img">
+      Délices<span>de Provence</span>
+    </a>
+    <div class="nav__burger" aria-label="Menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="nav__menu">
+      <ul class="nav__links">
+        <li><a href="index.html#tresors" class="nav__link">Nos Trésors</a></li>
+        <li><a href="boutique.html" class="nav__link nav__link--active">Boutique</a></li>
+        <li><a href="index.html#cse" class="nav__link">Entreprises</a></li>
+        <li><a href="index.html#qui-sommes-nous" class="nav__link">Qui sommes-nous</a></li>
+        <li><a href="index.html#on-parle-de-nous" class="nav__link">Presse</a></li>
+        <li><a href="index.html#infos" class="nav__link">Infos</a></li>
+      </ul>
+      <a href="#" data-cta="phone" class="nav__cta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Nous contacter
+      </a>
+      <div class="nav__social">
+        <a href="https://www.instagram.com/delicesdeprovence84valreas/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61559185874782" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== BOUTIQUE HERO ===== -->
+  <header class="boutique-hero">
+    <div class="boutique-hero__inner">
+      <p class="boutique-hero__label">Épicerie Fine — Valréas</p>
+      <h1 class="boutique-hero__title">Notre Boutique</h1>
+      <p class="boutique-hero__subtitle">144 produits artisanaux sélectionnés avec soin — le meilleur de la Provence, classé par catégorie.</p>
+      <a href="index.html" class="boutique-hero__back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        Retour à l'accueil
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== CATALOGUE COMPLET ===== -->
+  <section class="section catalogue" id="catalogue">
+    <div class="section__inner">
+
+      <div class="catalogue__filters reveal" id="catalogueFilters">
+        <button class="catalogue__filter active" data-filter="all">Tous les produits</button>
+        <button class="catalogue__filter" data-filter="alcools"><img src="assets/icons/alcools.svg" alt="Alcools" class="icon-svg"> Alcools & Champagnes</button>
+        <button class="catalogue__filter" data-filter="autour-olive"><img src="assets/icons/autour-olive.svg" alt="Olive" class="icon-svg"> Autour de l'Olive</button>
+        <button class="catalogue__filter" data-filter="bieres"><img src="assets/icons/bieres.svg" alt="Bières" class="icon-svg"> Bières</button>
+        <button class="catalogue__filter" data-filter="biscuits-sales"><img src="assets/icons/biscuits-sales.svg" alt="Biscuits salés" class="icon-svg"> Biscuits Salés</button>
+        <button class="catalogue__filter" data-filter="biscuits-sucres"><img src="assets/icons/biscuits-sucres.svg" alt="Biscuits sucrés" class="icon-svg"> Biscuits Sucrés</button>
+        <button class="catalogue__filter" data-filter="cafe-the"><img src="assets/icons/cafe-the.svg" alt="Café" class="icon-svg"> Café, Thé & Infusions</button>
+        <button class="catalogue__filter" data-filter="chocolat"><img src="assets/icons/chocolat.svg" alt="Chocolat" class="icon-svg"> Chocolat & Confiseries</button>
+        <button class="catalogue__filter" data-filter="confitures"><img src="assets/icons/confitures.svg" alt="Confitures" class="icon-svg"> Confitures</button>
+        <button class="catalogue__filter" data-filter="epices"><img src="assets/icons/epices.svg" alt="Épices" class="icon-svg"> Épices & Lavande</button>
+        <button class="catalogue__filter" data-filter="jus"><img src="assets/icons/jus.svg" alt="Jus" class="icon-svg"> Jus de Fruits</button>
+        <button class="catalogue__filter" data-filter="miel"><img src="assets/icons/miel.svg" alt="Miel" class="icon-svg"> Miel</button>
+        <button class="catalogue__filter" data-filter="pates-riz"><img src="assets/icons/pates-riz.svg" alt="Pâtes" class="icon-svg"> Pâtes, Riz & Ravioles</button>
+        <button class="catalogue__filter" data-filter="plats-cuisines"><img src="assets/icons/plats-cuisines.svg" alt="Plats cuisinés" class="icon-svg"> Plats Cuisinés</button>
+        <button class="catalogue__filter" data-filter="sel-camargue"><img src="assets/icons/sel-camargue.svg" alt="Sel" class="icon-svg"> Sel de Camargue</button>
+        <button class="catalogue__filter" data-filter="sirops"><img src="assets/icons/sirops.svg" alt="Sirops" class="icon-svg"> Sirops</button>
+        <button class="catalogue__filter" data-filter="terrines"><img src="assets/icons/terrines.svg" alt="Terrines" class="icon-svg"> Terrines & Charcuteries</button>
+        <button class="catalogue__filter" data-filter="vins"><img src="assets/icons/vins.svg" alt="Vins" class="icon-svg"> Vins</button>
+      </div>
+
+      <p class="catalogue__count" id="catalogueCount">Chargement…</p>
+
+      <div class="catalogue__grid catalogue__grid--photos" id="catalogueGridPhotos">
+        <div class="catalogue__loader">
+          <div class="catalogue__spinner"></div>
+          <p>Chargement du catalogue…</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer-mini">
+    <a href="mentions-legales.html">Mentions légales</a>
+    <span>|</span>
+    <a href="politique-confidentialite.html">Politique de confidentialité</a>
+  </footer>
+
+  <!-- ===== CTA OVERLAY ===== -->
+  <div class="cta-overlay" id="ctaOverlay" role="dialog" aria-label="Nous appeler" aria-hidden="true">
+    <button class="cta-overlay__close" aria-label="Fermer">&times;</button>
+    <div class="cta-overlay__box">
+      <h3 class="cta-overlay__title">Appelez-nous avec plaisir</h3>
+      <p class="cta-overlay__number">09 86 53 24 10</p>
+      <p class="cta-overlay__number-secondary">06 58 74 11 88</p>
+      <div>
+        <button class="cta-overlay__copy" data-number="0986532410" aria-label="Copier le numéro fixe">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copier le fixe
+        </button>
+        <button class="cta-overlay__copy" data-number="0658741188" aria-label="Copier le numéro mobile">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copier le mobile
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== LIGHTBOX PRODUIT ===== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Détail produit">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Fermer">&times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Photo précédente">&#8249;</button>
+    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Photo suivante">&#8250;</button>
+    <div class="lightbox__content">
+      <div class="lightbox__photo">
+        <img class="lightbox__img" id="lightboxImg" src="" alt="">
+        <p class="lightbox__legende" id="lightboxLegende"></p>
+      </div>
+      <div class="lightbox__info" id="lightboxInfo">
+        <span class="lightbox__category" id="lightboxCategory"></span>
+        <h2 class="lightbox__title" id="lightboxTitle"></h2>
+        <div class="lightbox__prix-bloc">
+          <span class="lightbox__price" id="lightboxPrice"></span>
+          <span class="lightbox__contenance" id="lightboxContenance"></span>
+          <span class="lightbox__prix-unitaire" id="lightboxPrixUnitaire"></span>
+        </div>
+        <div class="lightbox__desc-wrap">
+          <p class="lightbox__desc" id="lightboxDesc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== STICKY MAP ===== -->
+  <a href="https://www.google.com/maps/dir/?api=1&destination=27+rue+Saint-Antoine+84600+Valr%C3%A9as+France" target="_blank" rel="noopener noreferrer" class="map-sticky" id="mapSticky" aria-label="Itinéraire vers Délices de Provence">
+    <div class="map-sticky__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    </div>
+    <div class="map-sticky__text">
+      Itinéraire
+      <small>27 rue Saint-Antoine, Valréas</small>
+    </div>
+  </a>
+
+  <script src="js/main.js"></script>
+  <script src="js/catalogue.js"></script>
+</body>
+</html>

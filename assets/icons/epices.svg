@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+  <!-- Herb / lavender sprig -->
+  <path d="M18 33 Q17 25 16 20" fill="none" stroke="#558B2F" stroke-width="2" stroke-linecap="round"/>
+  <!-- Leaves -->
+  <path d="M16 20 Q10 16 12 12 Q14 14 16 17" fill="#66BB6A"/>
+  <path d="M17 17 Q22 12 20 8 Q18 11 17 14" fill="#66BB6A"/>
+  <path d="M16 24 Q8 22 10 17 Q13 20 16 22" fill="#4CAF50"/>
+  <path d="M17 22 Q24 18 22 13 Q20 17 17 20" fill="#4CAF50"/>
+  <path d="M16 28 Q10 27 11 23 Q13 25 16 26" fill="#388E3C"/>
+  <path d="M17 27 Q23 24 22 20 Q20 23 17 25" fill="#388E3C"/>
+  <!-- Top leaves -->
+  <path d="M17 14 Q13 8 15 4 Q17 8 17 11" fill="#81C784"/>
+  <path d="M17 13 Q21 7 19 3 Q17 7 17 10" fill="#81C784"/>
+</svg>
