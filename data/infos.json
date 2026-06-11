@@ -13,7 +13,7 @@
   "horaire_samedi":   "10h–13h / 15h30–19h",
   "horaire_dimanche": "Fermé",
 
-  "netlify_hook": "",
+  "netlify_hook": "https://api.netlify.com/build_hooks/6a2aa88a2518b6c5ad72c67a",
 
   "_commentaire_popup": "Popup promotionnel — mettez actif à false pour le désactiver sans toucher au code.",
   "popup": {
