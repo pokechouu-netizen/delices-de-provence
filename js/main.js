@@ -598,21 +598,18 @@
           if (text.indexOf('rue') !== -1 || text.indexOf('84600') !== -1) {
             if (infos.adresse) el.innerHTML = infos.adresse + '<br>' + (infos.code_postal || '84600') + ' ' + (infos.ville || 'Valréas') + ', France';
           }
-          if (text.indexOf('09') !== -1 && text.indexOf('06') !== -1) {
-            if (infos.telephone_fixe || infos.telephone_mobile) el.innerHTML = (infos.telephone_fixe || '') + '<br>' + (infos.telephone_mobile || '');
+          if (text.indexOf('09') !== -1) {
+            if (infos.telephone_fixe) el.textContent = infos.telephone_fixe;
           }
           if (text.indexOf('@') !== -1 && infos.email) el.textContent = infos.email;
         });
 
         // CTA overlay numbers
-        var ctaNumber    = document.querySelector('.cta-overlay__number');
-        var ctaSecondary = document.querySelector('.cta-overlay__number-secondary');
-        if (ctaNumber    && infos.telephone_fixe)    ctaNumber.textContent    = infos.telephone_fixe;
-        if (ctaSecondary && infos.telephone_mobile)  ctaSecondary.textContent = infos.telephone_mobile;
+        var ctaNumber = document.querySelector('.cta-overlay__number');
+        if (ctaNumber && infos.telephone_fixe) ctaNumber.textContent = infos.telephone_fixe;
 
         var copyBtnsAll = document.querySelectorAll('.cta-overlay__copy');
-        if (copyBtnsAll[0] && infos.telephone_fixe)   copyBtnsAll[0].setAttribute('data-number', infos.telephone_fixe.replace(/\s/g, ''));
-        if (copyBtnsAll[1] && infos.telephone_mobile)  copyBtnsAll[1].setAttribute('data-number', infos.telephone_mobile.replace(/\s/g, ''));
+        if (copyBtnsAll[0] && infos.telephone_fixe) copyBtnsAll[0].setAttribute('data-number', infos.telephone_fixe.replace(/\s/g, ''));
 
         // Mailto links
         if (infos.email) {
