@@ -171,6 +171,48 @@
         </div>
       </div>
 
+      <!-- Mentions légales -->
+      <div class="card">
+        <div class="card__title">⚖️ Mentions légales</div>
+
+        <div class="card__title" style="font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:.75rem;margin-top:-.5rem">Éditeur du site</div>
+        <div class="frow">
+          <div class="fg"><label>Enseigne</label><input type="text" id="ml_enseigne"></div>
+          <div class="fg"><label>Société</label><input type="text" id="ml_societe"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Forme juridique</label><input type="text" id="ml_forme"></div>
+          <div class="fg"><label>Code APE</label><input type="text" id="ml_ape"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>SIREN</label><input type="text" id="ml_siren"></div>
+          <div class="fg"><label>SIRET</label><input type="text" id="ml_siret"></div>
+        </div>
+
+        <div class="card__title" style="font-size:.8rem;font-weight:600;color:var(--muted);margin:.75rem 0">Coordonnées légales</div>
+        <div class="fg"><label>Adresse</label><input type="text" id="ml_adresse"></div>
+        <div class="frow">
+          <div class="fg"><label>Téléphone</label><input type="text" id="ml_tel"></div>
+          <div class="fg"><label>Email</label><input type="email" id="ml_email"></div>
+        </div>
+
+        <div class="card__title" style="font-size:.8rem;font-weight:600;color:var(--muted);margin:.75rem 0">Hébergement</div>
+        <div class="fg"><label>Hébergeur</label><input type="text" id="ml_hebergeur"></div>
+        <div class="fg"><label>Adresse hébergeur</label><input type="text" id="ml_h_adresse"></div>
+        <div class="fg"><label>Site hébergeur</label><input type="text" id="ml_h_site"></div>
+
+        <div class="card__title" style="font-size:.8rem;font-weight:600;color:var(--muted);margin:.75rem 0">Textes légaux</div>
+        <div class="fg"><label>Directrice de publication</label><textarea id="ml_directrice" rows="2" style="resize:vertical"></textarea></div>
+        <div class="fg"><label>Propriété intellectuelle</label><textarea id="ml_pi" rows="3" style="resize:vertical"></textarea></div>
+        <div class="fg"><label>Responsabilité (§1)</label><textarea id="ml_resp1" rows="2" style="resize:vertical"></textarea></div>
+        <div class="fg"><label>Responsabilité (§2)</label><textarea id="ml_resp2" rows="2" style="resize:vertical"></textarea></div>
+        <div class="fg"><label>Litiges</label><textarea id="ml_litiges" rows="2" style="resize:vertical"></textarea></div>
+
+        <div class="save-row">
+          <button class="btn btn-primary" onclick="saveSection('mentions')">Enregistrer les mentions</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -181,6 +223,8 @@
     var GIT  = '/.netlify/git/github/contents/';
     var FILE = 'data/infos.json';
     var data = {}, fileSha = '';
+    var MFILE = 'data/mentions.json';
+    var mdata = {}, mSha = '';
 
     netlifyIdentity.on('init',  function(u){ if(u) boot(); });
     netlifyIdentity.on('login', function(u){ netlifyIdentity.close(); boot(); });
@@ -193,6 +237,7 @@
       document.getElementById('loginScreen').style.display='none';
       document.getElementById('adminScreen').style.display='block';
       load();
+      loadMentions();
     }
 
     function jwt(){ return netlifyIdentity.currentUser().jwt(); }
@@ -218,6 +263,37 @@
         st('','');
         fillForm();
       }).catch(function(){ st('error','Erreur chargement'); });
+    }
+
+    function loadMentions(){
+      gitGet(MFILE).then(function(d){
+        mSha=d.sha;
+        mdata=JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\n/g,'')))));
+        fillMentions();
+      }).catch(function(){});
+    }
+
+    function writeMentions(msg){
+      st('saving','Enregistrement…');
+      var c=btoa(unescape(encodeURIComponent(JSON.stringify(mdata,null,2))));
+      return gitPut(MFILE,{message:msg,sha:mSha,content:c}).then(function(d){
+        mSha=d.content.sha;
+        st('saved','Enregistré ✓');
+        setTimeout(function(){ st('',''); },3000);
+      }).catch(function(){ st('error','Erreur sauvegarde'); });
+    }
+
+    function fillMentions(){
+      var e=mdata.editeur||{}, c=mdata.coordonnees||{}, h=mdata.hebergement||{}, cr=mdata.credits||{};
+      sv('ml_enseigne',e.enseigne||''); sv('ml_societe',e.societe||'');
+      sv('ml_forme',e.forme_juridique||''); sv('ml_ape',e.code_ape||'');
+      sv('ml_siren',e.siren||''); sv('ml_siret',e.siret||'');
+      sv('ml_adresse',c.adresse||''); sv('ml_tel',c.telephone||''); sv('ml_email',c.email||'');
+      sv('ml_hebergeur',h.hebergeur||''); sv('ml_h_adresse',h.adresse||''); sv('ml_h_site',h.site||'');
+      sv('ml_directrice',mdata.directrice_publication||'');
+      sv('ml_pi',mdata.propriete_intellectuelle||'');
+      sv('ml_resp1',mdata.responsabilite_1||''); sv('ml_resp2',mdata.responsabilite_2||'');
+      sv('ml_litiges',mdata.litiges||'');
     }
 
     function write(msg){
@@ -271,6 +347,29 @@
         data.horaire_samedi   = gv('h_samedi');
         data.horaire_dimanche = gv('h_dimanche');
         write('Mise à jour horaires');
+      }
+      else if(section === 'mentions'){
+        if(!mdata.editeur) mdata.editeur={};
+        mdata.editeur.enseigne       =gv('ml_enseigne');
+        mdata.editeur.societe        =gv('ml_societe');
+        mdata.editeur.forme_juridique=gv('ml_forme');
+        mdata.editeur.code_ape       =gv('ml_ape');
+        mdata.editeur.siren          =gv('ml_siren');
+        mdata.editeur.siret          =gv('ml_siret');
+        if(!mdata.coordonnees) mdata.coordonnees={};
+        mdata.coordonnees.adresse   =gv('ml_adresse');
+        mdata.coordonnees.telephone =gv('ml_tel');
+        mdata.coordonnees.email     =gv('ml_email');
+        if(!mdata.hebergement) mdata.hebergement={};
+        mdata.hebergement.hebergeur =gv('ml_hebergeur');
+        mdata.hebergement.adresse   =gv('ml_h_adresse');
+        mdata.hebergement.site      =gv('ml_h_site');
+        mdata.directrice_publication  =gv('ml_directrice');
+        mdata.propriete_intellectuelle=gv('ml_pi');
+        mdata.responsabilite_1      =gv('ml_resp1');
+        mdata.responsabilite_2      =gv('ml_resp2');
+        mdata.litiges               =gv('ml_litiges');
+        writeMentions('Mise à jour mentions légales');
       }
       else if(section === 'popup'){
         if(!data.popup) data.popup={};
