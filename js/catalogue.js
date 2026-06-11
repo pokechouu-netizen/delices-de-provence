@@ -215,11 +215,13 @@
       currentIndex = index;
       populate(visibleCards[currentIndex]);
       lightbox.classList.add('active');
+      document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
     }
 
     function close() {
       lightbox.classList.remove('active');
+      document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
       lightboxImg.src = '';
     }

@@ -2669,16 +2669,19 @@ button:focus-visible,a:focus-visible{
   inset:0;
   z-index:9999;
   background:rgba(0,0,0,.92);
-  display:none;
+  display:flex;
   align-items:center;
   justify-content:center;
   padding:2rem;
   opacity:0;
-  transition:opacity .3s;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .3s, visibility .3s;
 }
 .lightbox.active{
-  display:flex;
   opacity:1;
+  visibility:visible;
+  pointer-events:auto;
 }
 .lightbox__close{
   position:absolute;
