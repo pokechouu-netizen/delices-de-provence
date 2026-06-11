@@ -547,7 +547,7 @@
         return res.json();
       })
       .then(function (data) {
-        var sellers = (data.produits || []).filter(function (p) { return p.best_seller; });
+        var sellers = (data.produits || []).filter(function (p) { return p.best_seller && p.visible !== false; });
         grid.innerHTML = '';
 
         if (sellers.length === 0) return;
@@ -634,6 +634,41 @@
             row.classList.toggle('closed', ferme);
           }
         });
+
+        // Popup promo
+        var popup = infos.popup;
+        if (popup && popup.actif === true) {
+          var popupEl   = document.getElementById('popupPromo');
+          var msgEl     = document.getElementById('popupPromoMessage');
+          var ctaEl     = document.getElementById('popupPromoCta');
+          var closeEl   = document.getElementById('popupPromoClose');
+          var backdropEl= document.getElementById('popupPromoBackdrop');
+          if (popupEl) {
+            if (msgEl && popup.message) msgEl.textContent = popup.message;
+            if (ctaEl) {
+              if (popup.cta_label) ctaEl.textContent = popup.cta_label;
+              if (popup.cta_url)   ctaEl.setAttribute('href', popup.cta_url);
+            }
+            var delay = (popup.delai_secondes || 5) * 1000;
+            var shown = sessionStorage.getItem('popup_promo_shown');
+            if (!shown) {
+              setTimeout(function () {
+                popupEl.removeAttribute('aria-hidden');
+                popupEl.classList.add('show');
+                sessionStorage.setItem('popup_promo_shown', '1');
+              }, delay);
+            }
+            function closePopup() {
+              popupEl.classList.remove('show');
+              popupEl.setAttribute('aria-hidden', 'true');
+            }
+            if (closeEl)    closeEl.addEventListener('click', closePopup);
+            if (backdropEl) backdropEl.addEventListener('click', closePopup);
+            document.addEventListener('keydown', function (e) {
+              if (e.key === 'Escape') closePopup();
+            });
+          }
+        }
       })
       .catch(function (err) {
         console.warn('infos.json non disponible, valeurs statiques conservées.', err);

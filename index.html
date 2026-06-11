@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -964,6 +965,17 @@
     <ellipse cx="120" cy="220" rx="16" ry="8" fill="#C8963E" transform="rotate(20 120 220)"/>
     <circle cx="115" cy="100" r="5" fill="#C8963E" opacity=".4"/>
   </svg>
+
+  <!-- ===== POPUP PROMO ===== -->
+  <div class="popup-promo" id="popupPromo" role="dialog" aria-modal="true" aria-label="Nouveautés boutique" aria-hidden="true">
+    <div class="popup-promo__backdrop" id="popupPromoBackdrop"></div>
+    <div class="popup-promo__box">
+      <button class="popup-promo__close" id="popupPromoClose" aria-label="Fermer">&times;</button>
+      <div class="popup-promo__icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+      <p class="popup-promo__message" id="popupPromoMessage">Notre boutique est régulièrement mise à jour — allez-y, jetez un œil !</p>
+      <a href="boutique.html" class="btn btn--primary popup-promo__cta" id="popupPromoCta">Découvrir la boutique</a>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
 </body>

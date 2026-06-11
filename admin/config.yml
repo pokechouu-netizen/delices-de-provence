@@ -1,0 +1,196 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: assets/catalogue
+public_folder: assets/catalogue
+
+locale: fr
+
+collections:
+
+  # ─── INFORMATIONS BOUTIQUE & POPUP ───────────────────────────────────────
+  - name: "infos"
+    label: "Informations boutique"
+    files:
+      - name: "infos"
+        label: "Coordonnées, horaires & popup"
+        file: "data/infos.json"
+        format: json
+        fields:
+
+          - label: "Adresse"
+            name: "adresse"
+            widget: "string"
+            hint: "Ex : 27, rue Saint-Antoine"
+
+          - label: "Code postal"
+            name: "code_postal"
+            widget: "string"
+
+          - label: "Ville"
+            name: "ville"
+            widget: "string"
+
+          - label: "Téléphone fixe"
+            name: "telephone_fixe"
+            widget: "string"
+            hint: "Ex : 09 86 53 24 10"
+
+          - label: "Email"
+            name: "email"
+            widget: "string"
+
+          - label: "Horaire — Lundi"
+            name: "horaire_lundi"
+            widget: "string"
+            hint: "Ex : 10h–13h / 15h30–19h  ou  Fermé"
+
+          - label: "Horaire — Mardi"
+            name: "horaire_mardi"
+            widget: "string"
+
+          - label: "Horaire — Mercredi"
+            name: "horaire_mercredi"
+            widget: "string"
+
+          - label: "Horaire — Jeudi"
+            name: "horaire_jeudi"
+            widget: "string"
+
+          - label: "Horaire — Vendredi"
+            name: "horaire_vendredi"
+            widget: "string"
+
+          - label: "Horaire — Samedi"
+            name: "horaire_samedi"
+            widget: "string"
+
+          - label: "Horaire — Dimanche"
+            name: "horaire_dimanche"
+            widget: "string"
+
+          - label: "Popup promotionnel"
+            name: "popup"
+            widget: "object"
+            collapsed: false
+            fields:
+              - label: "Activer le popup"
+                name: "actif"
+                widget: "boolean"
+                default: true
+                hint: "Désactivez pour masquer le popup sans le supprimer"
+
+              - label: "Message"
+                name: "message"
+                widget: "string"
+                hint: "Texte affiché dans le popup"
+
+              - label: "Texte du bouton"
+                name: "cta_label"
+                widget: "string"
+
+              - label: "Lien du bouton"
+                name: "cta_url"
+                widget: "string"
+                hint: "Ex : boutique.html"
+
+              - label: "Délai d'apparition (secondes)"
+                name: "delai_secondes"
+                widget: "number"
+                default: 5
+                value_type: "int"
+
+  # ─── CATALOGUE PRODUITS ──────────────────────────────────────────────────
+  - name: "catalogue"
+    label: "Catalogue produits"
+    files:
+      - name: "produits"
+        label: "Tous les produits"
+        file: "data/catalogue.json"
+        format: json
+        fields:
+          - label: "Produits"
+            name: "produits"
+            widget: "list"
+            label_singular: "Produit"
+            summary: "{{fields.nom}} — {{fields.categorie}}"
+            fields:
+
+              - label: "Nom du produit"
+                name: "nom"
+                widget: "string"
+
+              - label: "Catégorie"
+                name: "categorie"
+                widget: "select"
+                options:
+                  - { label: "Alcools & Champagnes", value: "alcools" }
+                  - { label: "Autour de l'Olive", value: "autour-olive" }
+                  - { label: "Bières", value: "bieres" }
+                  - { label: "Biscuits Salés", value: "biscuits-sales" }
+                  - { label: "Biscuits Sucrés", value: "biscuits-sucres" }
+                  - { label: "Café, Thé & Infusions", value: "cafe-the" }
+                  - { label: "Chocolat & Confiseries", value: "chocolat" }
+                  - { label: "Confitures", value: "confitures" }
+                  - { label: "Épices & Lavande", value: "epices" }
+                  - { label: "Jus de Fruits", value: "jus" }
+                  - { label: "Miel", value: "miel" }
+                  - { label: "Pâtes, Riz & Ravioles", value: "pates-riz" }
+                  - { label: "Plats Cuisinés", value: "plats-cuisines" }
+                  - { label: "Sel de Camargue", value: "sel-camargue" }
+                  - { label: "Sirops", value: "sirops" }
+                  - { label: "Terrines & Charcuteries", value: "terrines" }
+                  - { label: "Vins", value: "vins" }
+
+              - label: "Photo du produit"
+                name: "image"
+                widget: "image"
+                required: false
+                hint: "Photo affichée dans le catalogue"
+
+              - label: "Description"
+                name: "description"
+                widget: "text"
+                required: false
+                hint: "Texte affiché au clic sur le produit"
+
+              - label: "Légende de la photo"
+                name: "legende"
+                widget: "string"
+                required: false
+                hint: "Courte légende affichée sous la photo"
+
+              - label: "Prix"
+                name: "prix"
+                widget: "string"
+                required: false
+                hint: "Ex : 4,50 €"
+
+              - label: "Contenance / Poids"
+                name: "contenance"
+                widget: "string"
+                required: false
+                hint: "Ex : 250 g — 50 cL — 75 cL — 1 kg"
+
+              - label: "Prix au détail"
+                name: "prix_unitaire"
+                widget: "string"
+                required: false
+                hint: "Ex : 1,80 € / 100g — 3,20 € / litre"
+
+              - label: "Best-seller (affiché sur la page d'accueil)"
+                name: "best_seller"
+                widget: "boolean"
+                default: false
+
+              - label: "Produit visible"
+                name: "visible"
+                widget: "boolean"
+                default: true
+                hint: "Décochez pour masquer ce produit sans le supprimer"
+
+              - label: "ID technique"
+                name: "id"
+                widget: "string"
+                hint: "Ne pas modifier — identifiant unique du produit"

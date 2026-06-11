@@ -250,7 +250,7 @@
       return res.json();
     })
     .then(function (data) {
-      var produits = data.produits || [];
+      var produits = (data.produits || []).filter(function (p) { return p.visible !== false; });
       if (produits.length === 0) throw new Error('Aucun produit');
 
       photoGrid.innerHTML = '';
@@ -272,7 +272,7 @@
       console.warn('catalogue.js :', err);
       photoGrid.innerHTML =
         '<div class="catalogue__fallback">' +
-          '<div class="catalogue__fallback-icon">🌿</div>' +
+          '<div class="catalogue__fallback-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M5 3s.55 7 7 9c6.45-2 7-9 7-9"/><path d="M5 12s1 5 7 7c6-2 7-7 7-7"/></svg></div>' +
           '<h3>Catalogue temporairement indisponible</h3>' +
           '<p>Revenez dans quelques instants ou contactez-nous directement.</p>' +
         '</div>';
