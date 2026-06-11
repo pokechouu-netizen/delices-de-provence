@@ -113,18 +113,32 @@
 
   // ── Filters logic ──
   function initFilters(allCards) {
-    var filterBtns     = filtersContainer.querySelectorAll('.catalogue__filter');
-    var prixContainer  = document.getElementById('cataloguePrixFilters');
-    var prixBtns       = prixContainer ? prixContainer.querySelectorAll('.catalogue__prix-filter') : [];
+    var filterBtns  = filtersContainer.querySelectorAll('.catalogue__filter');
+    var inputMin    = document.getElementById('prixInputMin');
+    var inputMax    = document.getElementById('prixInputMax');
+    var labelMin    = document.getElementById('prixLabelMin');
+    var labelMax    = document.getElementById('prixLabelMax');
+    var fill        = document.getElementById('prixFill');
+    var MAX         = 150;
 
-    var activeCat  = 'all';
-    var activePrix = 'all';
+    var activeCat   = 'all';
+    var activeMin   = 0;
+    var activeMax   = MAX;
+
+    function updateFill() {
+      if (!fill || !inputMin || !inputMax) return;
+      var pctMin = activeMin / MAX * 100;
+      var pctMax = activeMax / MAX * 100;
+      fill.style.left  = pctMin + '%';
+      fill.style.width = (pctMax - pctMin) + '%';
+    }
 
     function applyFilters() {
       var visible = 0;
       allCards.forEach(function (card) {
-        var catOk  = activeCat  === 'all' || card.getAttribute('data-category') === activeCat;
-        var prixOk = prixInRange(card, activePrix);
+        var catOk  = activeCat === 'all' || card.getAttribute('data-category') === activeCat;
+        var p      = parsePrix(card.getAttribute('data-prix'));
+        var prixOk = p === null || (p >= activeMin && (activeMax === MAX || p <= activeMax));
         if (catOk && prixOk) {
           card.classList.remove('hidden');
           card.classList.add('fade-in');
@@ -147,14 +161,25 @@
       });
     });
 
-    prixBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        prixBtns.forEach(function (b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        activePrix = btn.getAttribute('data-prix');
+    if (inputMin && inputMax) {
+      inputMin.addEventListener('input', function () {
+        var v = parseInt(inputMin.value);
+        if (v > activeMax) { inputMin.value = activeMax; v = activeMax; }
+        activeMin = v;
+        if (labelMin) labelMin.textContent = v + ' €';
+        updateFill();
         applyFilters();
       });
-    });
+      inputMax.addEventListener('input', function () {
+        var v = parseInt(inputMax.value);
+        if (v < activeMin) { inputMax.value = activeMin; v = activeMin; }
+        activeMax = v;
+        if (labelMax) labelMax.textContent = v === MAX ? v + ' €+' : v + ' €';
+        updateFill();
+        applyFilters();
+      });
+      updateFill();
+    }
 
     applyFilters();
   }

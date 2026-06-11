@@ -62,12 +62,13 @@
         <button class="catalogue__filter" data-filter="vins"><img src="assets/icons/vins.svg" alt="Vins" class="icon-svg"> Vins</button>
       </div>
 
-      <div class="catalogue__prix-filters" id="cataloguePrixFilters">
-        <button class="catalogue__prix-filter active" data-prix="all">Tous les prix</button>
-        <button class="catalogue__prix-filter" data-prix="0-5">Moins de 5 €</button>
-        <button class="catalogue__prix-filter" data-prix="5-10">5 € – 10 €</button>
-        <button class="catalogue__prix-filter" data-prix="10-20">10 € – 20 €</button>
-        <button class="catalogue__prix-filter" data-prix="20+">Plus de 20 €</button>
+      <div class="prix-range" id="prixRange">
+        <div class="prix-range__label">Prix : <strong id="prixLabelMin">0 €</strong> — <strong id="prixLabelMax">150 €+</strong></div>
+        <div class="prix-range__wrap">
+          <div class="prix-range__track"><div class="prix-range__fill" id="prixFill"></div></div>
+          <input type="range" id="prixInputMin" min="0" max="150" value="0" step="1">
+          <input type="range" id="prixInputMax" min="0" max="150" value="150" step="1">
+        </div>
       </div>
 
       <p class="catalogue__count" id="catalogueCount">Chargement…</p>
