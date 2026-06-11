@@ -547,7 +547,7 @@
         return res.json();
       })
       .then(function (data) {
-        var sellers = (data.produits || []).filter(function (p) { return p.best_seller; });
+        var sellers = (data.produits || []).filter(function (p) { return p.best_seller && p.visible !== false; });
         grid.innerHTML = '';
 
         if (sellers.length === 0) return;
@@ -598,21 +598,18 @@
           if (text.indexOf('rue') !== -1 || text.indexOf('84600') !== -1) {
             if (infos.adresse) el.innerHTML = infos.adresse + '<br>' + (infos.code_postal || '84600') + ' ' + (infos.ville || 'Valréas') + ', France';
           }
-          if (text.indexOf('09') !== -1 && text.indexOf('06') !== -1) {
-            if (infos.telephone_fixe || infos.telephone_mobile) el.innerHTML = (infos.telephone_fixe || '') + '<br>' + (infos.telephone_mobile || '');
+          if (text.indexOf('09') !== -1) {
+            if (infos.telephone_fixe) el.textContent = infos.telephone_fixe;
           }
           if (text.indexOf('@') !== -1 && infos.email) el.textContent = infos.email;
         });
 
         // CTA overlay numbers
-        var ctaNumber    = document.querySelector('.cta-overlay__number');
-        var ctaSecondary = document.querySelector('.cta-overlay__number-secondary');
-        if (ctaNumber    && infos.telephone_fixe)    ctaNumber.textContent    = infos.telephone_fixe;
-        if (ctaSecondary && infos.telephone_mobile)  ctaSecondary.textContent = infos.telephone_mobile;
+        var ctaNumber = document.querySelector('.cta-overlay__number');
+        if (ctaNumber && infos.telephone_fixe) ctaNumber.textContent = infos.telephone_fixe;
 
         var copyBtnsAll = document.querySelectorAll('.cta-overlay__copy');
-        if (copyBtnsAll[0] && infos.telephone_fixe)   copyBtnsAll[0].setAttribute('data-number', infos.telephone_fixe.replace(/\s/g, ''));
-        if (copyBtnsAll[1] && infos.telephone_mobile)  copyBtnsAll[1].setAttribute('data-number', infos.telephone_mobile.replace(/\s/g, ''));
+        if (copyBtnsAll[0] && infos.telephone_fixe) copyBtnsAll[0].setAttribute('data-number', infos.telephone_fixe.replace(/\s/g, ''));
 
         // Mailto links
         if (infos.email) {
@@ -637,6 +634,41 @@
             row.classList.toggle('closed', ferme);
           }
         });
+
+        // Popup promo
+        var popup = infos.popup;
+        if (popup && popup.actif === true) {
+          var popupEl   = document.getElementById('popupPromo');
+          var msgEl     = document.getElementById('popupPromoMessage');
+          var ctaEl     = document.getElementById('popupPromoCta');
+          var closeEl   = document.getElementById('popupPromoClose');
+          var backdropEl= document.getElementById('popupPromoBackdrop');
+          if (popupEl) {
+            if (msgEl && popup.message) msgEl.textContent = popup.message;
+            if (ctaEl) {
+              if (popup.cta_label) ctaEl.textContent = popup.cta_label;
+              if (popup.cta_url)   ctaEl.setAttribute('href', popup.cta_url);
+            }
+            var delay = (popup.delai_secondes || 5) * 1000;
+            var shown = sessionStorage.getItem('popup_promo_shown');
+            if (!shown) {
+              setTimeout(function () {
+                popupEl.removeAttribute('aria-hidden');
+                popupEl.classList.add('show');
+                sessionStorage.setItem('popup_promo_shown', '1');
+              }, delay);
+            }
+            function closePopup() {
+              popupEl.classList.remove('show');
+              popupEl.setAttribute('aria-hidden', 'true');
+            }
+            if (closeEl)    closeEl.addEventListener('click', closePopup);
+            if (backdropEl) backdropEl.addEventListener('click', closePopup);
+            document.addEventListener('keydown', function (e) {
+              if (e.key === 'Escape') closePopup();
+            });
+          }
+        }
       })
       .catch(function (err) {
         console.warn('infos.json non disponible, valeurs statiques conservées.', err);
