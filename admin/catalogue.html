@@ -405,6 +405,25 @@
           fileSha = data.content.sha;
           setStatus('saved', 'Enregistré ✓');
           setTimeout(function () { setStatus('', ''); }, 3000);
+        })
+        .catch(function (e) {
+          var code = e.message ? parseInt(e.message) : 0;
+          if (code === 409 || code === 422) {
+            setStatus('error', 'Conflit de version — rechargement…');
+            return gitGet(FILE).then(function (fresh) {
+              fileSha = fresh.sha;
+              var content2 = btoa(unescape(encodeURIComponent(JSON.stringify({ produits: products }, null, 2))));
+              return gitPut(FILE, { message: msg, sha: fileSha, content: content2 });
+            }).then(function (data) {
+              fileSha = data.content.sha;
+              setStatus('saved', 'Enregistré ✓');
+              setTimeout(function () { setStatus('', ''); }, 3000);
+            }).catch(function () {
+              setStatus('error', 'Erreur d\'enregistrement — rechargez la page');
+            });
+          }
+          setStatus('error', 'Erreur d\'enregistrement (code ' + (e.message || '?') + ')');
+          throw e;
         });
     }
 
@@ -477,14 +496,14 @@
     // ── Actions ───────────────────────────────────────────
     window.toggleVis = function (i, v) {
       products[i].visible = v;
-      writeCatalogue((v ? 'Affiche' : 'Masque') + ' : ' + products[i].nom).then(renderTable);
+      writeCatalogue((v ? 'Affiche' : 'Masque') + ' : ' + products[i].nom).then(renderTable).catch(function(){});
     };
 
     window.del = function (i) {
       var nom = products[i].nom || 'ce produit';
       if (!confirm('Supprimer "' + nom + '" ? Cette action est irréversible.')) return;
       products.splice(i, 1);
-      writeCatalogue('Suppression : ' + nom).then(renderTable);
+      writeCatalogue('Suppression : ' + nom).then(renderTable).catch(function(){});
     };
 
     window.openModal = function (i) {
