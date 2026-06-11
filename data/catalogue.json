@@ -1,6 +1,4 @@
 {
-  "_commentaire": "GUIDE RAPIDE — Pour ajouter un produit : copier un bloc existant, changer l'id (unique), remplir les champs. Pour les best_sellers sur la page d'accueil : mettre best_seller à true (max recommandé : 12). Laisser un champ vide ('') si pas encore renseigné.",
-  "_unites_disponibles": "g · kg · mg · mL · cL · dL · L · cl · pièce · pot · bouteille · sachet · boite · tablette · barre · portion",
   "produits": [
     {
       "id": "alcool-01",
@@ -13,7 +11,7 @@
       "prix": "",
       "contenance": "",
       "prix_unitaire": "",
-      "visible": true
+      "visible": false
     },
     {
       "id": "alcool-02",
