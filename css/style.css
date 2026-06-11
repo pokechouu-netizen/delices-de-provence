@@ -3131,7 +3131,7 @@ button:focus-visible,a:focus-visible{
 /* ========== BOUTIQUE HERO ========== */
 .boutique-hero{
   background:var(--c1);
-  padding:calc(var(--nav-h) + 4rem) 1.5rem 3rem;
+  padding:4rem 1.5rem 3rem;
   text-align:center;
   position:relative;
   overflow:hidden;
