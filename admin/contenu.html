@@ -263,6 +263,7 @@
     var FILE = 'data/contenu.json';
     var data = {}, fileSha = '';
     var editAI = -1, editAV = -1;
+    var hookUrl = '';
 
     var PHOTOS = {
       hero:     "Photo héro (bandeau d'accueil)",
@@ -287,6 +288,15 @@
       document.getElementById('loginScreen').style.display='none';
       document.getElementById('adminScreen').style.display='block';
       load();
+      gitGet('data/infos.json').then(function(d){
+        var info=JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\n/g,'')))));
+        hookUrl=info.netlify_hook||'';
+      }).catch(function(){});
+    }
+
+    function triggerDeploy(){
+      if(!hookUrl) return;
+      fetch(hookUrl,{method:'POST'}).catch(function(){});
     }
 
     function jwt(){ return netlifyIdentity.currentUser().jwt(); }
@@ -310,6 +320,7 @@
       var c=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
       return gitPut(FILE,{message:msg,sha:fileSha,content:c}).then(function(d){
         fileSha=d.content.sha; st('saved','Enregistré ✓');
+        triggerDeploy();
         setTimeout(function(){ st('',''); },3000);
       });
     }
