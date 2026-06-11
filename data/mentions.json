@@ -1,0 +1,30 @@
+{
+  "editeur": {
+    "enseigne": "Délices de Provence",
+    "societe": "DEMON&CIE",
+    "forme_juridique": "SAS (Société par Actions Simplifiée)",
+    "siren": "984 453 563",
+    "siret": "984 453 563 00020",
+    "code_ape": "47.11B – Commerce d'alimentation générale"
+  },
+  "coordonnees": {
+    "adresse": "27, rue Saint-Antoine, 84600 Valréas, France",
+    "telephone": "09 86 53 24 10",
+    "email": "edwigepaillon@delices-de-provence.com"
+  },
+  "directrice_publication": "La directrice de la publication est la représentante légale de la société DEMON&CIE.",
+  "hebergement": {
+    "hebergeur": "Netlify, Inc.",
+    "adresse": "44 Montgomery Street, Suite 300, San Francisco, California 94104, USA",
+    "site": "https://www.netlify.com"
+  },
+  "propriete_intellectuelle": "L'ensemble du contenu de ce site (textes, images, illustrations, mise en page) est la propriété de DEMON&CIE ou de ses partenaires et est protégé par le droit d'auteur. Toute reproduction, même partielle, sans autorisation écrite préalable est interdite.",
+  "credits": {
+    "conception": "Réalisation sur mesure.",
+    "photographies": "Photos d'illustration. Visuels complémentaires générés par intelligence artificielle.",
+    "typographies": "Playfair Display et DM Sans (Google Fonts, licence open source)."
+  },
+  "responsabilite_1": "L'éditeur du site s'efforce de fournir des informations aussi précises que possible. Toutefois, il ne saurait être tenu responsable des omissions, inexactitudes ou défauts de mise à jour. Les informations fournies le sont à titre indicatif et sont susceptibles d'évoluer.",
+  "responsabilite_2": "Les liens hypertextes présents sur ce site, notamment vers les réseaux sociaux ou Google Maps, sont fournis à titre de service. L'éditeur ne saurait être tenu responsable du contenu des sites externes.",
+  "litiges": "Le présent site et ses mentions légales sont régis par le droit français. En cas de litige, et après tentative de recherche d'une solution amiable, les tribunaux compétents seront ceux du ressort du siège social de l'éditeur."
+}

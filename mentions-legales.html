@@ -50,59 +50,87 @@
 
       <h1>Mentions légales</h1>
 
-      <h2>Éditeur du site</h2>
-      <p>
-        <strong>Enseigne :</strong> Délices de Provence<br>
-        <strong>Société :</strong> DEMON&amp;CIE<br>
-        <strong>Forme juridique :</strong> SAS (Société par Actions Simplifiée)<br>
-        <strong>SIREN :</strong> 984 453 563<br>
-        <strong>SIRET (établissement) :</strong> 984 453 563 00020<br>
-        <strong>Code APE :</strong> 47.11B – Commerce d'alimentation générale
-      </p>
+      <div id="mentionsContent">
+        <h2>Éditeur du site</h2>
+        <p>
+          <strong>Enseigne :</strong> Délices de Provence<br>
+          <strong>Société :</strong> DEMON&amp;CIE<br>
+          <strong>Forme juridique :</strong> SAS (Société par Actions Simplifiée)<br>
+          <strong>SIREN :</strong> 984 453 563<br>
+          <strong>SIRET (établissement) :</strong> 984 453 563 00020<br>
+          <strong>Code APE :</strong> 47.11B – Commerce d'alimentation générale
+        </p>
+        <h2>Coordonnées</h2>
+        <p>
+          <strong>Adresse :</strong> 27, rue Saint-Antoine, 84600 Valréas, France<br>
+          <strong>Téléphone :</strong> 09 86 53 24 10<br>
+          <strong>Email :</strong> edwigepaillon@delices-de-provence.com
+        </p>
+        <h2>Directrice de publication</h2>
+        <p>La directrice de la publication est la représentante légale de la société DEMON&amp;CIE.</p>
+        <h2>Hébergement</h2>
+        <p>
+          <strong>Hébergeur :</strong> Netlify, Inc.<br>
+          <strong>Adresse :</strong> 44 Montgomery Street, Suite 300, San Francisco, California 94104, USA<br>
+          <strong>Site :</strong> https://www.netlify.com
+        </p>
+        <h2>Propriété intellectuelle</h2>
+        <p>L'ensemble du contenu de ce site (textes, images, illustrations, mise en page) est la propriété de DEMON&amp;CIE ou de ses partenaires et est protégé par le droit d'auteur. Toute reproduction, même partielle, sans autorisation écrite préalable est interdite.</p>
+        <h2>Crédits</h2>
+        <p>
+          <strong>Conception et développement :</strong> Réalisation sur mesure.<br>
+          <strong>Photographies :</strong> Photos d'illustration. Visuels complémentaires générés par intelligence artificielle.<br>
+          <strong>Typographies :</strong> Playfair Display et DM Sans (Google Fonts, licence open source).
+        </p>
+        <h2>Responsabilité</h2>
+        <p>L'éditeur du site s'efforce de fournir des informations aussi précises que possible. Toutefois, il ne saurait être tenu responsable des omissions, inexactitudes ou défauts de mise à jour. Les informations fournies le sont à titre indicatif et sont susceptibles d'évoluer.</p>
+        <p>Les liens hypertextes présents sur ce site, notamment vers les réseaux sociaux ou Google Maps, sont fournis à titre de service. L'éditeur ne saurait être tenu responsable du contenu des sites externes.</p>
+        <h2>Litiges</h2>
+        <p>Le présent site et ses mentions légales sont régis par le droit français. En cas de litige, et après tentative de recherche d'une solution amiable, les tribunaux compétents seront ceux du ressort du siège social de l'éditeur.</p>
+      </div>
 
-      <h2>Coordonnées</h2>
-      <p>
-        <strong>Adresse :</strong> 27, rue Saint-Antoine, 84600 Valréas, France<br>
-        <strong>Téléphone :</strong> 09 86 53 24 10<br>
-        <strong>Email :</strong> edwigepaillon@delices-de-provence.com
-      </p>
-
-      <h2>Directrice de publication</h2>
-      <p>
-        La directrice de la publication est la représentante légale de la société DEMON&amp;CIE.
-      </p>
-
-      <h2>Hébergement</h2>
-      <p>
-        <!-- TODO : Renseigner les informations de l'hébergeur une fois le site déployé -->
-        <strong>Hébergeur :</strong> TODO — À renseigner lors de la mise en ligne.<br>
-        (Nom, adresse et coordonnées de l'hébergeur à compléter)
-      </p>
-
-      <h2>Propriété intellectuelle</h2>
-      <p>
-        L'ensemble du contenu de ce site (textes, images, illustrations, mise en page) est la propriété de DEMON&amp;CIE ou de ses partenaires et est protégé par le droit d'auteur. Toute reproduction, même partielle, sans autorisation écrite préalable est interdite.
-      </p>
-
-      <h2>Crédits</h2>
-      <p>
-        <strong>Conception et développement :</strong> réalisation sur mesure.<br>
-        <strong>Photographies :</strong> photos d'illustration. Visuels complémentaires générés par intelligence artificielle.<br>
-        <strong>Typographies :</strong> Playfair Display et DM Sans (Google Fonts, licence open source).
-      </p>
-
-      <h2>Responsabilité</h2>
-      <p>
-        L'éditeur du site s'efforce de fournir des informations aussi précises que possible. Toutefois, il ne saurait être tenu responsable des omissions, inexactitudes ou défauts de mise à jour. Les informations fournies le sont à titre indicatif et sont susceptibles d'évoluer.
-      </p>
-      <p>
-        Les liens hypertextes présents sur ce site, notamment vers les réseaux sociaux ou Google Maps, sont fournis à titre de service. L'éditeur ne saurait être tenu responsable du contenu des sites externes.
-      </p>
-
-      <h2>Litiges</h2>
-      <p>
-        Le présent site et ses mentions légales sont régis par le droit français. En cas de litige, et après tentative de recherche d'une solution amiable, les tribunaux compétents seront ceux du ressort du siège social de l'éditeur.
-      </p>
+  <script>
+  (function(){
+    function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    fetch('data/mentions.json?v='+Date.now())
+      .then(function(r){ return r.json(); })
+      .then(function(m){
+        var el = document.getElementById('mentionsContent');
+        if (!el) return;
+        el.innerHTML =
+          '<h2>Éditeur du site</h2><p>'+
+          '<strong>Enseigne :</strong> '+esc(m.editeur.enseigne)+'<br>'+
+          '<strong>Société :</strong> '+esc(m.editeur.societe)+'<br>'+
+          '<strong>Forme juridique :</strong> '+esc(m.editeur.forme_juridique)+'<br>'+
+          '<strong>SIREN :</strong> '+esc(m.editeur.siren)+'<br>'+
+          '<strong>SIRET (établissement) :</strong> '+esc(m.editeur.siret)+'<br>'+
+          '<strong>Code APE :</strong> '+esc(m.editeur.code_ape)+
+          '</p>'+
+          '<h2>Coordonnées</h2><p>'+
+          '<strong>Adresse :</strong> '+esc(m.coordonnees.adresse)+'<br>'+
+          '<strong>Téléphone :</strong> '+esc(m.coordonnees.telephone)+'<br>'+
+          '<strong>Email :</strong> '+esc(m.coordonnees.email)+
+          '</p>'+
+          '<h2>Directrice de publication</h2><p>'+esc(m.directrice_publication)+'</p>'+
+          '<h2>Hébergement</h2><p>'+
+          '<strong>Hébergeur :</strong> '+esc(m.hebergement.hebergeur)+'<br>'+
+          '<strong>Adresse :</strong> '+esc(m.hebergement.adresse)+'<br>'+
+          '<strong>Site :</strong> '+esc(m.hebergement.site)+
+          '</p>'+
+          '<h2>Propriété intellectuelle</h2><p>'+esc(m.propriete_intellectuelle)+'</p>'+
+          '<h2>Crédits</h2><p>'+
+          '<strong>Conception et développement :</strong> '+esc(m.credits.conception)+'<br>'+
+          '<strong>Photographies :</strong> '+esc(m.credits.photographies)+'<br>'+
+          '<strong>Typographies :</strong> '+esc(m.credits.typographies)+
+          '</p>'+
+          '<h2>Responsabilité</h2>'+
+          '<p>'+esc(m.responsabilite_1)+'</p>'+
+          '<p>'+esc(m.responsabilite_2)+'</p>'+
+          '<h2>Litiges</h2><p>'+esc(m.litiges)+'</p>';
+      })
+      .catch(function(){});
+  })();
+  </script>
 
     </div>
   </main>
