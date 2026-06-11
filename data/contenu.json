@@ -28,7 +28,7 @@
   "avis": [
     {
       "id": "av1",
-      "texte": "L'épicerie fine est très bien achalandée : on y trouve un large choix de produits locaux et de belles idées souvenirs. La vendeuse est très accueillante et connaît parfaitement ses produits, ce qui permet d'être très bien conseillée.",
+      "texte": "haaaahahahahah",
       "auteur": "Mathilde",
       "source": "Avis Google"
     },
@@ -65,14 +65,41 @@
     "marche": "assets/images/stand-marche-noel.jpg"
   },
   "galerie": [
-    { "src": "assets/images/produit-champagne.jpg",      "alt": "Champagne Grand Cru artisanal" },
-    { "src": "assets/images/produit-foie-gras.jpg",      "alt": "Foie gras de canard entier du Périgord" },
-    { "src": "assets/images/produit-miels.jpg",          "alt": "Miels artisanaux Les Miels du Max" },
-    { "src": "assets/images/produit-thes-boutique.jpg",  "alt": "Thés et infusions artisanaux en boutique" },
-    { "src": "assets/images/produit-saucisson-venandi.jpg", "alt": "Saucisson de cerf sauvage Venandi sur planche" },
-    { "src": "assets/images/produit-marrons-glaces.jpg", "alt": "Marrons glacés artisanaux" },
-    { "src": "assets/images/produit-guimauves.jpg",      "alt": "Guimauves à l'ancienne Arnaud Soubeyran" },
-    { "src": "assets/images/produit-glaces-bio.jpg",     "alt": "Glaces bio Terre Adélice" },
-    { "src": "assets/images/produit-saucisson-planche.jpg", "alt": "Saucisson artisanal sur planche de bois" }
+    {
+      "src": "assets/images/produit-champagne.jpg",
+      "alt": "Champagne Grand Cru artisanal"
+    },
+    {
+      "src": "assets/images/produit-foie-gras.jpg",
+      "alt": "Foie gras de canard entier du Périgord"
+    },
+    {
+      "src": "assets/images/produit-miels.jpg",
+      "alt": "Miels artisanaux Les Miels du Max"
+    },
+    {
+      "src": "assets/images/produit-thes-boutique.jpg",
+      "alt": "Thés et infusions artisanaux en boutique"
+    },
+    {
+      "src": "assets/images/produit-saucisson-venandi.jpg",
+      "alt": "Saucisson de cerf sauvage Venandi sur planche"
+    },
+    {
+      "src": "assets/images/produit-marrons-glaces.jpg",
+      "alt": "Marrons glacés artisanaux"
+    },
+    {
+      "src": "assets/images/produit-guimauves.jpg",
+      "alt": "Guimauves à l'ancienne Arnaud Soubeyran"
+    },
+    {
+      "src": "assets/images/produit-glaces-bio.jpg",
+      "alt": "Glaces bio Terre Adélice"
+    },
+    {
+      "src": "assets/images/produit-saucisson-planche.jpg",
+      "alt": "Saucisson artisanal sur planche de bois"
+    }
   ]
 }
