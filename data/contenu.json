@@ -1,0 +1,78 @@
+{
+  "presse": [
+    {
+      "id": "pr1",
+      "badge": "Presse",
+      "badge_type": "presse",
+      "titre": "Une épicerie fine qui fait rayonner le terroir",
+      "contenu": "Délices de Provence a été mise à l'honneur dans la presse locale pour sa sélection rigoureuse de produits artisanaux et son engagement envers les producteurs de la région.",
+      "date": "2025"
+    },
+    {
+      "id": "pr2",
+      "badge": "Lettre du Président de Région",
+      "badge_type": "gold",
+      "titre": "Soutien aux commerces de proximité",
+      "contenu": "Le Président de la Région a salué l'initiative de Délices de Provence, boutique emblématique du commerce de proximité dans l'Enclave des Papes, pour sa contribution au dynamisme économique local.",
+      "date": "2024"
+    },
+    {
+      "id": "pr3",
+      "badge": "Actualité",
+      "badge_type": "green",
+      "titre": "Marché de Noël de Valréas",
+      "contenu": "Chaque année, Délices de Provence participe au marché de Noël de Valréas avec un stand dédié aux coffrets cadeaux et aux spécialités de saison. Un rendez-vous incontournable pour les gourmands.",
+      "date": "Décembre 2024"
+    }
+  ],
+  "avis": [
+    {
+      "id": "av1",
+      "texte": "L'épicerie fine est très bien achalandée : on y trouve un large choix de produits locaux et de belles idées souvenirs. La vendeuse est très accueillante et connaît parfaitement ses produits, ce qui permet d'être très bien conseillée.",
+      "auteur": "Mathilde",
+      "source": "Avis Google"
+    },
+    {
+      "id": "av2",
+      "texte": "Accueil fort chaleureux. Produits très qualitatifs et qui sentent bon la Provence. Passage obligatoire à la boutique si vous passez par Valréas.",
+      "auteur": "Charles Frédéric",
+      "source": "Avis Google"
+    },
+    {
+      "id": "av3",
+      "texte": "Je me suis rendu plusieurs fois aux Délices de Provence. Un accueil chaleureux vous est réservé par Edwige et son mari. Des produits de grande qualité du terroir, producteurs locaux. De quoi régaler vos papilles !",
+      "auteur": "Pierre Lescieux",
+      "source": "Avis Google"
+    }
+  ],
+  "textes": {
+    "rue_p1": "Poussez la porte du 27, rue Saint-Antoine. Ici, chaque produit a été goûté avant d'arriver sur l'étagère. Chaque producteur a été visité, chaque histoire écoutée. Ce n'est pas un commerce — c'est un trait d'union entre ceux qui font et ceux qui savourent.",
+    "rue_p2": "Des confitures du Luberon aux terrines artisanales, de l'huile d'olive en première pression au riz de Camargue : une sélection rigoureuse, issue d'une agriculture raisonnée et 100 % française.",
+    "qsn_p1": "Délices de Provence est née d'une envie simple : partager les meilleurs produits du terroir provençal avec ceux qui aiment les belles choses. Installée au 27 rue Saint-Antoine à Valréas, au cœur de l'Enclave des Papes, notre épicerie fine est un lieu de découverte et de gourmandise.",
+    "qsn_p2": "Chaque produit présent sur nos étagères a été soigneusement sélectionné, goûté et approuvé. Nous visitons personnellement les producteurs, vérifions leurs méthodes de fabrication et privilégions l'agriculture raisonnée et les circuits courts.",
+    "pain_p1": "Le matin, avant même que la rue ne s'éveille, le pain arrive. Frais, croustillant, simple et bon. Un geste de quartier, une habitude douce, un rendez-vous quotidien pour ceux qui vivent ici.",
+    "pain_p2": "Passez en début de journée — le pain n'attend pas.",
+    "enclave": "Valréas est un morceau de Vaucluse entouré par la Drôme — une enclave historique rattachée à la papauté d'Avignon depuis 1317. Ici, entre vignes et lavande, le temps prend un autre rythme. Et dans cette terre de caractère, Délices de Provence a choisi de s'ancrer, au cœur d'une histoire qui a sept siècles d'avance."
+  },
+  "photos": {
+    "hero": "assets/images/facade-devanture.jpg",
+    "terrasse": "assets/images/facade-terrasse.jpg",
+    "mini_1": "assets/images/produit-sirop-boutique.jpg",
+    "mini_2": "assets/images/enseigne-cadeaux.jpg",
+    "pain": "assets/images/pain-frais.jpg",
+    "enseigne": "assets/images/enseigne-panneau.jpg",
+    "badge": "assets/images/badge-local-artisanal.jpg",
+    "marche": "assets/images/stand-marche-noel.jpg"
+  },
+  "galerie": [
+    { "src": "assets/images/produit-champagne.jpg",      "alt": "Champagne Grand Cru artisanal" },
+    { "src": "assets/images/produit-foie-gras.jpg",      "alt": "Foie gras de canard entier du Périgord" },
+    { "src": "assets/images/produit-miels.jpg",          "alt": "Miels artisanaux Les Miels du Max" },
+    { "src": "assets/images/produit-thes-boutique.jpg",  "alt": "Thés et infusions artisanaux en boutique" },
+    { "src": "assets/images/produit-saucisson-venandi.jpg", "alt": "Saucisson de cerf sauvage Venandi sur planche" },
+    { "src": "assets/images/produit-marrons-glaces.jpg", "alt": "Marrons glacés artisanaux" },
+    { "src": "assets/images/produit-guimauves.jpg",      "alt": "Guimauves à l'ancienne Arnaud Soubeyran" },
+    { "src": "assets/images/produit-glaces-bio.jpg",     "alt": "Glaces bio Terre Adélice" },
+    { "src": "assets/images/produit-saucisson-planche.jpg", "alt": "Saucisson artisanal sur planche de bois" }
+  ]
+}

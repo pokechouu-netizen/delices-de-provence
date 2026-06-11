@@ -1,12 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Administration — Délices de Provence</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    :root { --primary:#c4913a; --text:#2c1810; --muted:#8b6e5a; --border:#e5ddd4; --bg:#f8f5f0; --r:12px; }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+
+    #loginScreen{ display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; gap:1rem; }
+    #loginScreen h1{ font-size:1.3rem; }
+    #loginScreen p{ color:var(--muted); font-size:.9rem; }
+    .btn-login{ padding:.65rem 2rem; background:var(--primary); color:#fff; border:none; border-radius:8px; font-size:1rem; cursor:pointer; }
+    .btn-login:hover{ opacity:.88; }
+
+    #adminScreen{ display:none; }
+
+    header{
+      background:#fff; border-bottom:1px solid var(--border);
+      padding:.8rem 1.5rem; display:flex; align-items:center; justify-content:space-between;
+      box-shadow:0 2px 8px rgba(44,24,16,.08);
+    }
+    header h1{ font-size:1rem; font-weight:600; }
+    .logout{ background:none; border:none; color:var(--muted); font-size:.82rem; cursor:pointer; text-decoration:underline; }
+
+    .hub{
+      max-width:780px; margin:3rem auto; padding:0 1.25rem;
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.25rem;
+    }
+
+    .hub-card{
+      background:#fff; border:1.5px solid var(--border); border-radius:var(--r);
+      padding:1.75rem 1.5rem; text-decoration:none; color:var(--text);
+      display:flex; flex-direction:column; gap:.75rem;
+      box-shadow:0 2px 10px rgba(44,24,16,.07);
+      transition:transform .2s, box-shadow .2s, border-color .2s;
+      cursor:pointer;
+    }
+    .hub-card:hover{ transform:translateY(-3px); box-shadow:0 8px 24px rgba(44,24,16,.13); border-color:var(--primary); }
+
+    .hub-card__icon{ font-size:2rem; line-height:1; }
+    .hub-card__title{ font-size:1.05rem; font-weight:600; }
+    .hub-card__desc{ font-size:.82rem; color:var(--muted); line-height:1.55; }
+    .hub-card__arrow{ margin-top:auto; font-size:.85rem; color:var(--primary); font-weight:500; }
+
+    .welcome{
+      text-align:center; padding:2.5rem 1.5rem 0; max-width:500px; margin:0 auto;
+    }
+    .welcome h2{ font-size:1.3rem; margin-bottom:.5rem; }
+    .welcome p{ font-size:.9rem; color:var(--muted); }
+  </style>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <div id="loginScreen">
+    <h1>Administration — Délices de Provence</h1>
+    <p>Connectez-vous pour accéder à l'espace admin</p>
+    <button class="btn-login" onclick="netlifyIdentity.open()">Se connecter</button>
+  </div>
+
+  <div id="adminScreen">
+    <header>
+      <h1>Délices de Provence — Administration</h1>
+      <button class="logout" onclick="netlifyIdentity.logout()">Déconnexion</button>
+    </header>
+
+    <div class="welcome">
+      <h2>Bonjour 👋</h2>
+      <p>Choisissez ce que vous souhaitez modifier :</p>
+    </div>
+
+    <div class="hub">
+
+      <a href="catalogue.html" class="hub-card">
+        <div class="hub-card__icon">🛒</div>
+        <div class="hub-card__title">Catalogue produits</div>
+        <div class="hub-card__desc">Ajouter, modifier ou supprimer des produits. Gérer les photos, prix et visibilité.</div>
+        <div class="hub-card__arrow">Ouvrir →</div>
+      </a>
+
+      <a href="contenu.html" class="hub-card">
+        <div class="hub-card__icon">✏️</div>
+        <div class="hub-card__title">Contenu du site</div>
+        <div class="hub-card__desc">Modifier les textes, les photos, les avis clients et les articles presse de la page d'accueil.</div>
+        <div class="hub-card__arrow">Ouvrir →</div>
+      </a>
+
+      <a href="cms.html" class="hub-card">
+        <div class="hub-card__icon">⚙️</div>
+        <div class="hub-card__title">Infos &amp; Popup</div>
+        <div class="hub-card__desc">Modifier les horaires, l'adresse, le téléphone et le message popup de la boutique.</div>
+        <div class="hub-card__arrow">Ouvrir →</div>
+      </a>
+
+    </div>
+  </div>
+
+  <script>
+    netlifyIdentity.on('init',  function(u){ if(u) show(); });
+    netlifyIdentity.on('login', function(u){ netlifyIdentity.close(); show(); });
+    netlifyIdentity.on('logout', function(){
+      document.getElementById('adminScreen').style.display='none';
+      document.getElementById('loginScreen').style.display='flex';
+    });
+    function show(){
+      document.getElementById('loginScreen').style.display='none';
+      document.getElementById('adminScreen').style.display='block';
+    }
+  </script>
 </body>
 </html>

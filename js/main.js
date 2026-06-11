@@ -675,4 +675,123 @@
       });
   })();
 
+  // ========== CONTENU DU SITE (depuis data/contenu.json) ==========
+  (function () {
+    fetch('data/contenu.json?v=' + Date.now())
+      .then(function (res) { if (!res.ok) throw new Error('contenu.json introuvable'); return res.json(); })
+      .then(function (c) {
+
+        // ── Textes ─────────────────────────────────────────
+        var t = c.textes || {};
+        var setText = function (sel, val) {
+          if (!val) return;
+          var el = document.querySelector(sel);
+          if (el) el.textContent = val;
+        };
+        var setHtml = function (sel, val) {
+          if (!val) return;
+          var el = document.querySelector(sel);
+          if (el) el.innerHTML = val;
+        };
+
+        // Rue Saint-Antoine
+        var rueParagraphs = document.querySelectorAll('.rue__desc');
+        if (rueParagraphs[0] && t.rue_p1) rueParagraphs[0].innerHTML = t.rue_p1;
+        if (rueParagraphs[1] && t.rue_p2) rueParagraphs[1].innerHTML = t.rue_p2;
+
+        // Qui sommes-nous
+        var qsnParagraphs = document.querySelectorAll('.qsn__text > p');
+        if (qsnParagraphs[0] && t.qsn_p1) qsnParagraphs[0].innerHTML = t.qsn_p1;
+        if (qsnParagraphs[1] && t.qsn_p2) qsnParagraphs[1].innerHTML = t.qsn_p2;
+
+        // Dépôt de pain
+        var painParagraphs = document.querySelectorAll('.pain__text > p');
+        if (painParagraphs[0] && t.pain_p1) painParagraphs[0].innerHTML = t.pain_p1;
+        if (painParagraphs[1] && t.pain_p2) painParagraphs[1].innerHTML = t.pain_p2;
+
+        // Enclave
+        setText('.enclave__text', t.enclave);
+
+        // ── Photos ─────────────────────────────────────────
+        var p = c.photos || {};
+        var setImg = function (sel, src) {
+          if (!src) return;
+          var el = document.querySelector(sel);
+          if (el) el.setAttribute('src', src);
+        };
+        setImg('.hero__visual-img',   p.hero);
+        setImg('.rue__image',         p.terrasse);
+        setImg('.rue__mini-img:nth-child(1)', p.mini_1);
+        setImg('.rue__mini-img:nth-child(2)', p.mini_2);
+        setImg('.pain__visual-bg',    p.pain);
+        setImg('.qsn__image',         p.enseigne);
+
+        // ── Galerie strip ───────────────────────────────────
+        var galerie = c.galerie;
+        if (galerie && galerie.length) {
+          var strip = document.querySelector('.gallery-strip');
+          if (strip) {
+            var items = strip.querySelectorAll('.gallery-strip__item');
+            items.forEach(function (item, i) {
+              var g = galerie[i % galerie.length];
+              var img = item.querySelector('img');
+              if (img && g) { img.src = g.src; img.alt = g.alt || ''; }
+            });
+          }
+        }
+
+        // ── Presse ─────────────────────────────────────────
+        var presse = c.presse;
+        if (presse && presse.length) {
+          var grid = document.querySelector('.on-parle__grid');
+          if (grid) {
+            grid.innerHTML = '';
+            presse.forEach(function (article, i) {
+              var badgeClass = 'on-parle__badge';
+              if (article.badge_type === 'gold')  badgeClass += ' on-parle__badge--gold';
+              if (article.badge_type === 'green') badgeClass += ' on-parle__badge--green';
+              var div = document.createElement('div');
+              div.className = 'on-parle__bloc reveal';
+              div.style.transitionDelay = ((i + 1) * 0.1) + 's';
+              div.innerHTML =
+                '<span class="' + badgeClass + '">' + eh(article.badge) + '</span>' +
+                '<h3 class="on-parle__bloc-title">' + eh(article.titre) + '</h3>' +
+                '<p class="on-parle__bloc-content">' + eh(article.contenu) + '</p>' +
+                '<span class="on-parle__date">' + eh(article.date) + '</span>';
+              grid.appendChild(div);
+            });
+          }
+        }
+
+        // ── Avis ───────────────────────────────────────────
+        var avis = c.avis;
+        if (avis && avis.length) {
+          var avisCards = document.querySelector('.avis__cards');
+          if (avisCards) {
+            avisCards.innerHTML = '';
+            var googleSvg = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>';
+            var starsSvg = Array(5).fill('<img src="assets/icons/star-filled.svg" alt="étoile" class="icon-star">').join('');
+            avis.forEach(function (av, i) {
+              var div = document.createElement('div');
+              div.className = 'avis-card reveal';
+              div.style.transitionDelay = ((i + 1) * 0.1) + 's';
+              div.innerHTML =
+                '<div class="avis-card__stars">' + starsSvg + '</div>' +
+                '<p class="avis-card__text">' + eh(av.texte) + '</p>' +
+                '<div class="avis-card__author">' + googleSvg + eh(av.auteur) +
+                  '<span class="avis-card__source">— ' + eh(av.source) + '</span>' +
+                '</div>';
+              avisCards.appendChild(div);
+            });
+          }
+        }
+
+      })
+      .catch(function (err) {
+        console.warn('contenu.json non disponible, contenu statique conservé.', err);
+      });
+
+    function eh(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  })();
+
 })();

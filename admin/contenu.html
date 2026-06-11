@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contenu du site — Délices de Provence</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    :root {
+      --bg:#f8f5f0; --surface:#fff; --border:#e5ddd4;
+      --primary:#c4913a; --text:#2c1810; --muted:#8b6e5a;
+      --danger:#d94f4f; --success:#3a9a5c;
+      --r:8px; --shadow:0 2px 8px rgba(44,24,16,.1);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;background:var(--bg);color:var(--text);min-height:100vh}
+
+    #loginScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1rem}
+    #loginScreen h1{font-size:1.3rem}
+    #loginScreen p{color:var(--muted);font-size:.9rem}
+    .btn-login{padding:.65rem 2rem;background:var(--primary);color:#fff;border:none;border-radius:var(--r);font-size:1rem;cursor:pointer}
+
+    #adminScreen{display:none}
+
+    .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:.65rem 1.25rem;display:flex;align-items:center;gap:.75rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);flex-wrap:wrap}
+    .topbar h1{font-size:1rem;font-weight:600;flex:1;min-width:120px}
+    .status{font-size:.78rem;padding:.25rem .65rem;border-radius:50px}
+    .status.saving{color:var(--primary);background:rgba(196,145,58,.12)}
+    .status.saved{color:var(--success);background:rgba(58,154,92,.12)}
+    .status.error{color:var(--danger);background:rgba(217,79,79,.12)}
+
+    .tabs-wrap{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.25rem}
+    .tabs{display:flex;gap:0;overflow-x:auto}
+    .tab{padding:.65rem 1.1rem;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;font-size:.88rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .2s}
+    .tab:hover{color:var(--text)}
+    .tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+
+    .panel{display:none;padding:1.25rem;max-width:860px;margin:0 auto}
+    .panel.active{display:block}
+    .panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem}
+    .panel-header h2{font-size:1rem;font-weight:600}
+    .panel-hint{font-size:.82rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.5}
+
+    .card-list{display:flex;flex-direction:column;gap:.75rem}
+    .item-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1rem;display:flex;gap:1rem;align-items:flex-start;box-shadow:var(--shadow)}
+    .item-card__body{flex:1}
+    .item-card__badge{display:inline-block;font-size:.72rem;font-weight:600;padding:.2rem .6rem;border-radius:50px;margin-bottom:.4rem;background:rgba(196,145,58,.12);color:var(--primary)}
+    .item-card__badge--green{background:rgba(58,154,92,.12);color:var(--success)}
+    .item-card__badge--gold{background:rgba(196,145,58,.18);color:#a47c2e}
+    .item-card__title{font-weight:500;margin-bottom:.3rem;font-size:.95rem}
+    .item-card__text{font-size:.82rem;color:var(--muted);line-height:1.5}
+    .item-card__date{font-size:.76rem;color:var(--muted);margin-top:.4rem}
+    .item-card__actions{display:flex;flex-direction:column;gap:.35rem;flex-shrink:0}
+
+    .btn{padding:.45rem .9rem;border:none;border-radius:var(--r);font-size:.83rem;font-weight:500;cursor:pointer;transition:opacity .15s}
+    .btn:hover{opacity:.85}
+    .btn:disabled{opacity:.5;cursor:default}
+    .btn-primary{background:var(--primary);color:#fff}
+    .btn-danger{background:var(--danger);color:#fff}
+    .btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--text)}
+    .btn-sm{padding:.28rem .55rem;font-size:.75rem}
+    .btn-text{background:none;border:none;color:var(--muted);font-size:.8rem;cursor:pointer;text-decoration:underline}
+
+    .fg{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.9rem}
+    .fg label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+    .fg input,.fg select,.fg textarea{padding:.48rem .65rem;border:1.5px solid var(--border);border-radius:6px;font-size:.9rem;font-family:inherit;outline:none;transition:border-color .2s;background:#fff;color:var(--text)}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--primary)}
+    .fg textarea{resize:vertical;min-height:90px}
+    .frow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+    .form-save-row{display:flex;justify-content:flex-end;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+
+    .photos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem}
+    .photo-slot{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.85rem;box-shadow:var(--shadow)}
+    .photo-slot__label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.55rem;display:block}
+    .photo-slot__wrap{position:relative;border:2px dashed var(--border);border-radius:6px;overflow:hidden;cursor:pointer;aspect-ratio:4/3;transition:border-color .2s}
+    .photo-slot__wrap:hover{border-color:var(--primary)}
+    .photo-slot__wrap input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+    .photo-slot__wrap img{width:100%;height:100%;object-fit:cover;display:block}
+    .photo-slot__empty{display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:.8rem;flex-direction:column;gap:.35rem;padding:.75rem;text-align:center}
+    .photo-slot__hint{font-size:.72rem;color:var(--muted);margin-top:.4rem;text-align:center}
+
+    .galerie-list{display:flex;flex-direction:column;gap:.5rem}
+    .galerie-item{display:flex;gap:.65rem;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.55rem .85rem}
+    .galerie-item img{width:52px;height:40px;object-fit:cover;border-radius:4px;flex-shrink:0}
+    .galerie-item .no-img{width:52px;height:40px;background:#f0ece6;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#bbb;flex-shrink:0;font-size:1rem}
+    .galerie-item input[type="text"]{flex:1;padding:.4rem .6rem;border:1.5px solid var(--border);border-radius:6px;font-size:.85rem;outline:none}
+    .galerie-item input[type="text"]:focus{border-color:var(--primary)}
+
+    .section-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;box-shadow:var(--shadow)}
+    .section-card__title{font-size:.88rem;font-weight:600;margin-bottom:1rem;color:var(--text)}
+
+    .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;overflow-y:auto;padding:2rem 1rem}
+    .overlay.open{display:flex;align-items:flex-start;justify-content:center}
+    .modal{background:var(--surface);border-radius:12px;width:100%;max-width:520px;padding:1.5rem;box-shadow:0 24px 64px rgba(0,0,0,.28);position:relative;margin:auto}
+    .modal h2{font-size:1.05rem;font-weight:600;margin-bottom:1.25rem}
+    .modal-close{position:absolute;top:.9rem;right:.9rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--muted)}
+    .modal-close:hover{color:var(--text)}
+    .modal-footer{display:flex;gap:.6rem;justify-content:flex-end;margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border)}
+
+    .placeholder{text-align:center;padding:2.5rem;color:var(--muted)}
+  </style>
+</head>
+<body>
+
+  <div id="loginScreen">
+    <h1>Administration — Délices de Provence</h1>
+    <p>Connectez-vous pour modifier le contenu du site</p>
+    <button class="btn-login" onclick="netlifyIdentity.open()">Se connecter</button>
+  </div>
+
+  <div id="adminScreen">
+    <div class="topbar">
+      <h1>Contenu du site</h1>
+      <span class="status" id="statusEl"></span>
+      <a href="index.html" class="btn btn-ghost btn-sm">← Admin</a>
+      <a href="../index.html" target="_blank" class="btn btn-ghost btn-sm">Voir le site ↗</a>
+      <button class="btn-text" onclick="netlifyIdentity.logout()">Déconnexion</button>
+    </div>
+
+    <div class="tabs-wrap">
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('presse',this)">📰 Presse &amp; Actualités</button>
+        <button class="tab" onclick="switchTab('avis',this)">⭐ Avis clients</button>
+        <button class="tab" onclick="switchTab('photos',this)">📷 Photos &amp; Galerie</button>
+        <button class="tab" onclick="switchTab('textes',this)">✏️ Textes du site</button>
+      </div>
+    </div>
+
+    <!-- Presse -->
+    <div class="panel active" id="panel-presse">
+      <div class="panel-header">
+        <h2>Articles presse &amp; actualités</h2>
+        <button class="btn btn-primary btn-sm" onclick="openArticleModal(-1)">+ Ajouter un article</button>
+      </div>
+      <p class="panel-hint">Ces articles s'affichent dans la section "On parle de nous" de la page d'accueil.</p>
+      <div class="card-list" id="presseList"></div>
+    </div>
+
+    <!-- Avis -->
+    <div class="panel" id="panel-avis">
+      <div class="panel-header">
+        <h2>Avis clients</h2>
+        <button class="btn btn-primary btn-sm" onclick="openAvisModal(-1)">+ Ajouter un avis</button>
+      </div>
+      <p class="panel-hint">Ces avis s'affichent dans la section "La parole à nos visiteurs" de la page d'accueil.</p>
+      <div class="card-list" id="avisList"></div>
+    </div>
+
+    <!-- Photos -->
+    <div class="panel" id="panel-photos">
+      <div class="panel-header"><h2>Photos clés du site</h2></div>
+      <p class="panel-hint">Cliquez sur une photo pour la remplacer. La modification s'applique immédiatement après l'enregistrement.</p>
+      <div class="photos-grid" id="photosGrid"></div>
+
+      <div style="margin-top:2rem">
+        <div class="panel-header">
+          <h2>Galerie défilante</h2>
+          <button class="btn btn-ghost btn-sm" onclick="addGalerieItem()">+ Ajouter une photo</button>
+        </div>
+        <p class="panel-hint">La bande de photos qui défile sous "Trésors à découvrir". Cliquez 📷 pour remplacer une photo.</p>
+        <div class="galerie-list" id="galerieList"></div>
+        <div class="form-save-row">
+          <button class="btn btn-primary" onclick="saveGalerie()">Enregistrer la galerie</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Textes -->
+    <div class="panel" id="panel-textes">
+      <div class="panel-header"><h2>Textes du site</h2></div>
+      <p class="panel-hint">Modifiez les textes des sections de la page d'accueil. Cliquez "Enregistrer" en bas.</p>
+
+      <div class="section-card">
+        <p class="section-card__title">📍 Présentation de la boutique — section "Au cœur de Valréas"</p>
+        <div class="fg"><label>Paragraphe 1</label><textarea id="t_rue_p1" rows="4"></textarea></div>
+        <div class="fg"><label>Paragraphe 2</label><textarea id="t_rue_p2" rows="3"></textarea></div>
+      </div>
+
+      <div class="section-card">
+        <p class="section-card__title">👥 Qui sommes-nous</p>
+        <div class="fg"><label>Paragraphe 1</label><textarea id="t_qsn_p1" rows="4"></textarea></div>
+        <div class="fg"><label>Paragraphe 2</label><textarea id="t_qsn_p2" rows="4"></textarea></div>
+      </div>
+
+      <div class="section-card">
+        <p class="section-card__title">🍞 Dépôt de pain</p>
+        <div class="fg"><label>Paragraphe 1</label><textarea id="t_pain_p1" rows="3"></textarea></div>
+        <div class="fg"><label>Paragraphe 2</label><textarea id="t_pain_p2" rows="2"></textarea></div>
+      </div>
+
+      <div class="section-card">
+        <p class="section-card__title">⚜️ Enclave des Papes</p>
+        <div class="fg"><label>Texte</label><textarea id="t_enclave" rows="4"></textarea></div>
+      </div>
+
+      <div class="form-save-row">
+        <button class="btn btn-primary" onclick="saveTextes()">Enregistrer les textes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal presse -->
+  <div class="overlay" id="overlayArticle">
+    <div class="modal" role="dialog">
+      <button class="modal-close" onclick="closeOverlay('overlayArticle')">&times;</button>
+      <h2 id="articleModalTitle">Nouvel article</h2>
+      <div class="fg">
+        <label>Source / Badge *</label>
+        <input type="text" id="a_badge" placeholder="Ex : Presse — ou — Lettre du Président de Région">
+      </div>
+      <div class="fg">
+        <label>Couleur du badge</label>
+        <select id="a_badge_type">
+          <option value="presse">Bleu (Presse)</option>
+          <option value="gold">Doré (Officiel / Lettre)</option>
+          <option value="green">Vert (Actualité / Événement)</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Titre *</label>
+        <input type="text" id="a_titre" placeholder="Titre de l'article ou de l'actualité">
+      </div>
+      <div class="fg">
+        <label>Résumé *</label>
+        <textarea id="a_contenu" rows="4" placeholder="Description courte de l'article"></textarea>
+      </div>
+      <div class="fg">
+        <label>Date</label>
+        <input type="text" id="a_date" placeholder="Ex : Janvier 2025 — ou — 2025">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeOverlay('overlayArticle')">Annuler</button>
+        <button class="btn btn-primary" id="saveArticleBtn" onclick="saveArticle()">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal avis -->
+  <div class="overlay" id="overlayAvis">
+    <div class="modal" role="dialog">
+      <button class="modal-close" onclick="closeOverlay('overlayAvis')">&times;</button>
+      <h2 id="avisModalTitle">Nouvel avis</h2>
+      <div class="fg">
+        <label>Texte de l'avis *</label>
+        <textarea id="av_texte" rows="5" placeholder="Le texte complet de l'avis client"></textarea>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>Auteur *</label><input type="text" id="av_auteur" placeholder="Prénom Nom"></div>
+        <div class="fg"><label>Source</label><input type="text" id="av_source" placeholder="Ex : Avis Google"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeOverlay('overlayAvis')">Annuler</button>
+        <button class="btn btn-primary" id="saveAvisBtn" onclick="saveAvis()">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    'use strict';
+
+    var GIT  = '/.netlify/git/github/contents/';
+    var FILE = 'data/contenu.json';
+    var data = {}, fileSha = '';
+    var editAI = -1, editAV = -1;
+
+    var PHOTOS = {
+      hero:     "Photo héro (bandeau d'accueil)",
+      terrasse: 'Terrasse & façade',
+      mini_1:   'Petite photo 1 (boutique)',
+      mini_2:   'Petite photo 2 (enseigne)',
+      pain:     'Dépôt de pain',
+      enseigne: 'Enseigne (Qui sommes-nous)',
+      badge:    'Badge / Logo',
+      marche:   'Stand marché de Noël'
+    };
+
+    // Auth
+    netlifyIdentity.on('init',  function(u){ if(u) boot(); });
+    netlifyIdentity.on('login', function(u){ netlifyIdentity.close(); boot(); });
+    netlifyIdentity.on('logout', function(){
+      document.getElementById('adminScreen').style.display='none';
+      document.getElementById('loginScreen').style.display='flex';
+    });
+
+    function boot(){
+      document.getElementById('loginScreen').style.display='none';
+      document.getElementById('adminScreen').style.display='block';
+      load();
+    }
+
+    function jwt(){ return netlifyIdentity.currentUser().jwt(); }
+
+    function gitGet(p){ return jwt().then(function(t){ return fetch(GIT+p,{headers:{'Authorization':'Bearer '+t}}).then(function(r){ if(!r.ok) throw r.status; return r.json(); }); }); }
+    function gitPut(p,b){ return jwt().then(function(t){ return fetch(GIT+p,{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'Bearer '+t},body:JSON.stringify(b)}).then(function(r){ if(!r.ok) throw r.status; return r.json(); }); }); }
+
+    function load(){
+      st('saving','Chargement…');
+      gitGet(FILE).then(function(d){
+        fileSha=d.sha;
+        data=JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\n/g,'')))));
+        data.presse=data.presse||[]; data.avis=data.avis||[];
+        data.textes=data.textes||{}; data.photos=data.photos||{}; data.galerie=data.galerie||[];
+        st('',''); renderAll();
+      }).catch(function(){ st('error','Erreur chargement'); });
+    }
+
+    function write(msg){
+      st('saving','Enregistrement…');
+      var c=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+      return gitPut(FILE,{message:msg,sha:fileSha,content:c}).then(function(d){
+        fileSha=d.content.sha; st('saved','Enregistré ✓');
+        setTimeout(function(){ st('',''); },3000);
+      });
+    }
+
+    function uploadImg(file){
+      return new Promise(function(res,rej){
+        var r=new FileReader(); r.onerror=rej;
+        r.onload=function(e){
+          var b64=e.target.result.split(',')[1];
+          var name=Date.now()+'_'+file.name.replace(/[^a-z0-9.\-_]/gi,'-').toLowerCase();
+          gitPut('assets/images/'+name,{message:'Photo : '+name,content:b64})
+            .then(function(){ res('assets/images/'+name); }).catch(rej);
+        };
+        r.readAsDataURL(file);
+      });
+    }
+
+    function renderAll(){ renderPresse(); renderAvis(); renderPhotos(); renderGalerie(); renderTextes(); }
+
+    window.switchTab=function(id,btn){
+      document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+      document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+      document.getElementById('panel-'+id).classList.add('active');
+      btn.classList.add('active');
+    };
+
+    // ─ Presse ─
+    function renderPresse(){
+      var el=document.getElementById('presseList');
+      if(!data.presse.length){ el.innerHTML='<div class="placeholder">Aucun article. Cliquez "+ Ajouter" pour commencer.</div>'; return; }
+      el.innerHTML='';
+      data.presse.forEach(function(a,i){
+        var bc='item-card__badge'+(a.badge_type==='gold'?' item-card__badge--gold':a.badge_type==='green'?' item-card__badge--green':'');
+        var d=document.createElement('div'); d.className='item-card';
+        d.innerHTML='<div class="item-card__body"><span class="'+bc+'">'+eh(a.badge)+'</span><div class="item-card__title">'+eh(a.titre)+'</div><div class="item-card__text">'+eh(a.contenu)+'</div><div class="item-card__date">'+eh(a.date)+'</div></div><div class="item-card__actions"><button class="btn btn-ghost btn-sm" onclick="openArticleModal('+i+')">✏️</button><button class="btn btn-danger btn-sm" onclick="delArticle('+i+')">🗑</button></div>';
+        el.appendChild(d);
+      });
+    }
+
+    window.openArticleModal=function(i){
+      editAI=i; var a=i===-1?{}:data.presse[i];
+      document.getElementById('articleModalTitle').textContent=i===-1?'Nouvel article':'Modifier l\'article';
+      sv('a_badge',a.badge||''); sv('a_badge_type',a.badge_type||'presse');
+      sv('a_titre',a.titre||''); sv('a_contenu',a.contenu||''); sv('a_date',a.date||'');
+      document.getElementById('overlayArticle').classList.add('open');
+      document.getElementById('a_badge').focus();
+    };
+
+    window.saveArticle=function(){
+      var titre=gv('a_titre').trim(), contenu=gv('a_contenu').trim();
+      if(!titre||!contenu){ alert('Titre et contenu sont obligatoires.'); return; }
+      var btn=document.getElementById('saveArticleBtn'); btn.disabled=true;
+      var a=editAI===-1?{}:data.presse[editAI];
+      a.badge=gv('a_badge').trim(); a.badge_type=gv('a_badge_type');
+      a.titre=titre; a.contenu=contenu; a.date=gv('a_date').trim();
+      if(!a.id) a.id='pr'+Date.now();
+      if(editAI===-1) data.presse.push(a);
+      write((editAI===-1?'Ajout article : ':'Modif article : ')+titre)
+        .then(function(){ closeOverlay('overlayArticle'); renderPresse(); })
+        .finally(function(){ btn.disabled=false; });
+    };
+
+    window.delArticle=function(i){
+      if(!confirm('Supprimer cet article ?')) return;
+      var t=data.presse[i].titre; data.presse.splice(i,1);
+      write('Suppression article : '+t).then(renderPresse);
+    };
+
+    // ─ Avis ─
+    function renderAvis(){
+      var el=document.getElementById('avisList');
+      if(!data.avis.length){ el.innerHTML='<div class="placeholder">Aucun avis. Cliquez "+ Ajouter" pour commencer.</div>'; return; }
+      el.innerHTML='';
+      data.avis.forEach(function(av,i){
+        var d=document.createElement('div'); d.className='item-card';
+        d.innerHTML='<div class="item-card__body"><div class="item-card__text" style="font-style:italic;margin-bottom:.5rem">"'+eh(av.texte)+'"</div><div class="item-card__date">— '+eh(av.auteur)+' · '+eh(av.source)+'</div></div><div class="item-card__actions"><button class="btn btn-ghost btn-sm" onclick="openAvisModal('+i+')">✏️</button><button class="btn btn-danger btn-sm" onclick="delAvis('+i+')">🗑</button></div>';
+        el.appendChild(d);
+      });
+    }
+
+    window.openAvisModal=function(i){
+      editAV=i; var av=i===-1?{}:data.avis[i];
+      document.getElementById('avisModalTitle').textContent=i===-1?'Nouvel avis':'Modifier l\'avis';
+      sv('av_texte',av.texte||''); sv('av_auteur',av.auteur||''); sv('av_source',av.source||'Avis Google');
+      document.getElementById('overlayAvis').classList.add('open');
+      document.getElementById('av_texte').focus();
+    };
+
+    window.saveAvis=function(){
+      var texte=gv('av_texte').trim(), auteur=gv('av_auteur').trim();
+      if(!texte||!auteur){ alert('Texte et auteur sont obligatoires.'); return; }
+      var btn=document.getElementById('saveAvisBtn'); btn.disabled=true;
+      var av=editAV===-1?{}:data.avis[editAV];
+      av.texte=texte; av.auteur=auteur; av.source=gv('av_source').trim()||'Avis Google';
+      if(!av.id) av.id='av'+Date.now();
+      if(editAV===-1) data.avis.push(av);
+      write((editAV===-1?'Ajout avis : ':'Modif avis : ')+auteur)
+        .then(function(){ closeOverlay('overlayAvis'); renderAvis(); })
+        .finally(function(){ btn.disabled=false; });
+    };
+
+    window.delAvis=function(i){
+      if(!confirm('Supprimer cet avis ?')) return;
+      var a=data.avis[i].auteur; data.avis.splice(i,1);
+      write('Suppression avis : '+a).then(renderAvis);
+    };
+
+    // ─ Photos ─
+    function renderPhotos(){
+      var grid=document.getElementById('photosGrid'); grid.innerHTML='';
+      Object.keys(PHOTOS).forEach(function(key){
+        var src=data.photos[key]||'', label=PHOTOS[key];
+        var slot=document.createElement('div'); slot.className='photo-slot';
+        slot.innerHTML='<span class="photo-slot__label">'+eh(label)+'</span>'+
+          '<div class="photo-slot__wrap">'+
+            '<input type="file" accept="image/*" onchange="replacePhoto(this,\''+key+'\')">'+
+            (src?'<img id="simg-'+key+'" src="'+esc(src)+'" alt="">':
+                 '<div class="photo-slot__empty" id="simg-'+key+'">📷<span>Cliquer pour ajouter</span></div>')+
+          '</div>'+
+          '<p class="photo-slot__hint">Cliquer pour remplacer</p>';
+        grid.appendChild(slot);
+      });
+    }
+
+    window.replacePhoto=function(input,key){
+      if(!input.files||!input.files[0]) return;
+      st('saving','Upload…');
+      uploadImg(input.files[0]).then(function(path){
+        data.photos[key]=path;
+        return write('Photo : '+key);
+      }).then(function(){
+        var el=document.getElementById('simg-'+key);
+        if(el){
+          if(el.tagName==='IMG'){ el.src=data.photos[key]; }
+          else{
+            var img=document.createElement('img');
+            img.id='simg-'+key; img.src=data.photos[key]; img.alt='';
+            el.parentNode.replaceChild(img,el);
+          }
+        }
+      }).catch(function(){ st('error','Erreur upload'); });
+    };
+
+    // ─ Galerie ─
+    function renderGalerie(){
+      var list=document.getElementById('galerieList'); list.innerHTML='';
+      data.galerie.forEach(function(g,i){
+        var d=document.createElement('div'); d.className='galerie-item';
+        d.innerHTML=
+          (g.src?'<img src="'+esc(g.src)+'" alt="">':'<div class="no-img">🖼</div>')+
+          '<input type="text" value="'+esc(g.alt)+'" placeholder="Description de la photo" onchange="updGAlt('+i+',this.value)">'+
+          '<button class="btn btn-ghost btn-sm" onclick="replGImg(this,'+i+')" title="Remplacer">📷</button>'+
+          '<input type="file" accept="image/*" style="display:none" onchange="onGFile(this,'+i+')">'+
+          '<button class="btn btn-danger btn-sm" onclick="delG('+i+')" title="Supprimer">🗑</button>';
+        list.appendChild(d);
+      });
+    }
+
+    window.replGImg=function(btn,i){ btn.nextElementSibling.click(); };
+    window.onGFile=function(input,i){
+      if(!input.files||!input.files[0]) return;
+      st('saving','Upload…');
+      uploadImg(input.files[0]).then(function(path){ data.galerie[i].src=path; st('saved','Photo prête — cliquez "Enregistrer la galerie"'); renderGalerie(); });
+    };
+    window.updGAlt=function(i,v){ data.galerie[i].alt=v; };
+    window.delG=function(i){
+      if(!confirm('Retirer cette photo de la galerie ?')) return;
+      data.galerie.splice(i,1); write('Galerie : suppression').then(renderGalerie);
+    };
+    window.addGalerieItem=function(){
+      data.galerie.push({src:'',alt:''}); renderGalerie();
+      var items=document.querySelectorAll('.galerie-item');
+      if(items.length) items[items.length-1].querySelector('input[type="file"]').click();
+    };
+    window.saveGalerie=function(){ write('Mise à jour galerie').then(renderGalerie); };
+
+    // ─ Textes ─
+    function renderTextes(){
+      var t=data.textes||{};
+      ['rue_p1','rue_p2','qsn_p1','qsn_p2','pain_p1','pain_p2','enclave'].forEach(function(k){ sv('t_'+k,t[k]||''); });
+    }
+    window.saveTextes=function(){
+      ['rue_p1','rue_p2','qsn_p1','qsn_p2','pain_p1','pain_p2','enclave'].forEach(function(k){
+        data.textes[k]=gv('t_'+k);
+      });
+      write('Mise à jour textes du site');
+    };
+
+    // ─ Modals ─
+    window.closeOverlay=function(id){ document.getElementById(id).classList.remove('open'); };
+    document.querySelectorAll('.overlay').forEach(function(o){
+      o.addEventListener('click',function(e){ if(e.target===this) this.classList.remove('open'); });
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape') document.querySelectorAll('.overlay.open').forEach(function(o){ o.classList.remove('open'); });
+    });
+
+    // ─ Utils ─
+    function st(type,msg){ var el=document.getElementById('statusEl'); el.className='status'+(type?' '+type:''); el.textContent=msg; }
+    function gv(id){ return document.getElementById(id).value; }
+    function sv(id,v){ var el=document.getElementById(id); if(el) el.value=v; }
+    function esc(s){ return String(s||'').replace(/"/g,'&quot;'); }
+    function eh(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    window.renderAll=renderAll;
+  })();
+  </script>
+</body>
+</html>
