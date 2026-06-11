@@ -5,8 +5,6 @@ backend:
 media_folder: assets/catalogue
 public_folder: assets/catalogue
 
-locale: fr
-
 collections:
 
   # ─── INFORMATIONS BOUTIQUE & POPUP ───────────────────────────────────────
