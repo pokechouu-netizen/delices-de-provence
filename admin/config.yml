@@ -107,6 +107,7 @@ collections:
         label: "Tous les produits"
         file: "data/catalogue.json"
         format: json
+        preview_path: "boutique.html"
         fields:
           - label: "Produits"
             name: "produits"
@@ -114,10 +115,6 @@ collections:
             label_singular: "Produit"
             summary: "{{fields.nom}} — {{fields.categorie}}"
             fields:
-
-              - label: "Nom du produit"
-                name: "nom"
-                widget: "string"
 
               - label: "Catégorie"
                 name: "categorie"
@@ -140,6 +137,10 @@ collections:
                   - { label: "Sirops", value: "sirops" }
                   - { label: "Terrines & Charcuteries", value: "terrines" }
                   - { label: "Vins", value: "vins" }
+
+              - label: "Nom du produit"
+                name: "nom"
+                widget: "string"
 
               - label: "Photo du produit"
                 name: "image"
