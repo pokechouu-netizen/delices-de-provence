@@ -751,7 +751,7 @@
               if (article.badge_type === 'gold')  badgeClass += ' on-parle__badge--gold';
               if (article.badge_type === 'green') badgeClass += ' on-parle__badge--green';
               var div = document.createElement('div');
-              div.className = 'on-parle__bloc reveal';
+              div.className = 'on-parle__bloc reveal visible';
               div.style.transitionDelay = ((i + 1) * 0.1) + 's';
               div.innerHTML =
                 '<span class="' + badgeClass + '">' + eh(article.badge) + '</span>' +
@@ -773,7 +773,7 @@
             var starsSvg = Array(5).fill('<img src="assets/icons/star-filled.svg" alt="étoile" class="icon-star">').join('');
             avis.forEach(function (av, i) {
               var div = document.createElement('div');
-              div.className = 'avis-card reveal';
+              div.className = 'avis-card reveal visible';
               div.style.transitionDelay = ((i + 1) * 0.1) + 's';
               div.innerHTML =
                 '<div class="avis-card__stars">' + starsSvg + '</div>' +
