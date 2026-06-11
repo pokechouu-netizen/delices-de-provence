@@ -92,8 +92,13 @@
   <script>
   (function(){
     function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-    fetch('data/mentions.json?v='+Date.now())
-      .then(function(r){ return r.json(); })
+    var GH_BASE = 'https://raw.githubusercontent.com/pokechouu-netizen/delices-de-provence/main/';
+    function fetchGH(path) {
+      return fetch(GH_BASE + path + '?v=' + Date.now())
+        .then(function(r){ if(!r.ok) throw new Error('gh'); return r.json(); })
+        .catch(function(){ return fetch(path+'?v='+Date.now()).then(function(r){ return r.json(); }); });
+    }
+    fetchGH('data/mentions.json')
       .then(function(m){
         var el = document.getElementById('mentionsContent');
         if (!el) return;

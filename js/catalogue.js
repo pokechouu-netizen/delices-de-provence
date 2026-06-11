@@ -304,12 +304,19 @@
     cards.forEach(function (c) { obs.observe(c); });
   }
 
+  // ── Fetch helper : GitHub raw (toujours à jour) avec repli local ──
+  var GH_BASE = 'https://raw.githubusercontent.com/pokechouu-netizen/delices-de-provence/main/';
+  function fetchGH(path) {
+    return fetch(GH_BASE + path + '?v=' + Date.now())
+      .then(function (r) { if (!r.ok) throw new Error('gh'); return r.json(); })
+      .catch(function () {
+        return fetch(path + '?v=' + Date.now())
+          .then(function (r) { if (!r.ok) throw new Error(path + ' non disponible'); return r.json(); });
+      });
+  }
+
   // ── Main loader ──
-  fetch(CATALOGUE_URL + '?v=' + Date.now())
-    .then(function (res) {
-      if (!res.ok) throw new Error('catalogue.json non disponible');
-      return res.json();
-    })
+  fetchGH(CATALOGUE_URL)
     .then(function (data) {
       var produits = (data.produits || []).filter(function (p) { return p.visible !== false; });
       if (produits.length === 0) throw new Error('Aucun produit');

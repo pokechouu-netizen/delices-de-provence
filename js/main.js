@@ -480,6 +480,17 @@
     });
   }
 
+  // ── Fetch helper : GitHub raw (toujours à jour) avec repli local ──
+  var GH_BASE = 'https://raw.githubusercontent.com/pokechouu-netizen/delices-de-provence/main/';
+  function fetchGH(path) {
+    return fetch(GH_BASE + path + '?v=' + Date.now())
+      .then(function (r) { if (!r.ok) throw new Error('gh'); return r.json(); })
+      .catch(function () {
+        return fetch(path + '?v=' + Date.now())
+          .then(function (r) { if (!r.ok) throw new Error(path + ' non disponible'); return r.json(); });
+      });
+  }
+
   // ========== BEST-SELLERS (depuis data/catalogue.json) ==========
   (function () {
     var CATALOGUE_URL = 'data/catalogue.json';
@@ -541,11 +552,7 @@
       return card;
     }
 
-    fetch(CATALOGUE_URL + '?v=' + Date.now())
-      .then(function (res) {
-        if (!res.ok) throw new Error('catalogue.json introuvable');
-        return res.json();
-      })
+    fetchGH(CATALOGUE_URL)
       .then(function (data) {
         var sellers = (data.produits || []).filter(function (p) { return p.best_seller && p.visible !== false; });
         grid.innerHTML = '';
@@ -585,11 +592,7 @@
 
   // ========== INFOS BOUTIQUE (depuis data/infos.json) ==========
   (function () {
-    fetch('data/infos.json?v=' + Date.now())
-      .then(function (res) {
-        if (!res.ok) throw new Error('infos.json introuvable');
-        return res.json();
-      })
+    fetchGH('data/infos.json')
       .then(function (infos) {
         // Contact values
         var contactValues = document.querySelectorAll('.infos__contact-value');
@@ -677,8 +680,7 @@
 
   // ========== CONTENU DU SITE (depuis data/contenu.json) ==========
   (function () {
-    fetch('data/contenu.json?v=' + Date.now())
-      .then(function (res) { if (!res.ok) throw new Error('contenu.json introuvable'); return res.json(); })
+    fetchGH('data/contenu.json')
       .then(function (c) {
 
         // ── Textes ─────────────────────────────────────────
