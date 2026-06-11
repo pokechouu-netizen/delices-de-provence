@@ -2619,6 +2619,39 @@ button:focus-visible,a:focus-visible{
   max-width:180px;
 }
 
+/* Price filter row */
+.catalogue__prix-filters{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.4rem .5rem;
+  margin-bottom:1.5rem;
+  padding:0 1rem;
+}
+.catalogue__prix-filter{
+  padding:.4rem .9rem;
+  border:1.5px solid rgba(44,24,16,.15);
+  border-radius:50px;
+  background:transparent;
+  color:var(--c1);
+  font-family:var(--font-body);
+  font-size:.78rem;
+  font-weight:500;
+  cursor:pointer;
+  transition:all .3s var(--transition);
+}
+.catalogue__prix-filter:hover{
+  border-color:var(--c4);
+  color:var(--c4);
+  background:rgba(177,140,90,.06);
+}
+.catalogue__prix-filter.active{
+  background:var(--c4);
+  color:#fff;
+  border-color:var(--c4);
+  box-shadow:0 3px 10px rgba(177,140,90,.3);
+}
+
 /* Category counter badge */
 .catalogue__count{
   display:block;

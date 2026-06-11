@@ -93,36 +93,70 @@
     return String(str).replace(/"/g,'&quot;');
   }
 
+  // ── Price parser : "4,50 €" → 4.5  (null if no price) ──
+  function parsePrix(str) {
+    if (!str) return null;
+    var n = parseFloat(str.replace(/\s/g, '').replace(',', '.').replace(/[^0-9.]/g, ''));
+    return isNaN(n) ? null : n;
+  }
+
+  function prixInRange(card, range) {
+    if (range === 'all') return true;
+    var p = parsePrix(card.getAttribute('data-prix'));
+    if (p === null) return true; // produit sans prix visible partout
+    if (range === '0-5')   return p < 5;
+    if (range === '5-10')  return p >= 5  && p < 10;
+    if (range === '10-20') return p >= 10 && p < 20;
+    if (range === '20+')   return p >= 20;
+    return true;
+  }
+
   // ── Filters logic ──
   function initFilters(allCards) {
-    var filterBtns = filtersContainer.querySelectorAll('.catalogue__filter');
+    var filterBtns     = filtersContainer.querySelectorAll('.catalogue__filter');
+    var prixContainer  = document.getElementById('cataloguePrixFilters');
+    var prixBtns       = prixContainer ? prixContainer.querySelectorAll('.catalogue__prix-filter') : [];
+
+    var activeCat  = 'all';
+    var activePrix = 'all';
+
+    function applyFilters() {
+      var visible = 0;
+      allCards.forEach(function (card) {
+        var catOk  = activeCat  === 'all' || card.getAttribute('data-category') === activeCat;
+        var prixOk = prixInRange(card, activePrix);
+        if (catOk && prixOk) {
+          card.classList.remove('hidden');
+          card.classList.add('fade-in');
+          setTimeout(function () { card.classList.remove('fade-in'); }, 400);
+          visible++;
+        } else {
+          card.classList.add('hidden');
+          card.classList.remove('fade-in');
+        }
+      });
+      if (countEl) countEl.textContent = visible + ' produit' + (visible > 1 ? 's' : '');
+    }
 
     filterBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
         filterBtns.forEach(function (b) { b.classList.remove('active'); });
         btn.classList.add('active');
-        var filter = btn.getAttribute('data-filter');
-        var visible = 0;
-
-        allCards.forEach(function (card) {
-          if (filter === 'all' || card.getAttribute('data-category') === filter) {
-            card.classList.remove('hidden');
-            card.classList.add('fade-in');
-            setTimeout(function () { card.classList.remove('fade-in'); }, 400);
-            visible++;
-          } else {
-            card.classList.add('hidden');
-            card.classList.remove('fade-in');
-          }
-        });
-
-        if (countEl) countEl.textContent = visible + ' produit' + (visible > 1 ? 's' : '');
+        activeCat = btn.getAttribute('data-filter');
+        applyFilters();
       });
     });
 
-    var activeBtn = filtersContainer.querySelector('.catalogue__filter.active');
-    if (activeBtn) activeBtn.click();
-    else if (filterBtns[0]) filterBtns[0].click();
+    prixBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        prixBtns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        activePrix = btn.getAttribute('data-prix');
+        applyFilters();
+      });
+    });
+
+    applyFilters();
   }
 
   // ── Lightbox ──
