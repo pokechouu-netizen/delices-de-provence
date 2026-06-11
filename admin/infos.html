@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Infos & Popup — Délices de Provence</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    :root{--bg:#f8f5f0;--surface:#fff;--border:#e5ddd4;--primary:#c4913a;--text:#2c1810;--muted:#8b6e5a;--danger:#d94f4f;--success:#3a9a5c;--r:8px;--shadow:0 2px 8px rgba(44,24,16,.1)}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;background:var(--bg);color:var(--text);min-height:100vh}
+
+    #loginScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1rem}
+    #loginScreen h1{font-size:1.3rem}
+    #loginScreen p{color:var(--muted);font-size:.9rem}
+    .btn-login{padding:.65rem 2rem;background:var(--primary);color:#fff;border:none;border-radius:var(--r);font-size:1rem;cursor:pointer}
+
+    #adminScreen{display:none}
+
+    .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:.65rem 1.25rem;display:flex;align-items:center;gap:.75rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);flex-wrap:wrap}
+    .topbar h1{font-size:1rem;font-weight:600;flex:1;min-width:120px}
+    .status{font-size:.78rem;padding:.25rem .65rem;border-radius:50px}
+    .status.saving{color:var(--primary);background:rgba(196,145,58,.12)}
+    .status.saved{color:var(--success);background:rgba(58,154,92,.12)}
+    .status.error{color:var(--danger);background:rgba(217,79,79,.12)}
+
+    .content{max-width:700px;margin:0 auto;padding:1.5rem 1.25rem}
+
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-bottom:1.25rem;box-shadow:var(--shadow)}
+    .card__title{font-size:.95rem;font-weight:600;margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem}
+
+    .fg{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.9rem}
+    .fg label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+    .fg input,.fg select,.fg textarea{padding:.48rem .65rem;border:1.5px solid var(--border);border-radius:6px;font-size:.9rem;font-family:inherit;outline:none;transition:border-color .2s;background:#fff;color:var(--text)}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--primary)}
+    .fg .hint{font-size:.74rem;color:var(--muted);margin-top:.2rem}
+    .frow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+    .frow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+
+    /* Horaires */
+    .horaires-table{width:100%;border-collapse:collapse}
+    .horaires-table tr{border-bottom:1px solid var(--border)}
+    .horaires-table tr:last-child{border-bottom:none}
+    .horaires-table td{padding:.5rem .25rem;vertical-align:middle}
+    .horaires-table td:first-child{width:100px;font-weight:500;font-size:.88rem;color:var(--muted)}
+    .horaires-table input{width:100%;padding:.4rem .6rem;border:1.5px solid var(--border);border-radius:6px;font-size:.88rem;outline:none;transition:border-color .2s;background:#fff}
+    .horaires-table input:focus{border-color:var(--primary)}
+
+    /* Toggle popup */
+    .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--border);margin-bottom:1rem}
+    .toggle-row span{font-weight:500;font-size:.9rem}
+    .toggle{position:relative;display:inline-block;width:44px;height:24px}
+    .toggle input{opacity:0;width:0;height:0}
+    .toggle .track{position:absolute;inset:0;background:#ccc;border-radius:24px;cursor:pointer;transition:background .2s}
+    .toggle .track::before{content:'';position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:transform .2s}
+    .toggle input:checked + .track{background:var(--success)}
+    .toggle input:checked + .track::before{transform:translateX(20px)}
+
+    .save-row{display:flex;justify-content:flex-end;padding-top:1rem;border-top:1px solid var(--border)}
+    .btn{padding:.5rem 1.25rem;border:none;border-radius:var(--r);font-size:.88rem;font-weight:500;cursor:pointer;transition:opacity .15s}
+    .btn:hover{opacity:.85}
+    .btn:disabled{opacity:.5;cursor:default}
+    .btn-primary{background:var(--primary);color:#fff}
+    .btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--text)}
+    .btn-sm{padding:.28rem .65rem;font-size:.78rem}
+    .btn-text{background:none;border:none;color:var(--muted);font-size:.8rem;cursor:pointer;text-decoration:underline}
+  </style>
+</head>
+<body>
+
+  <div id="loginScreen">
+    <h1>Administration — Délices de Provence</h1>
+    <p>Connectez-vous pour modifier les infos et le popup</p>
+    <button class="btn-login" onclick="netlifyIdentity.open()">Se connecter</button>
+  </div>
+
+  <div id="adminScreen">
+    <div class="topbar">
+      <h1>Infos boutique &amp; Popup</h1>
+      <span class="status" id="statusEl"></span>
+      <a href="index.html" class="btn btn-ghost btn-sm">← Admin</a>
+      <a href="../index.html" target="_blank" class="btn btn-ghost btn-sm">Voir le site ↗</a>
+      <button class="btn-text" onclick="netlifyIdentity.logout()">Déconnexion</button>
+    </div>
+
+    <div class="content">
+
+      <!-- Coordonnées -->
+      <div class="card">
+        <div class="card__title">📍 Coordonnées</div>
+        <div class="fg">
+          <label>Adresse</label>
+          <input type="text" id="f_adresse" placeholder="Ex : 27, rue Saint-Antoine">
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>Code postal</label>
+            <input type="text" id="f_cp" placeholder="84600">
+          </div>
+          <div class="fg">
+            <label>Ville</label>
+            <input type="text" id="f_ville" placeholder="Valréas">
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>Téléphone</label>
+            <input type="text" id="f_tel" placeholder="09 86 53 24 10">
+          </div>
+          <div class="fg">
+            <label>Email</label>
+            <input type="email" id="f_email" placeholder="contact@…">
+          </div>
+        </div>
+        <div class="save-row">
+          <button class="btn btn-primary" onclick="saveSection('coordonnees')">Enregistrer</button>
+        </div>
+      </div>
+
+      <!-- Horaires -->
+      <div class="card">
+        <div class="card__title">🕐 Horaires d'ouverture</div>
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Écrivez "Fermé" pour les jours de fermeture.</p>
+        <table class="horaires-table">
+          <tr><td>Lundi</td><td><input type="text" id="h_lundi" placeholder="Fermé"></td></tr>
+          <tr><td>Mardi</td><td><input type="text" id="h_mardi" placeholder="10h–13h / 15h30–19h"></td></tr>
+          <tr><td>Mercredi</td><td><input type="text" id="h_mercredi" placeholder="09h–13h / 15h30–19h"></td></tr>
+          <tr><td>Jeudi</td><td><input type="text" id="h_jeudi" placeholder="10h–13h / 15h30–19h"></td></tr>
+          <tr><td>Vendredi</td><td><input type="text" id="h_vendredi" placeholder="10h–13h / 15h30–19h"></td></tr>
+          <tr><td>Samedi</td><td><input type="text" id="h_samedi" placeholder="10h–13h / 15h30–19h"></td></tr>
+          <tr><td>Dimanche</td><td><input type="text" id="h_dimanche" placeholder="Fermé"></td></tr>
+        </table>
+        <div class="save-row" style="margin-top:.75rem">
+          <button class="btn btn-primary" onclick="saveSection('horaires')">Enregistrer</button>
+        </div>
+      </div>
+
+      <!-- Popup -->
+      <div class="card">
+        <div class="card__title">💬 Popup promotionnel</div>
+
+        <div class="toggle-row">
+          <span>Activer le popup</span>
+          <label class="toggle">
+            <input type="checkbox" id="p_actif">
+            <span class="track"></span>
+          </label>
+        </div>
+
+        <div class="fg">
+          <label>Message affiché</label>
+          <input type="text" id="p_message" placeholder="Ex : Nouvelles confitures de saison disponibles !">
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>Texte du bouton</label>
+            <input type="text" id="p_cta_label" placeholder="Ex : Voir la boutique">
+          </div>
+          <div class="fg">
+            <label>Lien du bouton</label>
+            <input type="text" id="p_cta_url" placeholder="boutique.html">
+          </div>
+        </div>
+        <div class="fg" style="max-width:200px">
+          <label>Délai d'apparition (secondes)</label>
+          <input type="number" id="p_delai" min="1" max="60" placeholder="5">
+          <span class="hint">Le popup apparaît après ce délai sur la page d'accueil.</span>
+        </div>
+        <div class="save-row">
+          <button class="btn btn-primary" onclick="saveSection('popup')">Enregistrer</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    'use strict';
+
+    var GIT  = '/.netlify/git/github/contents/';
+    var FILE = 'data/infos.json';
+    var data = {}, fileSha = '';
+
+    netlifyIdentity.on('init',  function(u){ if(u) boot(); });
+    netlifyIdentity.on('login', function(u){ netlifyIdentity.close(); boot(); });
+    netlifyIdentity.on('logout', function(){
+      document.getElementById('adminScreen').style.display='none';
+      document.getElementById('loginScreen').style.display='flex';
+    });
+
+    function boot(){
+      document.getElementById('loginScreen').style.display='none';
+      document.getElementById('adminScreen').style.display='block';
+      load();
+    }
+
+    function jwt(){ return netlifyIdentity.currentUser().jwt(); }
+
+    function gitGet(p){
+      return jwt().then(function(t){
+        return fetch(GIT+p,{headers:{'Authorization':'Bearer '+t}})
+          .then(function(r){ if(!r.ok) throw r.status; return r.json(); });
+      });
+    }
+    function gitPut(p,b){
+      return jwt().then(function(t){
+        return fetch(GIT+p,{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'Bearer '+t},body:JSON.stringify(b)})
+          .then(function(r){ if(!r.ok) throw r.status; return r.json(); });
+      });
+    }
+
+    function load(){
+      st('saving','Chargement…');
+      gitGet(FILE).then(function(d){
+        fileSha=d.sha;
+        data=JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\n/g,'')))));
+        st('','');
+        fillForm();
+      }).catch(function(){ st('error','Erreur chargement'); });
+    }
+
+    function write(msg){
+      st('saving','Enregistrement…');
+      var c=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+      return gitPut(FILE,{message:msg,sha:fileSha,content:c}).then(function(d){
+        fileSha=d.content.sha;
+        st('saved','Enregistré ✓');
+        setTimeout(function(){ st('',''); },3000);
+      }).catch(function(){ st('error','Erreur sauvegarde'); });
+    }
+
+    function fillForm(){
+      sv('f_adresse', data.adresse          || '');
+      sv('f_cp',      data.code_postal       || '');
+      sv('f_ville',   data.ville             || '');
+      sv('f_tel',     data.telephone_fixe    || '');
+      sv('f_email',   data.email             || '');
+
+      sv('h_lundi',    data.horaire_lundi    || '');
+      sv('h_mardi',    data.horaire_mardi    || '');
+      sv('h_mercredi', data.horaire_mercredi || '');
+      sv('h_jeudi',    data.horaire_jeudi    || '');
+      sv('h_vendredi', data.horaire_vendredi || '');
+      sv('h_samedi',   data.horaire_samedi   || '');
+      sv('h_dimanche', data.horaire_dimanche || '');
+
+      var pop = data.popup || {};
+      document.getElementById('p_actif').checked = pop.actif === true;
+      sv('p_message',   pop.message      || '');
+      sv('p_cta_label', pop.cta_label    || '');
+      sv('p_cta_url',   pop.cta_url      || '');
+      sv('p_delai',     pop.delai_secondes != null ? pop.delai_secondes : 5);
+    }
+
+    window.saveSection = function(section){
+      if(section === 'coordonnees'){
+        data.adresse       = gv('f_adresse');
+        data.code_postal   = gv('f_cp');
+        data.ville         = gv('f_ville');
+        data.telephone_fixe= gv('f_tel');
+        data.email         = gv('f_email');
+        write('Mise à jour coordonnées');
+      }
+      else if(section === 'horaires'){
+        data.horaire_lundi    = gv('h_lundi');
+        data.horaire_mardi    = gv('h_mardi');
+        data.horaire_mercredi = gv('h_mercredi');
+        data.horaire_jeudi    = gv('h_jeudi');
+        data.horaire_vendredi = gv('h_vendredi');
+        data.horaire_samedi   = gv('h_samedi');
+        data.horaire_dimanche = gv('h_dimanche');
+        write('Mise à jour horaires');
+      }
+      else if(section === 'popup'){
+        if(!data.popup) data.popup={};
+        data.popup.actif         = document.getElementById('p_actif').checked;
+        data.popup.message       = gv('p_message');
+        data.popup.cta_label     = gv('p_cta_label');
+        data.popup.cta_url       = gv('p_cta_url');
+        data.popup.delai_secondes= parseInt(gv('p_delai'),10) || 5;
+        write('Mise à jour popup');
+      }
+    };
+
+    function st(type,msg){ var el=document.getElementById('statusEl'); el.className='status'+(type?' '+type:''); el.textContent=msg; }
+    function gv(id){ return document.getElementById(id).value; }
+    function sv(id,v){ var el=document.getElementById(id); if(el) el.value=v; }
+  })();
+  </script>
+</body>
+</html>
