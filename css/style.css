@@ -1725,6 +1725,16 @@ p{max-width:65ch}
   .infos__map-actions{flex-direction:column;align-items:center}
 }
 
+/* ========== FACEBOOK FEED ========== */
+.facebook-feed{background:var(--c3)}
+.facebook-feed__header{text-align:center;margin-bottom:2.5rem}
+.facebook-feed__widget{
+  display:flex;
+  justify-content:center;
+  overflow:hidden;
+}
+.facebook-feed__widget .fb-page{max-width:100%}
+
 /* ========== FOOTER ========== */
 .footer-mini{
   display:flex;
