@@ -1731,9 +1731,12 @@ p{max-width:65ch}
 .facebook-feed__widget{
   display:flex;
   justify-content:center;
+  width:100%;
 }
 .facebook-feed__widget iframe{
-  max-width:100%;
+  display:block;
+  width:100%;
+  max-width:500px;
   border-radius:12px;
   box-shadow:0 4px 24px rgba(44,24,16,.12);
 }
