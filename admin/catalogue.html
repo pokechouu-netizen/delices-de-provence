@@ -192,7 +192,7 @@
       <h1>Catalogue produits</h1>
       <span class="status" id="statusEl"></span>
       <a href="index.html" class="btn btn-ghost btn-sm">← Admin</a>
-      <a href="boutique.html" target="_blank" class="btn btn-ghost btn-sm">Voir la boutique ↗</a>
+      <a href="/" target="_blank" class="btn btn-ghost btn-sm">Voir le site ↗</a>
       <button class="btn btn-primary btn-sm" onclick="openModal(-1)">+ Ajouter un produit</button>
       <button class="btn-text" onclick="netlifyIdentity.logout()">Déconnexion</button>
     </div>
@@ -500,7 +500,7 @@
         if (!vis) tr.className = 'row-hidden';
         tr.innerHTML =
           '<td class="c-img">' + (p.image
-            ? '<img src="' + esc(p.image) + '" alt="" loading="lazy" onclick="openPhotoOverlay(\'' + esc(p.image) + '\')" title="Voir en grand">'
+            ? '<img src="' + esc(imgSrc(p.image)) + '" alt="" loading="lazy" onclick="openPhotoOverlay(\'' + esc(imgSrc(p.image)) + '\')" title="Voir en grand">'
             : '<div class="no-img">🖼</div>') + '</td>' +
           '<td class="c-nom">' + eh(p.nom || '—') + '</td>' +
           '<td class="c-cat">' + eh(CAT[p.categorie] || p.categorie || '—') + '</td>' +
@@ -521,6 +521,15 @@
     }
 
     // ── Actions ───────────────────────────────────────────
+    // ── Résout le chemin d'image depuis /admin/ ────────
+    // Les paths JSON sont relatifs à la racine (ex: assets/catalogue/...)
+    // Depuis /admin/, il faut ../assets/catalogue/...
+    function imgSrc(path) {
+      if (!path) return '';
+      if (path.startsWith('http') || path.startsWith('/') || path.startsWith('data:')) return path;
+      return '../' + path;
+    }
+
     // ── Overlay photo plein écran ─────────────────────
     window.openPhotoOverlay = function (src) {
       var ov = document.getElementById('photoOverlay');
@@ -565,7 +574,7 @@
       var ph   = document.getElementById('imgPlaceholder');
       var hint = document.getElementById('imgZoneHint');
       if (p.image) {
-        prev.src = p.image; prev.style.display = 'block';
+        prev.src = imgSrc(p.image); prev.style.display = 'block';
         ph.style.display = 'none';
         if (hint) hint.style.display = '';
       } else {
