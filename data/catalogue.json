@@ -1893,7 +1893,7 @@
       "prix": "1000€",
       "contenance": "",
       "prix_unitaire": "",
-      "visible": true,
+      "visible": false,
       "best_seller": false,
       "image": "",
       "id": "p-1781245433659"
