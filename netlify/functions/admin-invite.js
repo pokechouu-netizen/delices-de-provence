@@ -1,14 +1,17 @@
 /* ---------------------------------------------------------------
    admin-invite.js  —  Netlify Function (temporary)
-   Envoie des invitations Netlify Identity en utilisant le token
-   service-role injecté par Netlify dans context.clientContext.
+   Gère les invitations et la liste des utilisateurs Netlify Identity.
+   Utilise le service-role JWT injecté par Netlify via clientContext.
 
-   Usage: POST /.netlify/functions/admin-invite
-   Body: { "secret": "ddp-invite-2026", "email": "user@example.com" }
+   Usage:
+     POST /.netlify/functions/admin-invite
+       Body: { "secret": "ddp-invite-2026", "email": "user@example.com" }
+     GET  /.netlify/functions/admin-invite?secret=ddp-invite-2026
+       → liste les utilisateurs
    --------------------------------------------------------------- */
 const https = require('https');
 
-const INVITE_SECRET = 'ddp-invite-2026'; // clé secrète simple
+const INVITE_SECRET = 'ddp-invite-2026';
 
 function request(url, options, body) {
   return new Promise((resolve, reject) => {
@@ -24,46 +27,68 @@ function request(url, options, body) {
 }
 
 exports.handler = async function (event, context) {
-  const cors = { 'Access-Control-Allow-Origin': '*' };
+  const cors = { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' };
 
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
-  if (event.httpMethod !== 'POST') return { statusCode: 405, headers: cors, body: 'Method not allowed' };
 
-  let payload;
-  try { payload = JSON.parse(event.body || '{}'); } catch { return { statusCode: 400, headers: cors, body: 'Bad JSON' }; }
-
-  if (payload.secret !== INVITE_SECRET) {
-    return { statusCode: 403, headers: cors, body: JSON.stringify({ error: 'Wrong secret' }) };
+  // Auth check
+  const qs = event.queryStringParameters || {};
+  let payload = {};
+  if (event.httpMethod === 'POST') {
+    try { payload = JSON.parse(event.body || '{}'); } catch { return { statusCode: 400, headers: cors, body: '{"error":"Bad JSON"}' }; }
+  }
+  const secret = payload.secret || qs.secret;
+  if (secret !== INVITE_SECRET) {
+    return { statusCode: 403, headers: cors, body: '{"error":"Wrong secret"}' };
   }
 
   // Récupère le token service-role injecté par Netlify
   const identity = context.clientContext && context.clientContext.identity;
   if (!identity || !identity.token) {
     return {
-      statusCode: 500,
-      headers: cors,
-      body: JSON.stringify({ error: 'No identity context — check that Netlify Identity is enabled on the site' })
+      statusCode: 500, headers: cors,
+      body: JSON.stringify({ error: 'No identity context', clientContext: context.clientContext })
     };
   }
-
   const { token, url: identityUrl } = identity;
 
-  // Appel GoTrue admin pour envoyer l'invitation
-  const ghRes = await request(
-    `${identityUrl}/admin/users`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    },
-    JSON.stringify({ email: payload.email, invite: true })
-  );
+  // GET → liste les utilisateurs
+  if (event.httpMethod === 'GET') {
+    const res = await request(`${identityUrl}/admin/users?per_page=50`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return { statusCode: res.status, headers: cors, body: res.body };
+  }
 
-  return {
-    statusCode: ghRes.status,
-    headers: { ...cors, 'Content-Type': 'application/json' },
-    body: ghRes.body
-  };
+  // POST → invite (ou ré-invite) un utilisateur
+  if (!payload.email) return { statusCode: 400, headers: cors, body: '{"error":"Missing email"}' };
+
+  // Cherche d'abord l'ID si pas fourni
+  let userId = payload.id;
+  if (!userId) {
+    const listRes = await request(`${identityUrl}/admin/users?per_page=50`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const listData = JSON.parse(listRes.body);
+    const found = (listData.users || []).find(u => u.email === payload.email);
+    if (found) userId = found.id;
+  }
+
+  // Supprime l'utilisateur existant si nécessaire (pour réinviter)
+  if (userId) {
+    await request(`${identityUrl}/admin/users/${userId}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  }
+
+  // Envoie l'invitation via l'endpoint dédié /invite
+  const inviteRes = await request(`${identityUrl}/invite`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+  }, JSON.stringify({ email: payload.email }));
+
+  return { statusCode: inviteRes.status, headers: cors, body: inviteRes.body };
 };
