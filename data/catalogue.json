@@ -1880,7 +1880,7 @@
       "prix": "",
       "contenance": "",
       "prix_unitaire": "",
-      "visible": true,
+      "visible": false,
       "best_seller": false,
       "image": "",
       "id": "p-1781175815668"
