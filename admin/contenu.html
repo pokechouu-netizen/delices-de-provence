@@ -325,6 +325,13 @@
       });
     }
 
+    // Résout le chemin depuis /admin/ (les paths JSON sont relatifs à la racine)
+    function imgSrc(path){
+      if(!path) return '';
+      if(path.startsWith('http')||path.startsWith('/')||path.startsWith('data:')) return path;
+      return '../'+path;
+    }
+
     function uploadImg(file){
       return new Promise(function(res,rej){
         var r=new FileReader(); r.onerror=rej;
@@ -437,7 +444,7 @@
         slot.innerHTML='<span class="photo-slot__label">'+eh(label)+'</span>'+
           '<div class="photo-slot__wrap">'+
             '<input type="file" accept="image/*" onchange="replacePhoto(this,\''+key+'\')">'+
-            (src?'<img id="simg-'+key+'" src="'+esc(src)+'" alt="">':
+            (src?'<img id="simg-'+key+'" src="'+esc(imgSrc(src))+'" alt="">':
                  '<div class="photo-slot__empty" id="simg-'+key+'">📷<span>Cliquer pour ajouter</span></div>')+
           '</div>'+
           '<p class="photo-slot__hint">Cliquer pour remplacer</p>';
@@ -454,10 +461,10 @@
       }).then(function(){
         var el=document.getElementById('simg-'+key);
         if(el){
-          if(el.tagName==='IMG'){ el.src=data.photos[key]; }
+          if(el.tagName==='IMG'){ el.src=imgSrc(data.photos[key]); }
           else{
             var img=document.createElement('img');
-            img.id='simg-'+key; img.src=data.photos[key]; img.alt='';
+            img.id='simg-'+key; img.src=imgSrc(data.photos[key]); img.alt='';
             el.parentNode.replaceChild(img,el);
           }
         }
@@ -470,7 +477,7 @@
       data.galerie.forEach(function(g,i){
         var d=document.createElement('div'); d.className='galerie-item';
         d.innerHTML=
-          (g.src?'<img src="'+esc(g.src)+'" alt="">':'<div class="no-img">🖼</div>')+
+          (g.src?'<img src="'+esc(imgSrc(g.src))+'" alt="">':'<div class="no-img">🖼</div>')+
           '<input type="text" value="'+esc(g.alt)+'" placeholder="Description de la photo" onchange="updGAlt('+i+',this.value)">'+
           '<button class="btn btn-ghost btn-sm" onclick="replGImg(this,'+i+')" title="Remplacer">📷</button>'+
           '<input type="file" accept="image/*" style="display:none" onchange="onGFile(this,'+i+')">'+
