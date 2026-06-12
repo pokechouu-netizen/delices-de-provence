@@ -480,13 +480,15 @@
     });
   }
 
-  // ── Fetch helper : GitHub raw (toujours à jour) avec repli local ──
+  // ── Fetch helper : Netlify (no-cache) en priorité, GitHub raw en fallback ──
+  // Note : raw.githubusercontent.com a un cache CDN de 5 min qui ignore ?v=
+  // Les fichiers Netlify ont Cache-Control: no-store → toujours frais après déploiement
   var GH_BASE = 'https://raw.githubusercontent.com/pokechouu-netizen/delices-de-provence/main/';
   function fetchGH(path) {
-    return fetch(GH_BASE + path + '?v=' + Date.now())
-      .then(function (r) { if (!r.ok) throw new Error('gh'); return r.json(); })
+    return fetch(path + '?v=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error('local'); return r.json(); })
       .catch(function () {
-        return fetch(path + '?v=' + Date.now())
+        return fetch(GH_BASE + path + '?v=' + Date.now())
           .then(function (r) { if (!r.ok) throw new Error(path + ' non disponible'); return r.json(); });
       });
   }
