@@ -1857,7 +1857,7 @@
       "prix": "50€",
       "contenance": "",
       "prix_unitaire": "",
-      "visible": true
+      "visible": false
     },
     {
       "id": "vin-03",
