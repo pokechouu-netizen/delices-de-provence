@@ -1867,8 +1867,8 @@
       "legende": "",
       "image": "assets/catalogue/vins/vin-03.jpg",
       "best_seller": false,
-      "prix": "",
-      "contenance": "15€",
+      "prix": "15€",
+      "contenance": "",
       "prix_unitaire": "",
       "visible": true
     },
