@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Monstres en Duel — jeu de cartes</title>
+  <meta name="description" content="Monstres en Duel : un jeu de cartes mélange d'UNO et de Hearthstone. Collectionne des monstres, lance des sorts et bats le Rival (IA).">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#2a1b45">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Monstres en Duel">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+
+  <link rel="stylesheet" href="jeu.css">
+</head>
+<body>
+  <!-- ÉCRAN TITRE -->
+  <div id="ecran-titre" class="ecran">
+    <div class="titre-art" aria-hidden="true"></div>
+    <h1 class="titre-jeu">Monstres en Duel</h1>
+    <p class="titre-sous">Jeu de cartes · collectionne tes monstres, bats le Rival</p>
+    <div class="titre-actions">
+      <button class="btn-principal" data-action="jouer">⚔️ Jouer</button>
+      <button class="btn-secondaire" data-action="regles">📜 Règles &amp; cartes</button>
+    </div>
+  </div>
+
+  <!-- ÉCRAN RÈGLES -->
+  <div id="ecran-regles" class="ecran cache">
+    <div class="regles-contenu" id="regles-contenu"></div>
+    <button class="btn-principal" data-action="fermer-regles">Retour</button>
+  </div>
+
+  <!-- PLATEAU DE JEU -->
+  <div id="ecran-jeu" class="ecran cache">
+    <div class="plateau">
+      <!-- Héros adverse -->
+      <div class="ligne-hero" id="hero-ia"></div>
+      <!-- Plateau adverse -->
+      <div class="board" id="board-ia"></div>
+      <!-- Séparateur central -->
+      <div class="milieu">
+        <div class="indicateur-tour" id="indicateur-tour">À vous de jouer</div>
+      </div>
+      <!-- Plateau joueur -->
+      <div class="board" id="board-joueur"></div>
+      <!-- Héros joueur -->
+      <div class="ligne-hero" id="hero-joueur"></div>
+      <!-- Main du joueur -->
+      <div class="main" id="main-joueur"></div>
+      <!-- Barre d'action -->
+      <div class="barre-action">
+        <button class="btn-tour" id="btn-fin-tour" data-action="fin-tour">Fin du tour</button>
+        <button class="btn-quitter" data-action="quitter">✕</button>
+      </div>
+    </div>
+    <!-- Toasts / messages -->
+    <div class="toast" id="toast"></div>
+    <!-- Bannière de cible -->
+    <div class="bandeau-cible cache" id="bandeau-cible">
+      <span id="bandeau-cible-txt">Choisissez une cible</span>
+      <button data-action="annuler-cible">Annuler</button>
+    </div>
+    <!-- Écran de fin -->
+    <div class="fin-partie cache" id="fin-partie">
+      <h2 id="fin-titre"></h2>
+      <p id="fin-sous"></p>
+      <button class="btn-principal" data-action="rejouer">Rejouer</button>
+      <button class="btn-secondaire" data-action="menu">Menu</button>
+    </div>
+  </div>
+
+  <script src="jeu.js"></script>
+</body>
+</html>
