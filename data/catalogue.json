@@ -11,7 +11,7 @@
       "prix": "",
       "contenance": "",
       "prix_unitaire": "",
-      "visible": false
+      "visible": true
     },
     {
       "id": "alcool-02",
@@ -24,7 +24,7 @@
       "prix": "",
       "contenance": "",
       "prix_unitaire": "",
-      "visible": false
+      "visible": true
     },
     {
       "id": "alcool-03",
