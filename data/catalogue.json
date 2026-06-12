@@ -11,7 +11,7 @@
       "prix": "4,50€",
       "contenance": "250g ",
       "prix_unitaire": "1000€/100g",
-      "visible": true
+      "visible": false
     },
     {
       "id": "alcool-02",
