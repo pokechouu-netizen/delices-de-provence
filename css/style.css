@@ -2832,12 +2832,14 @@ button:focus-visible,a:focus-visible{
   min-width:0;
   background:#1a1a1a;
   display:flex;
-  align-items:center;
-  justify-content:center;
+  flex-direction:column;
+  align-items:stretch;
+  overflow:hidden;
 }
 .lightbox__img{
+  flex:1;
+  min-height:0;
   width:100%;
-  height:100%;
   object-fit:cover;
   display:block;
 }
@@ -2926,10 +2928,11 @@ button:focus-visible,a:focus-visible{
   }
   .lightbox__photo{
     flex:none;
+    height:45vh;
     max-height:45vh;
   }
   .lightbox__img{
-    max-height:45vh;
+    width:100%;
     object-fit:cover;
   }
   .lightbox__info{
@@ -3443,15 +3446,19 @@ button:focus-visible,a:focus-visible{
 
 /* ========== LIGHTBOX — NOUVEAUX CHAMPS ========== */
 .lightbox__legende{
-  font-size:.8rem;
+  font-size:.78rem;
   font-style:italic;
   color:rgba(255,255,255,.55);
   text-align:center;
-  padding:.5rem 1rem 0;
-  line-height:1.5;
+  padding:.45rem 1rem .55rem;
+  line-height:1.4;
+  flex-shrink:0;
+  word-wrap:break-word;
+  overflow-wrap:break-word;
 }
 .lightbox__legende:empty{
   display:none;
+  padding:0;
 }
 .lightbox__prix-bloc{
   display:flex;
