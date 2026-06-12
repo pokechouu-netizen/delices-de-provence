@@ -86,9 +86,17 @@
     tbody tr:hover { background:#faf8f5; }
     tbody tr.row-hidden { opacity:.55; }
     td { padding:.5rem 1rem; vertical-align:middle; }
-    td.c-img { width:52px; padding:.35rem .65rem; }
-    td.c-img img { width:40px; height:40px; object-fit:cover; border-radius:4px; display:block; }
-    td.c-img .no-img { width:40px; height:40px; border-radius:4px; background:#f0ece6; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:1.2rem; }
+    td.c-img { width:76px; padding:.3rem .5rem; }
+    td.c-img img { width:64px; height:64px; object-fit:cover; border-radius:6px; display:block; cursor:zoom-in; transition:transform .15s,box-shadow .15s; }
+    td.c-img img:hover { transform:scale(1.07); box-shadow:0 4px 14px rgba(44,24,16,.18); }
+    td.c-img .no-img { width:64px; height:64px; border-radius:6px; background:#f0ece6; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:1.5rem; }
+
+    /* ── Overlay plein-écran pour voir la photo en grand ─── */
+    #photoOverlay { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.85); align-items:center; justify-content:center; cursor:zoom-out; }
+    #photoOverlay.open { display:flex; }
+    #photoOverlay img { max-width:90vw; max-height:88vh; object-fit:contain; border-radius:10px; box-shadow:0 8px 40px rgba(0,0,0,.5); pointer-events:none; }
+    #photoOverlay .overlay-close { position:absolute; top:1rem; right:1.2rem; color:#fff; font-size:2rem; cursor:pointer; line-height:1; opacity:.8; }
+    #photoOverlay .overlay-close:hover { opacity:1; }
     td.c-nom { font-weight:500; max-width:200px; }
     td.c-cat { font-size:.82rem; color:var(--muted); }
     td.c-prix { width:90px; }
@@ -148,8 +156,9 @@
     }
     .img-zone:hover { border-color:var(--primary); }
     .img-zone input[type="file"] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
-    .img-zone img { max-width:100%; max-height:110px; object-fit:contain; border-radius:4px; pointer-events:none; }
+    .img-zone img { max-width:100%; max-height:220px; object-fit:contain; border-radius:6px; pointer-events:none; }
     .img-placeholder { color:var(--muted); font-size:.85rem; pointer-events:none; }
+    .img-zone-hint { font-size:.75rem; color:var(--muted); margin-top:.4rem; }
 
     /* ── Modal footer ────────────────────────────────────── */
     .modal-footer {
@@ -162,6 +171,12 @@
   </style>
 </head>
 <body>
+
+  <!-- ── Overlay photo plein écran ───────────────────── -->
+  <div id="photoOverlay" onclick="closePhotoOverlay()">
+    <span class="overlay-close" onclick="closePhotoOverlay()">×</span>
+    <img id="photoOverlayImg" src="" alt="">
+  </div>
 
   <!-- ── Login ────────────────────────────────────────── -->
   <div id="loginScreen">
@@ -271,6 +286,7 @@
           <input type="file" id="f_file" accept="image/*" onchange="onFileChange(this)">
           <img id="imgPreview" src="" alt="" style="display:none">
           <span class="img-placeholder" id="imgPlaceholder">📷 Cliquer pour choisir une photo</span>
+          <span class="img-zone-hint" id="imgZoneHint" style="display:none">Cliquez pour changer la photo</span>
         </div>
         <input type="hidden" id="f_img">
       </div>
@@ -484,7 +500,7 @@
         if (!vis) tr.className = 'row-hidden';
         tr.innerHTML =
           '<td class="c-img">' + (p.image
-            ? '<img src="' + esc(p.image) + '" alt="" loading="lazy">'
+            ? '<img src="' + esc(p.image) + '" alt="" loading="lazy" onclick="openPhotoOverlay(\'' + esc(p.image) + '\')" title="Voir en grand">'
             : '<div class="no-img">🖼</div>') + '</td>' +
           '<td class="c-nom">' + eh(p.nom || '—') + '</td>' +
           '<td class="c-cat">' + eh(CAT[p.categorie] || p.categorie || '—') + '</td>' +
@@ -505,6 +521,19 @@
     }
 
     // ── Actions ───────────────────────────────────────────
+    // ── Overlay photo plein écran ─────────────────────
+    window.openPhotoOverlay = function (src) {
+      var ov = document.getElementById('photoOverlay');
+      document.getElementById('photoOverlayImg').src = src;
+      ov.classList.add('open');
+    };
+    window.closePhotoOverlay = function () {
+      document.getElementById('photoOverlay').classList.remove('open');
+    };
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closePhotoOverlay();
+    });
+
     window.toggleVis = function (i, v) {
       products[i].visible = v;
       writeCatalogue((v ? 'Affiche' : 'Masque') + ' : ' + products[i].nom).then(renderTable).catch(function(){});
@@ -534,8 +563,16 @@
       set('f_file', '');
       var prev = document.getElementById('imgPreview');
       var ph   = document.getElementById('imgPlaceholder');
-      if (p.image) { prev.src = p.image; prev.style.display = 'block'; ph.style.display = 'none'; }
-      else         { prev.style.display = 'none'; ph.style.display = ''; }
+      var hint = document.getElementById('imgZoneHint');
+      if (p.image) {
+        prev.src = p.image; prev.style.display = 'block';
+        ph.style.display = 'none';
+        if (hint) hint.style.display = '';
+      } else {
+        prev.style.display = 'none';
+        ph.style.display = '';
+        if (hint) hint.style.display = 'none';
+      }
       document.getElementById('overlay').classList.add('open');
       document.getElementById('f_cat').focus();
     };
