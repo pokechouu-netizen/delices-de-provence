@@ -219,8 +219,13 @@
       var cont    = card.getAttribute('data-contenance')    || '';
       var prixU   = card.getAttribute('data-prix-unitaire') || '';
 
-      lightboxImg.src = img ? img.src : '';
+      var imgSrc = img ? (img.getAttribute('src') || '') : '';
+      var hasImg = imgSrc.trim() !== '';
+      lightboxImg.src = hasImg ? imgSrc : '';
       lightboxImg.alt = img ? img.alt : '';
+      lightboxImg.style.display = hasImg ? '' : 'none';
+      var noImgEl = document.getElementById('lightboxNoImg');
+      if (noImgEl) noImgEl.style.display = hasImg ? 'none' : '';
       lightboxTitle.textContent = nom;
       lightboxDesc.textContent  = desc;
 

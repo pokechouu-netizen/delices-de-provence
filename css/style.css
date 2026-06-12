@@ -3445,6 +3445,29 @@ button:focus-visible,a:focus-visible{
 }
 
 /* ========== LIGHTBOX — NOUVEAUX CHAMPS ========== */
+.lightbox__no-img{
+  flex:1;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1rem;
+  padding:2rem;
+  color:rgba(255,255,255,.35);
+  text-align:center;
+}
+.lightbox__no-img svg{
+  opacity:.4;
+  flex-shrink:0;
+}
+.lightbox__no-img p{
+  font-size:.88rem;
+  font-style:italic;
+  line-height:1.5;
+  margin:0;
+  max-width:18ch;
+}
 .lightbox__legende{
   font-size:.78rem;
   font-style:italic;
