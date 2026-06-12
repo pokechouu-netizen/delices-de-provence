@@ -5,12 +5,12 @@
       "nom": "Alcool Artisanal",
       "categorie": "alcools",
       "description": "test",
-      "legende": "",
+      "legende": "blablabla",
       "image": "assets/catalogue/alcools/alcool-01.jpg",
       "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
+      "prix": "4,50€",
+      "contenance": "250g ",
+      "prix_unitaire": "1000€/100g",
       "visible": true
     },
     {
