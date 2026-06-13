@@ -89,7 +89,7 @@
       "prix": "",
       "contenance": "",
       "prix_unitaire": "",
-      "visible": true
+      "visible": false
     },
     {
       "id": "olive-05",
