@@ -1,0 +1,17 @@
+{
+  "name": "Monstres en Duel",
+  "short_name": "Monstres",
+  "description": "Jeu de cartes — mélange d'UNO et de Hearthstone. Collectionne tes monstres et bats le Rival (IA).",
+  "lang": "fr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#120a26",
+  "theme_color": "#2a1b45",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,45 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="36%" r="78%">
+      <stop offset="0%" stop-color="#3a2466"/>
+      <stop offset="100%" stop-color="#120a26"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7bf0db"/>
+      <stop offset="100%" stop-color="#2bb3a3"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <!-- petites étoiles -->
+  <g fill="#ffd23f" opacity="0.85">
+    <circle cx="90" cy="120" r="6"/><circle cx="430" cy="100" r="5"/>
+    <circle cx="410" cy="380" r="6"/><circle cx="100" cy="400" r="5"/>
+  </g>
+  <!-- monstre mignon -->
+  <g transform="translate(256 270)">
+    <!-- oreilles/cornes -->
+    <path d="M-95 -70 L-70 -130 L-40 -78 Z" fill="#1c7d72"/>
+    <path d="M95 -70 L70 -130 L40 -78 Z" fill="#1c7d72"/>
+    <!-- corps -->
+    <circle r="128" fill="url(#body)"/>
+    <ellipse cy="20" rx="95" ry="92" fill="#3fd0bd"/>
+    <!-- yeux -->
+    <circle cx="-42" cy="-10" r="30" fill="#fff"/>
+    <circle cx="42" cy="-10" r="30" fill="#fff"/>
+    <circle cx="-38" cy="-4" r="15" fill="#10302c"/>
+    <circle cx="46" cy="-4" r="15" fill="#10302c"/>
+    <circle cx="-44" cy="-10" r="5" fill="#fff"/>
+    <circle cx="40" cy="-10" r="5" fill="#fff"/>
+    <!-- joues -->
+    <circle cx="-70" cy="40" r="16" fill="#ff8fb0" opacity="0.7"/>
+    <circle cx="70" cy="40" r="16" fill="#ff8fb0" opacity="0.7"/>
+    <!-- bouche -->
+    <path d="M-40 48 Q0 92 40 48 Q0 70 -40 48Z" fill="#10302c"/>
+    <path d="M-22 56 Q0 64 22 56" stroke="#fff" stroke-width="5" fill="none"/>
+  </g>
+  <!-- carte derrière (clin d'oeil) -->
+  <g transform="rotate(-16 110 380)" opacity="0.95">
+    <rect x="40" y="330" width="86" height="120" rx="14" fill="#fff" stroke="#9b5de5" stroke-width="6"/>
+    <circle cx="60" cy="352" r="15" fill="#3aa0e0"/>
+  </g>
+</svg>
