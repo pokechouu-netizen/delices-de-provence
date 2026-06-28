@@ -1,14 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
-  <!-- Champagne bottle -->
-  <path d="M16 30h4v3h-4z" fill="#546E7A"/>
-  <path d="M14 12h8l1 18h-10z" fill="#2E7D32"/>
-  <path d="M14 12h8l.3 5h-8.6z" fill="#388E3C"/>
-  <path d="M17 5h2v7h-2z" fill="#795548"/>
-  <rect x="14.5" y="18" width="7" height="5" rx="1" fill="#FDD835"/>
-  <!-- Cork popping -->
-  <rect x="20" y="2" width="3" height="4" rx="1" fill="#A1887F" transform="rotate(15 21.5 4)"/>
+  <!-- Champagne flute -->
+  <path d="M13 4 L21 4 L19 18 L17.5 18 L17.5 30 L20 30 L20 32 L14 32 L14 30 L16.5 30 L16.5 18 L15 18 Z" fill="#2C1810"/>
   <!-- Bubbles -->
-  <circle cx="24" cy="6" r="1.2" fill="#FFF9C4" opacity=".7"/>
-  <circle cx="26" cy="9" r=".8" fill="#FFF9C4" opacity=".5"/>
-  <circle cx="22" cy="3" r=".9" fill="#FFF9C4" opacity=".6"/>
+  <circle cx="16.5" cy="14" r="1"   fill="#2C1810" fill-opacity=".38"/>
+  <circle cx="18.5" cy="10" r="0.8" fill="#2C1810" fill-opacity=".38"/>
+  <circle cx="17"   cy="7"  r="0.7" fill="#2C1810" fill-opacity=".38"/>
+  <!-- Second glass (offset behind) -->
+  <path d="M19 5 L26 5 L24.5 16 L23.5 16 L23.5 27 L25.5 27 L25.5 29 L21 29" fill="#2C1810" fill-opacity=".4"/>
 </svg>

@@ -19,6 +19,18 @@
     "message": "Notre boutique est régulièrement mise à jour — allez-y, jetez un œil !",
     "cta_label": "Découvrir la boutique",
     "cta_url": "boutique.html",
-    "delai_secondes": 5
+    "delai_secondes": 5,
+    "produits_bandeau": [
+      "Confiture d'Abricot de Provence",
+      "Miel de Lavande",
+      "Tapenade Noire",
+      "Nougat de Montélimar",
+      "Huile d'Olive AOP",
+      "Sel de Camargue aux Herbes",
+      "Calissons d'Aix",
+      "Terrines du Luberon",
+      "Sirop de Violette",
+      "Chocolats Artisanaux"
+    ]
   }
 }

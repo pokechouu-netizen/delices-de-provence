@@ -3526,7 +3526,7 @@ button:focus-visible,a:focus-visible{
   border:1px solid rgba(200,150,62,.25);
   border-radius:1rem;
   padding:2.5rem 2rem 2rem;
-  max-width:380px;width:calc(100% - 2rem);
+  max-width:560px;width:calc(100% - 2rem);
   text-align:center;
   box-shadow:0 20px 60px rgba(0,0,0,.35);
   transform:translateY(24px) scale(.96);
@@ -3546,9 +3546,53 @@ button:focus-visible,a:focus-visible{
 .popup-promo__message{
   font-family:var(--font-body);font-size:1rem;
   color:var(--c4);line-height:1.55;
-  margin:0 0 1.5rem;
+  margin:0 0 1.25rem;
+}
+/* Scrolling product ticker */
+.popup-promo__ticker{
+  overflow:hidden;
+  margin:0 -2rem 1.5rem;
+  padding:.55rem 0;
+  border-top:1px solid rgba(200,150,62,.2);
+  border-bottom:1px solid rgba(200,150,62,.2);
+  background:rgba(200,150,62,.06);
+}
+.popup-promo__ticker:empty{display:none;}
+.popup-promo__ticker-track{
+  display:inline-flex;
+  white-space:nowrap;
+  animation:ticker-scroll 22s linear infinite;
+}
+.popup-promo__ticker-track:hover{animation-play-state:paused;}
+@keyframes ticker-scroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+.popup-promo__ticker-item{
+  display:inline-block;
+  padding:0 1.2rem;
+  font-family:var(--font-body);
+  font-size:.82rem;
+  font-weight:500;
+  color:var(--c4);
+  letter-spacing:.04em;
+}
+.popup-promo__ticker-sep{
+  color:rgba(200,150,62,.65);
+  font-size:.7rem;
 }
 .popup-promo__cta{
   display:inline-block;width:100%;
   font-size:.95rem;letter-spacing:.05em;
 }
+/* ===== FOOTER BADGE LOCAL ===== */
+.footer-mini{position:relative;}
+.footer-local-badge{
+  position:absolute;right:1rem;top:50%;
+  transform:translateY(-50%);
+  height:38px;width:auto;
+  opacity:.75;
+  transition:opacity .2s;
+  border-radius:3px;
+}
+.footer-local-badge:hover{opacity:1;}

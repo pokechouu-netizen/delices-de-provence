@@ -1,0 +1,21 @@
+{
+  "rayons": [
+    { "id": "vins",            "nom": "Vins",                     "icone": "vins.svg" },
+    { "id": "alcools",         "nom": "Alcools & Champagnes",     "icone": "alcools.svg" },
+    { "id": "bieres",          "nom": "Bières",                   "icone": "bieres.svg" },
+    { "id": "sirops",          "nom": "Sirops",                   "icone": "sirops.svg" },
+    { "id": "jus",             "nom": "Jus de Fruits",            "icone": "jus.svg" },
+    { "id": "miel",            "nom": "Miel",                     "icone": "miel.svg" },
+    { "id": "confitures",      "nom": "Confitures",               "icone": "confitures.svg" },
+    { "id": "chocolat",        "nom": "Chocolat & Confiseries",   "icone": "chocolat.svg" },
+    { "id": "biscuits-sucres", "nom": "Biscuits Sucrés",          "icone": "biscuits-sucres.svg" },
+    { "id": "biscuits-sales",  "nom": "Biscuits Salés",           "icone": "biscuits-sales.svg" },
+    { "id": "terrines",        "nom": "Terrines & Charcuteries",  "icone": "terrines.svg" },
+    { "id": "plats-cuisines",  "nom": "Plats Cuisinés",           "icone": "plats-cuisines.svg" },
+    { "id": "autour-olive",    "nom": "Autour de l'Olive",        "icone": "autour-olive.svg" },
+    { "id": "pates-riz",       "nom": "Pâtes, Riz & Ravioles",   "icone": "pates-riz.svg" },
+    { "id": "epices",          "nom": "Épices & Lavande",         "icone": "epices.svg" },
+    { "id": "sel-camargue",    "nom": "Sel de Camargue",          "icone": "sel-camargue.svg" },
+    { "id": "cafe-the",        "nom": "Café, Thé & Infusions",    "icone": "cafe-the.svg" }
+  ]
+}

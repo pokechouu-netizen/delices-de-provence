@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
-  <!-- Wrapper -->
-  <rect x="4" y="10" width="28" height="16" rx="2" fill="#7B1FA2"/>
-  <!-- Chocolate bar exposed -->
-  <rect x="4" y="14" width="28" height="12" rx="1" fill="#5D4037"/>
-  <!-- Squares -->
-  <line x1="13" y1="14" x2="13" y2="26" stroke="#4E342E" stroke-width="1"/>
-  <line x1="22" y1="14" x2="22" y2="26" stroke="#4E342E" stroke-width="1"/>
-  <line x1="4" y1="20" x2="32" y2="20" stroke="#4E342E" stroke-width="1"/>
-  <!-- Wrapper fold -->
-  <path d="M4 14 L1 10 L4 10Z" fill="#9C27B0"/>
-  <path d="M32 14 L35 10 L32 10Z" fill="#9C27B0"/>
-  <rect x="4" y="10" width="28" height="4" rx="1" fill="#9C27B0"/>
+  <!-- Chocolate bar -->
+  <rect x="4" y="8" width="28" height="20" rx="3" fill="#2C1810"/>
+  <!-- Segment lines -->
+  <line x1="4"  y1="16" x2="32" y2="16" stroke="#2C1810" stroke-width="1.5" stroke-opacity=".32"/>
+  <line x1="4"  y1="22" x2="32" y2="22" stroke="#2C1810" stroke-width="1.5" stroke-opacity=".32"/>
+  <line x1="13" y1="8"  x2="13" y2="28" stroke="#2C1810" stroke-width="1.5" stroke-opacity=".32"/>
+  <line x1="20" y1="8"  x2="20" y2="28" stroke="#2C1810" stroke-width="1.5" stroke-opacity=".32"/>
+  <line x1="27" y1="8"  x2="27" y2="28" stroke="#2C1810" stroke-width="1.5" stroke-opacity=".32"/>
+  <!-- Broken corner -->
+  <path d="M24 8 L32 8 L32 15 L27.5 12 Z" fill="#2C1810" fill-opacity=".5"/>
+  <!-- Wrapper curl -->
+  <path d="M4 8 Q5 5 8 5 L19 5 Q17 7 15 8Z" fill="#2C1810" fill-opacity=".42"/>
 </svg>

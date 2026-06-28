@@ -1,12 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
-  <!-- Beer mug -->
-  <rect x="7" y="10" width="16" height="20" rx="2" fill="#FF8F00"/>
-  <rect x="9" y="12" width="12" height="16" rx="1" fill="#FFB300"/>
-  <!-- Foam -->
-  <ellipse cx="15" cy="10" rx="9" ry="3" fill="#FFF8E1"/>
-  <circle cx="11" cy="9" r="2" fill="#FFFDE7"/>
-  <circle cx="16" cy="8" r="2.5" fill="#FFFDE7"/>
-  <circle cx="20" cy="9" r="1.8" fill="#FFFDE7"/>
+  <!-- Mug body -->
+  <rect x="5" y="11" width="19" height="19" rx="3" fill="#2C1810"/>
   <!-- Handle -->
-  <path d="M23 14h3a3 3 0 0 1 3 3v4a3 3 0 0 1-3 3h-3" fill="none" stroke="#FF8F00" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M24 15 Q32 15 32 20.5 Q32 26 24 26" fill="none" stroke="#2C1810" stroke-width="3" stroke-linecap="round"/>
+  <!-- Foam blobs -->
+  <ellipse cx="7"  cy="10" rx="2.5" ry="2"   fill="#2C1810"/>
+  <ellipse cx="12" cy="9"  rx="3"   ry="2.2" fill="#2C1810"/>
+  <ellipse cx="17" cy="10" rx="2.5" ry="2"   fill="#2C1810"/>
+  <ellipse cx="22" cy="11" rx="2"   ry="1.5" fill="#2C1810"/>
+  <!-- Bubbles in beer -->
+  <circle cx="11" cy="20" r="1"   fill="#2C1810" fill-opacity=".32"/>
+  <circle cx="16" cy="24" r="1"   fill="#2C1810" fill-opacity=".32"/>
+  <circle cx="13" cy="26" r="0.8" fill="#2C1810" fill-opacity=".32"/>
 </svg>

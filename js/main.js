@@ -654,6 +654,25 @@
               if (popup.cta_label) ctaEl.textContent = popup.cta_label;
               if (popup.cta_url)   ctaEl.setAttribute('href', popup.cta_url);
             }
+            // Scrolling product ticker
+            var tickerEl = document.getElementById('popupPromoTicker');
+            if (tickerEl && Array.isArray(popup.produits_bandeau) && popup.produits_bandeau.length) {
+              var doubled = popup.produits_bandeau.concat(popup.produits_bandeau);
+              var track = document.createElement('div');
+              track.className = 'popup-promo__ticker-track';
+              doubled.forEach(function(item) {
+                var s = document.createElement('span');
+                s.className = 'popup-promo__ticker-item';
+                s.textContent = item;
+                track.appendChild(s);
+                var sep = document.createElement('span');
+                sep.className = 'popup-promo__ticker-sep';
+                sep.setAttribute('aria-hidden', 'true');
+                sep.textContent = ' ✦ ';
+                track.appendChild(sep);
+              });
+              tickerEl.appendChild(track);
+            }
             var delay = (popup.delai_secondes || 5) * 1000;
             var shown = sessionStorage.getItem('popup_promo_shown');
             if (!shown) {

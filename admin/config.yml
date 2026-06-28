@@ -99,6 +99,61 @@ collections:
                 default: 5
                 value_type: "int"
 
+              - label: "Produits en bandeau défilant"
+                name: "produits_bandeau"
+                widget: "list"
+                required: false
+                hint: "Noms des produits qui défilent dans le popup. Laissez vide pour masquer le bandeau."
+                field:
+                  label: "Produit"
+                  name: "item"
+                  widget: "string"
+
+  # ─── RAYONS BOUTIQUE ─────────────────────────────────────────────────────
+  - name: "rayons"
+    label: "Rayons boutique"
+    files:
+      - name: "rayons"
+        label: "Gérer les étagères"
+        file: "data/rayons.json"
+        format: json
+        fields:
+          - label: "Rayons"
+            name: "rayons"
+            widget: "list"
+            label_singular: "Rayon"
+            summary: "{{fields.nom}}"
+            hint: "Ajoutez, supprimez ou réordonnez les rayons affichés sur les étagères de la boutique."
+            fields:
+              - label: "Identifiant (catégorie)"
+                name: "id"
+                widget: "select"
+                options:
+                  - { label: "Alcools & Champagnes", value: "alcools" }
+                  - { label: "Autour de l'Olive", value: "autour-olive" }
+                  - { label: "Bières", value: "bieres" }
+                  - { label: "Biscuits Salés", value: "biscuits-sales" }
+                  - { label: "Biscuits Sucrés", value: "biscuits-sucres" }
+                  - { label: "Café, Thé & Infusions", value: "cafe-the" }
+                  - { label: "Chocolat & Confiseries", value: "chocolat" }
+                  - { label: "Confitures", value: "confitures" }
+                  - { label: "Épices & Lavande", value: "epices" }
+                  - { label: "Jus de Fruits", value: "jus" }
+                  - { label: "Miel", value: "miel" }
+                  - { label: "Pâtes, Riz & Ravioles", value: "pates-riz" }
+                  - { label: "Plats Cuisinés", value: "plats-cuisines" }
+                  - { label: "Sel de Camargue", value: "sel-camargue" }
+                  - { label: "Sirops", value: "sirops" }
+                  - { label: "Terrines & Charcuteries", value: "terrines" }
+                  - { label: "Vins", value: "vins" }
+              - label: "Nom affiché sur l'étagère"
+                name: "nom"
+                widget: "string"
+              - label: "Icône (fichier SVG)"
+                name: "icone"
+                widget: "string"
+                hint: "Nom du fichier dans assets/icons/ — ex : vins.svg"
+
   # ─── CATALOGUE PRODUITS ──────────────────────────────────────────────────
   - name: "catalogue"
     label: "Catalogue produits"

@@ -61,6 +61,16 @@ exports.handler = async function (event, context) {
     return { statusCode: res.status, headers: cors, body: res.body };
   }
 
+  // POST action=delete → supprime un utilisateur
+  if (payload.action === 'delete') {
+    if (!payload.id) return { statusCode: 400, headers: cors, body: '{"error":"Missing id"}' };
+    const del = await request(`${identityUrl}/admin/users/${payload.id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return { statusCode: del.status, headers: cors, body: del.body || '{"ok":true}' };
+  }
+
   // POST → invite (ou ré-invite) un utilisateur
   if (!payload.email) return { statusCode: 400, headers: cors, body: '{"error":"Missing email"}' };
 

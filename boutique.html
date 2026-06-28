@@ -4,32 +4,220 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Boutique — Délices de Provence, Épicerie Fine à Valréas</title>
-  <meta name="description" content="Découvrez tout notre catalogue de produits artisanaux de Provence : confitures, huile d'olive, terrines, miel, vins, sirops et bien plus. Épicerie fine à Valréas.">
+  <meta name="description" content="Explorez nos rayons : vins, confitures, miel, huile d'olive, terrines, chocolat et bien plus. Épicerie fine artisanale à Valréas.">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="icon" type="image/jpeg" href="assets/images/badge-local-artisanal.jpg">
   <link rel="apple-touch-icon" href="assets/images/badge-local-artisanal.jpg">
+
+  <style>
+    /* ===== SHELVES ===== */
+    .shelves-section { background: #F5EDE0; }
+
+    .shelves-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1rem 3rem;
+    }
+
+    /* SVG cornice + frame */
+    .shelves-frame {
+      background: #2C1810;
+      border-radius: 6px 6px 4px 4px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(44,24,16,.35), 0 2px 8px rgba(0,0,0,.2);
+    }
+
+    .shelves-cornice {
+      display: block;
+      width: 100%;
+      height: 28px;
+    }
+
+    .shelves-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.2rem 2rem 1rem;
+      border-bottom: 2px solid rgba(139,94,60,.5);
+    }
+
+    .shelves-header__title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-style: italic;
+      color: #FFF5E0;
+      letter-spacing: 0.08em;
+      margin: 0;
+    }
+
+    .shelves-header__ornament {
+      color: rgba(200,150,62,.6);
+      font-size: 1.1rem;
+    }
+
+    .shelves-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding: 1rem;
+    }
+
+    @media (max-width: 560px) {
+      .shelves-grid { grid-template-columns: 1fr; }
+    }
+
+    .shelf-cat {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.85rem 1.1rem;
+      background: linear-gradient(to bottom,
+        #9B7040 0%, #8B6035 30%, #7A5230 65%, #6B4220 100%);
+      border-radius: 3px;
+      box-shadow:
+        0 3px 7px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,210,120,.22),
+        inset 0 -2px 0 rgba(0,0,0,.35);
+      color: #FFF5E0;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+      position: relative;
+    }
+
+    .shelf-cat::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right,
+        transparent, rgba(255,210,120,.35) 30%, rgba(255,210,120,.35) 70%, transparent);
+      border-radius: 3px 3px 0 0;
+    }
+
+    .shelf-cat:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.12);
+      box-shadow:
+        0 6px 14px rgba(0,0,0,.55),
+        inset 0 1px 0 rgba(255,210,120,.3),
+        inset 0 -2px 0 rgba(0,0,0,.35);
+    }
+
+    .shelf-cat__icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      filter: invert(1) sepia(0.2) brightness(0.85);
+      object-fit: contain;
+    }
+
+    .shelf-cat__name {
+      flex: 1;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+      line-height: 1.25;
+      color: #FFF5E0;
+    }
+
+    .shelf-cat__arrow {
+      color: rgba(200,150,62,.75);
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: transform .15s ease;
+    }
+    .shelf-cat:hover .shelf-cat__arrow { transform: translateX(3px); }
+
+    /* SVG shelf plank below each row */
+    .shelves-plank {
+      display: block;
+      width: calc(100% + 2rem);
+      margin: 0 -1rem;
+      height: 14px;
+    }
+
+    /* ===== CATEGORY VIEW ===== */
+    #categoryView { padding-top: 1.5rem; }
+
+    .catalogue-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      padding: 0.6rem 1.2rem;
+      background: #2C1810;
+      color: #FFF5E0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background .15s;
+    }
+    .catalogue-back-btn:hover { background: #6B3A1E; }
+
+    .catalogue-cat-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: #2C1810;
+      margin: 0 0 1.5rem;
+    }
+  </style>
 </head>
 <body class="page-boutique">
 
-  <!-- Scroll progress bar -->
   <div class="scroll-progress" id="scrollProgress"></div>
 
+  <nav class="nav" role="navigation" aria-label="Navigation principale">
+    <a href="index.html" class="nav__logo">
+      <img src="assets/images/badge-local-artisanal.jpg" alt="Logo Délices de Provence" class="nav__logo-img">
+      Délices<span>de Provence</span>
+    </a>
+    <div class="nav__burger" aria-label="Menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="nav__menu">
+      <ul class="nav__links">
+        <li><a href="tresors.html" class="nav__link">Nos Incontournables</a></li>
+        <li><a href="boutique.html" class="nav__link active">Boutique</a></li>
+        <li><a href="entreprises.html" class="nav__link">Espace Pro</a></li>
+        <li><a href="qui-sommes-nous.html" class="nav__link">Qui sommes-nous</a></li>
+        <li><a href="presse.html" class="nav__link">Presse</a></li>
+        <li><a href="infos.html" class="nav__link">Infos</a></li>
+      </ul>
+      <a href="#" data-cta="phone" class="nav__cta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Nous contacter
+      </a>
+      <div class="nav__social">
+        <a href="https://www.instagram.com/delicesdeprovence84valreas/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61559185874782" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
 
   <!-- ===== BOUTIQUE HERO ===== -->
   <header class="boutique-hero">
     <div class="boutique-hero__inner">
       <p class="boutique-hero__label">Épicerie Fine — Valréas</p>
       <h1 class="boutique-hero__title">Notre Boutique</h1>
-      <p class="boutique-hero__subtitle">144 produits artisanaux sélectionnés avec soin — le meilleur de la Provence, classé par catégorie.</p>
+      <p class="boutique-hero__subtitle">Artisanat provençal soigneusement sélectionné — explorez nos rayons.</p>
       <a href="index.html" class="boutique-hero__back">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
         Retour à l'accueil
@@ -37,46 +225,84 @@
     </div>
   </header>
 
-  <!-- ===== CATALOGUE COMPLET ===== -->
-  <section class="section catalogue" id="catalogue">
-    <div class="section__inner">
+  <!-- ===== CATALOGUE ===== -->
+  <section class="section shelves-section" id="catalogue">
+    <div class="section__inner shelves-wrapper">
 
-      <div class="catalogue__filters" id="catalogueFilters">
-        <button class="catalogue__filter active" data-filter="all">Tous les produits</button>
-        <button class="catalogue__filter" data-filter="alcools"><img src="assets/icons/alcools.svg" alt="Alcools" class="icon-svg"> Alcools & Champagnes</button>
-        <button class="catalogue__filter" data-filter="autour-olive"><img src="assets/icons/autour-olive.svg" alt="Olive" class="icon-svg"> Autour de l'Olive</button>
-        <button class="catalogue__filter" data-filter="bieres"><img src="assets/icons/bieres.svg" alt="Bières" class="icon-svg"> Bières</button>
-        <button class="catalogue__filter" data-filter="biscuits-sales"><img src="assets/icons/biscuits-sales.svg" alt="Biscuits salés" class="icon-svg"> Biscuits Salés</button>
-        <button class="catalogue__filter" data-filter="biscuits-sucres"><img src="assets/icons/biscuits-sucres.svg" alt="Biscuits sucrés" class="icon-svg"> Biscuits Sucrés</button>
-        <button class="catalogue__filter" data-filter="cafe-the"><img src="assets/icons/cafe-the.svg" alt="Café" class="icon-svg"> Café, Thé & Infusions</button>
-        <button class="catalogue__filter" data-filter="chocolat"><img src="assets/icons/chocolat.svg" alt="Chocolat" class="icon-svg"> Chocolat & Confiseries</button>
-        <button class="catalogue__filter" data-filter="confitures"><img src="assets/icons/confitures.svg" alt="Confitures" class="icon-svg"> Confitures</button>
-        <button class="catalogue__filter" data-filter="epices"><img src="assets/icons/epices.svg" alt="Épices" class="icon-svg"> Épices & Lavande</button>
-        <button class="catalogue__filter" data-filter="jus"><img src="assets/icons/jus.svg" alt="Jus" class="icon-svg"> Jus de Fruits</button>
-        <button class="catalogue__filter" data-filter="miel"><img src="assets/icons/miel.svg" alt="Miel" class="icon-svg"> Miel</button>
-        <button class="catalogue__filter" data-filter="pates-riz"><img src="assets/icons/pates-riz.svg" alt="Pâtes" class="icon-svg"> Pâtes, Riz & Ravioles</button>
-        <button class="catalogue__filter" data-filter="plats-cuisines"><img src="assets/icons/plats-cuisines.svg" alt="Plats cuisinés" class="icon-svg"> Plats Cuisinés</button>
-        <button class="catalogue__filter" data-filter="sel-camargue"><img src="assets/icons/sel-camargue.svg" alt="Sel" class="icon-svg"> Sel de Camargue</button>
-        <button class="catalogue__filter" data-filter="sirops"><img src="assets/icons/sirops.svg" alt="Sirops" class="icon-svg"> Sirops</button>
-        <button class="catalogue__filter" data-filter="terrines"><img src="assets/icons/terrines.svg" alt="Terrines" class="icon-svg"> Terrines & Charcuteries</button>
-        <button class="catalogue__filter" data-filter="vins"><img src="assets/icons/vins.svg" alt="Vins" class="icon-svg"> Vins</button>
+      <!-- Hidden filter buttons used by catalogue.js -->
+      <div id="catalogueFilters" style="position:absolute;visibility:hidden;pointer-events:none;height:0;overflow:hidden">
+        <button class="catalogue__filter active" data-filter="all">Tous</button>
+        <button class="catalogue__filter" data-filter="alcools">Alcools &amp; Champagnes</button>
+        <button class="catalogue__filter" data-filter="autour-olive">Autour de l'Olive</button>
+        <button class="catalogue__filter" data-filter="bieres">Bières</button>
+        <button class="catalogue__filter" data-filter="biscuits-sales">Biscuits Salés</button>
+        <button class="catalogue__filter" data-filter="biscuits-sucres">Biscuits Sucrés</button>
+        <button class="catalogue__filter" data-filter="cafe-the">Café, Thé &amp; Infusions</button>
+        <button class="catalogue__filter" data-filter="chocolat">Chocolat &amp; Confiseries</button>
+        <button class="catalogue__filter" data-filter="confitures">Confitures</button>
+        <button class="catalogue__filter" data-filter="epices">Épices &amp; Lavande</button>
+        <button class="catalogue__filter" data-filter="jus">Jus de Fruits</button>
+        <button class="catalogue__filter" data-filter="miel">Miel</button>
+        <button class="catalogue__filter" data-filter="pates-riz">Pâtes, Riz &amp; Ravioles</button>
+        <button class="catalogue__filter" data-filter="plats-cuisines">Plats Cuisinés</button>
+        <button class="catalogue__filter" data-filter="sel-camargue">Sel de Camargue</button>
+        <button class="catalogue__filter" data-filter="sirops">Sirops</button>
+        <button class="catalogue__filter" data-filter="terrines">Terrines &amp; Charcuteries</button>
+        <button class="catalogue__filter" data-filter="vins">Vins</button>
       </div>
 
-      <div class="prix-range" id="prixRange">
-        <div class="prix-range__label">Prix : <strong id="prixLabelMin">0 €</strong> — <strong id="prixLabelMax">150 €+</strong></div>
-        <div class="prix-range__wrap">
-          <div class="prix-range__track"><div class="prix-range__fill" id="prixFill"></div></div>
-          <input type="range" id="prixInputMin" min="0" max="150" value="0" step="1">
-          <input type="range" id="prixInputMax" min="0" max="150" value="150" step="1">
+      <!-- ===== SVG SHELF UNIT ===== -->
+      <div class="shelves-frame" id="shelvesUnit">
+
+        <!-- Cornice SVG -->
+        <svg class="shelves-cornice" viewBox="0 0 800 28" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="corniceGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stop-color="#B07848"/>
+              <stop offset="40%"  stop-color="#9B6A3C"/>
+              <stop offset="100%" stop-color="#6B4220"/>
+            </linearGradient>
+          </defs>
+          <rect width="800" height="28" fill="url(#corniceGrad)"/>
+          <line x1="0" y1="9"  x2="800" y2="9"  stroke="rgba(255,200,100,.18)" stroke-width="1"/>
+          <line x1="0" y1="20" x2="800" y2="20" stroke="rgba(0,0,0,.2)"        stroke-width="1.5"/>
+        </svg>
+
+        <div class="shelves-header">
+          <span class="shelves-header__ornament">✦</span>
+          <p class="shelves-header__title">Nos Rayons</p>
+          <span class="shelves-header__ornament">✦</span>
         </div>
-      </div>
 
-      <p class="catalogue__count" id="catalogueCount">Chargement…</p>
+        <!-- Gradient defs shared by dynamically built planks -->
+        <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+          <defs>
+            <linearGradient id="plankGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stop-color="#7A5230"/>
+              <stop offset="50%"  stop-color="#6B4220"/>
+              <stop offset="100%" stop-color="#3E2410"/>
+            </linearGradient>
+          </defs>
+        </svg>
 
-      <div class="catalogue__grid catalogue__grid--photos" id="catalogueGridPhotos">
-        <div class="catalogue__loader">
-          <div class="catalogue__spinner"></div>
-          <p>Chargement du catalogue…</p>
+        <div class="shelves-grid" id="shelvesGrid">
+          <!-- Chargé dynamiquement depuis data/rayons.json -->
+        </div>
+
+      </div><!-- /.shelves-frame -->
+
+      <!-- ===== CATEGORY PRODUCT VIEW ===== -->
+      <div id="categoryView" style="display:none">
+        <button class="catalogue-back-btn" id="catalogueBack">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+          Nos rayons
+        </button>
+        <h2 class="catalogue-cat-title" id="catalogueCatTitle"></h2>
+        <div class="catalogue__grid catalogue__grid--photos" id="catalogueGridPhotos">
+          <div class="catalogue__loader">
+            <div class="catalogue__spinner"></div>
+            <p>Chargement…</p>
+          </div>
         </div>
       </div>
 
@@ -84,7 +310,7 @@
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer-mini">
+  <footer class="footer-mini"><img class="footer-local-badge" src="assets/images/badge-local-artisanal.jpg" alt="Produit local artisanal">
     <a href="mentions-legales.html">Mentions légales</a>
     <span>|</span>
     <a href="politique-confidentialite.html">Politique de confidentialité</a>
@@ -147,5 +373,98 @@
 
   <script src="js/main.js"></script>
   <script src="js/catalogue.js"></script>
+
+  <script>
+  (function () {
+    var shelvesUnit  = document.getElementById('shelvesUnit');
+    var shelvesGrid  = document.getElementById('shelvesGrid');
+    var categoryView = document.getElementById('categoryView');
+    var catTitle     = document.getElementById('catalogueCatTitle');
+    var backBtn      = document.getElementById('catalogueBack');
+    var CAT_NAMES    = {};
+
+    function buildPlank() {
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('class', 'shelves-plank');
+      svg.setAttribute('viewBox', '0 0 800 14');
+      svg.setAttribute('preserveAspectRatio', 'none');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.style.gridColumn = '1 / -1';
+      svg.innerHTML = '<rect width="800" height="14" fill="url(#plankGrad)"/><line x1="0" y1="3" x2="800" y2="3" stroke="rgba(255,180,80,.12)" stroke-width="1"/><rect y="11" width="800" height="3" fill="rgba(0,0,0,.4)"/>';
+      return svg;
+    }
+
+    function buildShelf(rayon) {
+      var a = document.createElement('a');
+      a.className = 'shelf-cat';
+      a.href = 'boutique.html?cat=' + rayon.id;
+      var img = document.createElement('img');
+      img.className = 'shelf-cat__icon';
+      img.src = 'assets/icons/' + rayon.icone;
+      img.alt = '';
+      var nameSpan = document.createElement('span');
+      nameSpan.className = 'shelf-cat__name';
+      nameSpan.textContent = rayon.nom;
+      var arrow = document.createElement('span');
+      arrow.className = 'shelf-cat__arrow';
+      arrow.textContent = '→';
+      a.appendChild(img);
+      a.appendChild(nameSpan);
+      a.appendChild(arrow);
+      return a;
+    }
+
+    function renderShelves(rayons) {
+      if (!shelvesGrid) return;
+      shelvesGrid.innerHTML = '';
+      rayons.forEach(function(rayon, i) {
+        CAT_NAMES[rayon.id] = rayon.nom;
+        shelvesGrid.appendChild(buildShelf(rayon));
+        if (i % 2 === 1 || i === rayons.length - 1) {
+          shelvesGrid.appendChild(buildPlank());
+        }
+      });
+    }
+
+    function showCategory(cat) {
+      shelvesUnit.style.display  = 'none';
+      categoryView.style.display = 'block';
+      catTitle.textContent = CAT_NAMES[cat] || cat;
+      var tryFilter = function () {
+        var btn = document.querySelector('#catalogueFilters [data-filter="' + cat + '"]');
+        if (btn) btn.click();
+      };
+      tryFilter();
+      var grid = document.getElementById('catalogueGridPhotos');
+      var obs = new MutationObserver(function () {
+        obs.disconnect();
+        tryFilter();
+      });
+      obs.observe(grid, { childList: true });
+    }
+
+    // Load rayons from JSON then check URL
+    fetch('data/rayons.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        renderShelves(data.rayons || []);
+        var urlCat = new URLSearchParams(window.location.search).get('cat');
+        if (urlCat) { showCategory(urlCat); }
+      })
+      .catch(function() {
+        if (shelvesGrid) shelvesGrid.innerHTML = '<p style="color:#FFF5E0;padding:2rem;grid-column:1/-1;text-align:center">Rayons momentanément indisponibles.</p>';
+      });
+
+    // Back to shelves
+    backBtn.addEventListener('click', function () {
+      history.pushState(null, '', 'boutique.html');
+      categoryView.style.display = 'none';
+      shelvesUnit.style.display  = '';
+      var allBtn = document.querySelector('#catalogueFilters [data-filter="all"]');
+      if (allBtn) allBtn.click();
+    });
+  })();
+  </script>
+
 </body>
 </html>
