@@ -6,7 +6,7 @@
   <title>Étagères boutique — Admin</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
-    :root{--primary:#c4913a;--text:#2c1810;--muted:#8b6e5a;--border:#e5ddd4;--bg:#f8f5f0;--r:12px;}
+    :root{--primary:#c4913a;--text:#2c1810;--muted:#8b6e5a;--border:#e5ddd4;--bg:#f8f5f0;--r:12px;--green:#1e7e3b;}
     *{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 
@@ -26,39 +26,67 @@
     .status.saved{background:#d1e7dd;color:#0f5132;}
     .status.error{background:#f8d7da;color:#842029;}
 
-    .content{max-width:700px;margin:2rem auto;padding:0 1.25rem;}
-
+    .content{max-width:740px;margin:2rem auto;padding:0 1.25rem;}
     .card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-bottom:1.5rem;box-shadow:0 2px 10px rgba(44,24,16,.07);}
-    .card__title{font-size:1rem;font-weight:600;margin-bottom:1.25rem;}
+    .card__title{font-size:1rem;font-weight:600;margin-bottom:.4rem;}
+    .card__sub{font-size:.8rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.5;}
 
-    .rayons-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem;min-height:2rem;}
+    .legend{display:flex;gap:1.5rem;margin-bottom:1.25rem;flex-wrap:wrap;}
+    .legend-item{display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--muted);}
+    .legend-dot{width:10px;height:10px;border-radius:50%;}
+    .legend-dot--on{background:#1e7e3b;}
+    .legend-dot--off{background:#c0392b;}
 
-    .rayon-row{display:flex;align-items:center;gap:.6rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;}
-    .rayon-row:hover{border-color:var(--primary);}
-    .rayon-drag{display:flex;flex-direction:column;gap:1px;margin-right:.1rem;}
-    .rayon-drag button{background:none;border:none;cursor:pointer;color:var(--muted);font-size:.8rem;line-height:1;padding:1px 4px;border-radius:3px;}
+    .rayons-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem;min-height:2rem;}
+
+    .rayon-row{display:flex;align-items:center;gap:.6rem;border-radius:10px;padding:.6rem .75rem;border:1.5px solid var(--border);transition:border-color .2s,opacity .2s,background .2s;}
+    .rayon-row.is-active{background:#fff;}
+    .rayon-row.is-suspended{background:#fafafa;opacity:.6;border-style:dashed;}
+
+    .rayon-drag{display:flex;flex-direction:column;gap:1px;flex-shrink:0;}
+    .rayon-drag button{background:none;border:none;cursor:pointer;color:var(--muted);font-size:.75rem;line-height:1;padding:2px 5px;border-radius:3px;}
     .rayon-drag button:hover{background:var(--border);color:var(--text);}
-    .rayon-drag button:disabled{opacity:.3;cursor:default;}
-    .rayon-icon{width:28px;height:28px;object-fit:contain;flex-shrink:0;opacity:.85;}
-    .rayon-name{flex:1;font-size:.9rem;font-weight:500;}
-    .rayon-id{font-size:.75rem;color:var(--muted);background:var(--border);padding:.15rem .45rem;border-radius:4px;white-space:nowrap;}
-    .rayon-del{background:none;border:none;cursor:pointer;color:#c0392b;font-size:1rem;padding:.2rem .4rem;border-radius:4px;opacity:.7;flex-shrink:0;}
+    .rayon-drag button:disabled{opacity:.25;cursor:default;}
+
+    .rayon-icon{width:26px;height:26px;object-fit:contain;flex-shrink:0;opacity:.85;}
+
+    .rayon-info{flex:1;min-width:0;}
+    .rayon-name{font-size:.9rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .rayon-badge{display:inline-block;font-size:.67rem;padding:.12rem .4rem;border-radius:4px;margin-top:.12rem;font-weight:600;}
+    .rayon-badge--on{background:#d1e7dd;color:#0f5132;}
+    .rayon-badge--off{background:#f8d7da;color:#842029;}
+
+    /* Toggle switch */
+    .toggle-wrap{display:flex;align-items:center;gap:.45rem;flex-shrink:0;}
+    .toggle-label{font-size:.75rem;color:var(--muted);white-space:nowrap;min-width:38px;text-align:right;}
+    .toggle{position:relative;width:40px;height:22px;flex-shrink:0;}
+    .toggle input{opacity:0;width:0;height:0;position:absolute;}
+    .toggle-slider{position:absolute;inset:0;background:#ddd;border-radius:22px;cursor:pointer;transition:background .25s;}
+    .toggle-slider::before{content:'';position:absolute;width:16px;height:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:transform .25s;box-shadow:0 1px 3px rgba(0,0,0,.2);}
+    .toggle input:checked + .toggle-slider{background:var(--green);}
+    .toggle input:checked + .toggle-slider::before{transform:translateX(18px);}
+
+    .rayon-del{background:none;border:none;cursor:pointer;color:#c0392b;font-size:.95rem;padding:.25rem .4rem;border-radius:4px;opacity:.5;flex-shrink:0;transition:opacity .2s,background .2s;}
     .rayon-del:hover{background:#fde8e8;opacity:1;}
 
-    .add-zone{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;}
+    .add-zone{padding-top:1.25rem;border-top:1px solid var(--border);}
+    .add-label{font-size:.85rem;font-weight:600;margin-bottom:.6rem;}
+    .add-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;}
     select.cat-select{flex:1;min-width:180px;padding:.5rem .75rem;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;color:var(--text);background:#fff;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238b6e5a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center;cursor:pointer;}
     select.cat-select:focus{outline:none;border-color:var(--primary);}
+
     .btn{padding:.5rem 1.1rem;border-radius:8px;font-size:.9rem;cursor:pointer;border:none;font-weight:500;transition:opacity .2s;}
     .btn-primary{background:var(--primary);color:#fff;}
     .btn-primary:hover{opacity:.88;}
     .btn-ghost{background:#fff;color:var(--text);border:1.5px solid var(--border);}
     .btn-ghost:hover{border-color:var(--primary);color:var(--primary);}
     .btn-sm{font-size:.8rem;padding:.35rem .8rem;}
+    .btn-save{width:100%;padding:.75rem;font-size:.95rem;margin-top:1.5rem;border-radius:10px;}
 
-    .hint{font-size:.75rem;color:var(--muted);margin-top:.4rem;display:block;}
-
+    .hint{font-size:.74rem;color:var(--muted);margin-top:.4rem;display:block;}
     .empty-state{text-align:center;padding:1.5rem;color:var(--muted);font-size:.9rem;}
     .empty-state span{font-size:1.8rem;display:block;margin-bottom:.5rem;}
+    .warn-banner{background:#fff8e6;border:1px solid #f0d080;border-radius:8px;padding:.75rem 1rem;font-size:.82rem;color:#7a5c00;margin-bottom:1.25rem;line-height:1.5;display:none;}
   </style>
 </head>
 <body>
@@ -78,34 +106,42 @@
       <div class="header-actions">
         <a href="index.html" class="btn btn-ghost btn-sm">← Admin</a>
         <a href="../boutique.html" target="_blank" class="btn btn-ghost btn-sm">Voir la boutique ↗</a>
-        <button class="btn-text" onclick="netlifyIdentity.logout()" style="background:none;border:none;color:var(--muted);font-size:.82rem;cursor:pointer;text-decoration:underline">Déconnexion</button>
+        <button onclick="netlifyIdentity.logout()" style="background:none;border:none;color:var(--muted);font-size:.82rem;cursor:pointer;text-decoration:underline">Déconnexion</button>
       </div>
     </header>
 
     <div class="content">
-
       <div class="card">
-        <div class="card__title">Rayons affichés sur les étagères</div>
-        <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.25rem">Utilisez les flèches ↑↓ pour changer l'ordre. Les rayons sont affichés de gauche à droite, rangée par rangée.</p>
+        <div class="card__title">Rayons affichés dans la boutique</div>
+        <div class="card__sub">
+          Utilisez le <strong>toggle</strong> pour activer ou suspendre un rayon sans le supprimer.<br>
+          Utilisez <strong>↑↓</strong> pour changer l'ordre. Cliquez sur <strong>Enregistrer</strong> pour publier.
+        </div>
+
+        <div class="warn-banner" id="warnBanner">
+          ⚠️ Tous les rayons sont suspendus — la boutique affichera une page vide.
+        </div>
+
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot legend-dot--on"></div>Visible sur le site</div>
+          <div class="legend-item"><div class="legend-dot legend-dot--off"></div>Suspendu (masqué)</div>
+        </div>
 
         <div class="rayons-list" id="rayonsList"></div>
 
-        <div style="border-top:1px solid var(--border);padding-top:1.25rem">
-          <div style="font-size:.85rem;font-weight:600;margin-bottom:.6rem">Ajouter un rayon</div>
-          <div class="add-zone">
+        <div class="add-zone">
+          <div class="add-label">Ajouter un rayon</div>
+          <div class="add-row">
             <select class="cat-select" id="newCatSelect">
               <option value="">— Choisir une catégorie —</option>
             </select>
-            <button class="btn btn-primary" onclick="addRayon()">Ajouter</button>
+            <button class="btn btn-primary" onclick="addRayon()">+ Ajouter</button>
           </div>
-          <span class="hint">Les catégories déjà présentes restent disponibles (pour les dupliquer si besoin).</span>
+          <span class="hint">Seules les catégories absentes de la liste sont proposées.</span>
         </div>
 
-        <div style="border-top:1px solid var(--border);padding-top:1rem;margin-top:1.25rem;display:flex;justify-content:flex-end">
-          <button class="btn btn-primary" onclick="saveRayons()">Enregistrer les étagères</button>
-        </div>
+        <button class="btn btn-primary btn-save" onclick="saveRayons()">💾 Enregistrer les modifications</button>
       </div>
-
     </div>
   </div>
 
@@ -118,7 +154,7 @@
     var rayons = [];
     var fileSha = '';
 
-    var CATEGORIES = [
+    var ALL_CATEGORIES = [
       { id: 'alcools',          nom: 'Alcools & Champagnes',    icone: 'alcools.svg' },
       { id: 'autour-olive',     nom: "Autour de l'Olive",       icone: 'autour-olive.svg' },
       { id: 'bieres',           nom: 'Bières',                  icone: 'bieres.svg' },
@@ -138,18 +174,8 @@
       { id: 'vins',             nom: 'Vins',                    icone: 'vins.svg' }
     ];
 
-    // Peupler le select d'ajout
-    var sel = document.getElementById('newCatSelect');
-    CATEGORIES.forEach(function(c){
-      var opt = document.createElement('option');
-      opt.value = c.id;
-      opt.textContent = c.nom;
-      sel.appendChild(opt);
-    });
-
-    // Auth
     netlifyIdentity.on('init',  function(u){ if(u) boot(); });
-    netlifyIdentity.on('login', function(u){ netlifyIdentity.close(); boot(); });
+    netlifyIdentity.on('login', function(){ netlifyIdentity.close(); boot(); });
     netlifyIdentity.on('logout', function(){
       document.getElementById('adminScreen').style.display='none';
       document.getElementById('loginScreen').style.display='flex';
@@ -165,55 +191,105 @@
 
     function gitGet(p){
       return jwt().then(function(t){
-        return fetch(GIT+p,{headers:{'Authorization':'Bearer '+t}})
-          .then(function(r){ if(!r.ok) throw r.status; return r.json(); });
+        return fetch(GIT+p, { headers: { 'Authorization': 'Bearer '+t } })
+          .then(function(r){
+            if(!r.ok) return r.text().then(function(b){ throw new Error(r.status+': '+b.substring(0,120)); });
+            return r.json();
+          });
       });
     }
-    function gitPut(p,b){
+
+    function gitPut(p, body){
       return jwt().then(function(t){
-        return fetch(GIT+p,{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'Bearer '+t},body:JSON.stringify(b)})
-          .then(function(r){ if(!r.ok) throw r.status; return r.json(); });
+        return fetch(GIT+p, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+t },
+          body: JSON.stringify(body)
+        }).then(function(r){
+          if(!r.ok) return r.text().then(function(b){ throw new Error(r.status+': '+b.substring(0,120)); });
+          return r.json();
+        });
       });
     }
 
     function load(){
-      st('saving','Chargement…');
+      st('saving', 'Chargement…');
       gitGet(FILE).then(function(d){
         fileSha = d.sha;
         var parsed = JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\n/g,'')))));
-        rayons = parsed.rayons || [];
-        st('','');
+        rayons = (parsed.rayons || []).map(function(r){
+          return { id: r.id, nom: r.nom, icone: r.icone, actif: r.actif !== false };
+        });
+        st('', '');
         render();
-      }).catch(function(){ st('error','Erreur chargement'); });
+        renderSelect();
+      }).catch(function(e){ st('error', 'Erreur chargement : '+e.message); });
     }
 
     function catById(id){
-      return CATEGORIES.find(function(c){ return c.id === id; }) || { id: id, nom: id, icone: id + '.svg' };
+      return ALL_CATEGORIES.find(function(c){ return c.id === id; }) || { id: id, nom: id, icone: id+'.svg' };
     }
 
     function render(){
       var list = document.getElementById('rayonsList');
       list.innerHTML = '';
+
+      var activeCount = rayons.filter(function(r){ return r.actif; }).length;
+      document.getElementById('warnBanner').style.display = (rayons.length && activeCount === 0) ? 'block' : 'none';
+
       if(!rayons.length){
         list.innerHTML = '<div class="empty-state"><span>🛒</span>Aucun rayon — ajoutez-en ci-dessous.</div>';
         return;
       }
+
       rayons.forEach(function(r, i){
         var cat = catById(r.id);
         var row = document.createElement('div');
-        row.className = 'rayon-row';
+        row.className = 'rayon-row ' + (r.actif ? 'is-active' : 'is-suspended');
         row.innerHTML =
           '<div class="rayon-drag">' +
             '<button onclick="move('+i+',-1)" '+(i===0?'disabled':'')+' title="Monter">▲</button>' +
             '<button onclick="move('+i+',1)" '+(i===rayons.length-1?'disabled':'')+' title="Descendre">▼</button>' +
           '</div>' +
-          '<img class="rayon-icon" src="../assets/icons/'+cat.icone+'" alt="" onerror="this.style.display=\'none\'">' +
-          '<span class="rayon-name">'+escHtml(r.nom || cat.nom)+'</span>' +
-          '<span class="rayon-id">'+escHtml(r.id)+'</span>' +
-          '<button class="rayon-del" onclick="remove('+i+')" title="Supprimer">✕</button>';
+          '<img class="rayon-icon" src="../assets/icons/'+esc(cat.icone)+'" alt="" onerror="this.style.display=\'none\'">' +
+          '<div class="rayon-info">' +
+            '<div class="rayon-name">'+esc(r.nom || cat.nom)+'</div>' +
+            '<span class="rayon-badge '+(r.actif?'rayon-badge--on':'rayon-badge--off')+'">'+(r.actif?'✓ Visible':'⏸ Suspendu')+'</span>' +
+          '</div>' +
+          '<div class="toggle-wrap">' +
+            '<span class="toggle-label">'+(r.actif?'Actif':'Pausé')+'</span>' +
+            '<label class="toggle" title="'+(r.actif?'Suspendre':'Activer')+'">' +
+              '<input type="checkbox" '+(r.actif?'checked':'')+' onchange="toggleActif('+i+',this.checked)">' +
+              '<span class="toggle-slider"></span>' +
+            '</label>' +
+          '</div>' +
+          '<button class="rayon-del" onclick="removeRayon('+i+')" title="Supprimer définitivement">✕</button>';
         list.appendChild(row);
       });
     }
+
+    function renderSelect(){
+      var sel = document.getElementById('newCatSelect');
+      var existingIds = rayons.map(function(r){ return r.id; });
+      sel.innerHTML = '<option value="">— Choisir une catégorie —</option>';
+      var available = ALL_CATEGORIES.filter(function(c){ return existingIds.indexOf(c.id) === -1; });
+      if(available.length === 0){
+        var opt = document.createElement('option');
+        opt.disabled = true; opt.textContent = 'Toutes les catégories sont présentes';
+        sel.appendChild(opt);
+      } else {
+        available.forEach(function(c){
+          var opt = document.createElement('option');
+          opt.value = c.id; opt.textContent = c.nom;
+          sel.appendChild(opt);
+        });
+      }
+    }
+
+    window.toggleActif = function(i, checked){
+      rayons[i].actif = checked;
+      render();
+    };
 
     window.move = function(i, dir){
       var j = i + dir;
@@ -222,36 +298,44 @@
       render();
     };
 
-    window.remove = function(i){
-      if(!confirm('Supprimer "' + (rayons[i].nom || rayons[i].id) + '" ?')) return;
+    window.removeRayon = function(i){
+      if(!confirm('Supprimer "'+esc(rayons[i].nom || rayons[i].id)+'" définitivement ?\n\nConseil : utilisez plutôt le toggle pour le suspendre.')) return;
       rayons.splice(i, 1);
       render();
+      renderSelect();
     };
 
     window.addRayon = function(){
       var id = document.getElementById('newCatSelect').value;
-      if(!id){ alert('Choisissez une catégorie.'); return; }
+      if(!id){ alert('Choisissez une catégorie dans la liste.'); return; }
       var cat = catById(id);
-      rayons.push({ id: cat.id, nom: cat.nom, icone: cat.icone });
+      rayons.push({ id: cat.id, nom: cat.nom, icone: cat.icone, actif: true });
       document.getElementById('newCatSelect').value = '';
       render();
+      renderSelect();
     };
 
     window.saveRayons = function(){
-      var payload = { rayons: rayons };
-      var content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
-      st('saving','Enregistrement…');
+      var content = btoa(unescape(encodeURIComponent(JSON.stringify({ rayons: rayons }, null, 2))));
+      st('saving', 'Enregistrement en cours…');
       gitPut(FILE, { message: 'Mise à jour étagères boutique', sha: fileSha, content: content })
         .then(function(d){
-          fileSha = d.content.sha;
-          st('saved','Enregistré ✓');
-          setTimeout(function(){ st('',''); }, 3000);
+          fileSha = d.content ? d.content.sha : fileSha;
+          st('saved', '✓ Enregistré — visible sur le site dans quelques secondes');
+          setTimeout(function(){ st('',''); }, 6000);
         })
-        .catch(function(){ st('error','Erreur sauvegarde'); });
+        .catch(function(e){
+          if(e.message && e.message.indexOf('409') !== -1){
+            st('error', 'Conflit détecté — rechargement automatique…');
+            setTimeout(load, 1500);
+          } else {
+            st('error', 'Erreur : '+e.message);
+          }
+        });
     };
 
-    function st(type,msg){ var el=document.getElementById('statusEl'); el.className='status'+(type?' '+type:''); el.textContent=msg; }
-    function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function st(type, msg){ var el=document.getElementById('statusEl'); el.className='status'+(type?' '+type:''); el.textContent=msg; }
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   })();
   </script>
 </body>

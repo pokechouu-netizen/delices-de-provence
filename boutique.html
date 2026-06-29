@@ -382,15 +382,9 @@
     </div>
   </div>
 
-  <!-- ===== STICKY MAP ===== -->
-  <a href="https://www.google.com/maps/dir/?api=1&destination=27+rue+Saint-Antoine+84600+Valr%C3%A9as+France" target="_blank" rel="noopener noreferrer" class="map-sticky" id="mapSticky" aria-label="Itinéraire vers Délices de Provence">
-    <div class="map-sticky__icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-    </div>
-    <div class="map-sticky__text">
-      Itinéraire
-      <small>27 rue Saint-Antoine, Valréas</small>
-    </div>
+  <!-- ===== STICKY LOGO ===== -->
+  <a href="https://www.google.com/maps/dir/?api=1&destination=27+rue+Saint-Antoine+84600+Valr%C3%A9as+France" target="_blank" rel="noopener noreferrer" class="map-sticky" id="mapSticky" aria-label="Délices de Provence">
+    <img src="assets/images/badge-local-artisanal.jpg" alt="Délices de Provence" class="map-sticky__logo">
   </a>
 
   <script src="js/main.js"></script>
@@ -469,7 +463,7 @@
     fetch('data/rayons.json')
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        renderShelves(data.rayons || []);
+        renderShelves((data.rayons || []).filter(function(r){ return r.actif !== false; }));
         var urlCat = new URLSearchParams(window.location.search).get('cat');
         if (urlCat) { showCategory(urlCat); }
       })
