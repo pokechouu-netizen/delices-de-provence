@@ -101,6 +101,12 @@
       "nom": "Café, Thé & Infusions",
       "icone": "cafe-the.svg",
       "actif": false
+    },
+    {
+      "id": "zdudhuzd",
+      "nom": "zdudhuzd",
+      "icone": "chocolat.svg",
+      "actif": true
     }
   ]
 }
