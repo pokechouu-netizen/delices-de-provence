@@ -112,6 +112,17 @@
             <input type="email" id="f_email" placeholder="contact@…">
           </div>
         </div>
+        <div class="card__title" style="font-size:.8rem;font-weight:600;color:var(--muted);margin:.75rem 0 .5rem">📱 Réseaux sociaux</div>
+        <div class="frow">
+          <div class="fg">
+            <label>Instagram (URL complète)</label>
+            <input type="url" id="f_instagram" placeholder="https://www.instagram.com/…">
+          </div>
+          <div class="fg">
+            <label>Facebook (URL complète)</label>
+            <input type="url" id="f_facebook" placeholder="https://www.facebook.com/…">
+          </div>
+        </div>
         <div class="save-row">
           <button class="btn btn-primary" onclick="saveSection('coordonnees')">Enregistrer</button>
         </div>
@@ -165,6 +176,11 @@
           <label>Délai d'apparition (secondes)</label>
           <input type="number" id="p_delai" min="1" max="60" placeholder="5">
           <span class="hint">Le popup apparaît après ce délai sur la page d'accueil.</span>
+        </div>
+        <div class="fg" style="margin-top:.75rem">
+          <label>Produits en bandeau défilant</label>
+          <textarea id="p_bandeau" rows="6" placeholder="Un produit par ligne&#10;Ex : Confiture d'Abricot&#10;Miel de Lavande" style="resize:vertical"></textarea>
+          <span class="hint">Un produit par ligne — défilent en bas du popup. Laissez vide pour masquer le bandeau.</span>
         </div>
         <div class="save-row">
           <button class="btn btn-primary" onclick="saveSection('popup')">Enregistrer</button>
@@ -316,11 +332,13 @@
     }
 
     function fillForm(){
-      sv('f_adresse', data.adresse          || '');
-      sv('f_cp',      data.code_postal       || '');
-      sv('f_ville',   data.ville             || '');
-      sv('f_tel',     data.telephone_fixe    || '');
-      sv('f_email',   data.email             || '');
+      sv('f_adresse',   data.adresse          || '');
+      sv('f_cp',        data.code_postal       || '');
+      sv('f_ville',     data.ville             || '');
+      sv('f_tel',       data.telephone_fixe    || '');
+      sv('f_email',     data.email             || '');
+      sv('f_instagram', data.instagram_url     || '');
+      sv('f_facebook',  data.facebook_url      || '');
 
       sv('h_lundi',    data.horaire_lundi    || '');
       sv('h_mardi',    data.horaire_mardi    || '');
@@ -337,16 +355,19 @@
       sv('p_message',   pop.message      || '');
       sv('p_cta_label', pop.cta_label    || '');
       sv('p_cta_url',   pop.cta_url      || '');
-      sv('p_delai',     pop.delai_secondes != null ? pop.delai_secondes : 5);
+      sv('p_delai',   pop.delai_secondes != null ? pop.delai_secondes : 5);
+      sv('p_bandeau', (pop.produits_bandeau || []).join('\n'));
     }
 
     window.saveSection = function(section){
       if(section === 'coordonnees'){
-        data.adresse       = gv('f_adresse');
-        data.code_postal   = gv('f_cp');
-        data.ville         = gv('f_ville');
-        data.telephone_fixe= gv('f_tel');
-        data.email         = gv('f_email');
+        data.adresse        = gv('f_adresse');
+        data.code_postal    = gv('f_cp');
+        data.ville          = gv('f_ville');
+        data.telephone_fixe = gv('f_tel');
+        data.email          = gv('f_email');
+        data.instagram_url  = gv('f_instagram').trim();
+        data.facebook_url   = gv('f_facebook').trim();
         write('Mise à jour coordonnées');
       }
       else if(section === 'horaires'){
@@ -388,11 +409,13 @@
       }
       else if(section === 'popup'){
         if(!data.popup) data.popup={};
-        data.popup.actif         = document.getElementById('p_actif').checked;
-        data.popup.message       = gv('p_message');
-        data.popup.cta_label     = gv('p_cta_label');
-        data.popup.cta_url       = gv('p_cta_url');
-        data.popup.delai_secondes= parseInt(gv('p_delai'),10) || 5;
+        data.popup.actif          = document.getElementById('p_actif').checked;
+        data.popup.message        = gv('p_message');
+        data.popup.cta_label      = gv('p_cta_label');
+        data.popup.cta_url        = gv('p_cta_url');
+        data.popup.delai_secondes = parseInt(gv('p_delai'),10) || 5;
+        var band = gv('p_bandeau').trim();
+        data.popup.produits_bandeau = band ? band.split('\n').map(function(s){return s.trim();}).filter(Boolean) : [];
         write('Mise à jour popup');
       }
     };

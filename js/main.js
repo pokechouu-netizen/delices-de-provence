@@ -693,6 +693,15 @@
             });
           }
         }
+        // Réseaux sociaux
+        ['Instagram', 'Facebook'].forEach(function (name) {
+          var url = infos[name.toLowerCase() + '_url'];
+          if (url) {
+            document.querySelectorAll('a[aria-label="' + name + '"]').forEach(function (a) {
+              a.href = url;
+            });
+          }
+        });
       })
       .catch(function (err) {
         console.warn('infos.json non disponible, valeurs statiques conservées.', err);
