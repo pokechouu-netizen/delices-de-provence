@@ -201,23 +201,6 @@
       <input type="search" id="searchInput" placeholder="Rechercher…" oninput="renderTable()">
       <select id="filterCat" onchange="renderTable()">
         <option value="">Toutes les catégories</option>
-        <option value="alcools">Alcools &amp; Champagnes</option>
-        <option value="autour-olive">Autour de l'Olive</option>
-        <option value="bieres">Bières</option>
-        <option value="biscuits-sales">Biscuits Salés</option>
-        <option value="biscuits-sucres">Biscuits Sucrés</option>
-        <option value="cafe-the">Café, Thé &amp; Infusions</option>
-        <option value="chocolat">Chocolat &amp; Confiseries</option>
-        <option value="confitures">Confitures</option>
-        <option value="epices">Épices &amp; Lavande</option>
-        <option value="jus">Jus de Fruits</option>
-        <option value="miel">Miel</option>
-        <option value="pates-riz">Pâtes, Riz &amp; Ravioles</option>
-        <option value="plats-cuisines">Plats Cuisinés</option>
-        <option value="sel-camargue">Sel de Camargue</option>
-        <option value="sirops">Sirops</option>
-        <option value="terrines">Terrines &amp; Charcuteries</option>
-        <option value="vins">Vins</option>
       </select>
       <label class="check-label">
         <input type="checkbox" id="filterHidden" onchange="renderTable()"> Masqués seulement
@@ -255,23 +238,7 @@
         <div class="fg">
           <label>Catégorie *</label>
           <select id="f_cat">
-            <option value="alcools">Alcools &amp; Champagnes</option>
-            <option value="autour-olive">Autour de l'Olive</option>
-            <option value="bieres">Bières</option>
-            <option value="biscuits-sales">Biscuits Salés</option>
-            <option value="biscuits-sucres">Biscuits Sucrés</option>
-            <option value="cafe-the">Café, Thé &amp; Infusions</option>
-            <option value="chocolat">Chocolat &amp; Confiseries</option>
-            <option value="confitures">Confitures</option>
-            <option value="epices">Épices &amp; Lavande</option>
-            <option value="jus">Jus de Fruits</option>
-            <option value="miel">Miel</option>
-            <option value="pates-riz">Pâtes, Riz &amp; Ravioles</option>
-            <option value="plats-cuisines">Plats Cuisinés</option>
-            <option value="sel-camargue">Sel de Camargue</option>
-            <option value="sirops">Sirops</option>
-            <option value="terrines">Terrines &amp; Charcuteries</option>
-            <option value="vins">Vins</option>
+            <option value="">Chargement…</option>
           </select>
         </div>
         <div class="fg">
@@ -337,25 +304,7 @@
   (function () {
     'use strict';
 
-    var CAT = {
-      'alcools':         'Alcools & Champagnes',
-      'autour-olive':    "Autour de l'Olive",
-      'bieres':          'Bières',
-      'biscuits-sales':  'Biscuits Salés',
-      'biscuits-sucres': 'Biscuits Sucrés',
-      'cafe-the':        'Café, Thé & Infusions',
-      'chocolat':        'Chocolat & Confiseries',
-      'confitures':      'Confitures',
-      'epices':          'Épices & Lavande',
-      'jus':             'Jus de Fruits',
-      'miel':            'Miel',
-      'pates-riz':       'Pâtes, Riz & Ravioles',
-      'plats-cuisines':  'Plats Cuisinés',
-      'sel-camargue':    'Sel de Camargue',
-      'sirops':          'Sirops',
-      'terrines':        'Terrines & Charcuteries',
-      'vins':            'Vins'
-    };
+    var CAT = {};
 
     var GIT   = '/.netlify/functions/git-proxy/';
     var FILE  = 'data/catalogue.json';
@@ -375,11 +324,55 @@
     function boot(user) {
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('adminScreen').style.display = 'block';
-      loadCatalogue();
+      loadRayons().then(function(){ loadCatalogue(); });
       gitGet('data/infos.json').then(function(d){
         var info = JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\n/g,'')))));
         hookUrl = info.netlify_hook || '';
       }).catch(function(){});
+    }
+
+    function loadRayons() {
+      return gitGet('data/rayons.json').then(function(d){
+        var data = JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\n/g,'')))));
+        var rayons = data.rayons || [];
+        CAT = {};
+        rayons.forEach(function(r){ CAT[r.id] = r.nom; });
+
+        var filterSel = document.getElementById('filterCat');
+        filterSel.innerHTML = '<option value="">Toutes les catégories</option>';
+        var formSel = document.getElementById('f_cat');
+        formSel.innerHTML = '';
+
+        rayons.forEach(function(r){
+          var o1 = document.createElement('option');
+          o1.value = r.id; o1.textContent = r.nom;
+          filterSel.appendChild(o1);
+          var o2 = document.createElement('option');
+          o2.value = r.id; o2.textContent = r.nom;
+          formSel.appendChild(o2);
+        });
+      }).catch(function(){
+        // Fallback si rayons.json indisponible
+        var fallback = ['alcools','autour-olive','bieres','biscuits-sales','biscuits-sucres',
+          'cafe-the','chocolat','confitures','epices','jus','miel','pates-riz',
+          'plats-cuisines','sel-camargue','sirops','terrines','vins'];
+        var names = {'alcools':'Alcools & Champagnes','autour-olive':"Autour de l'Olive",
+          'bieres':'Bières','biscuits-sales':'Biscuits Salés','biscuits-sucres':'Biscuits Sucrés',
+          'cafe-the':'Café, Thé & Infusions','chocolat':'Chocolat & Confiseries',
+          'confitures':'Confitures','epices':'Épices & Lavande','jus':'Jus de Fruits',
+          'miel':'Miel','pates-riz':'Pâtes, Riz & Ravioles','plats-cuisines':'Plats Cuisinés',
+          'sel-camargue':'Sel de Camargue','sirops':'Sirops','terrines':'Terrines & Charcuteries','vins':'Vins'};
+        CAT = names;
+        var filterSel = document.getElementById('filterCat');
+        filterSel.innerHTML = '<option value="">Toutes les catégories</option>';
+        var formSel = document.getElementById('f_cat');
+        formSel.innerHTML = '';
+        fallback.forEach(function(id){
+          var nom = names[id];
+          filterSel.innerHTML += '<option value="'+id+'">'+nom+'</option>';
+          formSel.innerHTML   += '<option value="'+id+'">'+nom+'</option>';
+        });
+      });
     }
 
     function triggerDeploy(){
