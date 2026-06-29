@@ -72,8 +72,10 @@
     .add-zone{padding-top:1.25rem;border-top:1px solid var(--border);}
     .add-label{font-size:.85rem;font-weight:600;margin-bottom:.6rem;}
     .add-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;}
-    select.cat-select{flex:1;min-width:180px;padding:.5rem .75rem;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;color:var(--text);background:#fff;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238b6e5a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center;cursor:pointer;}
-    select.cat-select:focus{outline:none;border-color:var(--primary);}
+    .cat-input{flex:2;min-width:180px;padding:.5rem .75rem;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;color:var(--text);background:#fff;}
+    .cat-input:focus{outline:none;border-color:var(--primary);}
+    .cat-select-icon{flex:1;min-width:140px;padding:.5rem .5rem;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;color:var(--text);background:#fff;cursor:pointer;}
+    .cat-select-icon:focus{outline:none;border-color:var(--primary);}
 
     .btn{padding:.5rem 1.1rem;border-radius:8px;font-size:.9rem;cursor:pointer;border:none;font-weight:500;transition:opacity .2s;}
     .btn-primary{background:var(--primary);color:#fff;}
@@ -132,12 +134,29 @@
         <div class="add-zone">
           <div class="add-label">Ajouter un rayon</div>
           <div class="add-row">
-            <select class="cat-select" id="newCatSelect">
-              <option value="">— Choisir une catégorie —</option>
+            <input type="text" id="newCatNom" class="cat-input" placeholder="Ex: Épicerie sucrée, Produits locaux…" autocomplete="off">
+            <select id="newCatIcone" class="cat-select-icon">
+              <option value="epices.svg">🌿 Épices</option>
+              <option value="confitures.svg">🍓 Confitures</option>
+              <option value="miel.svg">🍯 Miel</option>
+              <option value="chocolat.svg">🍫 Chocolat</option>
+              <option value="biscuits-sucres.svg">🍪 Biscuits sucrés</option>
+              <option value="biscuits-sales.svg">🧂 Biscuits salés</option>
+              <option value="terrines.svg">🥩 Terrines</option>
+              <option value="plats-cuisines.svg">🍲 Plats cuisinés</option>
+              <option value="autour-olive.svg">🫒 Olive</option>
+              <option value="pates-riz.svg">🍝 Pâtes & Riz</option>
+              <option value="sel-camargue.svg">🧂 Sel</option>
+              <option value="vins.svg">🍷 Vins</option>
+              <option value="alcools.svg">🥂 Alcools</option>
+              <option value="bieres.svg">🍺 Bières</option>
+              <option value="sirops.svg">🧃 Sirops</option>
+              <option value="jus.svg">🍊 Jus</option>
+              <option value="cafe-the.svg">☕ Café & Thé</option>
             </select>
             <button class="btn btn-primary" onclick="addRayon()">+ Ajouter</button>
           </div>
-          <span class="hint">Seules les catégories absentes de la liste sont proposées.</span>
+          <span class="hint">Tapez le nom du rayon puis choisissez l'icône la plus proche.</span>
         </div>
 
         <button class="btn btn-primary btn-save" onclick="saveRayons()">💾 Enregistrer les modifications</button>
@@ -222,7 +241,6 @@
         });
         st('', '');
         render();
-        renderSelect();
       }).catch(function(e){ st('error', 'Erreur chargement : '+e.message); });
     }
 
@@ -268,22 +286,11 @@
       });
     }
 
-    function renderSelect(){
-      var sel = document.getElementById('newCatSelect');
-      var existingIds = rayons.map(function(r){ return r.id; });
-      sel.innerHTML = '<option value="">— Choisir une catégorie —</option>';
-      var available = ALL_CATEGORIES.filter(function(c){ return existingIds.indexOf(c.id) === -1; });
-      if(available.length === 0){
-        var opt = document.createElement('option');
-        opt.disabled = true; opt.textContent = 'Toutes les catégories sont présentes';
-        sel.appendChild(opt);
-      } else {
-        available.forEach(function(c){
-          var opt = document.createElement('option');
-          opt.value = c.id; opt.textContent = c.nom;
-          sel.appendChild(opt);
-        });
-      }
+    function slugify(str){
+      return str.toLowerCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g,'')
+        .replace(/[^a-z0-9]+/g,'-')
+        .replace(/^-+|-+$/g,'');
     }
 
     window.toggleActif = function(i, checked){
@@ -302,17 +309,16 @@
       if(!confirm('Supprimer "'+esc(rayons[i].nom || rayons[i].id)+'" définitivement ?\n\nConseil : utilisez plutôt le toggle pour le suspendre.')) return;
       rayons.splice(i, 1);
       render();
-      renderSelect();
     };
 
     window.addRayon = function(){
-      var id = document.getElementById('newCatSelect').value;
-      if(!id){ alert('Choisissez une catégorie dans la liste.'); return; }
-      var cat = catById(id);
-      rayons.push({ id: cat.id, nom: cat.nom, icone: cat.icone, actif: true });
-      document.getElementById('newCatSelect').value = '';
+      var nom = document.getElementById('newCatNom').value.trim();
+      if(!nom){ alert('Tapez un nom de rayon.'); document.getElementById('newCatNom').focus(); return; }
+      var icone = document.getElementById('newCatIcone').value;
+      var id = slugify(nom) || ('rayon-' + Date.now());
+      rayons.push({ id: id, nom: nom, icone: icone, actif: true });
+      document.getElementById('newCatNom').value = '';
       render();
-      renderSelect();
     };
 
     window.saveRayons = function(){
