@@ -109,6 +109,170 @@ collections:
                   name: "item"
                   widget: "string"
 
+  # ─── CONTENU DU SITE ─────────────────────────────────────────────────────
+  - name: "contenu"
+    label: "Contenu du site"
+    files:
+      - name: "contenu"
+        label: "Textes, photos, galerie, presse & avis"
+        file: "data/contenu.json"
+        format: json
+        fields:
+
+          # ── Textes libres ──────────────────────────────────────────────────
+          - label: "Textes"
+            name: "textes"
+            widget: "object"
+            collapsed: false
+            fields:
+              - label: "Rue Saint-Antoine — Paragraphe 1"
+                name: "rue_p1"
+                widget: "text"
+                hint: "Affiché sur la page Nos Incontournables, section boutique"
+
+              - label: "Rue Saint-Antoine — Paragraphe 2"
+                name: "rue_p2"
+                widget: "text"
+                required: false
+
+              - label: "Qui sommes-nous — Paragraphe 1"
+                name: "qsn_p1"
+                widget: "text"
+                hint: "Affiché sur la page Qui sommes-nous"
+
+              - label: "Qui sommes-nous — Paragraphe 2"
+                name: "qsn_p2"
+                widget: "text"
+                required: false
+
+              - label: "L'Enclave des Papes"
+                name: "enclave"
+                widget: "text"
+                required: false
+                hint: "Texte affiché dans la section géographique"
+
+          # ── Photos clés ────────────────────────────────────────────────────
+          - label: "Photos"
+            name: "photos"
+            widget: "object"
+            collapsed: true
+            fields:
+              - label: "Photo principale (hero accueil)"
+                name: "hero"
+                widget: "image"
+                required: false
+
+              - label: "Photo terrasse / devanture"
+                name: "terrasse"
+                widget: "image"
+                required: false
+
+              - label: "Photo miniature 1"
+                name: "mini_1"
+                widget: "image"
+                required: false
+
+              - label: "Photo miniature 2"
+                name: "mini_2"
+                widget: "image"
+                required: false
+
+              - label: "Photo enseigne / boutique"
+                name: "enseigne"
+                widget: "image"
+                required: false
+
+              - label: "Badge local artisanal"
+                name: "badge"
+                widget: "image"
+                required: false
+
+              - label: "Stand marché de Noël"
+                name: "marche"
+                widget: "image"
+                required: false
+
+          # ── Galerie photos ─────────────────────────────────────────────────
+          - label: "Galerie photos"
+            name: "galerie"
+            widget: "list"
+            label_singular: "Photo"
+            summary: "{{fields.alt}}"
+            hint: "Photos affichées dans la galerie défilante. Ajoutez-en autant que vous voulez."
+            fields:
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+              - label: "Description (texte alternatif)"
+                name: "alt"
+                widget: "string"
+                hint: "Décrit la photo pour l'accessibilité et le référencement"
+
+          # ── Presse & distinctions ──────────────────────────────────────────
+          - label: "Articles & distinctions presse"
+            name: "presse"
+            widget: "list"
+            label_singular: "Article"
+            summary: "{{fields.titre}} ({{fields.date}})"
+            hint: "Affiché sur la page Presse. Ajoutez autant d'articles que vous souhaitez."
+            fields:
+              - label: "Badge / Source"
+                name: "badge"
+                widget: "string"
+                hint: "Ex : Presse, Lettre du Président de Région, Actualité"
+
+              - label: "Type de badge (couleur)"
+                name: "badge_type"
+                widget: "select"
+                options:
+                  - { label: "Bleu — Presse", value: "presse" }
+                  - { label: "Or — Institutionnel", value: "gold" }
+                  - { label: "Vert — Actualité", value: "green" }
+
+              - label: "Titre"
+                name: "titre"
+                widget: "string"
+
+              - label: "Contenu"
+                name: "contenu"
+                widget: "text"
+
+              - label: "Date"
+                name: "date"
+                widget: "string"
+                hint: "Ex : 2025 ou Décembre 2024"
+
+              - label: "Identifiant technique"
+                name: "id"
+                widget: "string"
+                hint: "Ne pas modifier — identifiant unique interne"
+
+          # ── Avis clients ───────────────────────────────────────────────────
+          - label: "Avis clients"
+            name: "avis"
+            widget: "list"
+            label_singular: "Avis"
+            summary: "{{fields.auteur}}"
+            hint: "Avis affichés sur la page d'accueil. Ajoutez ou supprimez librement."
+            fields:
+              - label: "Texte de l'avis"
+                name: "texte"
+                widget: "text"
+
+              - label: "Auteur"
+                name: "auteur"
+                widget: "string"
+
+              - label: "Source"
+                name: "source"
+                widget: "string"
+                hint: "Ex : Avis Google"
+
+              - label: "Identifiant technique"
+                name: "id"
+                widget: "string"
+                hint: "Ne pas modifier — identifiant unique interne"
+
   # ─── RAYONS BOUTIQUE ─────────────────────────────────────────────────────
   - name: "rayons"
     label: "Rayons boutique"
@@ -233,10 +397,11 @@ collections:
                 required: false
                 hint: "Ex : 1,80 € / 100g — 3,20 € / litre"
 
-              - label: "Best-seller (affiché sur la page d'accueil)"
+              - label: "Mise en avant (coups de cœur)"
                 name: "best_seller"
                 widget: "boolean"
                 default: false
+                hint: "Réservé pour usage futur — non affiché actuellement"
 
               - label: "Produit visible"
                 name: "visible"
