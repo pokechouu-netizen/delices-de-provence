@@ -1,12 +1,6 @@
 {
   "rayons": [
     {
-      "id": "vins",
-      "nom": "Vins",
-      "icone": "vins.svg",
-      "actif": true
-    },
-    {
       "id": "alcools",
       "nom": "Alcools & Champagnes",
       "icone": "alcools.svg",
@@ -101,6 +95,12 @@
       "nom": "Café, Thé & Infusions",
       "icone": "cafe-the.svg",
       "actif": false
+    },
+    {
+      "id": "vins",
+      "nom": "Vins",
+      "icone": "vins.svg",
+      "actif": true
     },
     {
       "id": "zdudhuzd",
