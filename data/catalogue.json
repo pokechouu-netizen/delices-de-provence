@@ -336,7 +336,7 @@
       "prix": "7.90 €",
       "contenance": "325 g",
       "prix_unitaire": "24.68 €/kg",
-      "visible": true
+      "visible": false
     },
     {
       "id": "confiture-02",
