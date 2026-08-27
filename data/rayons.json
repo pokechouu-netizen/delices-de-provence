@@ -79,15 +79,15 @@
       "actif": true
     },
     {
-      "id": "sirops",
-      "nom": "Sirops",
-      "icone": "sirops.svg",
-      "actif": true
-    },
-    {
       "id": "sel-camargue",
       "nom": "Sel de Camargue",
       "icone": "sel-camargue.svg",
+      "actif": true
+    },
+    {
+      "id": "sirops",
+      "nom": "Sirops",
+      "icone": "sirops.svg",
       "actif": true
     },
     {
