@@ -85,15 +85,15 @@
       "actif": true
     },
     {
-      "id": "terrines",
-      "nom": "Terrines & Charcuteries",
-      "icone": "terrines.svg",
-      "actif": true
-    },
-    {
       "id": "sel-camargue",
       "nom": "Sel de Camargue",
       "icone": "sel-camargue.svg",
+      "actif": true
+    },
+    {
+      "id": "terrines",
+      "nom": "Terrines & Charcuteries",
+      "icone": "terrines.svg",
       "actif": true
     },
     {
