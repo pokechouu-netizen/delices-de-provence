@@ -7,39 +7,15 @@
       "actif": true
     },
     {
+      "id": "autour-olive",
+      "nom": "Autour de l'Olive",
+      "icone": "autour-olive.svg",
+      "actif": true
+    },
+    {
       "id": "bieres",
       "nom": "Bières",
       "icone": "bieres.svg",
-      "actif": true
-    },
-    {
-      "id": "sirops",
-      "nom": "Sirops",
-      "icone": "sirops.svg",
-      "actif": true
-    },
-    {
-      "id": "jus",
-      "nom": "Jus de Fruits",
-      "icone": "jus.svg",
-      "actif": true
-    },
-    {
-      "id": "miel",
-      "nom": "Miel",
-      "icone": "miel.svg",
-      "actif": true
-    },
-    {
-      "id": "confitures",
-      "nom": "Confitures",
-      "icone": "confitures.svg",
-      "actif": true
-    },
-    {
-      "id": "chocolat",
-      "nom": "Chocolat & Confiseries",
-      "icone": "chocolat.svg",
       "actif": true
     },
     {
@@ -55,27 +31,27 @@
       "actif": true
     },
     {
-      "id": "terrines",
-      "nom": "Terrines & Charcuteries",
-      "icone": "terrines.svg",
+      "id": "cafe-the",
+      "nom": "Café, Thé & Infusions",
+      "icone": "cafe-the.svg",
       "actif": true
     },
     {
-      "id": "plats-cuisines",
-      "nom": "Plats Cuisinés",
-      "icone": "plats-cuisines.svg",
+      "id": "chocolat",
+      "nom": "Chocolat & Confiseries",
+      "icone": "chocolat.svg",
       "actif": true
     },
     {
-      "id": "autour-olive",
-      "nom": "Autour de l'Olive",
-      "icone": "autour-olive.svg",
+      "id": "confitures",
+      "nom": "Confitures",
+      "icone": "confitures.svg",
       "actif": true
     },
     {
-      "id": "pates-riz",
-      "nom": "Pâtes, Riz & Ravioles",
-      "icone": "pates-riz.svg",
+      "id": "jus",
+      "nom": "Jus de Fruits",
+      "icone": "jus.svg",
       "actif": true
     },
     {
@@ -85,28 +61,46 @@
       "actif": true
     },
     {
+      "id": "miel",
+      "nom": "Miel",
+      "icone": "miel.svg",
+      "actif": true
+    },
+    {
+      "id": "pates-riz",
+      "nom": "Pâtes, Riz & Ravioles",
+      "icone": "pates-riz.svg",
+      "actif": true
+    },
+    {
+      "id": "plats-cuisines",
+      "nom": "Plats Cuisinés",
+      "icone": "plats-cuisines.svg",
+      "actif": true
+    },
+    {
+      "id": "sirops",
+      "nom": "Sirops",
+      "icone": "sirops.svg",
+      "actif": true
+    },
+    {
+      "id": "terrines",
+      "nom": "Terrines & Charcuteries",
+      "icone": "terrines.svg",
+      "actif": true
+    },
+    {
       "id": "sel-camargue",
       "nom": "Sel de Camargue",
       "icone": "sel-camargue.svg",
       "actif": true
     },
     {
-      "id": "cafe-the",
-      "nom": "Café, Thé & Infusions",
-      "icone": "cafe-the.svg",
-      "actif": false
-    },
-    {
       "id": "vins",
       "nom": "Vins",
       "icone": "vins.svg",
       "actif": true
-    },
-    {
-      "id": "zdudhuzd",
-      "nom": "zdudhuzd",
-      "icone": "chocolat.svg",
-      "actif": false
     }
   ]
 }
