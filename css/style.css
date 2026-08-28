@@ -3141,7 +3141,15 @@ button:focus-visible,a:focus-visible{
   margin:0;
   word-wrap:break-word;
   overflow-wrap:break-word;
+  white-space:pre-line;
+}
+/* Paragraphes de la description produit (retours à la ligne saisis dans le CMS) */
+.lightbox__desc-para{
+  display:block;
   white-space:normal;
+}
+.lightbox__desc-para + .lightbox__desc-para{
+  margin-top:.9em;
 }
 
 /* Responsive photo gallery */
