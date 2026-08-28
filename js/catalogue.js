@@ -93,6 +93,26 @@
     return String(str).replace(/"/g,'&quot;');
   }
 
+  // ── Texte multi-lignes → vrais paragraphes ──
+  // Le CMS enregistre les retours à la ligne (\n) tapés par la boutique ;
+  // le HTML les ignore. On reconstruit un bloc par paragraphe
+  // (ligne vide = nouveau paragraphe, retour simple = <br>).
+  function setMultiline(el, text) {
+    if (!el) return;
+    el.textContent = '';
+    var blocks = String(text || '').replace(/\r\n?/g, '\n').split(/\n[ \t]*\n+/);
+    blocks.forEach(function (block) {
+      if (!block.trim()) return;
+      var para = document.createElement('span');
+      para.className = 'lightbox__desc-para';
+      block.split('\n').forEach(function (line, i) {
+        if (i) para.appendChild(document.createElement('br'));
+        para.appendChild(document.createTextNode(line.trim()));
+      });
+      el.appendChild(para);
+    });
+  }
+
   // ── Price parser : "4,50 €" → 4.5  (null if no price) ──
   function parsePrix(str) {
     if (!str) return null;
@@ -227,7 +247,7 @@
       var noImgEl = document.getElementById('lightboxNoImg');
       if (noImgEl) noImgEl.style.display = hasImg ? 'none' : '';
       lightboxTitle.textContent = nom;
-      lightboxDesc.textContent  = desc;
+      setMultiline(lightboxDesc, desc);
 
       if (lightboxPrice) lightboxPrice.textContent = prix;
       if (lightboxCont)  lightboxCont.textContent  = cont;

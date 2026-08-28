@@ -715,6 +715,11 @@
 
         // ── Textes ─────────────────────────────────────────
         var t = c.textes || {};
+        // Les retours à la ligne tapés dans le CMS sont ignorés par le HTML :
+        // on les convertit en sauts de ligne réels.
+        var nl2br = function (s) {
+          return String(s == null ? '' : s).replace(/\r\n?/g, '\n').replace(/\n/g, '<br>');
+        };
         var setText = function (sel, val) {
           if (!val) return;
           var el = document.querySelector(sel);
@@ -728,21 +733,21 @@
 
         // Rue Saint-Antoine
         var rueParagraphs = document.querySelectorAll('.rue__desc');
-        if (rueParagraphs[0] && t.rue_p1) rueParagraphs[0].innerHTML = t.rue_p1;
-        if (rueParagraphs[1] && t.rue_p2) rueParagraphs[1].innerHTML = t.rue_p2;
+        if (rueParagraphs[0] && t.rue_p1) rueParagraphs[0].innerHTML = nl2br(t.rue_p1);
+        if (rueParagraphs[1] && t.rue_p2) rueParagraphs[1].innerHTML = nl2br(t.rue_p2);
 
         // Qui sommes-nous
         var qsnParagraphs = document.querySelectorAll('.qsn__text > p');
-        if (qsnParagraphs[0] && t.qsn_p1) qsnParagraphs[0].innerHTML = t.qsn_p1;
-        if (qsnParagraphs[1] && t.qsn_p2) qsnParagraphs[1].innerHTML = t.qsn_p2;
+        if (qsnParagraphs[0] && t.qsn_p1) qsnParagraphs[0].innerHTML = nl2br(t.qsn_p1);
+        if (qsnParagraphs[1] && t.qsn_p2) qsnParagraphs[1].innerHTML = nl2br(t.qsn_p2);
 
         // Dépôt de pain
         var painParagraphs = document.querySelectorAll('.pain__text > p');
-        if (painParagraphs[0] && t.pain_p1) painParagraphs[0].innerHTML = t.pain_p1;
-        if (painParagraphs[1] && t.pain_p2) painParagraphs[1].innerHTML = t.pain_p2;
+        if (painParagraphs[0] && t.pain_p1) painParagraphs[0].innerHTML = nl2br(t.pain_p1);
+        if (painParagraphs[1] && t.pain_p2) painParagraphs[1].innerHTML = nl2br(t.pain_p2);
 
         // Enclave
-        setText('.enclave__text', t.enclave);
+        setHtml('.enclave__text', nl2br(t.enclave));
 
         // ── Photos ─────────────────────────────────────────
         var p = c.photos || {};
@@ -788,7 +793,7 @@
               div.innerHTML =
                 '<span class="' + badgeClass + '">' + eh(article.badge) + '</span>' +
                 '<h3 class="on-parle__bloc-title">' + eh(article.titre) + '</h3>' +
-                '<p class="on-parle__bloc-content">' + eh(article.contenu) + '</p>' +
+                '<p class="on-parle__bloc-content">' + nl2br(eh(article.contenu)) + '</p>' +
                 '<span class="on-parle__date">' + eh(article.date) + '</span>';
               grid.appendChild(div);
             });
@@ -809,7 +814,7 @@
               div.style.transitionDelay = ((i + 1) * 0.1) + 's';
               div.innerHTML =
                 '<div class="avis-card__stars">' + starsSvg + '</div>' +
-                '<p class="avis-card__text">' + eh(av.texte) + '</p>' +
+                '<p class="avis-card__text">' + nl2br(eh(av.texte)) + '</p>' +
                 '<div class="avis-card__author">' + googleSvg + eh(av.auteur) +
                   '<span class="avis-card__source">— ' + eh(av.source) + '</span>' +
                 '</div>';
