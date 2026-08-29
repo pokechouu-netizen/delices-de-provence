@@ -34,9 +34,9 @@
       "legende": "",
       "image": "assets/catalogue/alcools/alcool-03.jpg",
       "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
+      "prix": "56.00 €",
+      "contenance": "75 cl",
+      "prix_unitaire": "78.66 €/litre",
       "visible": true
     },
     {
