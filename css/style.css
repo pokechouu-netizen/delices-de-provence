@@ -23,6 +23,10 @@
   --c4:#C8963E;
   --c5:#A67C52;
   --c2-light:#8BA34E;
+  /* Vert de l'enseigne de la boutique (relevé sur les photos de la devanture) */
+  --vert-enseigne:#45543A;
+  --vert-enseigne-clair:#5A6B4C;
+  --vert-enseigne-fonce:#38452E;
   --c1-alpha:rgba(44,24,16,.85);
   --c4-alpha:rgba(200,150,62,.15);
   --shadow-soft:0 4px 30px rgba(44,24,16,.08);
