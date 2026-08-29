@@ -80,13 +80,13 @@
       gap: 0.9rem;
       padding: 0.85rem 1.1rem;
       background: linear-gradient(to bottom,
-        #9B7040 0%, #8B6035 30%, #7A5230 65%, #6B4220 100%);
+        #5A6B4C 0%, #4E5D41 30%, #45543A 65%, #38452E 100%);
       border-radius: 3px;
       box-shadow:
         0 3px 7px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,210,120,.22),
-        inset 0 -2px 0 rgba(0,0,0,.35);
-      color: #FFF5E0;
+        inset 0 1px 0 rgba(255,255,255,.18),
+        inset 0 -2px 0 rgba(0,0,0,.3);
+      color: #ffffff;
       text-decoration: none;
       cursor: pointer;
       transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
@@ -99,7 +99,7 @@
       top: 0; left: 0; right: 0;
       height: 2px;
       background: linear-gradient(to right,
-        transparent, rgba(255,210,120,.35) 30%, rgba(255,210,120,.35) 70%, transparent);
+        transparent, rgba(255,255,255,.3) 30%, rgba(255,255,255,.3) 70%, transparent);
       border-radius: 3px 3px 0 0;
     }
 
@@ -108,15 +108,15 @@
       filter: brightness(1.12);
       box-shadow:
         0 6px 14px rgba(0,0,0,.55),
-        inset 0 1px 0 rgba(255,210,120,.3),
-        inset 0 -2px 0 rgba(0,0,0,.35);
+        inset 0 1px 0 rgba(255,255,255,.25),
+        inset 0 -2px 0 rgba(0,0,0,.3);
     }
 
     .shelf-cat__icon {
       width: 32px;
       height: 32px;
       flex-shrink: 0;
-      filter: invert(1) sepia(0.2) brightness(0.85);
+      filter: brightness(0) invert(1);
       object-fit: contain;
     }
 
@@ -125,11 +125,11 @@
       font-family: 'Playfair Display', Georgia, serif;
       font-size: clamp(0.8rem, 1.8vw, 0.95rem);
       line-height: 1.25;
-      color: #FFF5E0;
+      color: #ffffff;
     }
 
     .shelf-cat__arrow {
-      color: rgba(200,150,62,.75);
+      color: rgba(255,255,255,.75);
       font-size: 1rem;
       flex-shrink: 0;
       transition: transform .15s ease;

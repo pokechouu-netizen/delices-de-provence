@@ -231,8 +231,8 @@
       align-items: center;
       gap: 0.6rem;
       padding: 0.85rem 2.2rem;
-      background: rgba(200,150,62,0.85);
-      color: #fff5e0;
+      background: var(--vert-enseigne, #45543A);
+      color: #ffffff;
       font-family: 'DM Sans', sans-serif;
       font-size: 0.82rem;
       font-weight: 600;
@@ -651,13 +651,20 @@
       });
 
       /* ── Phase 1 : hero ── */
-      function revealDoors() {
+      /* immediate = déclenché par un clic volontaire : les portes s'ouvrent
+         dans la foulée, sans demander un second clic au visiteur. */
+      function revealDoors(immediate) {
         if (heroGone) return;
         heroGone = true;
         clearInterval(heroIv);
         document.getElementById('entryScreen').classList.add('visible');
         heroEl.classList.add('fade-out');
-        setTimeout(startDoorCountdown, 400);
+        if (immediate) {
+          if (timerEl) timerEl.textContent = 'Bienvenue…';
+          setTimeout(openDoors, 900);
+        } else {
+          setTimeout(startDoorCountdown, 400);
+        }
       }
 
       var heroCountdown = 3;
@@ -667,9 +674,9 @@
         else if (heroHint) heroHint.textContent = 'Ouverture automatique dans ' + heroCountdown + ' s…';
       }, 1000);
 
-      heroEl.addEventListener('click', revealDoors);
+      heroEl.addEventListener('click', function () { revealDoors(true); });
       heroEl.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') revealDoors();
+        if (e.key === 'Enter' || e.key === ' ') revealDoors(true);
       });
     })();
 
