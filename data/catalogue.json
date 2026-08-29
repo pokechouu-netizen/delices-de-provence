@@ -1910,6 +1910,19 @@
       "best_seller": false,
       "image": "assets/catalogue/1788014783214_hqchaubou08.jpg",
       "id": "p-1788014598766"
+    },
+    {
+      "nom": "Champagne extrat Brut Grand Cru",
+      "categorie": "alcools",
+      "description": "",
+      "legende": "",
+      "prix": "",
+      "contenance": "",
+      "prix_unitaire": "",
+      "visible": true,
+      "best_seller": false,
+      "image": "",
+      "id": "p-1788015290775"
     }
   ]
 }
