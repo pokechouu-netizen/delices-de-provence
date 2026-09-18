@@ -11,7 +11,7 @@
       "prix": "80,00 €",
       "contenance": "75 cl",
       "prix_unitaire": "106,66 € / litre",
-      "visible": false
+      "visible": true
     },
     {
       "id": "alcool-02",
