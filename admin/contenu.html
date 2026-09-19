@@ -255,6 +255,7 @@
     </div>
   </div>
 
+  <script src="recadrage.js"></script>
   <script>
   (function(){
     'use strict';
@@ -454,8 +455,11 @@
 
     window.replacePhoto=function(input,key){
       if(!input.files||!input.files[0]) return;
+      var picked=input.files[0]; input.value='';
+      Recadreur.open(picked,{ratio:'origine'}).then(function(file){
+      if(!file) return;
       st('saving','Upload…');
-      uploadImg(input.files[0]).then(function(path){
+      return uploadImg(file).then(function(path){
         data.photos[key]=path;
         return write('Photo : '+key);
       }).then(function(){
@@ -468,6 +472,7 @@
             el.parentNode.replaceChild(img,el);
           }
         }
+      });
       }).catch(function(){ st('error','Erreur upload'); });
     };
 
@@ -489,8 +494,12 @@
     window.replGImg=function(btn,i){ btn.nextElementSibling.click(); };
     window.onGFile=function(input,i){
       if(!input.files||!input.files[0]) return;
-      st('saving','Upload…');
-      uploadImg(input.files[0]).then(function(path){ data.galerie[i].src=path; st('saved','Photo prête — cliquez "Enregistrer la galerie"'); renderGalerie(); });
+      var picked=input.files[0]; input.value='';
+      Recadreur.open(picked,{ratio:'origine'}).then(function(file){
+        if(!file) return;
+        st('saving','Upload…');
+        return uploadImg(file).then(function(path){ data.galerie[i].src=path; st('saved','Photo prête — cliquez "Enregistrer la galerie"'); renderGalerie(); });
+      }).catch(function(){ st('error','Erreur upload'); });
     };
     window.updGAlt=function(i,v){ data.galerie[i].alt=v; };
     window.delG=function(i){

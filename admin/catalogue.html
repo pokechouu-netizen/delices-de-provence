@@ -101,7 +101,9 @@
     td.c-cat { font-size:.82rem; color:var(--muted); }
     td.c-prix { width:90px; }
     td.c-vis { width:64px; text-align:center; }
-    td.c-actions { width:82px; }
+    td.c-actions { width:120px; }
+    .btn-recrop { align-self:flex-start; }
+    .btn:focus-visible, .btn-text:focus-visible { outline:2px solid var(--text); outline-offset:2px; }
     .row-btns { display:flex; gap:.3rem; }
 
     /* ── Toggle switch ───────────────────────────────────── */
@@ -255,6 +257,7 @@
           <span class="img-placeholder" id="imgPlaceholder">📷 Cliquer pour choisir une photo</span>
           <span class="img-zone-hint" id="imgZoneHint" style="display:none">Cliquez pour changer la photo</span>
         </div>
+        <button type="button" class="btn btn-ghost btn-sm btn-recrop" id="recropBtn" onclick="recropPhoto()" style="display:none">✂️ Recadrer cette photo</button>
         <input type="hidden" id="f_img">
       </div>
 
@@ -300,6 +303,7 @@
     </div>
   </div>
 
+  <script src="recadrage.js"></script>
   <script>
   (function () {
     'use strict';
@@ -311,6 +315,7 @@
     var products = [];
     var fileSha  = '';
     var editIdx  = -1;
+    var pendingFile = null;   // photo choisie / recadrée, en attente d'enregistrement
     var hookUrl  = '';
 
     // ── Auth ──────────────────────────────────────────────
@@ -507,6 +512,7 @@
           '</td>' +
           '<td class="c-actions"><div class="row-btns">' +
             '<button class="btn btn-ghost btn-sm" onclick="openModal(' + ri + ')" title="Modifier">✏️</button>' +
+            (p.image ? '<button class="btn btn-ghost btn-sm" onclick="cropRow(' + ri + ')" title="Recadrer la photo">✂️</button>' : '') +
             '<button class="btn btn-danger btn-sm" onclick="del(' + ri + ')" title="Supprimer">🗑</button>' +
           '</div></td>';
         tbody.appendChild(tr);
@@ -563,6 +569,8 @@
       setChk('f_bs',      !!p.best_seller);
       set('f_img', p.image || '');
       set('f_file', '');
+      pendingFile = null;
+      document.getElementById('recropBtn').style.display = p.image ? '' : 'none';
       var prev = document.getElementById('imgPreview');
       var ph   = document.getElementById('imgPlaceholder');
       var hint = document.getElementById('imgZoneHint');
@@ -583,16 +591,51 @@
       document.getElementById('overlay').classList.remove('open');
     };
 
+    function showPreview(src) {
+      var img = document.getElementById('imgPreview');
+      img.src = src;
+      img.style.display = 'block';
+      document.getElementById('imgPlaceholder').style.display = 'none';
+      document.getElementById('imgZoneHint').style.display = '';
+      document.getElementById('recropBtn').style.display = '';
+    }
+
+    // Nouvelle photo choisie → passage par le recadreur avant l'aperçu
     window.onFileChange = function (input) {
       if (!input.files || !input.files[0]) return;
-      var r = new FileReader();
-      r.onload = function (e) {
-        var img = document.getElementById('imgPreview');
-        img.src = e.target.result;
-        img.style.display = 'block';
-        document.getElementById('imgPlaceholder').style.display = 'none';
-      };
-      r.readAsDataURL(input.files[0]);
+      var file = input.files[0];
+      input.value = '';
+      Recadreur.open(file, { ratio: 'boutique' }).then(function (out) {
+        if (!out) return;
+        pendingFile = out;
+        showPreview(URL.createObjectURL(out));
+      });
+    };
+
+    // Recadre la photo affichée dans la fiche (nouvelle ou déjà en ligne)
+    window.recropPhoto = function () {
+      var current = document.getElementById('f_img').value;
+      var source  = pendingFile || (current ? imgSrc(current) : null);
+      if (!source) return;
+      Recadreur.open(source, { ratio: 'boutique' }).then(function (out) {
+        if (!out) return;
+        pendingFile = out;
+        showPreview(URL.createObjectURL(out));
+      });
+    };
+
+    // Recadrage direct depuis la liste, sans ouvrir la fiche
+    window.cropRow = function (i) {
+      var p = products[i];
+      if (!p || !p.image) return;
+      Recadreur.open(imgSrc(p.image), { ratio: 'boutique' }).then(function (out) {
+        if (!out) return;
+        setStatus('saving', 'Envoi de la photo…');
+        return uploadImage(out).then(function (path) {
+          p.image = path;
+          return writeCatalogue('Recadrage photo : ' + (p.nom || ''));
+        }).then(renderTable);
+      }).catch(function () { setStatus('error', 'Erreur pendant l\'envoi de la photo'); });
     };
 
     window.saveProduct = function () {
@@ -604,7 +647,7 @@
       saveBtn.disabled = true;
       saveBtn.textContent = 'Enregistrement…';
 
-      var file = document.getElementById('f_file').files[0];
+      var file = pendingFile;
 
       function commit(imgPath) {
         var p = editIdx === -1 ? {} : products[editIdx];
