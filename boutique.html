@@ -17,105 +17,163 @@
   <link rel="apple-touch-icon" href="assets/images/badge-local-artisanal.jpg">
 
   <style>
-    /* ===== SHELVES ===== */
+    /* ===== SHELVES — meuble d'épicerie en noyer ===== */
     .shelves-section { background: #F5EDE0; }
 
     .shelves-wrapper {
-      max-width: 960px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 0 1rem 3rem;
     }
 
-    /* SVG cornice + frame */
     .shelves-frame {
-      background: #2C1810;
-      border-radius: 6px 6px 4px 4px;
+      --montant: clamp(12px, 2.2vw, 22px);
+      --laiton-grad: linear-gradient(to bottom, #ECD27A, #C8963E 45%, #A8802F);
+      position: relative;
+      padding: 0 var(--montant);
+      border-radius: 4px;
       overflow: hidden;
-      box-shadow: 0 12px 48px rgba(44,24,16,.35), 0 2px 8px rgba(0,0,0,.2);
+      /* montants gauche/droite + fond en lambris */
+      background:
+        linear-gradient(90deg, #4A2E1A, #6B4526 45%, #3A2416) left / var(--montant) 100% no-repeat,
+        linear-gradient(90deg, #3A2416, #6B4526 55%, #4A2E1A) right / var(--montant) 100% no-repeat,
+        repeating-linear-gradient(90deg, #24140B 0 78px, #1A0E07 78px 80px);
+      box-shadow: 0 18px 50px rgba(44,24,16,.38), 0 2px 8px rgba(0,0,0,.25);
     }
 
+    /* Corniche moulurée */
     .shelves-cornice {
-      display: block;
-      width: 100%;
-      height: 28px;
+      height: 34px;
+      margin: 0 calc(-1 * var(--montant));
+      background: linear-gradient(to bottom,
+        #8A5C34 0 16%, #B58250 16% 24%, #7A4F2B 24% 60%,
+        #4A2E1A 60% 68%, #6B4526 68% 100%);
+      box-shadow: 0 6px 12px rgba(0,0,0,.45);
+      position: relative;
+      z-index: 2;
     }
 
+    /* Plaque en laiton vissée */
     .shelves-header {
       display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 1rem;
-      padding: 1.2rem 2rem 1rem;
-      border-bottom: 2px solid rgba(139,94,60,.5);
+      padding: 1.4rem 1rem .4rem;
     }
-
     .shelves-header__title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      font-style: italic;
-      color: #FFF5E0;
-      letter-spacing: 0.08em;
+      position: relative;
       margin: 0;
+      padding: .5rem 2.4rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1rem, 2.4vw, 1.25rem);
+      font-style: italic;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: #2C1810;
+      background: var(--laiton-grad);
+      border-radius: 2px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.55),
+        inset 0 -1px 0 rgba(0,0,0,.25),
+        0 3px 8px rgba(0,0,0,.5);
     }
-
-    .shelves-header__ornament {
-      color: rgba(200,150,62,.6);
-      font-size: 1.1rem;
+    .shelves-header__title::before,
+    .shelves-header__title::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      margin-top: -3px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #F6E7A8, #7A5A14 70%);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.25);
     }
+    .shelves-header__title::before { left: .8rem; }
+    .shelves-header__title::after  { right: .8rem; }
 
     .shelves-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      padding: 1rem;
+      column-gap: 0;
+      row-gap: 0;
+      padding: 0;
+      /* lueur chaude venue du haut du meuble */
+      background: radial-gradient(ellipse 70% 180px at 50% 0, rgba(255,200,120,.10), transparent);
     }
 
     @media (max-width: 560px) {
       .shelves-grid { grid-template-columns: 1fr; }
     }
 
+    /* Plaque émaillée verte posée sur la planche */
     .shelf-cat {
       display: flex;
       align-items: center;
-      gap: 0.9rem;
-      padding: 0.85rem 1.1rem;
-      background: linear-gradient(to bottom,
-        #5A6B4C 0%, #4E5D41 30%, #45543A 65%, #38452E 100%);
-      border-radius: 3px;
+      gap: .85rem;
+      margin: 20px 9px 0;
+      padding: .8rem 1rem;
+      min-height: 62px;
+      box-sizing: border-box;
+      background: linear-gradient(to bottom, #586A4B 0%, #45543A 55%, #39462F 100%);
+      border-radius: 4px 4px 1px 1px;
       box-shadow:
-        0 3px 7px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.18),
-        inset 0 -2px 0 rgba(0,0,0,.3);
+        0 0 0 1px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.16),
+        0 -6px 14px rgba(0,0,0,.28);
       color: #ffffff;
       text-decoration: none;
       cursor: pointer;
-      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
       position: relative;
+      transition: transform .2s cubic-bezier(.16, 1, .3, 1);
+      animation: shelfIn .7s cubic-bezier(.16, 1, .3, 1) backwards;
+      animation-delay: calc(var(--i, 0) * 65ms);
+    }
+    @keyframes shelfIn {
+      from { opacity: 0; transform: translateY(12px); }
     }
 
+    /* filet doré intérieur */
     .shelf-cat::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(to right,
-        transparent, rgba(255,255,255,.3) 30%, rgba(255,255,255,.3) 70%, transparent);
-      border-radius: 3px 3px 0 0;
+      inset: 4px;
+      border: 1px solid rgba(236,210,122,.4);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    /* reflet au survol (opacité seulement) */
+    .shelf-cat::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(to bottom, rgba(255,255,255,.16), transparent 62%);
+      opacity: 0;
+      transition: opacity .2s ease-out;
+      pointer-events: none;
+    }
+    .shelf-cat:hover { transform: translateY(-3px); }
+    .shelf-cat:hover::after,
+    .shelf-cat:focus-visible::after { opacity: 1; }
+    .shelf-cat:focus-visible {
+      outline: 2px solid #ECD27A;
+      outline-offset: 2px;
     }
 
-    .shelf-cat:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.12);
-      box-shadow:
-        0 6px 14px rgba(0,0,0,.55),
-        inset 0 1px 0 rgba(255,255,255,.25),
-        inset 0 -2px 0 rgba(0,0,0,.3);
-    }
-
-    .shelf-cat__icon {
-      width: 32px;
-      height: 32px;
+    .shelf-cat__medal {
       flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.2);
+      box-shadow: inset 0 0 0 1px rgba(236,210,122,.5);
+    }
+    .shelf-cat__icon {
+      width: 24px;
+      height: 24px;
       filter: brightness(0) invert(1);
       object-fit: contain;
     }
@@ -123,25 +181,42 @@
     .shelf-cat__name {
       flex: 1;
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+      font-size: clamp(.86rem, 1.8vw, 1rem);
       line-height: 1.25;
       color: #ffffff;
     }
 
     .shelf-cat__arrow {
-      color: rgba(255,255,255,.75);
+      color: #ECD27A;
       font-size: 1rem;
       flex-shrink: 0;
-      transition: transform .15s ease;
+      transition: transform .2s cubic-bezier(.16, 1, .3, 1);
     }
-    .shelf-cat:hover .shelf-cat__arrow { transform: translateX(3px); }
+    .shelf-cat:hover .shelf-cat__arrow { transform: translateX(4px); }
 
-    /* SVG shelf plank below each row */
+    /* Planche : dessus éclairé, chant sombre, ombre portée sur le fond */
     .shelves-plank {
-      display: block;
-      width: calc(100% + 2rem);
-      margin: 0 -1rem;
-      height: 14px;
+      grid-column: 1 / -1;
+      height: 16px;
+      background: linear-gradient(to bottom,
+        #A6744A 0 3px, #7A5230 3px 5px, #5E3C20 5px 12px, #3E2410 12px 100%);
+      box-shadow: 0 12px 14px -4px rgba(0,0,0,.65);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Plinthe */
+    .shelves-plinth {
+      height: 22px;
+      margin: 20px calc(-1 * var(--montant)) 0;
+      background: linear-gradient(to bottom, #6B4526, #4A2E1A 40%, #2E1A0E);
+      box-shadow: inset 0 1px 0 rgba(255,200,140,.18);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .shelf-cat { animation: none; transition: none; }
+      .shelf-cat:hover { transform: none; }
+      .shelf-cat__arrow { transition: none; }
     }
 
     /* ===== CATEGORY VIEW ===== */
@@ -276,40 +351,17 @@
       <!-- ===== SVG SHELF UNIT ===== -->
       <div class="shelves-frame" id="shelvesUnit">
 
-        <!-- Cornice SVG -->
-        <svg class="shelves-cornice" viewBox="0 0 800 28" preserveAspectRatio="none" aria-hidden="true">
-          <defs>
-            <linearGradient id="corniceGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#B07848"/>
-              <stop offset="40%"  stop-color="#9B6A3C"/>
-              <stop offset="100%" stop-color="#6B4220"/>
-            </linearGradient>
-          </defs>
-          <rect width="800" height="28" fill="url(#corniceGrad)"/>
-          <line x1="0" y1="9"  x2="800" y2="9"  stroke="rgba(255,200,100,.18)" stroke-width="1"/>
-          <line x1="0" y1="20" x2="800" y2="20" stroke="rgba(0,0,0,.2)"        stroke-width="1.5"/>
-        </svg>
+        <div class="shelves-cornice" aria-hidden="true"></div>
 
         <div class="shelves-header">
-          <span class="shelves-header__ornament">✦</span>
           <p class="shelves-header__title">Nos Rayons</p>
-          <span class="shelves-header__ornament">✦</span>
         </div>
-
-        <!-- Gradient defs shared by dynamically built planks -->
-        <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
-          <defs>
-            <linearGradient id="plankGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#7A5230"/>
-              <stop offset="50%"  stop-color="#6B4220"/>
-              <stop offset="100%" stop-color="#3E2410"/>
-            </linearGradient>
-          </defs>
-        </svg>
 
         <div class="shelves-grid" id="shelvesGrid">
           <!-- Chargé dynamiquement depuis data/rayons.json -->
         </div>
+
+        <div class="shelves-plinth" aria-hidden="true"></div>
 
       </div><!-- /.shelves-frame -->
 
@@ -400,31 +452,32 @@
     var CAT_NAMES    = {};
 
     function buildPlank() {
-      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.setAttribute('class', 'shelves-plank');
-      svg.setAttribute('viewBox', '0 0 800 14');
-      svg.setAttribute('preserveAspectRatio', 'none');
-      svg.setAttribute('aria-hidden', 'true');
-      svg.style.gridColumn = '1 / -1';
-      svg.innerHTML = '<rect width="800" height="14" fill="url(#plankGrad)"/><line x1="0" y1="3" x2="800" y2="3" stroke="rgba(255,180,80,.12)" stroke-width="1"/><rect y="11" width="800" height="3" fill="rgba(0,0,0,.4)"/>';
-      return svg;
+      var plank = document.createElement('div');
+      plank.className = 'shelves-plank';
+      plank.setAttribute('aria-hidden', 'true');
+      return plank;
     }
 
-    function buildShelf(rayon) {
+    function buildShelf(rayon, i) {
       var a = document.createElement('a');
       a.className = 'shelf-cat';
       a.href = 'boutique.html?cat=' + rayon.id;
+      a.style.setProperty('--i', Math.min(i, 12));
+      var medal = document.createElement('span');
+      medal.className = 'shelf-cat__medal';
       var img = document.createElement('img');
       img.className = 'shelf-cat__icon';
       img.src = 'assets/icons/' + rayon.icone;
       img.alt = '';
+      medal.appendChild(img);
       var nameSpan = document.createElement('span');
       nameSpan.className = 'shelf-cat__name';
       nameSpan.textContent = rayon.nom;
       var arrow = document.createElement('span');
       arrow.className = 'shelf-cat__arrow';
+      arrow.setAttribute('aria-hidden', 'true');
       arrow.textContent = '→';
-      a.appendChild(img);
+      a.appendChild(medal);
       a.appendChild(nameSpan);
       a.appendChild(arrow);
       return a;
@@ -435,7 +488,7 @@
       shelvesGrid.innerHTML = '';
       rayons.forEach(function(rayon, i) {
         CAT_NAMES[rayon.id] = rayon.nom;
-        shelvesGrid.appendChild(buildShelf(rayon));
+        shelvesGrid.appendChild(buildShelf(rayon, i));
         if (i % 2 === 1 || i === rayons.length - 1) {
           shelvesGrid.appendChild(buildPlank());
         }
