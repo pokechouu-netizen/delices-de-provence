@@ -418,10 +418,10 @@
     },
     {
       "id": "confiture-08",
-      "nom": "Confiture de Framboise",
+      "nom": "Confiture Abricot de Provence",
       "categorie": "confitures",
-      "description": "",
-      "legende": "",
+      "description": "Elaborée à partir des meilleurs abricots de Provence, soigneusement triés à la main pour garantir une qualité irréprochable. Chaque confiture est cuite au chaudron, dans le respect des recettes traditionnelles, pour préserver toute la fraîcheur et la richesse des arômes naturels des abricots.",
+      "legende": "70g de fruits pour 100g de confiture",
       "image": "assets/catalogue/confitures/confiture-08.jpg",
       "best_seller": false,
       "prix": "",
