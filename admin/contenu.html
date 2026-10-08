@@ -132,7 +132,7 @@
         <h2>Articles presse &amp; actualités</h2>
         <button class="btn btn-primary btn-sm" onclick="openArticleModal(-1)">+ Ajouter un article</button>
       </div>
-      <p class="panel-hint">Ces articles s'affichent dans la section "On parle de nous" de la page d'accueil.</p>
+      <p class="panel-hint">Ces articles s'affichent sur la page Presse.</p>
       <div class="card-list" id="presseList"></div>
     </div>
 
@@ -142,7 +142,7 @@
         <h2>Avis clients</h2>
         <button class="btn btn-primary btn-sm" onclick="openAvisModal(-1)">+ Ajouter un avis</button>
       </div>
-      <p class="panel-hint">Ces avis s'affichent dans la section "La parole à nos visiteurs" de la page d'accueil.</p>
+      <p class="panel-hint">Ces avis s'affichent sur la page L'histoire.</p>
       <div class="card-list" id="avisList"></div>
     </div>
 
@@ -157,7 +157,7 @@
           <h2>Galerie défilante</h2>
           <button class="btn btn-ghost btn-sm" onclick="addGalerieItem()">+ Ajouter une photo</button>
         </div>
-        <p class="panel-hint">La bande de photos qui défile sous "Trésors à découvrir". Cliquez 📷 pour remplacer une photo.</p>
+        <p class="panel-hint">Galerie de photos de la boutique. Cliquez 📷 pour remplacer une photo.</p>
         <div class="galerie-list" id="galerieList"></div>
         <div class="form-save-row">
           <button class="btn btn-primary" onclick="saveGalerie()">Enregistrer la galerie</button>
@@ -168,29 +168,47 @@
     <!-- Textes -->
     <div class="panel" id="panel-textes">
       <div class="panel-header"><h2>Textes du site</h2></div>
-      <p class="panel-hint">Modifiez les textes des sections de la page d'accueil. Cliquez "Enregistrer" en bas.</p>
+      <p class="panel-hint">Tous les textes du site, page par page. Cliquez "Enregistrer les textes" en bas. Un champ vide = texte masqué (ou texte d'origine pour les pages légales).</p>
 
       <div class="section-card">
-        <p class="section-card__title">📍 Présentation de la boutique — section "Au cœur de Valréas"</p>
-        <div class="fg"><label>Paragraphe 1</label><textarea id="t_rue_p1" rows="4"></textarea></div>
-        <div class="fg"><label>Paragraphe 2</label><textarea id="t_rue_p2" rows="3"></textarea></div>
+        <p class="section-card__title">⭐ Sélection du mois — texte d'introduction</p>
+        <div class="fg"><label>Texte (une ligne vide = nouveau paragraphe)</label><textarea id="t_selection_intro" rows="4"></textarea></div>
+        <p class="hint" style="font-size:.78rem;color:var(--muted)">Les produits affichés sont ceux cochés « ⭐ Sélection du mois » dans le catalogue.</p>
       </div>
 
       <div class="section-card">
-        <p class="section-card__title">👥 Qui sommes-nous</p>
+        <p class="section-card__title">📖 L'histoire</p>
         <div class="fg"><label>Paragraphe 1</label><textarea id="t_qsn_p1" rows="4"></textarea></div>
         <div class="fg"><label>Paragraphe 2</label><textarea id="t_qsn_p2" rows="4"></textarea></div>
+        <div class="fg"><label>Paragraphe 3 (facultatif)</label><textarea id="t_qsn_p3" rows="3"></textarea></div>
+        <div class="fg"><label>Enclave des Papes</label><textarea id="t_enclave" rows="4"></textarea></div>
       </div>
 
       <div class="section-card">
-        <p class="section-card__title">🍞 Dépôt de pain</p>
-        <div class="fg"><label>Paragraphe 1</label><textarea id="t_pain_p1" rows="3"></textarea></div>
-        <div class="fg"><label>Paragraphe 2</label><textarea id="t_pain_p2" rows="2"></textarea></div>
+        <p class="section-card__title">🎁 Espace pro — les trois cartes</p>
+        <div class="frow">
+          <div class="fg"><label>Carte 1 — titre</label><input type="text" id="t_pro_card1_titre"></div>
+          <div class="fg"><label>Carte 1 — texte</label><textarea id="t_pro_card1_desc" rows="3"></textarea></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Carte 2 — titre</label><input type="text" id="t_pro_card2_titre"></div>
+          <div class="fg"><label>Carte 2 — texte</label><textarea id="t_pro_card2_desc" rows="3"></textarea></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Carte 3 — titre</label><input type="text" id="t_pro_card3_titre"></div>
+          <div class="fg"><label>Carte 3 — texte</label><textarea id="t_pro_card3_desc" rows="3"></textarea></div>
+        </div>
+        <div class="fg"><label>Formulaire de devis — phrase d'introduction</label><textarea id="t_pro_form_intro" rows="2"></textarea></div>
+        <p class="hint" style="font-size:.78rem;color:var(--muted)">Les photos des cartes se changent dans l'onglet « Photos ».</p>
       </div>
 
       <div class="section-card">
-        <p class="section-card__title">⚜️ Enclave des Papes</p>
-        <div class="fg"><label>Texte</label><textarea id="t_enclave" rows="4"></textarea></div>
+        <p class="section-card__title">🔒 Politique de confidentialité</p>
+        <div class="fg">
+          <label>Texte complet</label>
+          <textarea id="t_politique" rows="22" style="font-family:monospace;font-size:.8rem"></textarea>
+          <span class="hint" style="font-size:.78rem;color:var(--muted)">Mise en forme : une ligne commençant par <code>## </code> = titre de section ; une ligne vide = nouveau paragraphe ; des lignes commençant par <code>- </code> = liste. Les mentions légales se modifient dans « Infos ».</span>
+        </div>
       </div>
 
       <div class="form-save-row">
@@ -267,14 +285,11 @@
     var hookUrl = '';
 
     var PHOTOS = {
-      hero:     "Photo héro (bandeau d'accueil)",
-      terrasse: 'Terrasse & façade',
-      mini_1:   'Petite photo 1 (boutique)',
-      mini_2:   'Petite photo 2 (enseigne)',
-      pain:     'Dépôt de pain',
-      enseigne: 'Enseigne (Qui sommes-nous)',
-      badge:    'Badge / Logo',
-      marche:   'Stand marché de Noël'
+      enseigne: "Enseigne (page L'histoire)",
+      marche:   "Stand marché de Noël (page L'histoire)",
+      pro_1:    'Espace pro — carte 1 (coffrets)',
+      pro_2:    'Espace pro — carte 2 (CSE)',
+      pro_3:    'Espace pro — carte 3 (devis)'
     };
 
     // Auth
@@ -516,10 +531,10 @@
     // ─ Textes ─
     function renderTextes(){
       var t=data.textes||{};
-      ['rue_p1','rue_p2','qsn_p1','qsn_p2','pain_p1','pain_p2','enclave'].forEach(function(k){ sv('t_'+k,t[k]||''); });
+      ['selection_intro','qsn_p1','qsn_p2','qsn_p3','enclave','pro_card1_titre','pro_card1_desc','pro_card2_titre','pro_card2_desc','pro_card3_titre','pro_card3_desc','pro_form_intro','politique'].forEach(function(k){ sv('t_'+k,t[k]||''); });
     }
     window.saveTextes=function(){
-      ['rue_p1','rue_p2','qsn_p1','qsn_p2','pain_p1','pain_p2','enclave'].forEach(function(k){
+      ['selection_intro','qsn_p1','qsn_p2','qsn_p3','enclave','pro_card1_titre','pro_card1_desc','pro_card2_titre','pro_card2_desc','pro_card3_titre','pro_card3_desc','pro_form_intro','politique'].forEach(function(k){
         data.textes[k]=gv('t_'+k);
       });
       write('Mise à jour textes du site');

@@ -149,6 +149,13 @@
     .fg .hint { font-size:.74rem; color:var(--muted); }
     .frow { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
     .fcheckrow { display:flex; gap:1.5rem; flex-wrap:wrap; margin-bottom:.9rem; }
+    .nut-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:.5rem .75rem; }
+    .nut-grid .fg { margin-bottom:0; }
+    .nut-grid label { text-transform:none; letter-spacing:0; font-size:.72rem; }
+    .fg .hint { display:block; margin-top:.3rem; }
+    .radio-list { display:flex; flex-direction:column; gap:.45rem; font-size:.88rem; }
+    .radio-list label { display:flex; gap:.45rem; align-items:flex-start; cursor:pointer; text-transform:none; letter-spacing:0; font-weight:400; color:var(--text); }
+    .radio-list input { margin-top:.2rem; accent-color:var(--primary); }
 
     /* ── Image zone ──────────────────────────────────────── */
     .img-zone {
@@ -204,9 +211,14 @@
       <select id="filterCat" onchange="renderTable()">
         <option value="">Toutes les catégories</option>
       </select>
+      <select id="sortSel" onchange="renderTable()" title="Ordre d'affichage">
+        <option value="az">Tri : A → Z</option>
+        <option value="recent">Tri : plus récents d'abord</option>
+      </select>
       <label class="check-label">
         <input type="checkbox" id="filterHidden" onchange="renderTable()"> Masqués seulement
       </label>
+      <button class="btn btn-ghost btn-sm" onclick="openPrixRayon()" title="Appliquer un prix à tous les produits d'un rayon">💶 Prix du rayon</button>
     </div>
 
     <div class="count-bar" id="countBar">Chargement…</div>
@@ -292,13 +304,73 @@
           <input type="checkbox" id="f_visible"> Produit visible sur le site
         </label>
         <label class="check-label">
-          <input type="checkbox" id="f_bs"> Best-seller (page d'accueil)
+          <input type="checkbox" id="f_bs"> ⭐ Sélection du mois
         </label>
+      </div>
+
+      <div class="fg">
+        <label class="check-label" style="text-transform:none;letter-spacing:0;font-size:.85rem">
+          <input type="checkbox" id="f_sug_on" onchange="toggleBloc('sugBloc',this.checked)"> Afficher une suggestion de dégustation
+        </label>
+        <div id="sugBloc" style="display:none;margin-top:.4rem">
+          <textarea id="f_sug" rows="2" placeholder="Ex : à manger à la cuillère, sur des tartines ou avec du fromage"></textarea>
+          <span class="hint">Affichée dans la fiche produit, sous la description.</span>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="check-label" style="text-transform:none;letter-spacing:0;font-size:.85rem">
+          <input type="checkbox" id="f_nut_on" onchange="toggleBloc('nutBloc',this.checked)"> Afficher les valeurs nutritionnelles
+        </label>
+        <div id="nutBloc" style="display:none;margin-top:.4rem">
+          <div class="nut-grid">
+            <div class="fg"><label>Pour</label><input type="text" id="n_portion" placeholder="100 g"></div>
+            <div class="fg"><label>Énergie (kJ)</label><input type="text" id="n_kj" placeholder="1 050"></div>
+            <div class="fg"><label>Énergie (kcal)</label><input type="text" id="n_kcal" placeholder="250"></div>
+            <div class="fg"><label>Matières grasses (g)</label><input type="text" id="n_lipides" placeholder="0,2"></div>
+            <div class="fg"><label>dont acides gras saturés (g)</label><input type="text" id="n_satures" placeholder="0,1"></div>
+            <div class="fg"><label>Glucides (g)</label><input type="text" id="n_glucides" placeholder="60"></div>
+            <div class="fg"><label>dont sucres (g)</label><input type="text" id="n_sucres" placeholder="58"></div>
+            <div class="fg"><label>Fibres (g)</label><input type="text" id="n_fibres" placeholder="1,5"></div>
+            <div class="fg"><label>Protéines (g)</label><input type="text" id="n_proteines" placeholder="0,5"></div>
+            <div class="fg"><label>Sel (g)</label><input type="text" id="n_sel" placeholder="0,02"></div>
+          </div>
+          <span class="hint">Laissez vides les lignes que vous ne voulez pas afficher. L'étiquette est mise en forme automatiquement sur le site.</span>
+        </div>
       </div>
 
       <div class="modal-footer">
         <button class="btn btn-ghost" onclick="closeModal()">Annuler</button>
         <button class="btn btn-primary" id="saveBtn" onclick="saveProduct()">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Modal prix du rayon ─────────────────────────── -->
+  <div class="overlay" id="overlayPrix">
+    <div class="modal" role="dialog" aria-modal="true" style="max-width:460px">
+      <button class="modal-close" onclick="closePrixRayon()" aria-label="Fermer">&times;</button>
+      <h2>Prix du rayon</h2>
+      <div class="fg">
+        <label>Rayon</label>
+        <select id="pr_cat"></select>
+      </div>
+      <div class="fg">
+        <label>Nouveau prix</label>
+        <input type="text" id="pr_prix" placeholder="Ex : 4,50 €">
+        <span class="hint">Le prix est écrit tel quel sur chaque produit. Vous pourrez ensuite modifier un produit au cas par cas.</span>
+      </div>
+      <div class="fg">
+        <label>Appliquer à</label>
+        <div class="radio-list">
+          <label><input type="radio" name="pr_mode" value="all" checked> Tous les produits du rayon (remplace les prix existants)</label>
+          <label><input type="radio" name="pr_mode" value="empty"> Seulement les produits sans prix</label>
+        </div>
+      </div>
+      <p class="hint" id="pr_info" style="font-size:.8rem;color:var(--muted)"></p>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closePrixRayon()">Annuler</button>
+        <button class="btn btn-primary" id="prBtn" onclick="applyPrixRayon()">Appliquer au rayon</button>
       </div>
     </div>
   </div>
@@ -481,6 +553,15 @@
         return true;
       });
 
+      var sort = (document.getElementById('sortSel') || {}).value || 'az';
+      if (sort === 'recent') {
+        list.sort(function (a, b) { return products.indexOf(b) - products.indexOf(a); });
+      } else {
+        list.sort(function (a, b) {
+          return String(a.nom || '').localeCompare(String(b.nom || ''), 'fr', { sensitivity: 'base' });
+        });
+      }
+
       document.getElementById('countBar').textContent =
         list.length + ' produit' + (list.length > 1 ? 's' : '') + ' sur ' + products.length;
 
@@ -567,6 +648,22 @@
       set('f_prixU',  p.prix_unitaire || '');
       setChk('f_visible', p.visible !== false);
       setChk('f_bs',      !!p.best_seller);
+      setChk('f_sug_on',  !!p.suggestion_active);
+      set('f_sug',        p.suggestion || '');
+      toggleBloc('sugBloc', !!p.suggestion_active);
+      var n = p.nutrition || {};
+      setChk('f_nut_on', !!n.actif);
+      set('n_portion',   n.portion      || '');
+      set('n_kj',        n.energie_kj   || '');
+      set('n_kcal',      n.energie_kcal || '');
+      set('n_lipides',   n.lipides      || '');
+      set('n_satures',   n.satures      || '');
+      set('n_glucides',  n.glucides     || '');
+      set('n_sucres',    n.sucres       || '');
+      set('n_fibres',    n.fibres       || '');
+      set('n_proteines', n.proteines    || '');
+      set('n_sel',       n.sel          || '');
+      toggleBloc('nutBloc', !!n.actif);
       set('f_img', p.image || '');
       set('f_file', '');
       pendingFile = null;
@@ -660,6 +757,21 @@
         p.prix_unitaire = document.getElementById('f_prixU').value;
         p.visible       = document.getElementById('f_visible').checked;
         p.best_seller   = document.getElementById('f_bs').checked;
+        p.suggestion_active = document.getElementById('f_sug_on').checked;
+        p.suggestion    = document.getElementById('f_sug').value.trim();
+        p.nutrition = {
+          actif:        document.getElementById('f_nut_on').checked,
+          portion:      gv('n_portion') || '100 g',
+          energie_kj:   gv('n_kj'),
+          energie_kcal: gv('n_kcal'),
+          lipides:      gv('n_lipides'),
+          satures:      gv('n_satures'),
+          glucides:     gv('n_glucides'),
+          sucres:       gv('n_sucres'),
+          fibres:       gv('n_fibres'),
+          proteines:    gv('n_proteines'),
+          sel:          gv('n_sel')
+        };
         if (imgPath)   p.image = imgPath;
         else if (!p.image) p.image = document.getElementById('f_img').value || '';
         if (!p.id) p.id = 'p-' + Date.now();
@@ -674,12 +786,73 @@
       else      commit(null);
     };
 
+    window.toggleBloc = function (id, on) {
+      document.getElementById(id).style.display = on ? '' : 'none';
+    };
+    function gv(id) { return (document.getElementById(id).value || '').trim(); }
+
+    // ── Prix du rayon ─────────────────────────────────────
+    window.openPrixRayon = function () {
+      var sel = document.getElementById('pr_cat');
+      sel.innerHTML = '';
+      Object.keys(CAT).forEach(function (id) {
+        var o = document.createElement('option');
+        o.value = id; o.textContent = CAT[id];
+        sel.appendChild(o);
+      });
+      var current = document.getElementById('filterCat').value;
+      if (current) sel.value = current;
+      set('pr_prix', '');
+      updatePrixInfo();
+      sel.onchange = updatePrixInfo;
+      document.querySelectorAll('input[name="pr_mode"]').forEach(function (r) { r.onchange = updatePrixInfo; });
+      document.getElementById('overlayPrix').classList.add('open');
+      document.getElementById('pr_prix').focus();
+    };
+    function prixMode() {
+      var r = document.querySelector('input[name="pr_mode"]:checked');
+      return r ? r.value : 'all';
+    }
+    function prixTargets() {
+      var cat = document.getElementById('pr_cat').value, mode = prixMode();
+      return products.filter(function (p) {
+        return p.categorie === cat && (mode === 'all' || !(p.prix || '').trim());
+      });
+    }
+    function updatePrixInfo() {
+      var n = prixTargets().length;
+      document.getElementById('pr_info').textContent =
+        n ? n + ' produit' + (n > 1 ? 's' : '') + ' concerné' + (n > 1 ? 's' : '') + '.' : 'Aucun produit concerné.';
+      document.getElementById('prBtn').disabled = !n;
+    }
+    window.closePrixRayon = function () {
+      document.getElementById('overlayPrix').classList.remove('open');
+    };
+    window.applyPrixRayon = function () {
+      var prix = gv('pr_prix');
+      if (!prix) { document.getElementById('pr_prix').focus(); return; }
+      var cibles = prixTargets();
+      if (!cibles.length) return;
+      var nomCat = CAT[document.getElementById('pr_cat').value] || '';
+      if (!confirm('Mettre le prix « ' + prix + ' » sur ' + cibles.length + ' produit(s) du rayon ' + nomCat + ' ?')) return;
+      var btn = document.getElementById('prBtn');
+      btn.disabled = true; btn.textContent = 'Enregistrement…';
+      cibles.forEach(function (p) { p.prix = prix; });
+      writeCatalogue('Prix du rayon ' + nomCat + ' : ' + prix)
+        .then(function () { closePrixRayon(); renderTable(); })
+        .catch(function () {})
+        .finally(function () { btn.disabled = false; btn.textContent = 'Appliquer au rayon'; });
+    };
+
     // ── Close overlay on backdrop click / Escape ──────────
     document.getElementById('overlay').addEventListener('click', function (e) {
       if (e.target === this) closeModal();
     });
+    document.getElementById('overlayPrix').addEventListener('click', function (e) {
+      if (e.target === this) closePrixRayon();
+    });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape') { closeModal(); closePrixRayon(); }
     });
 
     // ── Utils ─────────────────────────────────────────────

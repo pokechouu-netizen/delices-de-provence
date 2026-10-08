@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Infos & Popup — Délices de Provence</title>
+  <title>Infos boutique — Délices de Provence</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     :root{--bg:#f8f5f0;--surface:#fff;--border:#e5ddd4;--primary:#c4913a;--text:#2c1810;--muted:#8b6e5a;--danger:#d94f4f;--success:#3a9a5c;--r:8px;--shadow:0 2px 8px rgba(44,24,16,.1)}
@@ -70,13 +70,13 @@
 
   <div id="loginScreen">
     <h1>Administration — Délices de Provence</h1>
-    <p>Connectez-vous pour modifier les infos et le popup</p>
+    <p>Connectez-vous pour modifier les infos de la boutique</p>
     <button class="btn-login" onclick="netlifyIdentity.open()">Se connecter</button>
   </div>
 
   <div id="adminScreen">
     <div class="topbar">
-      <h1>Infos boutique &amp; Popup</h1>
+      <h1>Infos boutique</h1>
       <span class="status" id="statusEl"></span>
       <a href="index.html" class="btn btn-ghost btn-sm">← Admin</a>
       <a href="../index.html" target="_blank" class="btn btn-ghost btn-sm">Voir le site ↗</a>
@@ -143,47 +143,6 @@
         </table>
         <div class="save-row" style="margin-top:.75rem">
           <button class="btn btn-primary" onclick="saveSection('horaires')">Enregistrer</button>
-        </div>
-      </div>
-
-      <!-- Popup -->
-      <div class="card">
-        <div class="card__title">💬 Popup promotionnel</div>
-
-        <div class="toggle-row">
-          <span>Activer le popup</span>
-          <label class="toggle">
-            <input type="checkbox" id="p_actif">
-            <span class="track"></span>
-          </label>
-        </div>
-
-        <div class="fg">
-          <label>Message affiché</label>
-          <input type="text" id="p_message" placeholder="Ex : Nouvelles confitures de saison disponibles !">
-        </div>
-        <div class="frow">
-          <div class="fg">
-            <label>Texte du bouton</label>
-            <input type="text" id="p_cta_label" placeholder="Ex : Voir la boutique">
-          </div>
-          <div class="fg">
-            <label>Lien du bouton</label>
-            <input type="text" id="p_cta_url" placeholder="boutique.html">
-          </div>
-        </div>
-        <div class="fg" style="max-width:200px">
-          <label>Délai d'apparition (secondes)</label>
-          <input type="number" id="p_delai" min="1" max="60" placeholder="5">
-          <span class="hint">Le popup apparaît après ce délai sur la page d'accueil.</span>
-        </div>
-        <div class="fg" style="margin-top:.75rem">
-          <label>Produits en bandeau défilant</label>
-          <textarea id="p_bandeau" rows="6" placeholder="Un produit par ligne&#10;Ex : Confiture d'Abricot&#10;Miel de Lavande" style="resize:vertical"></textarea>
-          <span class="hint">Un produit par ligne — défilent en bas du popup. Laissez vide pour masquer le bandeau.</span>
-        </div>
-        <div class="save-row">
-          <button class="btn btn-primary" onclick="saveSection('popup')">Enregistrer</button>
         </div>
       </div>
 
@@ -350,13 +309,6 @@
 
       sv('f_hook', data.netlify_hook || '');
 
-      var pop = data.popup || {};
-      document.getElementById('p_actif').checked = pop.actif === true;
-      sv('p_message',   pop.message      || '');
-      sv('p_cta_label', pop.cta_label    || '');
-      sv('p_cta_url',   pop.cta_url      || '');
-      sv('p_delai',   pop.delai_secondes != null ? pop.delai_secondes : 5);
-      sv('p_bandeau', (pop.produits_bandeau || []).join('\n'));
     }
 
     window.saveSection = function(section){
@@ -406,17 +358,6 @@
       else if(section === 'deploy'){
         data.netlify_hook = gv('f_hook').trim();
         write('Mise à jour deploy hook');
-      }
-      else if(section === 'popup'){
-        if(!data.popup) data.popup={};
-        data.popup.actif          = document.getElementById('p_actif').checked;
-        data.popup.message        = gv('p_message');
-        data.popup.cta_label      = gv('p_cta_label');
-        data.popup.cta_url        = gv('p_cta_url');
-        data.popup.delai_secondes = parseInt(gv('p_delai'),10) || 5;
-        var band = gv('p_bandeau').trim();
-        data.popup.produits_bandeau = band ? band.split('\n').map(function(s){return s.trim();}).filter(Boolean) : [];
-        write('Mise à jour popup');
       }
     };
 

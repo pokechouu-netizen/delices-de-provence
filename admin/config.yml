@@ -397,11 +397,41 @@ collections:
                 required: false
                 hint: "Ex : 1,80 € / 100g — 3,20 € / litre"
 
-              - label: "Mise en avant (coups de cœur)"
+              - label: "Sélection du mois"
                 name: "best_seller"
                 widget: "boolean"
                 default: false
-                hint: "Réservé pour usage futur — non affiché actuellement"
+                hint: "Affiche le produit en polaroïd sur la page Sélection du mois"
+
+              - label: "Afficher la suggestion de dégustation"
+                name: "suggestion_active"
+                widget: "boolean"
+                default: false
+                required: false
+
+              - label: "Suggestion de dégustation"
+                name: "suggestion"
+                widget: "string"
+                required: false
+                hint: "Ex : à manger à la cuillère, sur des tartines ou avec du fromage"
+
+              - label: "Valeurs nutritionnelles"
+                name: "nutrition"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - { label: "Afficher l'étiquette", name: "actif", widget: "boolean", default: false, required: false }
+                  - { label: "Pour", name: "portion", widget: "string", default: "100 g", required: false }
+                  - { label: "Énergie (kJ)", name: "energie_kj", widget: "string", required: false }
+                  - { label: "Énergie (kcal)", name: "energie_kcal", widget: "string", required: false }
+                  - { label: "Matières grasses (g)", name: "lipides", widget: "string", required: false }
+                  - { label: "dont acides gras saturés (g)", name: "satures", widget: "string", required: false }
+                  - { label: "Glucides (g)", name: "glucides", widget: "string", required: false }
+                  - { label: "dont sucres (g)", name: "sucres", widget: "string", required: false }
+                  - { label: "Fibres (g)", name: "fibres", widget: "string", required: false }
+                  - { label: "Protéines (g)", name: "proteines", widget: "string", required: false }
+                  - { label: "Sel (g)", name: "sel", widget: "string", required: false }
 
               - label: "Produit visible"
                 name: "visible"
