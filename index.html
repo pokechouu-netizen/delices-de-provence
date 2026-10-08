@@ -9,18 +9,18 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Great+Vibes&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="icon" type="image/jpeg" href="assets/images/badge-local-artisanal.jpg">
-  <link rel="apple-touch-icon" href="assets/images/badge-local-artisanal.jpg">
+  <link rel="icon" type="image/png" href="assets/images/logo-ld-192.png">
+  <link rel="apple-touch-icon" href="assets/images/logo-ld-192.png">
 
   <style>
-    html, body { overflow: hidden; height: 100%; margin: 0; }
+    html, body { overflow: hidden; height: 100%; margin: 0; padding: 0; }
 
     /* ===== ENTRY STAGE ===== */
     .entry-screen {
@@ -145,7 +145,6 @@
         radial-gradient(ellipse 8px 30% at 50% 78%, rgba(58,30,12,0.5) 90%, transparent) 0 0 / 30px 25%,
         repeating-linear-gradient(to bottom, transparent 0 calc(25% - 5px), rgba(44,24,16,0.8) calc(25% - 5px) 25%),
         radial-gradient(ellipse 80% 70% at 50% 42%, #F6D69A 0%, #D29A52 45%, #6E421F 85%, #3A2212 100%);
-      box-shadow: inset 0 0 46px rgba(0,0,0,0.55);
     }
     .shop__base {
       flex: 0 0 auto;
@@ -201,6 +200,17 @@
         radial-gradient(ellipse 8px 30% at 50% 78%, rgba(58,30,12,0.6) 90%, transparent) 0 0 / 28px 25%,
         repeating-linear-gradient(to bottom, transparent 0 calc(25% - 5px), #2C1810 calc(25% - 5px) 25%);
       opacity: 0.85;
+    }
+    .interior__badge {
+      position: absolute;
+      left: 50%;
+      top: 27%;
+      width: 24%;
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45), 0 0 0 3px rgba(236,210,122,0.5);
+      object-fit: cover;
     }
     .interior__floor {
       position: absolute;
@@ -263,7 +273,7 @@
       background:
         linear-gradient(112deg, rgba(255,255,255,0.20) 0 13%, transparent 13% 27%, rgba(255,255,255,0.08) 27% 32%, transparent 32%),
         radial-gradient(ellipse 120% 70% at 50% 40%, #F3CF8E 0%, #C98A44 50%, #5A3418 100%);
-      box-shadow: inset 0 0 0 4px rgba(20,12,6,0.55), inset 0 0 34px rgba(0,0,0,0.5), 0 0 0 2px #2F3A27;
+      box-shadow: inset 0 0 0 4px rgba(20,12,6,0.55), 0 0 0 2px #2F3A27;
     }
     /* Filet doré peint sur la vitre */
     .door__glass::before {
@@ -443,8 +453,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-end;
-      padding-bottom: 4vh;
+      justify-content: center;
+      padding-bottom: 0;
       cursor: pointer;
       transition: opacity 1.2s ease;
       background: #1A0A03;
@@ -478,6 +488,16 @@
       z-index: 2;
       text-align: center;
       padding: 0 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-logo {
+      width: clamp(160px, 30vh, 260px);
+      height: auto;
+      border-radius: 50%;
+      box-shadow: 0 14px 44px rgba(0,0,0,.55);
+      margin-bottom: 1.6rem;
     }
     .hero-eyebrow {
       font-family: 'DM Sans', sans-serif;
@@ -498,12 +518,17 @@
     }
     .hero-title em { font-style: italic; color: rgba(255,232,170,0.95); }
     .hero-sub {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(0.85rem, 1.8vw, 1.05rem);
-      font-style: italic;
-      color: rgba(255,245,225,0.7);
-      margin: 0 0 2.2rem;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1rem, 2.4vw, 1.5rem);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #F6F1E4;
+      text-shadow: 0 2px 18px rgba(0,0,0,0.8);
+      margin: 0;
     }
+    .hero-hint { display: none; }
+    .entry-cta__timer { display: none; }
     .hero-enter-btn {
       display: inline-flex;
       align-items: center;
@@ -538,28 +563,19 @@
   <!-- ===== NAV ===== -->
   <nav class="nav" role="navigation" aria-label="Navigation principale">
 
-    <ul class="nav__links--l">
-      <li><a href="tresors.html" class="nav__link">Incontournables</a></li>
-      <li><a href="boutique.html" class="nav__link">Boutique</a></li>
-      <li><a href="entreprises.html" class="nav__link">Espace Pro</a></li>
-    </ul>
+    <a href="index.html" class="nav__brand nav__brand--l">Délice de Provènço</a>
 
-    <a href="#" class="nav__logo">
-      <img src="assets/images/badge-local-artisanal.jpg" alt="Logo Délices de Provence" class="nav__logo-img">
-      Délices<span>de Provence</span>
-    </a>
-
-    <div class="nav__group--r">
-      <ul class="nav__links--r">
-        <li><a href="qui-sommes-nous.html" class="nav__link">À propos</a></li>
+    <ul class="nav__links--c">
+        <li><a href="index.html#boutique" class="nav__link">Boutique</a></li>
+        <li><a href="tresors.html" class="nav__link">Sélection du mois</a></li>
+        <li><a href="entreprises.html" class="nav__link">Espace pro</a></li>
+        <li><a href="qui-sommes-nous.html" class="nav__link">L'histoire</a></li>
         <li><a href="presse.html" class="nav__link">Presse</a></li>
         <li><a href="infos.html" class="nav__link">Infos</a></li>
-      </ul>
-      <a href="#" data-cta="phone" class="nav__cta">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        Nous appeler
-      </a>
-    </div>
+        <li><a href="#" data-cta="phone" class="nav__link nav__link--contact">Contact</a></li>
+    </ul>
+
+    <a href="index.html" class="nav__brand nav__brand--r">Délices de Provence</a>
 
     <div class="nav__burger" aria-label="Menu" role="button" tabindex="0">
       <span></span><span></span><span></span>
@@ -567,20 +583,17 @@
 
     <div class="nav__menu">
       <ul class="nav__links">
-        <li><a href="tresors.html" class="nav__link">Incontournables</a></li>
-        <li><a href="boutique.html" class="nav__link">Boutique</a></li>
-        <li><a href="entreprises.html" class="nav__link">Espace Pro</a></li>
-        <li><a href="qui-sommes-nous.html" class="nav__link">À propos</a></li>
+        <li><a href="index.html#boutique" class="nav__link">Boutique</a></li>
+        <li><a href="tresors.html" class="nav__link">Sélection du mois</a></li>
+        <li><a href="entreprises.html" class="nav__link">Espace pro</a></li>
+        <li><a href="qui-sommes-nous.html" class="nav__link">L'histoire</a></li>
         <li><a href="presse.html" class="nav__link">Presse</a></li>
         <li><a href="infos.html" class="nav__link">Infos</a></li>
       </ul>
-      <a href="#" data-cta="phone" class="nav__cta">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        Nous appeler
-      </a>
+      <a href="#" data-cta="phone" class="nav__cta">Contact</a>
       <div class="nav__social">
         <a href="https://www.instagram.com/delicesdeprovence84valreas/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
         <a href="https://www.facebook.com/profile.php?id=61559185874782" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
           <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -595,14 +608,9 @@
     <img class="hero-bg-img" src="assets/images/facade-devanture.jpg" alt="Façade de la boutique Délices de Provence à Valréas" loading="eager">
     <div class="hero-gradient"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">27 rue Saint-Antoine — Valréas</p>
-      <h1 class="hero-title">Délices<br><em>de Provence</em></h1>
-      <p class="hero-sub">Épicerie fine au cœur de l'Enclave des Papes</p>
-      <button class="hero-enter-btn" id="heroEnterBtn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-        Entrer dans la boutique
-      </button>
-      <span class="hero-hint" id="heroHint">Ouverture automatique dans 3 s…</span>
+      <img class="hero-logo" src="assets/images/logo-ld.png" alt="Délices de Provence — Épicerie fine" width="520" height="520">
+      <p class="hero-sub">Épicerie fine de l'Enclave des Papes</p>
+      <span class="hero-hint" id="heroHint" aria-hidden="true"></span>
     </div>
   </div>
 
@@ -629,6 +637,7 @@
         <div class="doorway">
           <div class="interior">
             <div class="interior__shelves"></div>
+            <img class="interior__badge" src="assets/images/badge-local-artisanal.jpg" alt="">
             <div class="interior__floor"></div>
           </div>
           <div class="doors-stage">
@@ -677,29 +686,25 @@
   </div><!-- /.entry-screen -->
 
   <!-- ===== CTA OVERLAY (PHONE) ===== -->
-  <div class="cta-overlay" id="ctaOverlay" role="dialog" aria-label="Nous appeler" aria-hidden="true">
+  <div class="cta-overlay" id="ctaOverlay" role="dialog" aria-label="Contact" aria-hidden="true">
     <button class="cta-overlay__close" aria-label="Fermer">&times;</button>
     <div class="cta-overlay__box">
-      <h3 class="cta-overlay__title">Appelez-nous avec plaisir</h3>
+      <h3 class="cta-overlay__title">Contactez-nous</h3>
       <p class="cta-overlay__number">09 86 53 24 10</p>
+      <p class="cta-overlay__number-secondary"><a href="mailto:edwigepaillon@delices-de-provence.com" class="cta-overlay__mail">edwigepaillon@delices-de-provence.com</a></p>
       <div>
         <button class="cta-overlay__copy" data-number="0986532410" aria-label="Copier le numéro">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
           Copier le numéro
         </button>
       </div>
+      <p class="cta-overlay__pro"><a href="entreprises.html#contact">Entreprises &amp; CSE : formulaire de devis →</a></p>
     </div>
   </div>
 
   <!-- ===== STICKY MAP ===== -->
   <a href="https://www.google.com/maps/dir/?api=1&destination=27+rue+Saint-Antoine+84600+Valr%C3%A9as+France" target="_blank" rel="noopener noreferrer" class="map-sticky" id="mapSticky" aria-label="Itinéraire vers Délices de Provence">
-    <div class="map-sticky__icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-    </div>
-    <div class="map-sticky__text">
-      Itinéraire
-      <small>27 rue Saint-Antoine, Valréas</small>
-    </div>
+    <img src="assets/images/logo-ld-192.png" alt="Délices de Provence" class="map-sticky__logo">
   </a>
 
   <script src="js/main.js"></script>
@@ -725,14 +730,12 @@
         setTimeout(function () { window.location.href = 'boutique.html'; }, 1650);
       }
 
-      var doorCountdown = 5;
+      var doorCountdown = 7;
       var doorIv;
       function startDoorCountdown() {
-        if (timerEl) timerEl.textContent = 'Ouverture dans 5 s…';
         doorIv = setInterval(function () {
           doorCountdown--;
           if (doorCountdown <= 0) { clearInterval(doorIv); openDoors(); }
-          else if (timerEl) timerEl.textContent = 'Ouverture dans ' + doorCountdown + ' s…';
         }, 1000);
       }
 
@@ -751,19 +754,27 @@
         document.getElementById('entryScreen').classList.add('visible');
         heroEl.classList.add('fade-out');
         if (immediate) {
-          if (timerEl) timerEl.textContent = 'Bienvenue…';
           setTimeout(openDoors, 900);
         } else {
           setTimeout(startDoorCountdown, 400);
         }
       }
 
-      var heroCountdown = 3;
+      /* Depuis le menu « Boutique » : on rejoue l'ouverture de la porte sans repasser par la façade */
+      var replay = window.location.hash === '#boutique';
+      if (replay) {
+        heroGone = true;
+        heroEl.style.display = 'none';
+        document.getElementById('entryScreen').classList.add('visible');
+        setTimeout(openDoors, 1400);
+      }
+
+      var heroCountdown = 5;
       var heroIv = setInterval(function () {
         heroCountdown--;
         if (heroCountdown <= 0) { clearInterval(heroIv); revealDoors(); }
-        else if (heroHint) heroHint.textContent = 'Ouverture automatique dans ' + heroCountdown + ' s…';
       }, 1000);
+      if (replay) clearInterval(heroIv);
 
       heroEl.addEventListener('click', function () { revealDoors(true); });
       heroEl.addEventListener('keydown', function (e) {
