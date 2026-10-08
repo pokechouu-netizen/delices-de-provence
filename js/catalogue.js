@@ -75,10 +75,51 @@
         '</div>' +
       '</div>' +
       (nom ? '<span class="photo-card__nom">' + escHtml(nom) + '</span>' : '') +
-      '<span class="photo-card__category"><img src="assets/icons/' + escAttr(disp.icon) + '.svg" alt="' + escAttr(disp.name) + '" class="icon-svg"> ' + escHtml(disp.name) + '</span>' +
       (prixHtml ? '<div class="photo-card__prix-wrap">' + prixHtml + '</div>' : '');
 
+    // Suggestion + valeurs nutritionnelles (affichées dans la fiche)
+    card.__extra = {
+      suggestion: product.suggestion_active ? (product.suggestion || '') : '',
+      nutrition:  (product.nutrition && product.nutrition.actif) ? product.nutrition : null
+    };
+
     return card;
+  }
+
+  // Étiquette « Valeurs nutritionnelles »
+  var NUTRI_ROWS = [
+    ['energie',   'Énergie',                    'energie', ''],
+    ['lipides',   'Matières grasses',           '', 'g'],
+    ['satures',   'dont acides gras saturés',   'sub', 'g'],
+    ['glucides',  'Glucides',                   '', 'g'],
+    ['sucres',    'dont sucres',                'sub', 'g'],
+    ['fibres',    'Fibres alimentaires',        '', 'g'],
+    ['proteines', 'Protéines',                  '', 'g'],
+    ['sel',       'Sel',                        '', 'g']
+  ];
+  function fmtNutri(v, unit) {
+    v = String(v == null ? '' : v).trim();
+    if (!v) return '';
+    if (unit && !/[a-z%]/i.test(v)) v += ' ' + unit;
+    return v;
+  }
+  function buildNutri(n) {
+    var rows = '';
+    NUTRI_ROWS.forEach(function (r) {
+      var val;
+      if (r[0] === 'energie') {
+        var kj = fmtNutri(n.energie_kj, 'kJ'), kcal = fmtNutri(n.energie_kcal, 'kcal');
+        val = [kj, kcal].filter(Boolean).join(' / ');
+      } else {
+        val = fmtNutri(n[r[0]], r[3]);
+      }
+      if (!val) return;
+      rows += '<tr class="' + (r[2] === 'sub' ? 'nutri__sub' : r[2] === 'energie' ? 'nutri__energie' : '') + '">' +
+        '<td>' + escHtml(r[1]) + '</td><td>' + escHtml(val) + '</td></tr>';
+    });
+    if (!rows) return '';
+    return '<div class="nutri"><div class="nutri__head">Valeurs nutritionnelles<small>moyennes pour ' +
+      escHtml(n.portion || '100 g') + '</small></div><table>' + rows + '</table></div>';
   }
 
   function zoomSvg() {
@@ -253,9 +294,23 @@
       if (lightboxCont)  lightboxCont.textContent  = cont;
       if (lightboxPrixU) lightboxPrixU.textContent  = prixU;
       if (lightboxLeg)   lightboxLeg.textContent   = leg;
-      if (lightboxCat)   lightboxCat.innerHTML = catEl ? catEl.innerHTML : '';
+      if (lightboxCat)   lightboxCat.innerHTML = '';
 
-      var hasInfo = nom || desc || prix || cont || prixU || leg;
+      var extra  = card.__extra || {};
+      var sugEl  = document.getElementById('lightboxSuggestion');
+      var sugTxt = document.getElementById('lightboxSuggestionText');
+      if (sugEl && sugTxt) {
+        sugTxt.textContent = extra.suggestion || '';
+        sugEl.hidden = !extra.suggestion;
+      }
+      var nutEl = document.getElementById('lightboxNutri');
+      if (nutEl) {
+        var html = extra.nutrition ? buildNutri(extra.nutrition) : '';
+        nutEl.innerHTML = html;
+        nutEl.hidden = !html;
+      }
+
+      var hasInfo = nom || desc || prix || cont || prixU || leg || extra.suggestion || extra.nutrition;
       lightboxInfo.classList.toggle('lightbox__info--empty', !hasInfo);
     }
 
@@ -347,6 +402,9 @@
     .then(function (data) {
       var produits = (data.produits || []).filter(function (p) { return p.visible !== false; });
       if (produits.length === 0) throw new Error('Aucun produit');
+      produits.sort(function (a, b) {
+        return String(a.nom || '').localeCompare(String(b.nom || ''), 'fr', { sensitivity: 'base' });
+      });
 
       photoGrid.innerHTML = '';
       var allCards = [];

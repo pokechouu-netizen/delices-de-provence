@@ -493,103 +493,69 @@
       });
   }
 
-  // ========== BEST-SELLERS (depuis data/catalogue.json) ==========
+  // ========== SÉLECTION DU MOIS — polaroïds (depuis data/catalogue.json) ==========
   (function () {
-    var CATALOGUE_URL = 'data/catalogue.json';
-    var grid      = document.getElementById('bestSellersGrid');
-    var clickable = document.getElementById('bestSellersClickable');
-
-    if (!grid) return;
-
-    var CATEGORY_DISPLAY = {
-      'alcools':         { name: 'Alcools & Champagnes',   icon: 'alcools' },
-      'autour-olive':    { name: "Autour de l'Olive",      icon: 'autour-olive' },
-      'bieres':          { name: 'Bières',                 icon: 'bieres' },
-      'biscuits-sales':  { name: 'Biscuits Salés',         icon: 'biscuits-sales' },
-      'biscuits-sucres': { name: 'Biscuits Sucrés',        icon: 'biscuits-sucres' },
-      'cafe-the':        { name: 'Café, Thé & Infusions',  icon: 'cafe-the' },
-      'chocolat':        { name: 'Chocolat & Confiseries', icon: 'chocolat' },
-      'confitures':      { name: 'Confitures',             icon: 'confitures' },
-      'epices':          { name: 'Épices & Lavande',       icon: 'epices' },
-      'jus':             { name: 'Jus de Fruits',          icon: 'jus' },
-      'miel':            { name: 'Miel',                   icon: 'miel' },
-      'pates-riz':       { name: 'Pâtes, Riz & Ravioles',  icon: 'pates-riz' },
-      'plats-cuisines':  { name: 'Plats Cuisinés',         icon: 'plats-cuisines' },
-      'sel-camargue':    { name: 'Sel de Camargue',        icon: 'sel-camargue' },
-      'sirops':          { name: 'Sirops',                 icon: 'sirops' },
-      'terrines':        { name: 'Terrines & Charcuteries',icon: 'terrines' },
-      'vins':            { name: 'Vins',                   icon: 'vins' }
-    };
+    var track = document.getElementById('polaroidTrack');
+    var band  = document.getElementById('polaroidBand');
+    if (!track || !band) return;
 
     function esc(str) { return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
     function escA(str) { return String(str || '').replace(/"/g,'&quot;'); }
 
-    function buildCard(p) {
-      var cat  = p.categorie || '';
-      var disp = CATEGORY_DISPLAY[cat] || { name: cat, icon: cat };
-      var card = document.createElement('a');
-      card.href = 'boutique.html';
-      card.className = 'photo-card photo-card--bestseller reveal';
-      card.setAttribute('data-category', cat);
-      card.setAttribute('data-nom', p.nom || '');
-      card.setAttribute('aria-label', esc(p.nom || disp.name) + ' — voir dans la boutique');
+    var TILTS = [-3, 2, -1.5, 3, -2.5, 1.5, -1, 2.5];
 
-      var prixHtml = '';
-      if (p.prix)           prixHtml += '<span class="photo-card__prix">'        + esc(p.prix) + '</span>';
-      if (p.contenance)     prixHtml += '<span class="photo-card__contenance">'  + esc(p.contenance) + '</span>';
-      if (p.prix_unitaire)  prixHtml += '<span class="photo-card__prix-unit">'   + esc(p.prix_unitaire) + '</span>';
-
-      card.innerHTML =
-        '<div class="photo-card__img-wrap">' +
-          '<img src="' + escA(p.image) + '" alt="' + escA((p.nom || disp.name) + ' — Délices de Provence') + '" loading="lazy">' +
-          '<div class="photo-card__overlay"><span class="photo-card__zoom best-sellers__icon-boutique">' +
-            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg>' +
-            '<span>Voir en boutique</span>' +
-          '</span></div>' +
-        '</div>' +
-        (p.nom ? '<span class="photo-card__nom">' + esc(p.nom) + '</span>' : '') +
-        '<span class="photo-card__category"><img src="assets/icons/' + escA(disp.icon) + '.svg" alt="" class="icon-svg"> ' + esc(disp.name) + '</span>' +
-        (prixHtml ? '<div class="photo-card__prix-wrap">' + prixHtml + '</div>' : '');
-
-      return card;
+    function buildPolaroid(p, i) {
+      var a = document.createElement('a');
+      a.className = 'polaroid';
+      a.href = 'boutique.html?cat=' + encodeURIComponent(p.categorie || '');
+      a.style.setProperty('--tilt', TILTS[i % TILTS.length] + 'deg');
+      a.setAttribute('aria-label', (p.nom || 'Produit') + ' — voir dans la boutique');
+      a.innerHTML =
+        '<span class="polaroid__photo">' +
+          (p.image ? '<img src="' + escA(p.image) + '" alt="" loading="lazy">' : '') +
+        '</span>' +
+        '<span class="polaroid__caption">' + esc(p.nom) + '</span>' +
+        (p.prix ? '<span class="polaroid__prix">' + esc(p.prix) + (p.contenance ? ' · ' + esc(p.contenance) : '') + '</span>' : '');
+      return a;
     }
 
-    fetchGH(CATALOGUE_URL)
+    fetchGH('data/catalogue.json')
       .then(function (data) {
-        var sellers = (data.produits || []).filter(function (p) { return p.best_seller && p.visible !== false; });
-        grid.innerHTML = '';
-
-        if (sellers.length === 0) return;
-
-        sellers.forEach(function (p) {
-          var card = buildCard(p);
-          grid.appendChild(card);
-        });
-
-        // Reveal animation on new cards
-        observeRevealList(grid.querySelectorAll('.reveal'));
-
-        // Magnetic effect on new cards
-        if (!prefersReducedMotion) {
-          grid.querySelectorAll('.photo-card--bestseller').forEach(function (card) {
-            card.addEventListener('mousemove', function (e) {
-              var rect = this.getBoundingClientRect();
-              var x = (e.clientX - rect.left) / rect.width - 0.5;
-              var y = (e.clientY - rect.top) / rect.height - 0.5;
-              this.querySelector('.photo-card__img-wrap img').style.transform =
-                'scale(1.06) perspective(600px) rotateX(' + (y * -3) + 'deg) rotateY(' + (x * 3) + 'deg)';
-            });
-            card.addEventListener('mouseleave', function () {
-              var img = this.querySelector('.photo-card__img-wrap img');
-              if (img) img.style.transform = '';
-            });
-          });
+        var sel = (data.produits || []).filter(function (p) { return p.best_seller && p.visible !== false; });
+        track.innerHTML = '';
+        if (!sel.length) {
+          band.classList.add('polaroids--static');
+          track.innerHTML = '<p class="selection__empty">La sélection du mois arrive très bientôt.</p>';
+          return;
+        }
+        // Peu de produits : pas de défilement, on les pose simplement
+        var scroll = sel.length >= 5 && !prefersReducedMotion;
+        var list = scroll ? sel.concat(sel) : sel;
+        list.forEach(function (p, i) { track.appendChild(buildPolaroid(p, i)); });
+        if (scroll) {
+          track.style.setProperty('--duree', Math.max(30, sel.length * 7) + 's');
+        } else {
+          band.classList.add('polaroids--static');
         }
       })
       .catch(function (err) {
-        console.warn('Best-sellers:', err);
-        grid.innerHTML = '';
+        console.warn('Sélection du mois :', err);
+        band.classList.add('polaroids--static');
+        track.innerHTML = '<p class="selection__empty">Sélection momentanément indisponible.</p>';
       });
+  })();
+
+  // ========== FORMULAIRE PRO : message de confirmation ==========
+  (function () {
+    var ok = document.getElementById('formOk');
+    var form = document.getElementById('contactForm');
+    if (!ok || !form) return;
+    if (/[?&]envoye=1/.test(window.location.search)) {
+      form.hidden = true;
+      ok.hidden = false;
+      ok.setAttribute('tabindex', '-1');
+      ok.focus();
+    }
   })();
 
   // ========== INFOS BOUTIQUE (depuis data/infos.json) ==========
@@ -616,6 +582,10 @@
         var copyBtnsAll = document.querySelectorAll('.cta-overlay__copy');
         if (copyBtnsAll[0] && infos.telephone_fixe) copyBtnsAll[0].setAttribute('data-number', infos.telephone_fixe.replace(/\s/g, ''));
 
+        // Overlay contact : e-mail
+        var ctaMail = document.querySelector('.cta-overlay__mail');
+        if (ctaMail && infos.email) { ctaMail.textContent = infos.email; ctaMail.href = 'mailto:' + infos.email; }
+
         // Mailto links
         if (infos.email) {
           document.querySelectorAll('a[href*="mailto:"]').forEach(function (a) {
@@ -640,59 +610,6 @@
           }
         });
 
-        // Popup promo
-        var popup = infos.popup;
-        if (popup && popup.actif === true) {
-          var popupEl   = document.getElementById('popupPromo');
-          var msgEl     = document.getElementById('popupPromoMessage');
-          var ctaEl     = document.getElementById('popupPromoCta');
-          var closeEl   = document.getElementById('popupPromoClose');
-          var backdropEl= document.getElementById('popupPromoBackdrop');
-          if (popupEl) {
-            if (msgEl && popup.message) msgEl.textContent = popup.message;
-            if (ctaEl) {
-              if (popup.cta_label) ctaEl.textContent = popup.cta_label;
-              if (popup.cta_url)   ctaEl.setAttribute('href', popup.cta_url);
-            }
-            // Scrolling product ticker
-            var tickerEl = document.getElementById('popupPromoTicker');
-            if (tickerEl && Array.isArray(popup.produits_bandeau) && popup.produits_bandeau.length) {
-              var doubled = popup.produits_bandeau.concat(popup.produits_bandeau);
-              var track = document.createElement('div');
-              track.className = 'popup-promo__ticker-track';
-              doubled.forEach(function(item) {
-                var s = document.createElement('span');
-                s.className = 'popup-promo__ticker-item';
-                s.textContent = item;
-                track.appendChild(s);
-                var sep = document.createElement('span');
-                sep.className = 'popup-promo__ticker-sep';
-                sep.setAttribute('aria-hidden', 'true');
-                sep.textContent = ' ✦ ';
-                track.appendChild(sep);
-              });
-              tickerEl.appendChild(track);
-            }
-            var delay = (popup.delai_secondes || 5) * 1000;
-            var shown = sessionStorage.getItem('popup_promo_shown');
-            if (!shown) {
-              setTimeout(function () {
-                popupEl.removeAttribute('aria-hidden');
-                popupEl.classList.add('show');
-                sessionStorage.setItem('popup_promo_shown', '1');
-              }, delay);
-            }
-            function closePopup() {
-              popupEl.classList.remove('show');
-              popupEl.setAttribute('aria-hidden', 'true');
-            }
-            if (closeEl)    closeEl.addEventListener('click', closePopup);
-            if (backdropEl) backdropEl.addEventListener('click', closePopup);
-            document.addEventListener('keydown', function (e) {
-              if (e.key === 'Escape') closePopup();
-            });
-          }
-        }
         // Réseaux sociaux
         ['Instagram', 'Facebook'].forEach(function (name) {
           var url = infos[name.toLowerCase() + '_url'];
@@ -749,6 +666,26 @@
         // Enclave
         setHtml('.enclave__text', nl2br(t.enclave));
 
+        // Textes génériques : data-texte (une ligne / paragraphe) et data-texte-rich (paragraphes, ## titres, - listes)
+        var rich = function (txt) {
+          return String(txt || '').replace(/\r\n?/g, '\n').split(/\n[ \t]*\n+/).map(function (b) {
+            b = b.trim(); if (!b) return '';
+            if (b.indexOf('## ') === 0) return '<h2>' + eh(b.slice(3)) + '</h2>';
+            var lines = b.split('\n');
+            if (lines.every(function (l) { return l.trim().indexOf('- ') === 0; }))
+              return '<ul>' + lines.map(function (l) { return '<li>' + eh(l.trim().slice(2)) + '</li>'; }).join('') + '</ul>';
+            return '<p>' + lines.map(eh).join('<br>') + '</p>';
+          }).join('');
+        };
+        document.querySelectorAll('[data-texte]').forEach(function (el) {
+          var v = t[el.getAttribute('data-texte')];
+          if (v !== undefined && v !== null && String(v).trim() !== '') el.innerHTML = nl2br(eh(v));
+        });
+        document.querySelectorAll('[data-texte-rich]').forEach(function (el) {
+          var v = t[el.getAttribute('data-texte-rich')];
+          if (v && String(v).trim()) el.innerHTML = rich(v);
+        });
+
         // ── Photos ─────────────────────────────────────────
         var p = c.photos || {};
         var setImg = function (sel, src) {
@@ -762,6 +699,11 @@
         setImg('.rue__mini-img:nth-child(2)', p.mini_2);
         setImg('.pain__visual-bg',    p.pain);
         setImg('.qsn__image',         p.enseigne);
+        setImg('.qsn-story__img',     p.enseigne);
+        document.querySelectorAll('[data-photo]').forEach(function (el) {
+          var src = p[el.getAttribute('data-photo')];
+          if (src) el.setAttribute('src', src);
+        });
 
         // ── Galerie strip ───────────────────────────────────
         var galerie = c.galerie;
