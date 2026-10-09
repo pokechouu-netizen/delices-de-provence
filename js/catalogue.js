@@ -86,40 +86,40 @@
     return card;
   }
 
-  // Étiquette « Valeurs nutritionnelles »
-  var NUTRI_ROWS = [
-    ['energie',   'Énergie',                    'energie', ''],
-    ['lipides',   'Matières grasses',           '', 'g'],
-    ['satures',   'dont acides gras saturés',   'sub', 'g'],
-    ['glucides',  'Glucides',                   '', 'g'],
-    ['sucres',    'dont sucres',                'sub', 'g'],
-    ['fibres',    'Fibres alimentaires',        '', 'g'],
-    ['proteines', 'Protéines',                  '', 'g'],
-    ['sel',       'Sel',                        '', 'g']
-  ];
-  function fmtNutri(v, unit) {
-    v = String(v == null ? '' : v).trim();
-    if (!v) return '';
-    if (unit && !/[a-z%]/i.test(v)) v += ' ' + unit;
-    return v;
+  // Étiquette « Informations nutritionnelles »
+  // Format libre saisi dans l'admin : une ligne par valeur, « Libellé | valeur ».
+  // Une ligne commençant par « - » ou « dont » est affichée en retrait.
+  function nutriLignes(n) {
+    if (Array.isArray(n.lignes) && n.lignes.length) return n.lignes;
+    if (typeof n.lignes === 'string' && n.lignes.trim()) return n.lignes.split(/\r?\n/);
+    // Compatibilité avec les anciennes fiches à champs fixes
+    var out = [];
+    var kj = (n.energie_kj || '').trim(), kcal = (n.energie_kcal || '').trim();
+    if (kj || kcal) out.push('Énergie | ' + [kj ? kj + ' kJ' : '', kcal ? kcal + ' kcal' : ''].filter(Boolean).join(' / '));
+    [['lipides', 'Matières grasses'], ['satures', '- dont acides gras saturés'], ['glucides', 'Glucides'],
+     ['sucres', '- dont sucres'], ['fibres', 'Fibres'], ['proteines', 'Protéines'], ['sel', 'Sel']].forEach(function (r) {
+      var v = (n[r[0]] || '').trim();
+      if (v) out.push(r[1] + ' | ' + (/[a-z%]/i.test(v) ? v : v + ' g'));
+    });
+    return out;
   }
   function buildNutri(n) {
     var rows = '';
-    NUTRI_ROWS.forEach(function (r) {
-      var val;
-      if (r[0] === 'energie') {
-        var kj = fmtNutri(n.energie_kj, 'kJ'), kcal = fmtNutri(n.energie_kcal, 'kcal');
-        val = [kj, kcal].filter(Boolean).join(' / ');
-      } else {
-        val = fmtNutri(n[r[0]], r[3]);
-      }
-      if (!val) return;
-      rows += '<tr class="' + (r[2] === 'sub' ? 'nutri__sub' : r[2] === 'energie' ? 'nutri__energie' : '') + '">' +
-        '<td>' + escHtml(r[1]) + '</td><td>' + escHtml(val) + '</td></tr>';
+    nutriLignes(n).forEach(function (l) {
+      l = String(l || '').trim();
+      if (!l) return;
+      var sub = /^-\s*/.test(l);
+      l = l.replace(/^-\s*/, '');
+      var parts = l.split('|');
+      var label = parts.shift().trim(), val = parts.join('|').trim();
+      if (!label) return;
+      if (/^dont\b/i.test(label)) sub = true;
+      rows += '<tr' + (sub ? ' class="nutri__sub"' : '') + '><td>' + escHtml(label) + '</td><td>' + escHtml(val) + '</td></tr>';
     });
     if (!rows) return '';
-    return '<div class="nutri"><div class="nutri__head">Valeurs nutritionnelles<small>moyennes pour ' +
-      escHtml(n.portion || '100 g') + '</small></div><table>' + rows + '</table></div>';
+    return '<div class="nutri"><div class="nutri__head"><span>Informations nutritionnelles</span><small>pour ' +
+      escHtml(n.portion || '100 g') + '</small></div><table>' + rows + '</table>' +
+      (n.note ? '<p class="nutri__note">' + escHtml(n.note) + '</p>' : '') + '</div>';
   }
 
   function zoomSvg() {
