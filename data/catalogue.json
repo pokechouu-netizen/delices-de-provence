@@ -772,7 +772,7 @@
     },
     {
       "id": "confiture-27",
-      "nom": "Confiture de Coing",
+      "nom": "Figue pm",
       "categorie": "confitures",
       "description": "",
       "legende": "",
@@ -781,7 +781,22 @@
       "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "energie_kj": "",
+        "energie_kcal": "",
+        "lipides": "",
+        "satures": "",
+        "glucides": "",
+        "sucres": "",
+        "fibres": "",
+        "proteines": "",
+        "sel": ""
+      }
     },
     {
       "id": "confiture-28",
