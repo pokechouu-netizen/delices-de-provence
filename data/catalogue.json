@@ -710,7 +710,7 @@
       "nom": "Framboise",
       "categorie": "confitures",
       "description": "Découvrez la confiture de framboise, médaille d’argent 2026 au Concours Général Agricole de Paris. Nos artisans la cuisent lentement au chaudron avec des framboises juteuses et mûres. Elle capture ainsi toute la richesse et la fraîcheur du fruit. Elle offre un équilibre parfait entre douceur et acidité.",
-      "legende": "",
+      "legende": "70g de fruits pour 100g de confiture",
       "image": "assets/catalogue/1791560993610_framboise-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
@@ -722,15 +722,16 @@
       "nutrition": {
         "actif": true,
         "portion": "100 g",
-        "energie_kj": "1050 Kj",
-        "energie_kcal": "247 Kcal",
-        "lipides": "0.2",
-        "satures": "<0.2",
-        "glucides": "61.1",
-        "sucres": "60.8",
-        "fibres": "",
-        "proteines": "0.2",
-        "sel": "<0.10"
+        "note": "",
+        "lignes": [
+          "Énergie | 1050 Kj kJ / 247 Kcal kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 61.1 g",
+          "- dont sucres | 60.8 g",
+          "Protéines | 0.2 g",
+          "Sel | <0.10 g"
+        ]
       }
     },
     {
