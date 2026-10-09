@@ -411,16 +411,31 @@
     },
     {
       "id": "confiture-04",
-      "nom": "Confiture de Cerise",
+      "nom": "Confiture figue de Provence",
       "categorie": "confitures",
-      "description": "",
+      "description": "Succombez à l’authenticité de cette confiture de figue de Provence, un trésor artisanal cuit au chaudron. Réalisée avec des figues fraîches triées à la main, chaque pot incarne le savoir-faire traditionnel de la région.",
       "legende": "",
-      "image": "assets/catalogue/confitures/confiture-04.jpg",
+      "image": "assets/catalogue/1791556155627_figue-de-provence-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
-      "contenance": "",
+      "contenance": "320",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "energie_kj": "",
+        "energie_kcal": "",
+        "lipides": "",
+        "satures": "",
+        "glucides": "",
+        "sucres": "",
+        "fibres": "",
+        "proteines": "",
+        "sel": ""
+      }
     },
     {
       "id": "confiture-05",
