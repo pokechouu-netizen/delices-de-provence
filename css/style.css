@@ -3075,12 +3075,15 @@ button:focus-visible,a:focus-visible{
   overflow:hidden;
 }
 .lightbox__img{
-  flex:1;
+  flex:0 1 auto;
   min-height:0;
   width:100%;
+  max-height:100%;
   object-fit:contain;
+  object-position:top;
   display:block;
 }
+.lightbox__photo{justify-content:flex-start}
 .lightbox__info{
   flex:1;
   min-width:0;
@@ -3719,7 +3722,7 @@ button:focus-visible,a:focus-visible{
   font-style:italic;
   color:var(--c5);
   text-align:center;
-  padding:.45rem 1rem .55rem;
+  padding:.3rem 1rem .4rem;
   line-height:1.4;
   flex-shrink:0;
   word-wrap:break-word;
@@ -4019,37 +4022,42 @@ body{padding-top:var(--nav-h)}
   color:var(--c1);
 }
 .nutri{
-  margin-top:.9rem;
-  border:1.5px solid var(--c1);
-  border-radius:6px;
-  background:#fff;
+  margin-top:1rem;
+  max-width:340px;
   font-family:var(--font-body);
-  font-size:.82rem;
+  font-size:.78rem;
+  line-height:1.35;
   color:var(--c1);
-  overflow:hidden;
+  border-top:1px solid rgba(44,24,16,.35);
+  border-bottom:1px solid rgba(44,24,16,.35);
+  padding:.35rem 0 .25rem;
 }
 .nutri__head{
-  padding:.55rem .8rem .45rem;
-  font-family:var(--font-caps);
-  font-size:.78rem;
-  font-weight:600;
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:1rem;
+  padding:.1rem 0 .3rem;
+  border-bottom:1px solid rgba(44,24,16,.2);
+  font-size:.7rem;
+  font-weight:700;
   letter-spacing:.06em;
-  border-bottom:4px solid var(--c1);
+  text-transform:uppercase;
 }
 .nutri__head small{
-  display:block;
-  font-family:var(--font-body);
-  font-weight:400;
-  letter-spacing:0;
-  font-size:.72rem;
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.02em;
+  text-transform:none;
   color:var(--c5);
-  margin-top:.15rem;
+  white-space:nowrap;
 }
 .nutri table{width:100%;border-collapse:collapse}
-.nutri td{padding:.33rem .8rem;border-top:1px solid rgba(44,24,16,.14)}
-.nutri td:last-child{text-align:right;font-weight:600;white-space:nowrap}
-.nutri tr.nutri__sub td{padding-left:1.7rem;font-weight:400;color:var(--c5);border-top-color:rgba(44,24,16,.06)}
-.nutri tr.nutri__sub td:last-child{font-weight:400}
+.nutri td{padding:.17rem 0;vertical-align:top}
+.nutri td:last-child{text-align:right;white-space:nowrap;padding-left:1rem}
+.nutri tr.nutri__sub td{padding-left:1rem;color:var(--c5)}
+.nutri tr.nutri__sub td:last-child{padding-left:1rem}
+.nutri__note{margin:.35rem 0 0;font-size:.68rem;color:var(--c5);line-height:1.35}
 .nutri tr.nutri__energie td{font-weight:700}
 
 /* ---------- Sélection du mois : polaroïds qui défilent ---------- */
