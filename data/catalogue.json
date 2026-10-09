@@ -357,15 +357,15 @@
       "nutrition": {
         "actif": true,
         "portion": "100 g",
-        "energie_kj": "100",
-        "energie_kcal": "100",
-        "lipides": "100",
-        "satures": "100",
-        "glucides": "100",
-        "sucres": "100",
-        "fibres": "100",
-        "proteines": "100",
-        "sel": "100"
+        "energie_kj": "1138",
+        "energie_kcal": "268",
+        "lipides": "0.2",
+        "satures": "<0.2",
+        "glucides": "65.9",
+        "sucres": "61.2",
+        "fibres": "0",
+        "proteines": "0.6",
+        "sel": "<0.10"
       }
     },
     {
