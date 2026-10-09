@@ -678,16 +678,24 @@
     },
     {
       "id": "confiture-19",
-      "nom": "Confiture de Kiwi",
+      "nom": "Petales de rose",
       "categorie": "confitures",
       "description": "",
       "legende": "",
-      "image": "assets/catalogue/confitures/confiture-19.jpg",
+      "image": "assets/catalogue/1791562743954_p-tales-de-rose-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      }
     },
     {
       "id": "confiture-20",
