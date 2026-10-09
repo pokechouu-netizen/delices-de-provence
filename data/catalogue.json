@@ -519,16 +519,31 @@
     },
     {
       "id": "confiture-10",
-      "nom": "Confiture de Clémentine",
+      "nom": "Clémentine de Corse",
       "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/confitures/confiture-10.jpg",
+      "description": "Découvrez la Confiture de Clémentine de Corse : authenticité et saveurs du terroir français !\nUn délice cuit au chaudron et issu d’un circuit court. Préparée avec soin à partir de fruits triés et préparés à la main, cette spécialité emblématique de la Corse vous invite à une expérience gustative unique.",
+      "legende": "70 g de fruits pour 100g de confiture",
+      "image": "assets/catalogue/1791559593568_citron---copie-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
-      "contenance": "",
+      "contenance": "325",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": true,
+      "suggestion": "Au Petit-Déjeuner : Tartinez généreusement votre tartine de pain frais ou votre croissant pour un début de journée plein de douceur et de saveurs.\nEn Accompagnement : Accordez-la avec vos fromages ou vos desserts pour une touche fruitée et délicatement parfumée.",
+      "nutrition": {
+        "actif": true,
+        "portion": "100 g",
+        "energie_kj": "1099 Kj",
+        "energie_kcal": "259 Kcal",
+        "lipides": "0.3",
+        "satures": "<0.2",
+        "glucides": "63.5",
+        "sucres": "61.8",
+        "fibres": "",
+        "proteines": "0.5",
+        "sel": "<0.10"
+      }
     },
     {
       "id": "confiture-11",
