@@ -358,7 +358,11 @@
       <div class="fg">
         <label>Nouveau prix</label>
         <input type="text" id="pr_prix" placeholder="Ex : 4,50 €">
-        <span class="hint">Le prix est écrit tel quel sur chaque produit. Vous pourrez ensuite modifier un produit au cas par cas.</span>
+      </div>
+      <div class="fg">
+        <label>Nouveau prix au détail</label>
+        <input type="text" id="pr_prixU" placeholder="Ex : 1,80 € / 100g">
+        <span class="hint">Les deux prix sont écrits tels quels sur chaque produit. Un champ vide n'est pas modifié. Vous pourrez ensuite ajuster un produit au cas par cas.</span>
       </div>
       <div class="fg">
         <label>Appliquer à</label>
@@ -803,6 +807,7 @@
       var current = document.getElementById('filterCat').value;
       if (current) sel.value = current;
       set('pr_prix', '');
+      set('pr_prixU', '');
       updatePrixInfo();
       sel.onchange = updatePrixInfo;
       document.querySelectorAll('input[name="pr_mode"]').forEach(function (r) { r.onchange = updatePrixInfo; });
@@ -816,7 +821,7 @@
     function prixTargets() {
       var cat = document.getElementById('pr_cat').value, mode = prixMode();
       return products.filter(function (p) {
-        return p.categorie === cat && (mode === 'all' || !(p.prix || '').trim());
+        return p.categorie === cat && (mode === 'all' || !(p.prix || '').trim() || !(p.prix_unitaire || '').trim());
       });
     }
     function updatePrixInfo() {
@@ -829,16 +834,17 @@
       document.getElementById('overlayPrix').classList.remove('open');
     };
     window.applyPrixRayon = function () {
-      var prix = gv('pr_prix');
-      if (!prix) { document.getElementById('pr_prix').focus(); return; }
+      var prix = gv('pr_prix'), prixU = gv('pr_prixU');
+      if (!prix && !prixU) { document.getElementById('pr_prix').focus(); return; }
       var cibles = prixTargets();
       if (!cibles.length) return;
       var nomCat = CAT[document.getElementById('pr_cat').value] || '';
-      if (!confirm('Mettre le prix « ' + prix + ' » sur ' + cibles.length + ' produit(s) du rayon ' + nomCat + ' ?')) return;
+      var resume = [prix ? 'prix « ' + prix + ' »' : '', prixU ? 'prix au détail « ' + prixU + ' »' : ''].filter(Boolean).join(' et ');
+      if (!confirm('Mettre le ' + resume + ' sur ' + cibles.length + ' produit(s) du rayon ' + nomCat + ' ?')) return;
       var btn = document.getElementById('prBtn');
       btn.disabled = true; btn.textContent = 'Enregistrement…';
-      cibles.forEach(function (p) { p.prix = prix; });
-      writeCatalogue('Prix du rayon ' + nomCat + ' : ' + prix)
+      cibles.forEach(function (p) { if (prix) p.prix = prix; if (prixU) p.prix_unitaire = prixU; });
+      writeCatalogue('Prix du rayon ' + nomCat + ' : ' + (prix || prixU))
         .then(function () { closePrixRayon(); renderTable(); })
         .catch(function () {})
         .finally(function () { btn.disabled = false; btn.textContent = 'Appliquer au rayon'; });
