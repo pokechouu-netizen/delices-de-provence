@@ -355,17 +355,17 @@
       "suggestion_active": true,
       "suggestion": "À la cuillère : Dégustez notre gelée directement à la cuillère pour savourer pleinement sa texture veloutée et ses arômes fruités.\nSur des tartines : Tartinez généreusement vos tartines de pain frais avec notre gelée pour un petit-déjeuner ensoleillé et plein de saveurs.\nEn accompagnement : Accordez-la avec vos fromages fins préférés ou utilisez-la pour agrémenter vos desserts pour une touche sucrée et acidulée.",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
-        "energie_kj": "",
-        "energie_kcal": "",
-        "lipides": "",
-        "satures": "",
-        "glucides": "",
-        "sucres": "",
-        "fibres": "",
-        "proteines": "",
-        "sel": ""
+        "energie_kj": "100",
+        "energie_kcal": "100",
+        "lipides": "100",
+        "satures": "100",
+        "glucides": "100",
+        "sucres": "100",
+        "fibres": "100",
+        "proteines": "100",
+        "sel": "100"
       }
     },
     {
