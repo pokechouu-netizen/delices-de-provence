@@ -377,23 +377,23 @@
       "image": "assets/catalogue/1791554599766_myrtille-recadre.jpg",
       "best_seller": true,
       "prix": "7.90",
-      "contenance": "",
+      "contenance": "325g",
       "prix_unitaire": "24.68€/kg",
       "visible": true,
       "suggestion_active": true,
-      "suggestion": "",
+      "suggestion": "À la cuillère : Plongez votre cuillère dans notre confiture de myrtilles pour apprécier pleinement sa texture onctueuse et ses saveurs fruitées.\nSur des tartines : Étalez généreusement notre confiture de myrtille sur une tranche de pain frais pour un petit-déjeuner gourmand et réconfortant.\nEn accompagnement : Accordez-la avec vos fromages favoris ou utilisez-la pour rehausser vos desserts pour une note sucrée et délicate.",
       "nutrition": {
         "actif": true,
         "portion": "100 g",
-        "energie_kj": "",
-        "energie_kcal": "",
-        "lipides": "",
-        "satures": "",
-        "glucides": "",
-        "sucres": "",
+        "energie_kj": "1046",
+        "energie_kcal": "246",
+        "lipides": "0.2",
+        "satures": "<0.2",
+        "glucides": "60.8",
+        "sucres": "60.1",
         "fibres": "",
-        "proteines": "",
-        "sel": ""
+        "proteines": "0.3",
+        "sel": "0.10"
       }
     },
     {
