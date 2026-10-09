@@ -423,15 +423,12 @@ collections:
                 fields:
                   - { label: "Afficher l'étiquette", name: "actif", widget: "boolean", default: false, required: false }
                   - { label: "Pour", name: "portion", widget: "string", default: "100 g", required: false }
-                  - { label: "Énergie (kJ)", name: "energie_kj", widget: "string", required: false }
-                  - { label: "Énergie (kcal)", name: "energie_kcal", widget: "string", required: false }
-                  - { label: "Matières grasses (g)", name: "lipides", widget: "string", required: false }
-                  - { label: "dont acides gras saturés (g)", name: "satures", widget: "string", required: false }
-                  - { label: "Glucides (g)", name: "glucides", widget: "string", required: false }
-                  - { label: "dont sucres (g)", name: "sucres", widget: "string", required: false }
-                  - { label: "Fibres (g)", name: "fibres", widget: "string", required: false }
-                  - { label: "Protéines (g)", name: "proteines", widget: "string", required: false }
-                  - { label: "Sel (g)", name: "sel", widget: "string", required: false }
+                  - { label: "Note en bas", name: "note", widget: "string", required: false }
+                  - label: "Valeurs (libellé | valeur)"
+                    name: "lignes"
+                    widget: "list"
+                    required: false
+                    field: { label: "Ligne", name: "ligne", widget: "string" }
 
               - label: "Produit visible"
                 name: "visible"

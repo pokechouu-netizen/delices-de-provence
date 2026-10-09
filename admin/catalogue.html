@@ -324,19 +324,22 @@
           <input type="checkbox" id="f_nut_on" onchange="toggleBloc('nutBloc',this.checked)"> Afficher les valeurs nutritionnelles
         </label>
         <div id="nutBloc" style="display:none;margin-top:.4rem">
-          <div class="nut-grid">
+          <div class="frow">
             <div class="fg"><label>Pour</label><input type="text" id="n_portion" placeholder="100 g"></div>
-            <div class="fg"><label>Énergie (kJ)</label><input type="text" id="n_kj" placeholder="1 050"></div>
-            <div class="fg"><label>Énergie (kcal)</label><input type="text" id="n_kcal" placeholder="250"></div>
-            <div class="fg"><label>Matières grasses (g)</label><input type="text" id="n_lipides" placeholder="0,2"></div>
-            <div class="fg"><label>dont acides gras saturés (g)</label><input type="text" id="n_satures" placeholder="0,1"></div>
-            <div class="fg"><label>Glucides (g)</label><input type="text" id="n_glucides" placeholder="60"></div>
-            <div class="fg"><label>dont sucres (g)</label><input type="text" id="n_sucres" placeholder="58"></div>
-            <div class="fg"><label>Fibres (g)</label><input type="text" id="n_fibres" placeholder="1,5"></div>
-            <div class="fg"><label>Protéines (g)</label><input type="text" id="n_proteines" placeholder="0,5"></div>
-            <div class="fg"><label>Sel (g)</label><input type="text" id="n_sel" placeholder="0,02"></div>
+            <div class="fg"><label>Note en bas (facultatif)</label><input type="text" id="n_note" placeholder="Ex : Apport de référence pour un adulte-type (8400 kJ / 2000 kcal)"></div>
           </div>
-          <span class="hint">Laissez vides les lignes que vous ne voulez pas afficher. L'étiquette est mise en forme automatiquement sur le site.</span>
+          <div class="fg">
+            <label>Valeurs (une par ligne : libellé | valeur)</label>
+            <textarea id="n_lignes" rows="9" style="font-family:monospace;font-size:.82rem" placeholder="Énergie | 1138 kJ / 268 kcal
+Matières grasses | 0,2 g
+- dont acides gras saturés | <0,2 g
+Glucides | 65,9 g
+- dont sucres | 61,2 g
+Protéines | 0,6 g
+Sel | <0,10 g
+Vitamine C | 25 mg (31 %)"></textarea>
+            <span class="hint">Vous choisissez les lignes et leur ordre. Mettez « - » devant une ligne pour l'afficher en retrait (« dont sucres »). Une ligne vide est ignorée.</span>
+          </div>
         </div>
       </div>
 
@@ -659,15 +662,8 @@
       var n = p.nutrition || {};
       setChk('f_nut_on', !!n.actif);
       set('n_portion',   n.portion      || '');
-      set('n_kj',        n.energie_kj   || '');
-      set('n_kcal',      n.energie_kcal || '');
-      set('n_lipides',   n.lipides      || '');
-      set('n_satures',   n.satures      || '');
-      set('n_glucides',  n.glucides     || '');
-      set('n_sucres',    n.sucres       || '');
-      set('n_fibres',    n.fibres       || '');
-      set('n_proteines', n.proteines    || '');
-      set('n_sel',       n.sel          || '');
+      set('n_note',      n.note         || '');
+      set('n_lignes',    nutriTexte(n));
       toggleBloc('nutBloc', !!n.actif);
       set('f_img', p.image || '');
       set('f_file', '');
@@ -765,17 +761,10 @@
         p.suggestion_active = document.getElementById('f_sug_on').checked;
         p.suggestion    = document.getElementById('f_sug').value.trim();
         p.nutrition = {
-          actif:        document.getElementById('f_nut_on').checked,
-          portion:      gv('n_portion') || '100 g',
-          energie_kj:   gv('n_kj'),
-          energie_kcal: gv('n_kcal'),
-          lipides:      gv('n_lipides'),
-          satures:      gv('n_satures'),
-          glucides:     gv('n_glucides'),
-          sucres:       gv('n_sucres'),
-          fibres:       gv('n_fibres'),
-          proteines:    gv('n_proteines'),
-          sel:          gv('n_sel')
+          actif:   document.getElementById('f_nut_on').checked,
+          portion: gv('n_portion') || '100 g',
+          note:    gv('n_note'),
+          lignes:  document.getElementById('n_lignes').value.split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean)
         };
         if (imgPath)   p.image = imgPath;
         else if (!p.image) p.image = document.getElementById('f_img').value || '';
@@ -790,6 +779,20 @@
       if (file) uploadImage(file).then(commit).catch(function () { commit(null); });
       else      commit(null);
     };
+
+    // Anciennes fiches (champs fixes) → texte libre « libellé | valeur »
+    function nutriTexte(n) {
+      if (Array.isArray(n.lignes)) return n.lignes.join('\n');
+      var out = [];
+      var kj = (n.energie_kj || '').trim(), kcal = (n.energie_kcal || '').trim();
+      if (kj || kcal) out.push('Énergie | ' + [kj ? kj + ' kJ' : '', kcal ? kcal + ' kcal' : ''].filter(Boolean).join(' / '));
+      [['lipides', 'Matières grasses'], ['satures', '- dont acides gras saturés'], ['glucides', 'Glucides'],
+       ['sucres', '- dont sucres'], ['fibres', 'Fibres'], ['proteines', 'Protéines'], ['sel', 'Sel']].forEach(function (r) {
+        var v = (n[r[0]] || '').trim();
+        if (v) out.push(r[1] + ' | ' + (/[a-z%]/i.test(v) ? v : v + ' g'));
+      });
+      return out.join('\n');
+    }
 
     window.toggleBloc = function (id, on) {
       document.getElementById(id).style.display = on ? '' : 'none';
