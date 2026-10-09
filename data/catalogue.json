@@ -348,7 +348,7 @@
       "legende": "Fabriquée en Provence avec 67g de fruits pour 100g de confiture",
       "image": "assets/catalogue/1791478081936_gelee-groseilles-2-recadre.jpg",
       "best_seller": true,
-      "prix": "7.90 €",
+      "prix": "7.90",
       "contenance": "325 g",
       "prix_unitaire": "24.68 €/kg",
       "visible": true
@@ -361,7 +361,7 @@
       "legende": "",
       "image": "assets/catalogue/1791469792650_confiture-02-recadre.jpg",
       "best_seller": true,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -374,7 +374,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-03.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -387,7 +387,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-04.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -400,7 +400,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-05.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -413,7 +413,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-06.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -426,7 +426,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-07.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -439,7 +439,7 @@
       "legende": "70g de fruits pour 100g de confiture",
       "image": "assets/catalogue/confitures/confiture-08.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -452,7 +452,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-09.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -465,7 +465,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-10.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -478,7 +478,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-11.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -491,7 +491,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-12.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -504,7 +504,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-13.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -517,7 +517,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-14.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -530,7 +530,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-15.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -543,7 +543,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-16.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -556,7 +556,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-17.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -569,7 +569,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-18.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -582,7 +582,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-19.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -595,7 +595,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-20.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -608,7 +608,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-21.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -621,7 +621,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-22.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -634,7 +634,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-23.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -647,7 +647,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-24.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -660,7 +660,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-25.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -673,7 +673,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-26.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -686,7 +686,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-27.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -699,7 +699,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-28.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -712,7 +712,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-29.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -725,7 +725,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-30.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -738,7 +738,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-31.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -751,7 +751,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-32.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -764,7 +764,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-33.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -777,7 +777,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-34.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -790,7 +790,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-35.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -803,7 +803,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-36.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
@@ -816,7 +816,7 @@
       "legende": "",
       "image": "assets/catalogue/confitures/confiture-37.jpg",
       "best_seller": false,
-      "prix": "",
+      "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "",
       "visible": true
