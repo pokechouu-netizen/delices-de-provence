@@ -576,7 +576,7 @@
       "id": "confiture-13",
       "nom": "Citron",
       "categorie": "confitures",
-      "description": "Découvrez l’intensité et la fraîcheur de la confiture de Citron, un délice artisanal préparé avec passion. Grâce à une cuisson traditionnelle au chaudron, chaque pot renferme une explosion de saveurs et une expèrience gustative inégalée.\n\nSavourez un instant gourmand avec notre confiture de Citron BIO, une véritable invitation au plaisir naturel et authentique.",
+      "description": "Découvrez l’intensité et la fraîcheur de la confiture de Citron, un délice artisanal préparé avec passion. Grâce à une cuisson traditionnelle au chaudron, chaque pot renferme une explosion de saveurs et une expèrience gustative inégalée.",
       "legende": "45g de fruits pour 100g de confiture",
       "image": "assets/catalogue/1791560955402_citron-recadre.jpg",
       "best_seller": false,
@@ -589,15 +589,16 @@
       "nutrition": {
         "actif": true,
         "portion": "100 g",
-        "energie_kj": "1053 Kj",
-        "energie_kcal": "248 Kcal",
-        "lipides": "0.2",
-        "satures": "0.2",
-        "glucides": "61",
-        "sucres": "59.5",
-        "fibres": "",
-        "proteines": "0.5",
-        "sel": "0.10"
+        "note": "",
+        "lignes": [
+          "Énergie | 1053 Kj kJ / 248 Kcal kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | 0.2 g",
+          "Glucides | 61 g",
+          "- dont sucres | 59.5 g",
+          "Protéines | 0.5 g",
+          "Sel | 0.10 g"
+        ]
       }
     },
     {
