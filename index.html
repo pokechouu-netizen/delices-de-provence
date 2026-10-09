@@ -66,7 +66,7 @@
       flex-direction: column;
       background: var(--vert-fonce);
       transform-origin: 50% 78%;
-      transition: transform 1.7s cubic-bezier(0.6, 0, 0.2, 1);
+      transition: transform 3.4s cubic-bezier(0.6, 0, 0.2, 1);
       will-change: transform;
     }
     /* Signature : on pousse la porte et on avance dans la boutique */
@@ -204,8 +204,8 @@
     .interior__badge {
       position: absolute;
       left: 50%;
-      top: 27%;
-      width: 24%;
+      top: 30%;
+      width: 34%;
       aspect-ratio: 1;
       transform: translate(-50%, -50%);
       border-radius: 50%;
@@ -369,7 +369,7 @@
       background: #2C1810;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.6s ease-out 1s;
+      transition: opacity 0.6s ease-out 3s;
     }
     .entry-screen.opening .entry-veil { opacity: 1; }
 
@@ -727,7 +727,7 @@
         document.getElementById('doorLeft').classList.add('open');
         document.getElementById('doorRight').classList.add('open');
         if (seam) seam.classList.add('hidden');
-        setTimeout(function () { window.location.href = 'boutique.html'; }, 1650);
+        setTimeout(function () { window.location.href = 'boutique.html'; }, 3650);   /* le temps de lire le badge au fond de la pièce */
       }
 
       var doorCountdown = 7;
