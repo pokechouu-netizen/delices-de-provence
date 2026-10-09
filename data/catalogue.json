@@ -700,7 +700,7 @@
       "categorie": "confitures",
       "description": "Succombez au charme de la confiture de fraise de Carpentras, un produit local d’exception. Avec sa qualité incomparable et son goût authentique, elle est un véritable ambassadeur des saveurs de notre région. Dégustez-la sans modération et laissez-vous transporter par son délicieux parfum de terroir.",
       "legende": "75g de fruits pour 100g de confiture",
-      "image": "assets/catalogue/1791562529190_fraises-de-carpentras-recadre.jpg",
+      "image": "assets/catalogue/1791562641565_fraises-de-carpentras-recadre-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
       "contenance": "325",
@@ -712,7 +712,15 @@
         "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Énergie | 1069 Kj / 251 Kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | 0.2 g",
+          "Glucides | 60.2 g",
+          "- dont sucres | 60 g",
+          "Protéines | 0.9 g",
+          "Sel | 0.01 g"
+        ]
       }
     },
     {
