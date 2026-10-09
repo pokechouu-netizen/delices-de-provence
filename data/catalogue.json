@@ -443,10 +443,10 @@
       "contenance": "",
       "prix_unitaire": "",
       "visible": true,
-      "suggestion_active": false,
+      "suggestion_active": true,
       "suggestion": "",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "energie_kj": "",
         "energie_kcal": "",
