@@ -372,14 +372,29 @@
       "id": "confiture-02",
       "nom": "Confiture d'Abricot",
       "categorie": "confitures",
-      "description": "",
+      "description": "Plongez dans l’univers savoureux de la confiture de myrtille, mijotée doucement au chaudron pour conserver toute la richesse des arômes naturels des myrtilles.",
       "legende": "",
-      "image": "assets/catalogue/1791469792650_confiture-02-recadre.jpg",
+      "image": "assets/catalogue/1791554599766_myrtille-recadre.jpg",
       "best_seller": true,
       "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": true,
+      "suggestion": "",
+      "nutrition": {
+        "actif": true,
+        "portion": "100 g",
+        "energie_kj": "",
+        "energie_kcal": "",
+        "lipides": "",
+        "satures": "",
+        "glucides": "",
+        "sucres": "",
+        "fibres": "",
+        "proteines": "",
+        "sel": ""
+      }
     },
     {
       "id": "confiture-03",
