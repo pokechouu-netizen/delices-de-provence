@@ -696,16 +696,24 @@
     },
     {
       "id": "confiture-21",
-      "nom": "Confiture de Groseille",
+      "nom": "Fraise de Carpentras",
       "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/confitures/confiture-21.jpg",
+      "description": "Succombez au charme de la confiture de fraise de Carpentras, un produit local d’exception. Avec sa qualité incomparable et son goût authentique, elle est un véritable ambassadeur des saveurs de notre région. Dégustez-la sans modération et laissez-vous transporter par son délicieux parfum de terroir.",
+      "legende": "75g de fruits pour 100g de confiture",
+      "image": "assets/catalogue/1791562529190_fraises-de-carpentras-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
-      "contenance": "",
+      "contenance": "325",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": true,
+      "suggestion": "Au Petit-Déjeuner : Étalez généreusement cette confiture de fraise sur une tranche de pain frais ou une viennoiserie pour commencer la journée avec gourmandise.\nEn Accompagnement : Sublimez vos desserts, fromages ou yaourts avec une cuillerée de cette confiture savoureuse.\nDans vos Recettes : Intégrez-la dans vos préparations culinaires pour apporter une note fruitée à vos sauces, marinades ou pâtisseries.",
+      "nutrition": {
+        "actif": true,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      }
     },
     {
       "id": "confiture-22",
