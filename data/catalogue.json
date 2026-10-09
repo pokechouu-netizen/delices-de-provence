@@ -573,16 +573,31 @@
     },
     {
       "id": "confiture-13",
-      "nom": "Confiture de Courgette",
+      "nom": "Citron",
       "categorie": "confitures",
-      "description": "",
+      "description": "Découvrez l’intensité et la fraîcheur de la confiture de Citron, un délice artisanal préparé avec passion. Grâce à une cuisson traditionnelle au chaudron, chaque pot renferme une explosion de saveurs et une expèrience gustative inégalée.\n\nSavourez un instant gourmand avec notre confiture de Citron BIO, une véritable invitation au plaisir naturel et authentique.",
       "legende": "",
-      "image": "assets/catalogue/confitures/confiture-13.jpg",
+      "image": "assets/catalogue/1791560955402_citron-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": true,
+        "portion": "100 g",
+        "energie_kj": "1053 Kj",
+        "energie_kcal": "248 Kcal",
+        "lipides": "0.2",
+        "satures": "0.2",
+        "glucides": "61",
+        "sucres": "59.5",
+        "fibres": "",
+        "proteines": "0.5",
+        "sel": "0.10"
+      }
     },
     {
       "id": "confiture-14",
