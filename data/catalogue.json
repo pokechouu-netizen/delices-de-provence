@@ -731,19 +731,6 @@
       }
     },
     {
-      "id": "confiture-20",
-      "nom": "Confiture de Mangue",
-      "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/confitures/confiture-20.jpg",
-      "best_seller": false,
-      "prix": "7.90",
-      "contenance": "",
-      "prix_unitaire": "24.68€/kg",
-      "visible": true
-    },
-    {
       "id": "confiture-21",
       "nom": "Fraise de Carpentras",
       "categorie": "confitures",
