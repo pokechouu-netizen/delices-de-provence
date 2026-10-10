@@ -648,19 +648,20 @@
       "prix_unitaire": "24.68€/kg",
       "visible": true,
       "suggestion_active": true,
-      "suggestion": "Tartinez généreusement vos tartines de pain frais, une brioche ou une crèpe.",
+      "suggestion": "Au petit déjeuner : sur des tranches de pain frais, des tartines ou des brioches \nEn accompagnement d'un fromage à pâte pressée ou d'un comté.\nEn touche sucrée-salée aux côtés d'une tranche de foie gras.\nPour garnir le fond d'une tarte fine ou intégrer un gâteau fondant.",
       "nutrition": {
         "actif": true,
         "portion": "100 g",
-        "energie_kj": "1050 Kj",
-        "energie_kcal": "247",
-        "lipides": "0.2",
-        "satures": "0.2",
-        "glucides": "61",
-        "sucres": "59.5",
-        "fibres": "",
-        "proteines": "0.3",
-        "sel": "0.10"
+        "note": "",
+        "lignes": [
+          "Énergie | 1050 Kj kJ / 247 kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | 0.2 g",
+          "Glucides | 61 g",
+          "- dont sucres | 59.5 g",
+          "Protéines | 0.3 g",
+          "Sel | 0.10 g"
+        ]
       }
     },
     {
