@@ -526,16 +526,24 @@
     },
     {
       "id": "confiture-09",
-      "nom": "Confiture de Tomate Verte",
+      "nom": "Tomate verte",
       "categorie": "confitures",
       "description": "",
       "legende": "",
-      "image": "assets/catalogue/confitures/confiture-09.jpg",
+      "image": "assets/catalogue/1791624857414_tomates-verte-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      }
     },
     {
       "id": "confiture-10",
