@@ -958,19 +958,6 @@
       }
     },
     {
-      "id": "confiture-31",
-      "nom": "Confiture de Rose",
-      "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/confitures/confiture-31.jpg",
-      "best_seller": false,
-      "prix": "7.90",
-      "contenance": "",
-      "prix_unitaire": "24.68€/kg",
-      "visible": true
-    },
-    {
       "id": "confiture-32",
       "nom": "Oranges pm",
       "categorie": "confitures",
