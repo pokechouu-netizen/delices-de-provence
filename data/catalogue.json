@@ -945,7 +945,7 @@
     },
     {
       "id": "confiture-30",
-      "nom": "Confiture de Papaye",
+      "nom": "Confiture de Papaye pm",
       "categorie": "confitures",
       "description": "",
       "legende": "",
@@ -954,7 +954,15 @@
       "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      }
     },
     {
       "id": "confiture-31",
