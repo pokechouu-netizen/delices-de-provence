@@ -874,27 +874,6 @@
       }
     },
     {
-      "id": "confiture-25",
-      "nom": "Confiture de Nectarine pm",
-      "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/confitures/confiture-25.jpg",
-      "best_seller": false,
-      "prix": "7.90",
-      "contenance": "",
-      "prix_unitaire": "24.68€/kg",
-      "visible": true,
-      "suggestion_active": false,
-      "suggestion": "",
-      "nutrition": {
-        "actif": false,
-        "portion": "100 g",
-        "note": "",
-        "lignes": []
-      }
-    },
-    {
       "id": "confiture-26",
       "nom": "Confiture pm",
       "categorie": "confitures",
