@@ -2149,6 +2149,35 @@
       },
       "image": "assets/catalogue/1791646505069_citron---copie-recadre.jpg",
       "id": "p-1791646507998"
+    },
+    {
+      "nom": "Griotte",
+      "categorie": "confitures",
+      "description": "La confiture de griotte est une préparation fruitée et acidulée, très appréciée pour son équilibre unique entre la douceur du sucre et la vivacité naturelle de la cerise aigre",
+      "legende": "",
+      "prix": "7.90",
+      "contenance": "325",
+      "prix_unitaire": "24.68€/kg",
+      "visible": true,
+      "best_seller": false,
+      "suggestion_active": true,
+      "suggestion": "Petit-déjeuner/goûter : Sur des tartines de pain frais, des biscottes ou dans un yaourt nature / fromage blanc.\nEn pâtisserie : Idéale pour garnir des gâteaux, des biscuits, des tartes ou des rouleaux.\nAvec le fromage : Son acidité fait merveille en accompagnement de fromages à pâte cuite ou de fromages fermiers",
+      "nutrition": {
+        "actif": true,
+        "portion": "100 g",
+        "note": "",
+        "lignes": [
+          "Énergie | 1184 Kj / 279 Kcal",
+          "Matières grasses | 0.3 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 68.6 g",
+          "- dont sucres | 67.5 g",
+          "Protéines | 0.4 g",
+          "Sel | <0.10 g"
+        ]
+      },
+      "image": "assets/catalogue/1791646787825_citron---copie-recadre.jpg",
+      "id": "p-1791646790166"
     }
   ]
 }
