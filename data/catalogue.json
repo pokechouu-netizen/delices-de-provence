@@ -2120,6 +2120,35 @@
       },
       "image": "assets/catalogue/1791645553509_citron---copie-recadre.jpg",
       "id": "p-1791645556554"
+    },
+    {
+      "nom": "Cerise noire",
+      "categorie": "confitures",
+      "description": "La confiture de cerise noire est une douceur incontournable de la gastronomie française, particulièrement célèbre pour sa saveur à la fois riche, douce et peu acide.",
+      "legende": "70g de fruits pour 100g de confiture",
+      "prix": "7.90",
+      "contenance": "325",
+      "prix_unitaire": "24.68€/kg",
+      "visible": true,
+      "best_seller": false,
+      "suggestion_active": true,
+      "suggestion": "Avec le fromage : c'est le grand classique pour accompagner les fromages de brebis des Pyrénées ou du Pays basque (comme l'Ossau-Iraty), un mariage sucré-salé emblématique.\nEn pâtisserie : Elle est la garniture historique et traditionnelle du gâteau basque (avant l'introduction de la version à la crème pâtissière).\nAu petit-déjeuner : Elle se déguste simplement sur des tartines de pain frais, des brioches ou en accompagnement de foie gras.",
+      "nutrition": {
+        "actif": true,
+        "portion": "100 g",
+        "note": "",
+        "lignes": [
+          "Énergie | 1095 Kj / 258 Kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | <0.1 g",
+          "Glucides | 63.5 g",
+          "- dont sucres | 62.5 g",
+          "Protéines | 0.5 g",
+          "Sel | <0.10 g"
+        ]
+      },
+      "image": "assets/catalogue/1791646505069_citron---copie-recadre.jpg",
+      "id": "p-1791646507998"
     }
   ]
 }
