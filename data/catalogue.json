@@ -430,7 +430,7 @@
       "nom": "Figue de Provence",
       "categorie": "confitures",
       "description": "Succombez à l’authenticité de la confiture de figue de Provence, un trésor artisanal régionale emblématique cuite au chaudron. Réalisée avec des figues fraîches triées à la main,  incarne le savoir-faire traditionnel.",
-      "legende": "71g de fruits pour 100g de confiture",
+      "legende": "71g de fruits pour 100g de confiture - Disponible en pot de 120 g",
       "image": "assets/catalogue/1791556155627_figue-de-provence-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
@@ -442,15 +442,16 @@
       "nutrition": {
         "actif": true,
         "portion": "100 g",
-        "energie_kj": "1150",
-        "energie_kcal": "271",
-        "lipides": "0.1",
-        "satures": "<0.1",
-        "glucides": "67",
-        "sucres": "65.1",
-        "fibres": "",
-        "proteines": "0.4",
-        "sel": "<0.10"
+        "note": "",
+        "lignes": [
+          "Énergie | 1150 kJ / 271 kcal",
+          "Matières grasses | 0.1 g",
+          "- dont acides gras saturés | <0.1 g",
+          "Glucides | 67 g",
+          "- dont sucres | 65.1 g",
+          "Protéines | 0.4 g",
+          "Sel | <0.10 g"
+        ]
       }
     },
     {
