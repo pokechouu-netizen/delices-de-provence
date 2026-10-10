@@ -2091,6 +2091,35 @@
       },
       "image": "assets/catalogue/1791640564618_citron---copie-recadre.jpg",
       "id": "p-1791640567266"
+    },
+    {
+      "nom": "Cassis",
+      "categorie": "confitures",
+      "description": "Plongez dans l’univers ensoleillé de la confiture de cassis et laissez-vous transporter par ses saveurs exquises et son caractère authentique. À chaque bouchée, découvrez toute la passion et le savoir-faire qui font de ce produit un symbole de qualité et de tradition provençale.",
+      "legende": "54g de fruits pour 100g de confiture",
+      "prix": "7.90",
+      "contenance": "325",
+      "prix_unitaire": "24.68€/kg",
+      "visible": true,
+      "best_seller": false,
+      "suggestion_active": true,
+      "suggestion": "Tartines  gourmandes au petit déjeuner\nGarniture Pâtissière: Utilisez-la pour garnir vos pâtisseries préférées, qu’il s’agisse de tartes, de muffins ou de crêpes. Sa texture veloutée et son goût intense en feront un ingrédient de choix pour sublimer vos créations sucrées.",
+      "nutrition": {
+        "actif": true,
+        "portion": "100g",
+        "note": "",
+        "lignes": [
+          "Énergie | 1058 Kj kJ / 249 kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 61 g",
+          "- dont sucres | 56.8 g",
+          "Protéines | 0.8 g",
+          "Sel | <0.10 g"
+        ]
+      },
+      "image": "assets/catalogue/1791645553509_citron---copie-recadre.jpg",
+      "id": "p-1791645556554"
     }
   ]
 }
