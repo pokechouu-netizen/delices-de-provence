@@ -455,16 +455,24 @@
     },
     {
       "id": "confiture-05",
-      "nom": "Confiture de Melon",
+      "nom": "Orange amère",
       "categorie": "confitures",
       "description": "",
-      "legende": "",
-      "image": "assets/catalogue/confitures/confiture-05.jpg",
+      "legende": "55g de fruits pour 100g de confiture",
+      "image": "assets/catalogue/1791624393758_orange-am-re-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
-      "contenance": "",
+      "contenance": "325",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      }
     },
     {
       "id": "confiture-06",
