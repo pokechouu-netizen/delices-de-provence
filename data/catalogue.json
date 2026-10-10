@@ -374,7 +374,7 @@
       "nom": "Myrtille",
       "categorie": "confitures",
       "description": "Plongez dans l’univers savoureux de la confiture de myrtille, mijotée doucement au chaudron pour conserver toute la richesse des arômes naturels des myrtilles.",
-      "legende": "69g de fruits pour 100g de confiture",
+      "legende": "69g de fruits pour 100g de confiture - Disponible en pot de 120 g",
       "image": "assets/catalogue/1791554599766_myrtille-recadre.jpg",
       "best_seller": true,
       "prix": "7.90",
@@ -386,15 +386,16 @@
       "nutrition": {
         "actif": true,
         "portion": "100 g",
-        "energie_kj": "1046",
-        "energie_kcal": "246",
-        "lipides": "0.2",
-        "satures": "<0.2",
-        "glucides": "60.8",
-        "sucres": "60.1",
-        "fibres": "",
-        "proteines": "0.3",
-        "sel": "0.10"
+        "note": "",
+        "lignes": [
+          "Énergie | 1046 kJ / 246 kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 60.8 g",
+          "- dont sucres | 60.1 g",
+          "Protéines | 0.3 g",
+          "Sel | 0.10 g"
+        ]
       }
     },
     {
