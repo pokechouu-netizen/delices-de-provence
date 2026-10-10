@@ -667,16 +667,24 @@
     },
     {
       "id": "confiture-15",
-      "nom": "Confiture de Prune",
+      "nom": "Prunes lovita",
       "categorie": "confitures",
       "description": "",
       "legende": "",
-      "image": "assets/catalogue/confitures/confiture-15.jpg",
+      "image": "assets/catalogue/1791624765617_prunes-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      }
     },
     {
       "id": "confiture-16",
