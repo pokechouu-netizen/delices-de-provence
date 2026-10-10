@@ -589,15 +589,16 @@
       "nutrition": {
         "actif": true,
         "portion": "100 g",
-        "energie_kj": "1099 Kj",
-        "energie_kcal": "259 Kcal",
-        "lipides": "0.3",
-        "satures": "<0.2",
-        "glucides": "63.5",
-        "sucres": "61.8",
-        "fibres": "",
-        "proteines": "0.5",
-        "sel": "<0.10"
+        "note": "",
+        "lignes": [
+          "Énergie | 1099 Kj kJ / 259 Kcal kcal",
+          "Matières grasses | 0.3 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 63.5 g",
+          "- dont sucres | 61.8 g",
+          "Protéines | 0.5 g",
+          "Sel | <0.10 g"
+        ]
       }
     },
     {
