@@ -875,21 +875,29 @@
       "id": "confiture-23",
       "nom": "Marron",
       "categorie": "confitures",
-      "description": "",
-      "legende": "",
+      "description": "Offrez-vous un moment de délice avec cette confiture de marrons, un produit unique qui capture toute la richesse et l’authenticité des marrons de notre belle France. Préparée avec des fruits frais triés à la main, cette confiture est une véritable ode à la tradition et à la qualité artisanale, pour une expérience gustative inoubliable.",
+      "legende": "48g de fruits pour 100g de confiture",
       "image": "assets/catalogue/1791624686539_marron-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
-      "contenance": "",
+      "contenance": "325",
       "prix_unitaire": "24.68€/kg",
       "visible": true,
-      "suggestion_active": false,
-      "suggestion": "",
+      "suggestion_active": true,
+      "suggestion": "À la cuillère : Dégustez cette confiture de marrons directement à la cuillère pour savourer pleinement sa texture veloutée et ses arômes riches.\nEn accompagnement : Accordez-la avec vos fromages préférés ou utilisez-la pour agrémenter vos desserts pour une touche sucrée et délicieusement parfumée.",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Énergie | 1059 Kj / 249 Kcal",
+          "Matières grasses | 0.5 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 60.1 g",
+          "- dont sucres | 48.6 g",
+          "Protéines | 1.1 g",
+          "Sel | <0.10 g"
+        ]
       }
     },
     {
