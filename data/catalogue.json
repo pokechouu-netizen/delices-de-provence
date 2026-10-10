@@ -486,21 +486,29 @@
       "id": "confiture-06",
       "nom": "Orange douce",
       "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/1791639153193_orange-douce-recadre-recadre.jpg",
+      "description": "Elle se distingue de la marmelade d'orange classique par son profil gourmand. Élaborée à partir d'oranges douces elle met en avant le sucre naturel et l'acidité subtile du fruit sans l'amertume marquée des oranges amères.",
+      "legende": "65g de fruits pour 100g de confiture",
+      "image": "assets/catalogue/1791639528742_orange-douce-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
-      "contenance": "",
+      "contenance": "325",
       "prix_unitaire": "24.68€/kg",
       "visible": true,
-      "suggestion_active": false,
-      "suggestion": "",
+      "suggestion_active": true,
+      "suggestion": "• Au petit-déjeuner : Sur des tartines de pain frais, des biscottes, de la brioche ou des crêpes tièdes.\n• En pâtisserie : Idéale pour napper ou garnir un gâteau au chocolat noir (l'association orange et chocolat est un grand classique), un fond de tarte, un gâteau de semoule ou un cake.\n• En version sucrée-salée : En accompagnement de fromages blancs, de yaurts ou pour glacer certaines viandes blanches.",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Énergie | 1128 Kj / 265 Kcal",
+          "Matières grasses | 0.4 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 65 g",
+          "- dont sucres | 63.8 g",
+          "Protéines | 0.5 g",
+          "Sel | <0.10 g"
+        ]
       }
     },
     {
