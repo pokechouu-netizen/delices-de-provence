@@ -2046,6 +2046,35 @@
       "best_seller": false,
       "image": "assets/catalogue/1791470116309_2008-recadre.jpg",
       "id": "p-1788015290775"
+    },
+    {
+      "nom": "Marron rhum",
+      "categorie": "confitures",
+      "description": "Offrez-vous un moment de délice avec cette confiture de marrons au rhum, un produit unique qui marie la richesse des marrons de Provence à la subtilité du rhum. Cuite avec amour au chaudron et préparée avec des fruits frais triés à la main, cette confiture est une véritable ode à la tradition et à la qualité artisanale, pour une expérience gustative inoubliable.",
+      "legende": "",
+      "prix": "7.90",
+      "contenance": "325",
+      "prix_unitaire": "24.68€/kg",
+      "visible": true,
+      "best_seller": false,
+      "suggestion_active": true,
+      "suggestion": "À la cuillère : Dégustez cette confiture de marrons au rhum directement à la cuillère pour savourer pleinement sa texture veloutée et ses arômes riches et envoûtants.\nEn accompagnement : Accordez-la avec vos fromages fins préférés ou utilisez-la pour agrémenter vos desserts pour une touche sucrée et délicieusement parfumée.",
+      "nutrition": {
+        "actif": true,
+        "portion": "100 g",
+        "note": "",
+        "lignes": [
+          "Énergie | 1084 Kj kJ / 255 kcal",
+          "Matières grasses | 0.5 g",
+          "- dont acides gras saturés | 0.2 g",
+          "Glucides | 62 g",
+          "- dont sucres | 58.2 g",
+          "Protéines | 0.7 g",
+          "Sel | 0.10 g"
+        ]
+      },
+      "image": "assets/catalogue/1791640564618_citron---copie-recadre.jpg",
+      "id": "p-1791640567266"
     }
   ]
 }
