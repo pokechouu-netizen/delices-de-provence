@@ -555,10 +555,18 @@
       "suggestion_active": true,
       "suggestion": "Sur des tartines ou du pain frais : Tartinez généreusement la confiture sur une tranche de pain frais ou des tartines grillées pour un petit-déjeuner plein de saveurs et de vitalité.\nEn accompagnement de vos plats salés : Utilisez notre confiture comme condiment pour accompagner vos plats salés préférés, comme les viandes grillées, les fromages ou les terrines, pour une touche sucrée-acidulée délicieusement surprenante.\nDans vos recettes de pâtisserie : Intégrez notre confiture de tomates vertes dans vos recettes de desserts, telles que les tartelettes, les cakes ou les muffins, pour une explosion de saveurs inattendue qui ravira vos papilles.",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Énergie | 1099 Kj kJ / 259 kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | <0.1 g",
+          "Glucides | 63.7 g",
+          "- dont sucres | 62.8 g",
+          "Protéines | 0.5 g",
+          "Sel | <0.10 g"
+        ]
       }
     },
     {
