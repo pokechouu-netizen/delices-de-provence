@@ -569,16 +569,32 @@
     },
     {
       "id": "confiture-12",
-      "nom": "Confiture de Lavande & Miel",
+      "nom": "Prunes Reine Claude",
       "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/confitures/confiture-12.jpg",
+      "description": "Dégustez la confiture de Reine-Claude, un trésor artisanal qui incarne l’authenticité et la tradition de la région. Fruits triés et préparés à la main, cette confiture est le résultat d’un savoir-faire artisanal et d’une passion pour les produits locaux. Laissez-vous séduire par ses arômes délicats et ses saveurs exquises, pour une expérience gustative inoubliable.",
+      "legende": "63.2g de fruits pour 100g de confiture",
+      "image": "assets/catalogue/1791622911567_prunes-reine-claude-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
-      "contenance": "",
+      "contenance": "325",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": true,
+      "suggestion": "Au Petit-Déjeuner : Tartinez généreusement votre pain frais ou votre brioche de confiture de Reine-Claude. \nEn Accompagnement : Accompagnez vos fromages ou utilisez-la pour sublimer vos desserts et vos yaourts, pour une touche fruitée et délicieusement parfumée.\nDans vos Recettes : Intégrez-la dans vos recettes de pâtisserie ou de sauces pour apporter une note sucrée et fruitée à vos créations culinaires.",
+      "nutrition": {
+        "actif": true,
+        "portion": "100g",
+        "note": "",
+        "lignes": [
+          "Énergie | 1129 Kj / 266 Kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 65.7 g",
+          "- dont sucres | 63.2 g",
+          "Protéines | 0.3 g",
+          "Sel | <0.10 g"
+        ]
+      }
     },
     {
       "id": "confiture-13",
