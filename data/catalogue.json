@@ -680,21 +680,29 @@
       "id": "confiture-19",
       "nom": "Petales de rose",
       "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/1791562743954_p-tales-de-rose-recadre.jpg",
+      "description": "Plongez dans un monde de raffinement et d’élégance avec ce confit de pétales de rose. Cuit au chaudron avec des pétales triés à la main, ce délice floral vous transporte dans une expérience gustative exceptionnelle. ",
+      "legende": "5g de pétales pour 100g de confit",
+      "image": "assets/catalogue/1791621405448_p-tales-de-rose-recadre-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
-      "contenance": "",
+      "contenance": "325",
       "prix_unitaire": "24.68€/kg",
       "visible": true,
-      "suggestion_active": false,
+      "suggestion_active": true,
       "suggestion": "",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Énergie | 1136 Kj / 267 Kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 66.2 g",
+          "- dont sucres | 65.3 g",
+          "Protéines | 0.2 g",
+          "Sel | <0.10 g"
+        ]
       }
     },
     {
