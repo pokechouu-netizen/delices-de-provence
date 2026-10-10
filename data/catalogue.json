@@ -656,21 +656,29 @@
       "id": "confiture-14",
       "nom": "Melon de Cavaillon",
       "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/confitures/confiture-14.jpg",
+      "description": "Découvrez la confiture de Melon de Cavaillon, une spécialité régionale emblématique, confectionnée avec passion selon des méthodes traditionnelles. Réalisé à partir de fruits frais triés à la main, elle incarne l’authenticité et le savoir-faire culinaire de la région de Provence.",
+      "legende": "75g de fruits pour 100g de confiture",
+      "image": "assets/catalogue/1791627083758_confiture-14-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
-      "contenance": "",
+      "contenance": "325",
       "prix_unitaire": "24.68€/kg",
       "visible": true,
-      "suggestion_active": false,
-      "suggestion": "",
+      "suggestion_active": true,
+      "suggestion": "Au Petit-Déjeuner : Étalez généreusement sur une tranche de pain frais ou une viennoiserie pour commencer la journée avec une touche de douceur.\nEn Accompagnement :  fromages ou desserts avec une cuillerée de cette confiture artisanale pour une explosion de saveurs fruitées.",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Énergie | 1097 Kj / 258 Kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 63.6 g",
+          "- dont sucres | 62.1 g",
+          "Protéines | 0.6 g",
+          "Sel | <0.10 g"
+        ]
       }
     },
     {
