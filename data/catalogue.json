@@ -345,7 +345,7 @@
       "nom": "Gelée de Groseille",
       "categorie": "confitures",
       "description": "Cuisson traditionnelle au chaudron, lentement, pour préserver toute la fraîcheur et la saveur naturelle des fruits.",
-      "legende": "67g de fruits/100g de confiture",
+      "legende": "67g de fruits pour 100g de confiture - Disponible en pot de 120 g",
       "image": "assets/catalogue/1791553398017_gelee-groseilles-2-recadre-recadre-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
@@ -357,15 +357,16 @@
       "nutrition": {
         "actif": true,
         "portion": "100 g",
-        "energie_kj": "1138",
-        "energie_kcal": "268",
-        "lipides": "0.2",
-        "satures": "<0.2",
-        "glucides": "65.9",
-        "sucres": "61.2",
-        "fibres": "",
-        "proteines": "0.6",
-        "sel": "<0.10"
+        "note": "",
+        "lignes": [
+          "Énergie | 1138 kJ / 268 kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 65.9 g",
+          "- dont sucres | 61.2 g",
+          "Protéines | 0.6 g",
+          "Sel | <0.10 g"
+        ]
       }
     },
     {
