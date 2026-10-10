@@ -830,16 +830,24 @@
     },
     {
       "id": "confiture-24",
-      "nom": "Confiture de Pomme & Cannelle",
+      "nom": "Pastèque méréville",
       "categorie": "confitures",
       "description": "",
       "legende": "",
-      "image": "assets/catalogue/confitures/confiture-24.jpg",
+      "image": "assets/catalogue/1791624726789_past-que-m-r-ville-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      }
     },
     {
       "id": "confiture-25",
