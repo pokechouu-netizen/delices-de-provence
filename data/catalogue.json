@@ -923,34 +923,6 @@
       }
     },
     {
-      "id": "confiture-33",
-      "nom": "Confiture pm",
-      "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/confitures/confiture-33.jpg",
-      "best_seller": false,
-      "prix": "7.90",
-      "contenance": "",
-      "prix_unitaire": "24.68€/kg",
-      "visible": true,
-      "suggestion_active": false,
-      "suggestion": "",
-      "nutrition": {
-        "actif": false,
-        "portion": "100 g",
-        "energie_kj": "",
-        "energie_kcal": "",
-        "lipides": "",
-        "satures": "",
-        "glucides": "",
-        "sucres": "",
-        "fibres": "",
-        "proteines": "",
-        "sel": ""
-      }
-    },
-    {
       "id": "confiture-34",
       "nom": "Confiture pm",
       "categorie": "confitures",
