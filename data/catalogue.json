@@ -1035,19 +1035,6 @@
       }
     },
     {
-      "id": "confiture-35",
-      "nom": "Confiture Exotique",
-      "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/confitures/confiture-35.jpg",
-      "best_seller": false,
-      "prix": "7.90",
-      "contenance": "",
-      "prix_unitaire": "24.68€/kg",
-      "visible": true
-    },
-    {
       "id": "confiture-36",
       "nom": "Confiture Maison du Chef",
       "categorie": "confitures",
