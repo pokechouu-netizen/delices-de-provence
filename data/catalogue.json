@@ -744,12 +744,20 @@
       "prix_unitaire": "24.68€/kg",
       "visible": true,
       "suggestion_active": true,
-      "suggestion": "Au petit-déjeuner et au goûter\n\n• Dans les laitages : Incorporez une belle cuillère de confiture dans un yaourt nature, un fromage blanc ou du skyr. Cela remplace avantageusement les versions aromatisées du commerce.\n• Sur des pancakes ou des crêpes : Nappez vos crêpes, gaufres, pancakes ou French toasts (pain perdu) chauds pour un contraste thermique délicieux.\n• Avec des bowls sains : Ajoutez-la en touche sucrée sur un bol de flocons d'avoine chauds (porridge) ou un pudding de graines de chia.",
+      "suggestion": "Au petit-déjeuner/goûter\nSur des pancakes ou des crêpes : Nappez vos crêpes, gaufres, pancakes ou French toasts (pain perdu) chauds pour un contraste thermique délicieux.\nEn association sucrée-salée\nAvec les fromages : elle est divine avec les fromages de chèvre frais ou chauds, les bleus (Roquefort, Gorgonzola) et les fromages basques à pâte pressée (Ossau-Iraty). Avec les viandes : Déglacez vos sucs de cuisson de viandes blanches (porc, canard) ou de gibier avec une cuillère de confiture de mûres et un filet de vinaigre balsamique pour créer une sauce d'accompagnement riche et brillante.",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Énergie | 1069Kj / 252 Kcal",
+          "Matières grasses | 0.4 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 61.5 g",
+          "- dont sucres | 59.6 g",
+          "Protéines | 0.5 g",
+          "Sel | <0.10 g"
+        ]
       }
     },
     {
