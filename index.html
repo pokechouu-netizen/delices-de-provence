@@ -679,7 +679,7 @@
     <!-- CTA / countdown -->
     <div class="entry-cta" id="entryCta" aria-hidden="true">
       <div class="entry-cta__inner">
-        <p class="entry-cta__title">Entrez dans notre boutique</p>
+        <p class="entry-cta__title">Bienvenue</p>
         <span class="entry-cta__timer" id="entryTimer">Ouverture dans 5 s…</span>
       </div>
     </div>
@@ -762,13 +762,28 @@
       }
 
       /* Depuis le menu « Boutique » : on rejoue l'ouverture de la porte sans repasser par la façade */
-      var replay = window.location.hash === '#boutique';
-      if (replay) {
+      function replayDoors() {
+        clearInterval(heroIv);
+        clearInterval(doorIv);
         heroGone = true;
         heroEl.style.display = 'none';
         document.getElementById('entryScreen').classList.add('visible');
         setTimeout(openDoors, 1400);
       }
+      var replay = window.location.hash === '#boutique';
+      if (replay) replayDoors();
+      /* Clic sur « Boutique » dans le menu alors qu'on est déjà sur l'accueil :
+         le navigateur ne recharge pas la page, on lance donc l'ouverture nous-mêmes (un seul clic) */
+      document.querySelectorAll('a[href$="#boutique"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (doorsOpen) return;
+          replayDoors();
+        });
+      });
+      window.addEventListener('hashchange', function () {
+        if (window.location.hash === '#boutique' && !doorsOpen) replayDoors();
+      });
 
       var heroCountdown = 5;
       var heroIv = setInterval(function () {
