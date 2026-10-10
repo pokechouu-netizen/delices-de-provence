@@ -896,7 +896,7 @@
     },
     {
       "id": "confiture-28",
-      "nom": "Confiture de Noix",
+      "nom": "Confiture de Noix pm",
       "categorie": "confitures",
       "description": "",
       "legende": "",
@@ -905,7 +905,15 @@
       "prix": "7.90",
       "contenance": "",
       "prix_unitaire": "24.68€/kg",
-      "visible": true
+      "visible": true,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      }
     },
     {
       "id": "confiture-29",
