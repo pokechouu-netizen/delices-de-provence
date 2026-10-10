@@ -896,21 +896,29 @@
       "id": "confiture-24",
       "nom": "Pastèque méréville",
       "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/1791624726789_past-que-m-r-ville-recadre.jpg",
+      "description": "Plongez dans l’univers rafraîchissant de cette confiture de pastèques, un délice fruité préparé avec des fruits frais cueillis et triés à la main, puis cuits lentement dans un chaudron pour en capturer toute la saveur naturelle. ",
+      "legende": "80g de fruits pour 100g de confiture",
+      "image": "assets/catalogue/1791639912565_past-que-m-r-ville-recadre.jpg",
       "best_seller": false,
       "prix": "7.90",
-      "contenance": "",
+      "contenance": "325",
       "prix_unitaire": "24.68€/kg",
       "visible": true,
-      "suggestion_active": false,
-      "suggestion": "",
+      "suggestion_active": true,
+      "suggestion": "Sur du pain frais ou des toasts : Étalez généreusement cette confiture de pastèques sur une tranche de pain frais ou des toasts grillés.\nEn accompagnement de vos fromages préférés : Mariez les saveurs sucrées de notre confiture avec la richesse des fromages, comme le fromage de chèvre ou le brie, pour un plateau de fromages élégant et savoureux.",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Énergie | 1078 Kj / 254 Kcal",
+          "Matières grasses | <0.2 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 62.9 g",
+          "- dont sucres | 62.5 g",
+          "Protéines | 0.3 g",
+          "Sel | <0.10 g"
+        ]
       }
     },
     {
