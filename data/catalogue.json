@@ -488,19 +488,6 @@
       "visible": true
     },
     {
-      "id": "confiture-07",
-      "nom": "Confiture de Mûre",
-      "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/confitures/confiture-07.jpg",
-      "best_seller": false,
-      "prix": "7.90",
-      "contenance": "",
-      "prix_unitaire": "24.68€/kg",
-      "visible": true
-    },
-    {
       "id": "confiture-08",
       "nom": "Abricot de Provence",
       "categorie": "confitures",
