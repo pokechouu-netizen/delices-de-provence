@@ -923,19 +923,6 @@
       }
     },
     {
-      "id": "confiture-37",
-      "nom": "Confiture Spéciale Saison",
-      "categorie": "confitures",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/confitures/confiture-37.jpg",
-      "best_seller": false,
-      "prix": "7.90",
-      "contenance": "",
-      "prix_unitaire": "24.68€/kg",
-      "visible": true
-    },
-    {
       "id": "epice-01",
       "nom": "Herbes de Provence",
       "categorie": "epices",
