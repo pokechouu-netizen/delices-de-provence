@@ -2225,10 +2225,18 @@
       "suggestion_active": true,
       "suggestion": "En cuisine : utilisez ce confit de romarin pour parfumer vos plats de viande ou de légumes grillés, apportant ainsi une touche d’arôme méditerranéen à vos recettes.\nEn apéritif : servez le avec du fromage ou des crackers lors de vos apéritifs, pour une expérience gustative originale et raffinée.\nEn accompagnement : accordez-le avec vos plats préférés ou utilisez-le comme condiment pour sublimer vos assiettes avec une saveur unique.",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Énergie | 1087 Kj kJ / 256 kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | 0.2 g",
+          "Glucides | 63.2 g",
+          "- dont sucres | 62 g",
+          "Protéines | 0.2 g",
+          "Sel | 0.10 g"
+        ]
       },
       "image": "assets/catalogue/1791902558502_confit-de-romarin-pm-recadre.jpg",
       "id": "p-1791902560821"
