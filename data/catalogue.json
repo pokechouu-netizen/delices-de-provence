@@ -2240,6 +2240,27 @@
       },
       "image": "assets/catalogue/1791902558502_confit-de-romarin-pm-recadre.jpg",
       "id": "p-1791902560821"
+    },
+    {
+      "nom": "Confit de Thym",
+      "categorie": "confitures",
+      "description": "Plongez dans un monde d’authenticité et de caractère avec notre confit de thym, une création unique et Made in Provence. Cuit au chaudron avec de la fleur de thym cueillie localement, ce condiment vous transporte dans une expérience gustative exceptionnelle, à savourer avec curiosité et gourmandise.",
+      "legende": "",
+      "prix": "",
+      "contenance": "",
+      "prix_unitaire": "",
+      "visible": true,
+      "best_seller": false,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      },
+      "image": "assets/catalogue/1791903353110_confit-de-thym-pm-recadre.jpg",
+      "id": "p-1791903355906"
     }
   ]
 }
