@@ -2280,8 +2280,8 @@
       "prix_unitaire": "32.50€/kg",
       "visible": true,
       "best_seller": false,
-      "suggestion_active": false,
-      "suggestion": "",
+      "suggestion_active": true,
+      "suggestion": "• Pâtisserie/desserts :\npour napper ou glacer des tartes aux fruits .\n\t• En cœur coulant ou garniture pour des biscuits roulés, des macarons, des madeleines ou des choux.\n\t• Pour agrémenter une charlotte ou une panna cotta.\n• Cuisine salée (mariant le sucré-salé) :\n\t• En accompagnement d'une tranche de foie gras mi-cuit ou poêlé.\n\t• Pour déglacer un magret de canard ou des aiguillettes de volaille en fin de cuisson",
       "nutrition": {
         "actif": false,
         "portion": "100 g",
