@@ -498,7 +498,7 @@
       "prix_unitaire": "24.68€/kg",
       "visible": true,
       "suggestion_active": true,
-      "suggestion": "• Au petit-déjeuner : Sur des tartines de pain frais, des biscottes, de la brioche ou des crêpes tièdes.\n• En pâtisserie : Idéale pour napper ou garnir un gâteau au chocolat noir (l'association orange et chocolat est un grand classique), un fond de tarte, un gâteau de semoule ou un cake.\n• En version sucrée-salée : En accompagnement de fromages blancs, de yaurts ou pour glacer certaines viandes blanches.",
+      "suggestion": "Au petit-déjeuner : sur des tartines de pain frais, des biscottes, de la brioche ou des crêpes tièdes.\nEn pâtisserie : idéale pour napper ou garnir un gâteau au chocolat noir (l'association orange et chocolat est un grand classique), un fond de tarte, un gâteau de semoule ou un cake.\nEn version sucrée-salée : accompagnement de fromages blancs, de yaurts ou pour glacer certaines viandes blanches.",
       "nutrition": {
         "actif": true,
         "portion": "100 g",
