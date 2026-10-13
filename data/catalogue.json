@@ -547,7 +547,7 @@
       "id": "confiture-09",
       "nom": "Tomate verte",
       "categorie": "confitures",
-      "description": "Explorez le délicieux monde de la confiture de tomates vertes, un trésor artisanal préparé avec des fruits frais cueillis et triés à la main, puis mijotés avec soin dans notre chaudron. ",
+      "description": "La confiture de tomates vertes est une recette traditionnelle et anti-gaspillage, idéale pour cuisiner les derniers fruits du potager qui n'ont pas eu le temps de mûrir avant l'automne. Explorez le délicieux monde de cette confiture.",
       "legende": "80g de fruits pour 100g de confiture",
       "image": "assets/catalogue/1791641031429_tomates-verte-recadre-recadre.jpg",
       "best_seller": false,
@@ -556,7 +556,7 @@
       "prix_unitaire": "24.68€/kg",
       "visible": true,
       "suggestion_active": true,
-      "suggestion": "Sur des tartines ou du pain frais : Tartinez généreusement la confiture sur une tranche de pain frais ou des tartines grillées pour un petit-déjeuner plein de saveurs et de vitalité.\nEn accompagnement de vos plats salés : Utilisez notre confiture comme condiment pour accompagner vos plats salés préférés, comme les viandes grillées, les fromages ou les terrines, pour une touche sucrée-acidulée délicieusement surprenante.\nDans vos recettes de pâtisserie : Intégrez notre confiture de tomates vertes dans vos recettes de desserts, telles que les tartelettes, les cakes ou les muffins, pour une explosion de saveurs inattendue qui ravira vos papilles.",
+      "suggestion": "Sur des tartines ou du pain frais : tartinez généreusement la confiture sur une tranche de pain frais ou des tartines grillées pour un petit-déjeuner plein de saveurs et de vitalité.\nEn accompagnement de vos plats salés : utilisez notre confiture comme condiment pour accompagner vos plats salés préférés, comme les viandes grillées, les fromages ou les terrines, pour une touche sucrée-acidulée délicieusement surprenante.\nDans vos recettes de pâtisserie : intégrez notre confiture de tomates vertes dans vos recettes de desserts, telles que les tartelettes, les cakes ou les muffins, pour une explosion de saveurs inattendue qui ravira vos papilles.",
       "nutrition": {
         "actif": true,
         "portion": "100 g",
