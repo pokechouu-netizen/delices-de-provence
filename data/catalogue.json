@@ -2070,7 +2070,7 @@
     {
       "nom": "Marron au rhum",
       "categorie": "confitures",
-      "description": "Offrez-vous un moment de délice avec cette confiture de marrons au rhum, un produit unique qui marie la richesse des marrons de Provence à la subtilité du rhum. Cuite avec amour au chaudron et préparée avec des fruits frais triés à la main, cette confiture est une véritable ode à la tradition et à la qualité artisanale, pour une expérience gustative inoubliable.",
+      "description": "La confiture de marrons au rhum (souvent appelée crème ou confiture de châtaignes) est une spécialité gourmande, riche et chaleureuse qui marie la douceur fondante du fruit d'automne au caractère épicé et boisé du rhum.",
       "legende": "",
       "prix": "7.90",
       "contenance": "325",
@@ -2078,7 +2078,7 @@
       "visible": true,
       "best_seller": false,
       "suggestion_active": true,
-      "suggestion": "À la cuillère : Dégustez cette confiture de marrons au rhum directement à la cuillère pour savourer pleinement sa texture veloutée et ses arômes riches et envoûtants.\nEn accompagnement : Accordez-la avec vos fromages fins préférés ou utilisez-la pour agrémenter vos desserts pour une touche sucrée et délicieusement parfumée.",
+      "suggestion": "À la cuillère : dégustez cette confiture de marrons au rhum directement à la cuillère pour savourer pleinement sa texture veloutée et ses arômes riches et envoûtants.\nEn accompagnement : accordez-la avec vos fromages fins préférés ou utilisez-la pour agrémenter vos desserts pour une touche sucrée et délicieusement parfumée.",
       "nutrition": {
         "actif": true,
         "portion": "100 g",
