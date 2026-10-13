@@ -373,7 +373,7 @@
       "id": "confiture-02",
       "nom": "Myrtille",
       "categorie": "confitures",
-      "description": "Plongez dans l’univers savoureux de la confiture de myrtille, mijotée doucement au chaudron pour conserver toute la richesse des arômes naturels des myrtilles.",
+      "description": "La confiture de myrtille est un grand classique des petits-déjeuners et des goûters, appréciée pour sa saveur à la fois douce, légèrement acidulée et sa belle couleur pourpre foncée.La myrtille est riche en antioxydants, en flavonoïdes, ainsi qu'en fibres, en magnésium et en potassium. Même cuite en confiture, elle conserve une partie de ses nutriments.",
       "legende": "69g de fruits pour 100g de confiture - Disponible en 120 g",
       "image": "assets/catalogue/1791554599766_myrtille-recadre.jpg",
       "best_seller": true,
@@ -382,7 +382,7 @@
       "prix_unitaire": "24.68€/kg",
       "visible": true,
       "suggestion_active": true,
-      "suggestion": "À la cuillère : Plongez votre cuillère dans notre confiture de myrtilles pour apprécier pleinement sa texture onctueuse et ses saveurs fruitées.\nSur des tartines : Étalez généreusement notre confiture de myrtille sur une tranche de pain frais pour un petit-déjeuner gourmand et réconfortant.\nEn accompagnement : Accordez-la avec vos fromages favoris ou utilisez-la pour rehausser vos desserts pour une note sucrée et délicate.",
+      "suggestion": "À la cuillère : plongez votre cuillère dans notre confiture de myrtilles pour apprécier pleinement sa texture onctueuse et ses saveurs fruitées.\nSur des tartines : étalez généreusement notre confiture de myrtille sur une tranche de pain frais pour un petit-déjeuner gourmand et réconfortant.\nEn accompagnement : accordez-la avec vos fromages favoris ou utilisez-la pour rehausser vos desserts pour une note sucrée et délicate.",
       "nutrition": {
         "actif": true,
         "portion": "100 g",
