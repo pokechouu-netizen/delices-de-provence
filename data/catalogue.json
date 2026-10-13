@@ -440,7 +440,7 @@
       "prix_unitaire": "24.68€/kg",
       "visible": true,
       "suggestion_active": true,
-      "suggestion": "Au Petit-Déjeuner : Tartinez généreusement notre confiture de figues sur une tranche de pain frais ou une crêpe pour commencer la journée avec une touche de gourmandise.\nEn Accompagnement : Avec vos fromages ou vos plats de viande pour une explosion de saveurs sucrées.",
+      "suggestion": "Au Petit-Déjeuner : Tartinez généreusement notre confiture de figues sur une tranche de pain frais ou une crêpe pour commencer la journée avec une touche de gourmandise.\nEn accompagnement : avec vos fromages ou vos plats de viande pour une explosion de saveurs sucrées.",
       "nutrition": {
         "actif": true,
         "portion": "100 g",
