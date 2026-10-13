@@ -2222,8 +2222,8 @@
       "prix_unitaire": "32.50€/kg",
       "visible": true,
       "best_seller": false,
-      "suggestion_active": false,
-      "suggestion": "",
+      "suggestion_active": true,
+      "suggestion": "En cuisine : utilisez ce confit de romarin pour parfumer vos plats de viande ou de légumes grillés, apportant ainsi une touche d’arôme méditerranéen à vos recettes.\nEn apéritif : servez le avec du fromage ou des crackers lors de vos apéritifs, pour une expérience gustative originale et raffinée.\nEn accompagnement : accordez-le avec vos plats préférés ou utilisez-le comme condiment pour sublimer vos assiettes avec une saveur unique.",
       "nutrition": {
         "actif": false,
         "portion": "100 g",
