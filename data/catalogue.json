@@ -808,7 +808,7 @@
       "id": "confiture-19",
       "nom": "Petales de rose",
       "categorie": "confitures",
-      "description": "Plongez dans un monde de raffinement et d’élégance avec ce confit de pétales de rose. Cuit au chaudron avec des pétales triés à la main, ce délice floral vous transporte dans une expérience gustative exceptionnelle. ",
+      "description": "C'est le monde du raffinement et de l’élégance avec ce confit de pétales de rose. Cuit au chaudron avec des pétales triés à la main, ce délice floral vous transporte dans une expérience gustative exceptionnelle. ",
       "legende": "5g de pétales pour 100g de confit",
       "image": "assets/catalogue/1791621405448_p-tales-de-rose-recadre-recadre.jpg",
       "best_seller": false,
@@ -817,7 +817,7 @@
       "prix_unitaire": "24.68€/kg",
       "visible": true,
       "suggestion_active": true,
-      "suggestion": "Au petit-déjeuner/au goûter : À étaler simplement sur du pain frais, des biscottes, des crêpes, des gaufres ou des scones. En garniture à l'intérieur de croissants, de brioches ou de muffins\nEn pâtisserie/desserts\nYaourts et fromage blanc : Une cuillère mélangée dans un yaourt nature, un fromage blanc ou un petit-suisse.\nPanna cotta et mousses : En nappage sur le dessus d'une panna cotta à la vanille ou incorporé dans une mousse blanche (mascarpone, crème fouettée).\nGâteaux et macarons : Utilisé en fine couche pour fourrer un gâteau roulé, un layer cake, ou pour garnir des macarons à la rose\nEn version sucrée-salée\nFromages : Accompagne très bien les fromages à pâte blanche, les chèvres frais ou le brie.\nViandes blanches : En petite quantité en accompagnement d'un magret de canard ou d'agneau rôti",
+      "suggestion": "Au petit-déjeuner/au goûter : à étaler simplement sur du pain frais, des biscottes, des crêpes, des gaufres ou des scones. En garniture à l'intérieur de croissants, de brioches ou de muffins\nEn pâtisserie/desserts\nYaourts et fromage blanc : une cuillère mélangée dans un yaourt nature, un fromage blanc ou un petit-suisse.\nPanna cotta et mousses : en nappage sur le dessus d'une panna cotta à la vanille ou incorporé dans une mousse blanche (mascarpone, crème fouettée).\nGâteaux et macarons : utilisé en fine couche pour fourrer un gâteau roulé, un layer cake, ou pour garnir des macarons à la rose\nEn version sucrée-salée\nFromages : Accompagne très bien les fromages à pâte blanche, les chèvres frais ou le brie.\nViandes blanches : en petite quantité en accompagnement d'un magret de canard ou d'agneau rôti",
       "nutrition": {
         "actif": true,
         "portion": "100 g",
