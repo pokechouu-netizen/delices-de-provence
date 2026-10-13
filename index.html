@@ -67,7 +67,7 @@
       flex-direction: column;
       background: var(--vert-fonce);
       transform-origin: 50% 78%;
-      transition: transform 3.4s cubic-bezier(0.6, 0, 0.2, 1);
+      transition: transform 2.6s cubic-bezier(0.6, 0, 0.2, 1);
       will-change: transform;
     }
     /* Signature : on pousse la porte et on avance dans la boutique */
@@ -141,11 +141,25 @@
       border: 4px solid var(--laiton);
       border-image: var(--laiton-grad) 1;
       overflow: hidden;
+      background: radial-gradient(ellipse 80% 70% at 50% 42%, #F6D69A 0%, #D29A52 45%, #6E421F 85%, #3A2212 100%);
+    }
+    .shop__vitrine img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.05) brightness(0.96);
+    }
+    /* Reflet de la vitre, par-dessus la photo */
+    .shop__vitrine::after {
+      content: '';
+      position: absolute;
+      inset: 0;
       background:
-        linear-gradient(112deg, rgba(255,255,255,0.16) 0 9%, transparent 9% 24%, rgba(255,255,255,0.07) 24% 29%, transparent 29%),
-        radial-gradient(ellipse 8px 30% at 50% 78%, rgba(58,30,12,0.5) 90%, transparent) 0 0 / 30px 25%,
-        repeating-linear-gradient(to bottom, transparent 0 calc(25% - 5px), rgba(44,24,16,0.8) calc(25% - 5px) 25%),
-        radial-gradient(ellipse 80% 70% at 50% 42%, #F6D69A 0%, #D29A52 45%, #6E421F 85%, #3A2212 100%);
+        linear-gradient(112deg, rgba(255,255,255,0.22) 0 9%, transparent 9% 24%, rgba(255,255,255,0.10) 24% 29%, transparent 29%),
+        linear-gradient(to bottom, rgba(255,214,150,0.10), rgba(60,30,10,0.12));
+      pointer-events: none;
     }
     .shop__base {
       flex: 0 0 auto;
@@ -370,7 +384,7 @@
       background: #2C1810;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.6s ease-out 3s;
+      transition: opacity 0.6s ease-out 2s;
     }
     .entry-screen.opening .entry-veil { opacity: 1; }
 
@@ -631,7 +645,7 @@
       <div class="shop__body">
       <div class="shop__wall">
         <span class="shop__numero">27</span>
-        <div class="shop__vitrine"></div>
+        <div class="shop__vitrine"><img src="assets/images/vitrine-gauche.jpg" alt=""></div>
         <div class="shop__base"></div>
       </div>
 
@@ -666,7 +680,7 @@
         </div>
 
       <div class="shop__wall">
-        <div class="shop__vitrine"></div>
+        <div class="shop__vitrine"><img src="assets/images/vitrine-droite.jpg" alt=""></div>
         <div class="shop__base"></div>
       </div>
       </div>
@@ -728,10 +742,10 @@
         document.getElementById('doorLeft').classList.add('open');
         document.getElementById('doorRight').classList.add('open');
         if (seam) seam.classList.add('hidden');
-        setTimeout(function () { window.location.href = 'boutique.html'; }, 3650);   /* le temps de lire le badge au fond de la pièce */
+        setTimeout(function () { window.location.href = 'boutique.html'; }, 2600);
       }
 
-      var doorCountdown = 7;
+      var doorCountdown = 1;
       var doorIv;
       function startDoorCountdown() {
         doorIv = setInterval(function () {
@@ -755,7 +769,7 @@
         document.getElementById('entryScreen').classList.add('visible');
         heroEl.classList.add('fade-out');
         if (immediate) {
-          setTimeout(openDoors, 900);
+          setTimeout(openDoors, 700);
         } else {
           setTimeout(startDoorCountdown, 400);
         }
@@ -768,7 +782,7 @@
         heroGone = true;
         heroEl.style.display = 'none';
         document.getElementById('entryScreen').classList.add('visible');
-        setTimeout(openDoors, 1400);
+        setTimeout(openDoors, 800);
       }
       var replay = window.location.hash === '#boutique';
       if (replay) replayDoors();
@@ -785,7 +799,7 @@
         if (window.location.hash === '#boutique' && !doorsOpen) replayDoors();
       });
 
-      var heroCountdown = 5;
+      var heroCountdown = 4;
       var heroIv = setInterval(function () {
         heroCountdown--;
         if (heroCountdown <= 0) { clearInterval(heroIv); revealDoors(); }
