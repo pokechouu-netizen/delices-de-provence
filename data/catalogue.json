@@ -2244,20 +2244,28 @@
     {
       "nom": "Confit de Thym",
       "categorie": "confitures",
-      "description": "Plongez dans un monde d’authenticité et de caractère avec ce confit de thym 100% Provence. Cuit au chaudron avec de la fleur de thym cueillie localement, ce condiment vous transporte dans une expérience gustative exceptionnelle, à savourer avec curiosité et gourmandise.",
+      "description": "Plongez dans un monde d’authenticité et de caractère avec ce confit de thym 100% Provence. Cuit au chaudron avec de la fleur de thym cueillie localement, ce condiment vous transporte dans une expérience gustative exceptionnelle, à savourer avec curiosité et gourmandise. Même cuisiné en confit (et donc sucré), il conserve ce côté tonique et apaisant pour la gorge ou le confort digestif.",
       "legende": "0,54g de thym pour 100g de confit",
       "prix": "3.90 €",
       "contenance": "120g",
       "prix_unitaire": "32.50€/kg",
       "visible": true,
       "best_seller": false,
-      "suggestion_active": false,
-      "suggestion": "",
+      "suggestion_active": true,
+      "suggestion": "Il s'utilise facilement du plat salé au dessert. Il se marie particulièrement bien avec les fromages de chèvre (frais ou affinés), nappe à merveille les viandes rôties ou les volailles avant ou après cuisson, et relève les fruits d'été (abricots, pêches) dans des tartes ou avec une faisselle",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Énergie | 1092 Kj kJ / 257 kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 63.5 g",
+          "- dont sucres | 62 g",
+          "Protéines | 0.2 g",
+          "Sel | <0.10 g"
+        ]
       },
       "image": "assets/catalogue/1791903353110_confit-de-thym-pm-recadre.jpg",
       "id": "p-1791903355906"
