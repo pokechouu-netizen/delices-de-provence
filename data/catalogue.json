@@ -2182,6 +2182,27 @@
       },
       "image": "assets/catalogue/1791646787825_citron---copie-recadre.jpg",
       "id": "p-1791646790166"
+    },
+    {
+      "nom": "Confit de Lavande",
+      "categorie": "confitures",
+      "description": "",
+      "legende": "",
+      "prix": "",
+      "contenance": "",
+      "prix_unitaire": "",
+      "visible": true,
+      "best_seller": false,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      },
+      "image": "assets/catalogue/1791900986987_confit-de-lavande-pm-recadre.jpg",
+      "id": "p-1791900990228"
     }
   ]
 }
