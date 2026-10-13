@@ -2274,10 +2274,10 @@
       "nom": "Confit de Violettes",
       "categorie": "confitures",
       "description": "Offrez-vous une escapade sensorielle avec ce confit de violette, un produit unique qui capture toute la délicatesse et le raffinement de cette fleur emblématique. Ce délice floral est une véritable invitation au voyage gustatif, où chaque dégustation vous transporte dans un monde de saveurs et d’arômes exquis.",
-      "legende": "",
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
+      "legende": "5g de fleurs pour 100g de confit",
+      "prix": "3.90 €",
+      "contenance": "120g",
+      "prix_unitaire": "32.50€/kg",
       "visible": true,
       "best_seller": false,
       "suggestion_active": false,
@@ -2288,7 +2288,7 @@
         "note": "",
         "lignes": []
       },
-      "image": "",
+      "image": "assets/catalogue/1791903837470_confit-de-violettes-pm-recadre.jpg",
       "id": "p-1791903780017"
     }
   ]
