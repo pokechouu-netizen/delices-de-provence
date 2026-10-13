@@ -2269,6 +2269,27 @@
       },
       "image": "assets/catalogue/1791903353110_confit-de-thym-pm-recadre.jpg",
       "id": "p-1791903355906"
+    },
+    {
+      "nom": "Confit de Violettes",
+      "categorie": "confitures",
+      "description": "Offrez-vous une escapade sensorielle avec ce confit de violette, un produit unique qui capture toute la délicatesse et le raffinement de cette fleur emblématique. Ce délice floral est une véritable invitation au voyage gustatif, où chaque dégustation vous transporte dans un monde de saveurs et d’arômes exquis.",
+      "legende": "",
+      "prix": "",
+      "contenance": "",
+      "prix_unitaire": "",
+      "visible": true,
+      "best_seller": false,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      },
+      "image": "",
+      "id": "p-1791903780017"
     }
   ]
 }
