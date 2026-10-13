@@ -924,7 +924,7 @@
       "id": "confiture-24",
       "nom": "Pastèque méréville",
       "categorie": "confitures",
-      "description": "Plongez dans l’univers rafraîchissant de cette confiture de pastèques, un délice fruité préparé avec des fruits frais cueillis et triés à la main, puis cuits lentement dans un chaudron pour en capturer toute la saveur naturelle. ",
+      "description": "La confiture de méréville (ou confiture de citre / gigérine) est une spécialité traditionnelle de Provence confectionnée à partir d'une variété ancienne de pastèque à chair blanche (Citrullus lanatus var. citroides) qui ne se mange pas crue. Plongez dans l’univers rafraîchissant de cette confiture de pastèques. ",
       "legende": "80g de fruits pour 100g de confiture",
       "image": "assets/catalogue/1791639912565_past-que-m-r-ville-recadre.jpg",
       "best_seller": false,
@@ -933,7 +933,7 @@
       "prix_unitaire": "24.68€/kg",
       "visible": true,
       "suggestion_active": true,
-      "suggestion": "Sur du pain frais ou des toasts : Étalez généreusement cette confiture de pastèques sur une tranche de pain frais ou des toasts grillés.\nEn accompagnement de vos fromages préférés : Mariez les saveurs sucrées de notre confiture avec la richesse des fromages, comme le fromage de chèvre ou le brie, pour un plateau de fromages élégant et savoureux.",
+      "suggestion": "Sur du pain frais ou des toasts : étalez généreusement cette confiture de pastèques sur une tranche de pain frais ou des toasts grillés.\nEn accompagnement de vos fromages préférés : mariez les saveurs sucrées de notre confiture avec la richesse des fromages, comme le fromage de chèvre ou le brie, pour un plateau de fromages élégant et savoureux.",
       "nutrition": {
         "actif": true,
         "portion": "100 g",
