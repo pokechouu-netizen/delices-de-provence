@@ -2211,6 +2211,27 @@
       },
       "image": "assets/catalogue/1791900986987_confit-de-lavande-pm-recadre.jpg",
       "id": "p-1791900990228"
+    },
+    {
+      "nom": "Confit de Romarin",
+      "categorie": "confitures",
+      "description": "",
+      "legende": "",
+      "prix": "",
+      "contenance": "",
+      "prix_unitaire": "",
+      "visible": true,
+      "best_seller": false,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      },
+      "image": "assets/catalogue/1791902558502_confit-de-romarin-pm-recadre.jpg",
+      "id": "p-1791902560821"
     }
   ]
 }
