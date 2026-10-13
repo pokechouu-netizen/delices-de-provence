@@ -2187,19 +2187,27 @@
       "nom": "Confit de Lavande",
       "categorie": "confitures",
       "description": "C'est un produit typique du terroir provençal, souvent offert comme petit souvenir ou cadeau raffiné. Offrez-vous un moment de douceur et d’évasion avec ce produit unique qui capture l’essence même de la Provence et qui vous transportera dans un monde de saveurs et de parfums envoûtants.",
-      "legende": "",
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
+      "legende": "O.3g de lavandin pour 100g de confit",
+      "prix": "3.90 €",
+      "contenance": "120g",
+      "prix_unitaire": "32.50/kg",
       "visible": true,
       "best_seller": false,
-      "suggestion_active": false,
-      "suggestion": "",
+      "suggestion_active": true,
+      "suggestion": "En Accompagnement : accordez-le avec vos fromages fins ou vos desserts pour une touche subtile et raffinée, ajoutant une note florale à vos dégustations.\nDans vos Recettes : intégrez-le dans vos recettes de pâtisserie ou de cocktails pour une expérience gustative audacieuse et créative, où la lavande apporte une touche d’originalité et d’élégance.",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Énergie | 1051 Kj kJ / 247 kcal",
+          "Matières grasses | 0.6 g",
+          "- dont acides gras saturés | <0.2 g",
+          "Glucides | 60 g",
+          "- dont sucres | 58.8 g",
+          "Protéines | 0.5 g",
+          "Sel | <0.10 g"
+        ]
       },
       "image": "assets/catalogue/1791900986987_confit-de-lavande-pm-recadre.jpg",
       "id": "p-1791900990228"
