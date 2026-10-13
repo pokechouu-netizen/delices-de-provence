@@ -2281,12 +2281,20 @@
       "visible": true,
       "best_seller": false,
       "suggestion_active": true,
-      "suggestion": "• Pâtisserie/desserts :\npour napper ou glacer des tartes aux fruits .\n\t• En cœur coulant ou garniture pour des biscuits roulés, des macarons, des madeleines ou des choux.\n\t• Pour agrémenter une charlotte ou une panna cotta.\n• Cuisine salée (mariant le sucré-salé) :\n\t• En accompagnement d'une tranche de foie gras mi-cuit ou poêlé.\n\t• Pour déglacer un magret de canard ou des aiguillettes de volaille en fin de cuisson",
+      "suggestion": "Pâtisserie/desserts :\npour napper ou glacer des tartes aux fruits, en cœur coulant ou garniture pour des biscuits roulés, des macarons, des madeleines ou des choux.\nEn accompagnement d'une tranche de foie gras mi-cuit ou poêlé.\nPour déglacer un magret de canard ou des aiguillettes de volaille en fin de cuisson.",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Énergie | 1123 Kj kJ / 264 kcal",
+          "Matières grasses | 0.2 g",
+          "- dont acides gras saturés | 0.2 g",
+          "Glucides | 63.5 g",
+          "- dont sucres | 62 g",
+          "Protéines | 0.3 g",
+          "Sel | 0.10 g"
+        ]
       },
       "image": "assets/catalogue/1791903837470_confit-de-violettes-pm-recadre.jpg",
       "id": "p-1791903780017"
