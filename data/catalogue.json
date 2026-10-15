@@ -2073,8 +2073,16 @@
       "prix_unitaire": "52.00 € / litre",
       "visible": true,
       "best_seller": false,
-      "image": "assets/catalogue/1791470116309_2008-recadre.jpg",
-      "id": "p-1788015290775"
+      "image": "assets/catalogue/1792056129041_diapositive1-recadre.jpg",
+      "id": "p-1788015290775",
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      }
     },
     {
       "nom": "Marron au rhum",
