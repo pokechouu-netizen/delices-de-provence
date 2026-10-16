@@ -754,19 +754,6 @@
       "visible": true
     },
     {
-      "id": "pates-riz-03",
-      "nom": "Ravioles du Dauphiné",
-      "categorie": "pates-riz",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/pates-riz/pates-riz-03.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "pates-riz-05",
       "nom": "Vermicelles de Riz",
       "categorie": "pates-riz",
