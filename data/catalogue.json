@@ -819,19 +819,6 @@
       "visible": true
     },
     {
-      "id": "sel-12",
-      "nom": "Sel de Guérande",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-12.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-14",
       "nom": "Sel Gris de Mer",
       "categorie": "sel-camargue",
