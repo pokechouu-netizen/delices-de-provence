@@ -200,19 +200,6 @@
       "visible": true
     },
     {
-      "id": "biere-02",
-      "nom": "Bière Artisanale Ambrée",
-      "categorie": "bieres",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/bieres/biere-02.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "biere-03",
       "nom": "Bière Artisanale Brune",
       "categorie": "bieres",
