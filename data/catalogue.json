@@ -1147,19 +1147,6 @@
       "visible": true
     },
     {
-      "id": "plat-05",
-      "nom": "Cassoulet du Terroir",
-      "categorie": "plats-cuisines",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/plats-cuisines/plat-05.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-01",
       "nom": "Fleur de Sel de Camargue",
       "categorie": "sel-camargue",
