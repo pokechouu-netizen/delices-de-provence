@@ -213,19 +213,6 @@
       "visible": true
     },
     {
-      "id": "biscuit-sucre-03",
-      "nom": "Croquants aux Amandes",
-      "categorie": "biscuits-sucres",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/biscuits-sucres/biscuit-sucre-03.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "cafe-the-01",
       "nom": "Thé de Provence aux Fleurs",
       "categorie": "cafe-the",
