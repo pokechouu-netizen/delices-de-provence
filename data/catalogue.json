@@ -897,19 +897,6 @@
       "visible": true
     },
     {
-      "id": "sel-16",
-      "nom": "Sel au Curcuma",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-16.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-17",
       "nom": "Sel Méditerranéen",
       "categorie": "sel-camargue",
