@@ -1030,19 +1030,6 @@
       "visible": true
     },
     {
-      "id": "plat-01",
-      "nom": "Daube Provençale",
-      "categorie": "plats-cuisines",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/plats-cuisines/plat-01.jpg",
-      "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "plat-02",
       "nom": "Ratatouille Maison",
       "categorie": "plats-cuisines",
