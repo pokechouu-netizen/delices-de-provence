@@ -780,19 +780,6 @@
       "visible": true
     },
     {
-      "id": "sirop-01",
-      "nom": "Sirop de Lavande",
-      "categorie": "sirops",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sirops/sirop-01.jpg",
-      "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sirop-02",
       "nom": "Sirop de Rose",
       "categorie": "sirops",
