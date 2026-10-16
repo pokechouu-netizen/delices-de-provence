@@ -145,19 +145,6 @@
       }
     },
     {
-      "id": "biscuit-sucre-02",
-      "nom": "Navettes Provençales",
-      "categorie": "biscuits-sucres",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/biscuits-sucres/biscuit-sucre-02.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "cafe-the-01",
       "nom": "Thé de Provence aux Fleurs",
       "categorie": "cafe-the",
