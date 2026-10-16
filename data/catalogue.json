@@ -806,19 +806,6 @@
       "visible": true
     },
     {
-      "id": "jus-02",
-      "nom": "Jus de Pêche de Provence",
-      "categorie": "jus",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/jus/jus-02.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "jus-03",
       "nom": "Nectarine & Abricot",
       "categorie": "jus",
