@@ -93,19 +93,6 @@
       }
     },
     {
-      "id": "cafe-the-01",
-      "nom": "Thé de Provence aux Fleurs",
-      "categorie": "cafe-the",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/cafe-the/cafe-the-01.jpg",
-      "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "confiture-01",
       "nom": "Gelée de Groseille",
       "categorie": "confitures",
