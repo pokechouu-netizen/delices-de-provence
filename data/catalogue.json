@@ -962,19 +962,6 @@
       "visible": true
     },
     {
-      "id": "sel-20",
-      "nom": "Sel à l'Ail des Ours",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-20.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-21",
       "nom": "Sel au Poivre Blanc",
       "categorie": "sel-camargue",
