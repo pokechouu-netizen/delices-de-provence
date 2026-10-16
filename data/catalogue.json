@@ -265,19 +265,6 @@
       "visible": true
     },
     {
-      "id": "chocolat-03",
-      "nom": "Confiserie de Provence",
-      "categorie": "chocolat",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/chocolat/chocolat-03.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "confiture-01",
       "nom": "Gelée de Groseille",
       "categorie": "confitures",
