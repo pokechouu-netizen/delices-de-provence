@@ -793,19 +793,6 @@
       "visible": true
     },
     {
-      "id": "miel-01",
-      "nom": "Miel de Lavande",
-      "categorie": "miel",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/miel/miel-01.jpg",
-      "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "miel-02",
       "nom": "Miel de Thym",
       "categorie": "miel",
