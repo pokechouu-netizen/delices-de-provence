@@ -962,19 +962,6 @@
       "visible": true
     },
     {
-      "id": "sel-22",
-      "nom": "Sel à la Truffe",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-22.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sirop-01",
       "nom": "Sirop de Lavande",
       "categorie": "sirops",
