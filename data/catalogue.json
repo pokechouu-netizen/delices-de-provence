@@ -64,19 +64,6 @@
       }
     },
     {
-      "id": "olive-01",
-      "nom": "Huile d'Olive Extra Vierge",
-      "categorie": "autour-olive",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/1791466282799_olive-01-recadre.jpg",
-      "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "olive-02",
       "nom": "Tapenade d'Olives Noires",
       "categorie": "autour-olive",
