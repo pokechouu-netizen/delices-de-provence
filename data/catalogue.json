@@ -793,19 +793,6 @@
       "visible": true
     },
     {
-      "id": "sel-04",
-      "nom": "Sel à la Lavande",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-04.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-05",
       "nom": "Sel au Piment d'Espelette",
       "categorie": "sel-camargue",
