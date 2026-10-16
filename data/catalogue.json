@@ -278,19 +278,6 @@
       "visible": true
     },
     {
-      "id": "cafe-the-03",
-      "nom": "Café du Terroir",
-      "categorie": "cafe-the",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/cafe-the/cafe-the-03.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "chocolat-01",
       "nom": "Chocolat Noir Artisanal",
       "categorie": "chocolat",
