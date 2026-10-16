@@ -819,19 +819,6 @@
       "visible": true
     },
     {
-      "id": "sirop-05",
-      "nom": "Sirop de Framboise",
-      "categorie": "sirops",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sirops/sirop-05.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sirop-06",
       "nom": "Sirop de Grenadine",
       "categorie": "sirops",
