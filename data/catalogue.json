@@ -213,19 +213,6 @@
       "visible": true
     },
     {
-      "id": "biscuit-sucre-01",
-      "nom": "Calissons d'Aix",
-      "categorie": "biscuits-sucres",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/biscuits-sucres/biscuit-sucre-01.jpg",
-      "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "biscuit-sucre-02",
       "nom": "Navettes Provençales",
       "categorie": "biscuits-sucres",
