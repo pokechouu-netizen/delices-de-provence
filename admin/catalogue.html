@@ -73,6 +73,8 @@
 
     /* ── Count bar ───────────────────────────────────────── */
     .count-bar { padding:.4rem 1.25rem; font-size:.8rem; color:var(--muted); }
+    .orphan-bar { margin:0 1.25rem .6rem; padding:.55rem .8rem; border:1.5px solid #e9c46a; background:#fff8e6; border-radius:8px; font-size:.82rem; display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; }
+    td.c-actions { width:150px; }
 
     /* ── Table ───────────────────────────────────────────── */
     .table-wrap { padding:0 1.25rem 3rem; overflow-x:auto; }
@@ -102,7 +104,7 @@
     td.c-cat { font-size:.82rem; color:var(--muted); }
     td.c-prix { width:90px; }
     td.c-vis { width:64px; text-align:center; }
-    td.c-actions { width:120px; }
+    td.c-actions { width:150px; }
     .btn-recrop { align-self:flex-start; }
     .btn:focus-visible, .btn-text:focus-visible { outline:2px solid var(--text); outline-offset:2px; }
     .row-btns { display:flex; gap:.3rem; }
@@ -223,6 +225,7 @@
     </div>
 
     <div class="count-bar" id="countBar">Chargement…</div>
+    <div class="orphan-bar" id="orphanBar" style="display:none"></div>
 
     <div class="table-wrap">
       <table>
@@ -416,26 +419,40 @@ Vitamine C | 25 mg (31 %)"></textarea>
       }).catch(function(){});
     }
 
+    var RAYONS = [], rayonsSha = '';
+    var STD_CATEGORIES = [
+      { id: 'alcools',          nom: 'Alcools & Champagnes',    icone: 'alcools.svg' },
+      { id: 'autour-olive',     nom: "Autour de l'Olive",       icone: 'autour-olive.svg' },
+      { id: 'bieres',           nom: 'Bières',                  icone: 'bieres.svg' },
+      { id: 'biscuits-sales',   nom: 'Biscuits Salés',          icone: 'biscuits-sales.svg' },
+      { id: 'biscuits-sucres',  nom: 'Biscuits Sucrés',         icone: 'biscuits-sucres.svg' },
+      { id: 'cafe-the',         nom: 'Café, Thé & Infusions',   icone: 'cafe-the.svg' },
+      { id: 'chocolat',         nom: 'Chocolat & Confiseries',  icone: 'chocolat.svg' },
+      { id: 'confitures',       nom: 'Confitures',              icone: 'confitures.svg' },
+      { id: 'epices',           nom: 'Épices & Lavande',        icone: 'epices.svg' },
+      { id: 'jus',              nom: 'Jus de Fruits',           icone: 'jus.svg' },
+      { id: 'miel',             nom: 'Miel',                    icone: 'miel.svg' },
+      { id: 'pates-riz',        nom: 'Pâtes, Riz & Ravioles',  icone: 'pates-riz.svg' },
+      { id: 'plats-cuisines',   nom: 'Plats Cuisinés',          icone: 'plats-cuisines.svg' },
+      { id: 'sel-camargue',     nom: 'Sel de Camargue',         icone: 'sel-camargue.svg' },
+      { id: 'sirops',           nom: 'Sirops',                  icone: 'sirops.svg' },
+      { id: 'terrines',         nom: 'Terrines & Charcuteries', icone: 'terrines.svg' },
+      { id: 'vins',             nom: 'Vins',                    icone: 'vins.svg' }
+    ];
+    function stdCat(id) {
+      return STD_CATEGORIES.find(function (c) { return c.id === id; }) || { id: id, nom: id, icone: 'epices.svg' };
+    }
+    function slugify(str) {
+      return String(str).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    }
+
     function loadRayons() {
       return gitGet('data/rayons.json').then(function(d){
         var data = JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\n/g,'')))));
-        var rayons = data.rayons || [];
-        CAT = {};
-        rayons.forEach(function(r){ CAT[r.id] = r.nom; });
-
-        var filterSel = document.getElementById('filterCat');
-        filterSel.innerHTML = '<option value="">Toutes les catégories</option>';
-        var formSel = document.getElementById('f_cat');
-        formSel.innerHTML = '';
-
-        rayons.forEach(function(r){
-          var o1 = document.createElement('option');
-          o1.value = r.id; o1.textContent = r.nom;
-          filterSel.appendChild(o1);
-          var o2 = document.createElement('option');
-          o2.value = r.id; o2.textContent = r.nom;
-          formSel.appendChild(o2);
-        });
+        RAYONS = data.rayons || [];
+        rayonsSha = d.sha;
+        buildCatSelects();
       }).catch(function(){
         // Fallback si rayons.json indisponible
         var fallback = ['alcools','autour-olive','bieres','biscuits-sales','biscuits-sucres',
@@ -458,6 +475,100 @@ Vitamine C | 25 mg (31 %)"></textarea>
           formSel.innerHTML   += '<option value="'+id+'">'+nom+'</option>';
         });
       });
+    }
+
+    // Listes de catégories (filtre + fiche). Les catégories de produits dont le rayon
+    // n'existe plus sont gardées, signalées « rayon supprimé », pour ne rien perdre.
+    function buildCatSelects() {
+      CAT = {};
+      RAYONS.forEach(function(r){ CAT[r.id] = r.nom; });
+      var orphans = [];
+      products.forEach(function (p) {
+        if (p.categorie && !CAT[p.categorie] && orphans.indexOf(p.categorie) === -1) orphans.push(p.categorie);
+      });
+      orphans.forEach(function (id) { CAT[id] = stdCat(id).nom + ' (rayon supprimé)'; });
+
+      var filterSel = document.getElementById('filterCat');
+      var current = filterSel.value;
+      filterSel.innerHTML = '<option value="">Toutes les catégories</option>';
+      var formSel = document.getElementById('f_cat');
+      var currentForm = formSel.value;
+      formSel.innerHTML = '';
+
+      RAYONS.forEach(function(r){
+        var o1 = document.createElement('option');
+        o1.value = r.id; o1.textContent = r.nom;
+        filterSel.appendChild(o1);
+        var o2 = document.createElement('option');
+        o2.value = r.id; o2.textContent = r.nom;
+        formSel.appendChild(o2);
+      });
+      orphans.forEach(function (id) {
+        var o1 = document.createElement('option');
+        o1.value = id; o1.textContent = '⚠ ' + CAT[id];
+        filterSel.appendChild(o1);
+        var o2 = document.createElement('option');
+        o2.value = id; o2.textContent = '⚠ ' + CAT[id];
+        formSel.appendChild(o2);
+      });
+      var oNew = document.createElement('option');
+      oNew.value = '__new__'; oNew.textContent = '➕ Créer un nouveau rayon…';
+      formSel.appendChild(oNew);
+      if (current) filterSel.value = current;
+      if (currentForm && currentForm !== '__new__') formSel.value = currentForm;
+
+      var box = document.getElementById('orphanBar');
+      if (box) {
+        if (orphans.length) {
+          box.style.display = '';
+          box.innerHTML = '⚠️ ' + orphans.length + ' catégorie' + (orphans.length > 1 ? 's' : '') + ' de produits sans rayon (' +
+            orphans.map(function (id) { return eh(stdCat(id).nom); }).join(', ') + '). ' +
+            '<button class="btn btn-primary btn-sm" onclick="recreerRayons()">Recréer ces rayons</button> ' +
+            '<a href="rayons.html" class="btn btn-ghost btn-sm">Gérer les rayons</a>';
+        } else {
+          box.style.display = 'none';
+        }
+      }
+    }
+
+    // Création d'un rayon depuis la fiche produit (menu « ➕ Créer un nouveau rayon… »)
+    document.getElementById('f_cat').addEventListener('change', function () {
+      if (this.value !== '__new__') return;
+      var sel = this;
+      var nom = prompt('Nom du nouveau rayon :');
+      if (!nom || !nom.trim()) { sel.value = RAYONS[0] ? RAYONS[0].id : ''; return; }
+      nom = nom.trim();
+      var id = slugify(nom) || ('rayon-' + Date.now());
+      var std = STD_CATEGORIES.find(function (c) { return slugify(c.nom) === id || c.id === id; });
+      if (std) id = std.id;
+      if (CAT[id] && RAYONS.some(function (r) { return r.id === id; })) { sel.value = id; return; }
+      saveRayons(RAYONS.concat([{ id: id, nom: nom, icone: (std || stdCat(id)).icone, actif: true }]), 'Nouveau rayon : ' + nom)
+        .then(function () { sel.value = id; setStatus('saved', 'Rayon « ' + nom + ' » créé ✓'); setTimeout(function () { setStatus('', ''); }, 3000); })
+        .catch(function () { setStatus('error', 'Impossible de créer le rayon'); sel.value = RAYONS[0] ? RAYONS[0].id : ''; });
+    });
+
+    window.recreerRayons = function () {
+      var ids = [];
+      products.forEach(function (p) {
+        if (p.categorie && !RAYONS.some(function (r) { return r.id === p.categorie; }) && ids.indexOf(p.categorie) === -1) ids.push(p.categorie);
+      });
+      if (!ids.length) return;
+      var ajout = ids.map(function (id) { var c = stdCat(id); return { id: id, nom: c.nom, icone: c.icone, actif: true }; });
+      saveRayons(RAYONS.concat(ajout), 'Rayons recréés : ' + ajout.map(function (r) { return r.nom; }).join(', '))
+        .then(function () { setStatus('saved', 'Rayons recréés ✓'); renderTable(); setTimeout(function () { setStatus('', ''); }, 3000); })
+        .catch(function () { setStatus('error', 'Erreur lors de la création des rayons'); });
+    };
+
+    function saveRayons(list, msg) {
+      setStatus('saving', 'Enregistrement du rayon…');
+      var content = btoa(unescape(encodeURIComponent(JSON.stringify({ rayons: list }, null, 2))));
+      return gitPut('data/rayons.json', { message: msg, sha: rayonsSha, content: content })
+        .then(function (d) {
+          rayonsSha = d.content ? d.content.sha : rayonsSha;
+          RAYONS = list;
+          buildCatSelects();
+          triggerDeploy();
+        });
     }
 
     function triggerDeploy(){
@@ -493,6 +604,7 @@ Vitamine C | 25 mg (31 %)"></textarea>
         fileSha  = data.sha;
         products = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))))).produits || [];
         setStatus('', '');
+        buildCatSelects();
         renderTable();
       }).catch(function (e) {
         setStatus('error', 'Erreur de chargement');
@@ -601,6 +713,7 @@ Vitamine C | 25 mg (31 %)"></textarea>
           '</td>' +
           '<td class="c-actions"><div class="row-btns">' +
             '<button class="btn btn-ghost btn-sm" onclick="openModal(' + ri + ')" title="Modifier">✏️</button>' +
+            '<button class="btn btn-ghost btn-sm" onclick="duplicateProduct(' + ri + ')" title="Dupliquer : nouveau produit pré-rempli avec cette fiche">⧉</button>' +
             (p.image ? '<button class="btn btn-ghost btn-sm" onclick="cropRow(' + ri + ')" title="Recadrer la photo">✂️</button>' : '') +
             '<button class="btn btn-danger btn-sm" onclick="del(' + ri + ')" title="Supprimer">🗑</button>' +
           '</div></td>';
@@ -643,11 +756,25 @@ Vitamine C | 25 mg (31 %)"></textarea>
       writeCatalogue('Suppression : ' + nom).then(renderTable).catch(function(){});
     };
 
-    window.openModal = function (i) {
+    // Dupliquer : ouvre une fiche « nouveau produit » déjà remplie avec les valeurs de l'original
+    // (photo comprise). Rien n'est créé tant qu'on ne clique pas sur Enregistrer.
+    window.duplicateProduct = function (i) {
+      var src = products[i];
+      if (!src) return;
+      var copie = JSON.parse(JSON.stringify(src));
+      delete copie.id;
+      copie.nom = (src.nom || '') + ' (copie)';
+      openModal(-1, copie);
+      document.getElementById('modalTitle').textContent = 'Copie de « ' + (src.nom || '') + ' »';
+      var nomEl = document.getElementById('f_nom');
+      nomEl.focus(); nomEl.select();
+    };
+
+    window.openModal = function (i, modele) {
       editIdx = i;
-      var p = i === -1 ? {} : products[i];
+      var p = i === -1 ? (modele || {}) : products[i];
       document.getElementById('modalTitle').textContent = i === -1 ? 'Nouveau produit' : 'Modifier le produit';
-      set('f_cat',    p.categorie     || 'vins');
+      set('f_cat',    p.categorie     || (RAYONS[0] ? RAYONS[0].id : ''));
       set('f_nom',    p.nom           || '');
       set('f_desc',   p.description   || '');
       set('f_leg',    p.legende       || '');
@@ -682,7 +809,7 @@ Vitamine C | 25 mg (31 %)"></textarea>
         if (hint) hint.style.display = 'none';
       }
       document.getElementById('overlay').classList.add('open');
-      document.getElementById('f_cat').focus();
+      if (!modele) document.getElementById('f_cat').focus();
     };
 
     window.closeModal = function () {
@@ -740,6 +867,7 @@ Vitamine C | 25 mg (31 %)"></textarea>
       var nom = document.getElementById('f_nom').value.trim();
       var cat = document.getElementById('f_cat').value;
       if (!nom) { document.getElementById('f_nom').focus(); return; }
+      if (!cat || cat === '__new__') { alert('Choisissez un rayon pour ce produit (ou créez-en un).'); document.getElementById('f_cat').focus(); return; }
 
       var saveBtn = document.getElementById('saveBtn');
       saveBtn.disabled = true;

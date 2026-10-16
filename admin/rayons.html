@@ -89,6 +89,27 @@
     .hint{font-size:.74rem;color:var(--muted);margin-top:.4rem;display:block;}
     .empty-state{text-align:center;padding:1.5rem;color:var(--muted);font-size:.9rem;}
     .empty-state span{font-size:1.8rem;display:block;margin-bottom:.5rem;}
+    .rayon-count{font-size:.74rem;color:var(--muted);margin-left:.4rem;white-space:nowrap;}
+    .rayon-edit{background:none;border:none;cursor:pointer;font-size:.9rem;color:var(--muted);padding:.2rem .35rem;border-radius:6px;}
+    .rayon-edit:hover{background:#f0ece6;color:var(--text);}
+    .chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:.6rem 0 1rem;}
+    .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .7rem .35rem .5rem;border:1.5px solid var(--border);border-radius:50px;background:#fff;font-size:.8rem;cursor:pointer;transition:border-color .15s,background .15s;}
+    .chip img{width:18px;height:18px;object-fit:contain;}
+    .chip:hover{border-color:var(--primary);}
+    .chip.is-added{opacity:.45;cursor:default;background:#f5f1ea;}
+    .icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:.4rem;margin-top:.6rem;}
+    .icon-btn{display:flex;flex-direction:column;align-items:center;gap:.25rem;padding:.45rem .2rem;border:1.5px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;font-size:.62rem;color:var(--muted);}
+    .icon-btn img{width:24px;height:24px;object-fit:contain;}
+    .icon-btn:hover{border-color:var(--primary);}
+    .icon-btn.is-selected{border-color:var(--primary);background:rgba(196,145,58,.12);color:var(--text);}
+    .orphans{margin:1rem 0;padding:.8rem 1rem;border:1.5px solid #e9c46a;background:#fff8e6;border-radius:10px;font-size:.84rem;}
+    .orphans strong{display:block;margin-bottom:.4rem;}
+    .orphans ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.35rem;}
+    .orphans li{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;}
+    .orphans .btn{padding:.3rem .7rem;font-size:.76rem;}
+    .save-bar{position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 70%,transparent);padding:1rem 0 .25rem;margin-top:1rem;}
+    .save-bar .btn-save{margin-top:0;}
+    .unsaved{font-size:.76rem;color:#b35c00;text-align:center;margin-bottom:.4rem;min-height:1em;}
     .warn-banner{background:#fff8e6;border:1px solid #f0d080;border-radius:8px;padding:.75rem 1rem;font-size:.82rem;color:#7a5c00;margin-bottom:1.25rem;line-height:1.5;display:none;}
   </style>
 </head>
@@ -132,35 +153,26 @@
 
         <div class="rayons-list" id="rayonsList"></div>
 
+        <div class="orphans" id="orphansBox" style="display:none"></div>
+
         <div class="add-zone">
-          <div class="add-label">Ajouter un rayon</div>
+          <div class="add-label">Rayons habituels — un clic pour (re)créer</div>
+          <div class="chips" id="stdChips"></div>
+
+          <div class="add-label">Ou créer un rayon à votre nom</div>
           <div class="add-row">
-            <input type="text" id="newCatNom" class="cat-input" placeholder="Ex: Épicerie sucrée, Produits locaux…" autocomplete="off">
-            <select id="newCatIcone" class="cat-select-icon">
-              <option value="epices.svg">🌿 Épices</option>
-              <option value="confitures.svg">🍓 Confitures</option>
-              <option value="miel.svg">🍯 Miel</option>
-              <option value="chocolat.svg">🍫 Chocolat</option>
-              <option value="biscuits-sucres.svg">🍪 Biscuits sucrés</option>
-              <option value="biscuits-sales.svg">🧂 Biscuits salés</option>
-              <option value="terrines.svg">🥩 Terrines</option>
-              <option value="plats-cuisines.svg">🍲 Plats cuisinés</option>
-              <option value="autour-olive.svg">🫒 Olive</option>
-              <option value="pates-riz.svg">🍝 Pâtes & Riz</option>
-              <option value="sel-camargue.svg">🧂 Sel</option>
-              <option value="vins.svg">🍷 Vins</option>
-              <option value="alcools.svg">🥂 Alcools</option>
-              <option value="bieres.svg">🍺 Bières</option>
-              <option value="sirops.svg">🧃 Sirops</option>
-              <option value="jus.svg">🍊 Jus</option>
-              <option value="cafe-the.svg">☕ Café & Thé</option>
-            </select>
+            <input type="text" id="newCatNom" class="cat-input" placeholder="Ex : Épicerie sucrée, Produits locaux…" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();addRayon();}">
+            <input type="hidden" id="newCatIcone" value="epices.svg">
             <button class="btn btn-primary" onclick="addRayon()">+ Ajouter</button>
           </div>
-          <span class="hint">Tapez le nom du rayon puis choisissez l'icône la plus proche.</span>
+          <div class="icon-grid" id="iconGrid"></div>
+          <span class="hint">Tapez le nom, choisissez l'icône la plus proche, puis « + Ajouter ». Le rayon apparaît ensuite dans la liste des catégories du catalogue.</span>
         </div>
 
+        <div class="save-bar">
+          <div class="unsaved" id="unsavedMsg"></div>
         <button class="btn btn-primary btn-save" onclick="saveRayons()">💾 Enregistrer les modifications</button>
+        </div>
       </div>
     </div>
   </div>
@@ -232,6 +244,9 @@
       });
     }
 
+    var counts = {};       // nombre de produits par catégorie (catalogue.json)
+    var dirty = false;
+
     function load(){
       st('saving', 'Chargement…');
       gitGet(FILE).then(function(d){
@@ -240,10 +255,23 @@
         rayons = (parsed.rayons || []).map(function(r){
           return { id: r.id, nom: r.nom, icone: r.icone, actif: r.actif !== false };
         });
+        dirty = false;
         st('', '');
+        render();
+        return gitGet('data/catalogue.json');
+      }).then(function(d){
+        var cat = JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\n/g,'')))));
+        counts = {};
+        (cat.produits || []).forEach(function(p){ counts[p.categorie] = (counts[p.categorie] || 0) + 1; });
         render();
       }).catch(function(e){ st('error', 'Erreur chargement : '+e.message); });
     }
+
+    function markDirty(){
+      dirty = true;
+      document.getElementById('unsavedMsg').textContent = 'Modifications non enregistrées — cliquez sur « Enregistrer » pour publier.';
+    }
+    window.addEventListener('beforeunload', function(ev){ if(dirty){ ev.preventDefault(); ev.returnValue = ''; } });
 
     function catById(id){
       return ALL_CATEGORIES.find(function(c){ return c.id === id; }) || { id: id, nom: id, icone: id+'.svg' };
@@ -272,7 +300,10 @@
           '</div>' +
           '<img class="rayon-icon" src="../assets/icons/'+esc(cat.icone)+'" alt="" onerror="this.style.display=\'none\'">' +
           '<div class="rayon-info">' +
-            '<div class="rayon-name">'+esc(r.nom || cat.nom)+'</div>' +
+            '<div class="rayon-name">'+esc(r.nom || cat.nom)+
+              '<span class="rayon-count">'+(counts[r.id] ? counts[r.id]+' produit'+(counts[r.id]>1?'s':'') : 'aucun produit')+'</span>'+
+              '<button class="rayon-edit" onclick="renameRayon('+i+')" title="Renommer">✏️</button>'+
+            '</div>' +
             '<span class="rayon-badge '+(r.actif?'rayon-badge--on':'rayon-badge--off')+'">'+(r.actif?'✓ Visible':'⏸ Suspendu')+'</span>' +
           '</div>' +
           '<div class="toggle-wrap">' +
@@ -285,7 +316,70 @@
           '<button class="rayon-del" onclick="removeRayon('+i+')" title="Supprimer définitivement">✕</button>';
         list.appendChild(row);
       });
+      renderChips();
+      renderOrphans();
     }
+
+    function hasRayon(id){ return rayons.some(function(r){ return r.id === id; }); }
+
+    function renderChips(){
+      var box = document.getElementById('stdChips');
+      box.innerHTML = '';
+      ALL_CATEGORIES.forEach(function(c){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'chip' + (hasRayon(c.id) ? ' is-added' : '');
+        b.innerHTML = '<img src="../assets/icons/'+esc(c.icone)+'" alt="">' + esc(c.nom) + (hasRayon(c.id) ? ' ✓' : '');
+        b.title = hasRayon(c.id) ? 'Déjà dans la liste' : 'Ajouter ce rayon';
+        if(!hasRayon(c.id)) b.onclick = function(){ rayons.push({ id: c.id, nom: c.nom, icone: c.icone, actif: true }); markDirty(); render(); };
+        box.appendChild(b);
+      });
+      var grid = document.getElementById('iconGrid');
+      if(!grid.children.length){
+        ALL_CATEGORIES.forEach(function(c){
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'icon-btn' + (c.icone === document.getElementById('newCatIcone').value ? ' is-selected' : '');
+          b.setAttribute('data-icone', c.icone);
+          b.innerHTML = '<img src="../assets/icons/'+esc(c.icone)+'" alt="">' + esc(c.nom.split(/[,&]/)[0].trim());
+          b.onclick = function(){
+            document.getElementById('newCatIcone').value = c.icone;
+            grid.querySelectorAll('.icon-btn').forEach(function(x){ x.classList.toggle('is-selected', x === b); });
+          };
+          grid.appendChild(b);
+        });
+      }
+    }
+
+    // Produits dont le rayon n'existe plus : on propose de le recréer en un clic
+    function renderOrphans(){
+      var box = document.getElementById('orphansBox');
+      var ids = Object.keys(counts).filter(function(id){ return id && !hasRayon(id); });
+      if(!ids.length){ box.style.display = 'none'; box.innerHTML = ''; return; }
+      box.style.display = 'block';
+      box.innerHTML = '<strong>⚠️ Des produits sont rangés dans des rayons qui n\'existent plus :</strong><ul>' +
+        ids.map(function(id){
+          var c = catById(id);
+          return '<li><span>'+esc(c.nom)+' — '+counts[id]+' produit'+(counts[id]>1?'s':'')+'</span>' +
+            '<button class="btn btn-primary" onclick="restoreRayon(\''+esc(id)+'\')">Recréer ce rayon</button></li>';
+        }).join('') + '</ul><span class="hint">Ces produits restent invisibles sur le site tant que leur rayon n\'existe pas. Pensez à « Enregistrer » après.</span>';
+    }
+
+    window.restoreRayon = function(id){
+      if(hasRayon(id)) return;
+      var c = catById(id);
+      rayons.push({ id: id, nom: c.nom, icone: c.icone, actif: true });
+      markDirty(); render();
+    };
+
+    window.renameRayon = function(i){
+      var nom = prompt('Nouveau nom du rayon :', rayons[i].nom || '');
+      if(nom === null) return;
+      nom = nom.trim();
+      if(!nom) return;
+      rayons[i].nom = nom;
+      markDirty(); render();
+    };
 
     function slugify(str){
       return str.toLowerCase()
@@ -296,20 +390,20 @@
 
     window.toggleActif = function(i, checked){
       rayons[i].actif = checked;
-      render();
+      markDirty(); render();
     };
 
     window.move = function(i, dir){
       var j = i + dir;
       if(j < 0 || j >= rayons.length) return;
       var tmp = rayons[i]; rayons[i] = rayons[j]; rayons[j] = tmp;
-      render();
+      markDirty(); render();
     };
 
     window.removeRayon = function(i){
       if(!confirm('Supprimer "'+esc(rayons[i].nom || rayons[i].id)+'" définitivement ?\n\nConseil : utilisez plutôt le toggle pour le suspendre.')) return;
       rayons.splice(i, 1);
-      render();
+      markDirty(); render();
     };
 
     window.addRayon = function(){
@@ -317,9 +411,13 @@
       if(!nom){ alert('Tapez un nom de rayon.'); document.getElementById('newCatNom').focus(); return; }
       var icone = document.getElementById('newCatIcone').value;
       var id = slugify(nom) || ('rayon-' + Date.now());
+      // Si le nom correspond à un rayon habituel, on reprend son identifiant (les produits existants s'y rattachent)
+      var std = ALL_CATEGORIES.find(function(c){ return slugify(c.nom) === id || c.id === id; });
+      if(std){ id = std.id; }
+      if(hasRayon(id)){ alert('Ce rayon existe déjà dans la liste.'); return; }
       rayons.push({ id: id, nom: nom, icone: icone, actif: true });
       document.getElementById('newCatNom').value = '';
-      render();
+      markDirty(); render();
     };
 
     window.saveRayons = function(){
@@ -328,6 +426,8 @@
       gitPut(FILE, { message: 'Mise à jour étagères boutique', sha: fileSha, content: content })
         .then(function(d){
           fileSha = d.content ? d.content.sha : fileSha;
+          dirty = false;
+          document.getElementById('unsavedMsg').textContent = '';
           st('saved', '✓ Enregistré — visible sur le site dans quelques secondes');
           setTimeout(function(){ st('',''); }, 6000);
         })
