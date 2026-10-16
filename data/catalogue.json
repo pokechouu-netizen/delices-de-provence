@@ -90,19 +90,6 @@
       "visible": true
     },
     {
-      "id": "olive-04",
-      "nom": "Olivade Provençale",
-      "categorie": "autour-olive",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/autour-olive/olive-04.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "olive-05",
       "nom": "Pesto à l'Huile d'Olive",
       "categorie": "autour-olive",
