@@ -132,14 +132,22 @@
       "id": "olive-06",
       "nom": "Huile d'Olive aux Herbes",
       "categorie": "autour-olive",
-      "description": "",
+      "description": "L’huile d’olive vierge-extra Classic est le résultat d’un assemblage de\nquatre variétés d’olives typiques de l’A.O.P. Vallée des Baux de Provence :  Aglandau, Salonenque, Grossane et Verdale.\nClassic AOP Vallée des Baux de\nProvence va ravir les amateurs de\nfruité vert par sa complexité et son\nharmonie.\nL’ensemble aromatique d’une grande\nfraîcheur présente des saveurs nettes\net équilibrées. Les arômes dominants\nd’artichaut cru, de banane verte et de\npomme se mêlent harmonieusement\navec les arômes secondaires\nd’amande fraîche et de noisette.\nLe fruité d’une belle intensité fait\napparaître une élégante persistance\nen bouche.",
       "legende": "",
       "image": "assets/catalogue/autour-olive/olive-06.jpg",
       "best_seller": false,
       "prix": "",
       "contenance": "",
       "prix_unitaire": "",
-      "visible": true
+      "visible": true,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      }
     },
     {
       "id": "olive-07",
