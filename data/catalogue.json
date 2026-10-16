@@ -1554,7 +1554,7 @@
       "prix": "",
       "contenance": "",
       "prix_unitaire": "",
-      "visible": false,
+      "visible": true,
       "best_seller": false,
       "image": "",
       "id": "p-1781175815668"
