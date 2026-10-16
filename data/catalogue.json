@@ -278,19 +278,6 @@
       "visible": true
     },
     {
-      "id": "chocolat-02",
-      "nom": "Chocolat au Lait & Lavande",
-      "categorie": "chocolat",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/chocolat/chocolat-02.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "chocolat-03",
       "nom": "Confiserie de Provence",
       "categorie": "chocolat",
