@@ -265,19 +265,6 @@
       "visible": true
     },
     {
-      "id": "chocolat-01",
-      "nom": "Chocolat Noir Artisanal",
-      "categorie": "chocolat",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/chocolat/chocolat-01.jpg",
-      "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "chocolat-03",
       "nom": "Confiserie de Provence",
       "categorie": "chocolat",
