@@ -780,19 +780,6 @@
       "visible": true
     },
     {
-      "id": "plat-02",
-      "nom": "Ratatouille Maison",
-      "categorie": "plats-cuisines",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/plats-cuisines/plat-02.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "plat-03",
       "nom": "Soupe au Pistou",
       "categorie": "plats-cuisines",
