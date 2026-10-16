@@ -858,19 +858,6 @@
       "visible": true
     },
     {
-      "id": "sel-15",
-      "nom": "Sel aux Algues Marines",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-15.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-17",
       "nom": "Sel Méditerranéen",
       "categorie": "sel-camargue",
