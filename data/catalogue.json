@@ -923,19 +923,6 @@
       "visible": true
     },
     {
-      "id": "sel-18",
-      "nom": "Sel Artisanal Maison",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-18.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-21",
       "nom": "Sel au Poivre Blanc",
       "categorie": "sel-camargue",
