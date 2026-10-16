@@ -793,19 +793,6 @@
       "visible": true
     },
     {
-      "id": "sel-05",
-      "nom": "Sel au Piment d'Espelette",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-05.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-07",
       "nom": "Sel Fumé",
       "categorie": "sel-camargue",
