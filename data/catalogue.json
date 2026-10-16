@@ -780,19 +780,6 @@
       "visible": true
     },
     {
-      "id": "sel-08",
-      "nom": "Sel Noir Hawaïen",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-08.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-09",
       "nom": "Sel Rose de l'Himalaya",
       "categorie": "sel-camargue",
