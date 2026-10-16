@@ -1966,19 +1966,6 @@
       "visible": true
     },
     {
-      "id": "terrine-20",
-      "nom": "Anchoïade en Pot",
-      "categorie": "terrines",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/terrines/terrine-20.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "terrine-21",
       "nom": "Terrine Maison du Chef",
       "categorie": "terrines",
