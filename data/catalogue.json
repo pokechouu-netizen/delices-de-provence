@@ -1199,19 +1199,6 @@
       "visible": true
     },
     {
-      "id": "sel-11",
-      "nom": "Fleur de Sel au Basilic",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-11.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-12",
       "nom": "Sel de Guérande",
       "categorie": "sel-camargue",
