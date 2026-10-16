@@ -793,19 +793,6 @@
       "visible": true
     },
     {
-      "id": "miel-03",
-      "nom": "Miel Toutes Fleurs",
-      "categorie": "miel",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/miel/miel-03.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "pates-riz-01",
       "nom": "Pâtes Artisanales Provençales",
       "categorie": "pates-riz",
