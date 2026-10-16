@@ -1352,19 +1352,6 @@
       "visible": true
     },
     {
-      "id": "terrine-04",
-      "nom": "Mousse de Foie",
-      "categorie": "terrines",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/terrines/terrine-04.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "terrine-05",
       "nom": "Terrine de Sanglier",
       "categorie": "terrines",
