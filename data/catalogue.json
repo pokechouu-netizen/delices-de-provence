@@ -806,19 +806,6 @@
       "visible": true
     },
     {
-      "id": "jus-01",
-      "nom": "Jus de Fruit Artisanal",
-      "categorie": "jus",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/jus/jus-01.jpg",
-      "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "jus-02",
       "nom": "Jus de Pêche de Provence",
       "categorie": "jus",
