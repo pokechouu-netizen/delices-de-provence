@@ -835,19 +835,6 @@
       }
     },
     {
-      "id": "epice-01",
-      "nom": "Herbes de Provence",
-      "categorie": "epices",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/epices/epice-01.jpg",
-      "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "epice-02",
       "nom": "Lavande Culinaire",
       "categorie": "epices",
