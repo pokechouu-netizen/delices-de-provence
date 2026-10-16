@@ -1567,7 +1567,7 @@
       "prix": "1000€",
       "contenance": "",
       "prix_unitaire": "",
-      "visible": false,
+      "visible": true,
       "best_seller": false,
       "image": "",
       "id": "p-1781245433659"
