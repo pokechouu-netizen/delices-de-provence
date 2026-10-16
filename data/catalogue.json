@@ -780,19 +780,6 @@
       }
     },
     {
-      "id": "epice-02",
-      "nom": "Lavande Culinaire",
-      "categorie": "epices",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/epices/epice-02.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "epice-03",
       "nom": "Mélanges d'Épices",
       "categorie": "epices",
