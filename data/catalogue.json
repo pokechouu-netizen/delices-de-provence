@@ -806,19 +806,6 @@
       "visible": true
     },
     {
-      "id": "sel-17",
-      "nom": "Sel Méditerranéen",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-17.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sirop-01",
       "nom": "Sirop de Lavande",
       "categorie": "sirops",
