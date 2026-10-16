@@ -1469,19 +1469,6 @@
       "visible": true
     },
     {
-      "id": "terrine-14",
-      "nom": "Mousse de Truite",
-      "categorie": "terrines",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/terrines/terrine-14.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "terrine-15",
       "nom": "Terrine de Saumon",
       "categorie": "terrines",
