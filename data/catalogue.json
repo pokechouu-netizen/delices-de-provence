@@ -871,19 +871,6 @@
       "visible": true
     },
     {
-      "id": "sel-10",
-      "nom": "Sel & Poivre du Moulin",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-10.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-12",
       "nom": "Sel de Guérande",
       "categorie": "sel-camargue",
