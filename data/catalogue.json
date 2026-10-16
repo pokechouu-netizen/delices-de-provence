@@ -1069,19 +1069,6 @@
       "visible": true
     },
     {
-      "id": "sel-01",
-      "nom": "Fleur de Sel de Camargue",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-01.jpg",
-      "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-02",
       "nom": "Sel aux Herbes de Provence",
       "categorie": "sel-camargue",
