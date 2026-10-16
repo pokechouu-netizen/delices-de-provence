@@ -1069,19 +1069,6 @@
       "visible": true
     },
     {
-      "id": "sel-03",
-      "nom": "Gros Sel de Camargue",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-03.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-04",
       "nom": "Sel à la Lavande",
       "categorie": "sel-camargue",
