@@ -143,16 +143,24 @@
     },
     {
       "id": "olive-07",
-      "nom": "Anchoïade Provençale",
+      "nom": "Classic AOP Provence",
       "categorie": "autour-olive",
       "description": "",
       "legende": "",
-      "image": "assets/catalogue/autour-olive/olive-07.jpg",
+      "image": "assets/catalogue/1792156372615_castelas-aop-provence-recadre.jpg",
       "best_seller": false,
       "prix": "",
       "contenance": "",
       "prix_unitaire": "",
-      "visible": true
+      "visible": true,
+      "suggestion_active": false,
+      "suggestion": "",
+      "nutrition": {
+        "actif": false,
+        "portion": "100 g",
+        "note": "",
+        "lignes": []
+      }
     },
     {
       "id": "biere-01",
