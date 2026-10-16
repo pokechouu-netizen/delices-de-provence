@@ -754,19 +754,6 @@
       }
     },
     {
-      "id": "pates-riz-01",
-      "nom": "Pâtes Artisanales Provençales",
-      "categorie": "pates-riz",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/pates-riz/pates-riz-01.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "pates-riz-02",
       "nom": "Riz de Camargue",
       "categorie": "pates-riz",
