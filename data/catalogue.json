@@ -780,19 +780,6 @@
       "visible": true
     },
     {
-      "id": "sel-02",
-      "nom": "Sel aux Herbes de Provence",
-      "categorie": "sel-camargue",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sel-camargue/sel-02.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-07",
       "nom": "Sel Fumé",
       "categorie": "sel-camargue",
