@@ -187,19 +187,6 @@
       }
     },
     {
-      "id": "biscuit-sale-01",
-      "nom": "Biscuits aux Herbes de Provence",
-      "categorie": "biscuits-sales",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/biscuits-sales/biscuit-sale-01.jpg",
-      "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "biscuit-sale-02",
       "nom": "Gressins à l'Huile d'Olive",
       "categorie": "biscuits-sales",
