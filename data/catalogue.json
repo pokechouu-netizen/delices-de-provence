@@ -1186,19 +1186,6 @@
       "visible": true
     },
     {
-      "id": "plat-06",
-      "nom": "Brandade de Morue",
-      "categorie": "plats-cuisines",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/plats-cuisines/plat-06.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sel-01",
       "nom": "Fleur de Sel de Camargue",
       "categorie": "sel-camargue",
