@@ -200,19 +200,6 @@
       "visible": true
     },
     {
-      "id": "biscuit-sale-03",
-      "nom": "Crackers Provençaux",
-      "categorie": "biscuits-sales",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/biscuits-sales/biscuit-sale-03.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "biscuit-sucre-02",
       "nom": "Navettes Provençales",
       "categorie": "biscuits-sucres",
