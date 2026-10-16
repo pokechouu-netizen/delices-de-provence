@@ -156,10 +156,18 @@
       "suggestion_active": true,
       "suggestion": "Classic AOP Provence est une huile d’olive plaisir qui s’associe très bien à l’assaisonnement des salades, légumes et poisson tout au long de l’année.",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Energie : 3700 kj / 900 kcal",
+          "Matières grasses : 100g",
+          "dont acides gras saturés : 17g",
+          "Glucides : <0,5g",
+          "dont sucres : <0,5g",
+          "Protéines : <0,5g",
+          "Sel : 0,02g"
+        ]
       }
     },
     {
