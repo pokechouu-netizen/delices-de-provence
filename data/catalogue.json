@@ -140,8 +140,8 @@
       "contenance": "",
       "prix_unitaire": "",
       "visible": true,
-      "suggestion_active": false,
-      "suggestion": "",
+      "suggestion_active": true,
+      "suggestion": "C'est une huile d’olive délicate, complexe et harmonieuse qu’il\nconvient d’utiliser en filet à cru. Elle se dévoile aussi bien sur des plats chauds et cuits tels que légumes à la vapeur, poissons, pâtes fraîches que sur des salades vertes, des crudités et le fromage.",
       "nutrition": {
         "actif": false,
         "portion": "100 g",
