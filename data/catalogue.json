@@ -819,19 +819,6 @@
       "visible": true
     },
     {
-      "id": "sirop-06",
-      "nom": "Sirop de Grenadine",
-      "categorie": "sirops",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/sirops/sirop-06.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "sirop-08",
       "nom": "Sirop de Menthe",
       "categorie": "sirops",
