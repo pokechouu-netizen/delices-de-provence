@@ -187,19 +187,6 @@
       }
     },
     {
-      "id": "biere-01",
-      "nom": "Bière Artisanale Blonde",
-      "categorie": "bieres",
-      "description": "",
-      "legende": "",
-      "image": "assets/catalogue/bieres/biere-01.jpg",
-      "best_seller": true,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true
-    },
-    {
       "id": "biere-03",
       "nom": "Bière Artisanale Brune",
       "categorie": "bieres",
