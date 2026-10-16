@@ -143,10 +143,18 @@
       "suggestion_active": true,
       "suggestion": "C'est une huile d’olive délicate, complexe et harmonieuse qu’il\nconvient d’utiliser en filet à cru. Elle se dévoile aussi bien sur des plats chauds et cuits tels que légumes à la vapeur, poissons, pâtes fraîches que sur des salades vertes, des crudités et le fromage.",
       "nutrition": {
-        "actif": false,
+        "actif": true,
         "portion": "100 g",
         "note": "",
-        "lignes": []
+        "lignes": [
+          "Energie : 3700 kj / 900 kcal",
+          "Matières grasses : 100g",
+          "dont acides gras saturés : 17g",
+          "Glucides : <0,5g",
+          "dont sucres : <0,5g",
+          "Protéines : <0,5g",
+          "Sel : 0,02g"
+        ]
       }
     },
     {
