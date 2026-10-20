@@ -33,7 +33,7 @@
   var photoGrid        = document.getElementById('catalogueGridPhotos');
   var countEl          = document.getElementById('catalogueCount');
 
-  if (!filtersContainer || !photoGrid) return;
+  if (!photoGrid) return;
 
   // ── Build one product card ──
   function buildCard(product) {
@@ -67,6 +67,10 @@
       prixHtml += '<span class="photo-card__prix-unit">' + escHtml(prixU) + '</span>';
     }
 
+    // Courte description : première phrase / ligne, coupée proprement
+    var court = String(desc || '').replace(/\s+/g, ' ').trim();
+    if (court.length > 110) court = court.slice(0, 110).replace(/\s+\S*$/, '') + '…';
+
     card.innerHTML =
       '<div class="photo-card__img-wrap">' +
         '<img src="' + escAttr(product.image) + '" alt="' + escAttr(nom + ' — Délices de Provence Valréas') + '" loading="lazy">' +
@@ -74,7 +78,15 @@
           '<span class="photo-card__zoom">' + zoomSvg() + '</span>' +
         '</div>' +
       '</div>' +
-      (nom ? '<span class="photo-card__nom">' + escHtml(nom) + '</span>' : '') +
+      '<div class="photo-card__body">' +
+        '<span class="photo-card__nom">' + escHtml(nom || 'Produit') + '</span>' +
+        (cont ? '<span class="photo-card__format">' + escHtml(cont) + '</span>' : '') +
+        (court ? '<p class="photo-card__desc">' + escHtml(court) + '</p>' : '') +
+        '<div class="photo-card__foot">' +
+          (prix ? '<span class="photo-card__price">' + escHtml(prix) + (prixU ? '<small>' + escHtml(prixU) + '</small>' : '') + '</span>' : '<span></span>') +
+          '<span class="photo-card__btn">Voir la fiche</span>' +
+        '</div>' +
+      '</div>' +
       (prixHtml ? '<div class="photo-card__prix-wrap">' + prixHtml + '</div>' : '');
 
     // Suggestion + valeurs nutritionnelles (affichées dans la fiche)
@@ -173,34 +185,15 @@
   }
 
   // ── Filters logic ──
+  // ── Filtre par liste de rayons (piloté par la page Nos produits) ──
   function initFilters(allCards) {
-    var filterBtns  = filtersContainer.querySelectorAll('.catalogue__filter');
-    var inputMin    = document.getElementById('prixInputMin');
-    var inputMax    = document.getElementById('prixInputMax');
-    var labelMin    = document.getElementById('prixLabelMin');
-    var labelMax    = document.getElementById('prixLabelMax');
-    var fill        = document.getElementById('prixFill');
-    var MAX         = 150;
-
-    var activeCat   = 'all';
-    var activeMin   = 0;
-    var activeMax   = MAX;
-
-    function updateFill() {
-      if (!fill || !inputMin || !inputMax) return;
-      var pctMin = activeMin / MAX * 100;
-      var pctMax = activeMax / MAX * 100;
-      fill.style.left  = pctMin + '%';
-      fill.style.width = (pctMax - pctMin) + '%';
-    }
+    var activeCats = null;   // null = tout
 
     function applyFilters() {
       var visible = 0;
       allCards.forEach(function (card) {
-        var catOk  = activeCat === 'all' || card.getAttribute('data-category') === activeCat;
-        var p      = parsePrix(card.getAttribute('data-prix'));
-        var prixOk = p === null || (p >= activeMin && (activeMax === MAX || p <= activeMax));
-        if (catOk && prixOk) {
+        var ok = !activeCats || activeCats.indexOf(card.getAttribute('data-category')) !== -1;
+        if (ok) {
           card.classList.remove('hidden');
           card.classList.add('fade-in');
           setTimeout(function () { card.classList.remove('fade-in'); }, 400);
@@ -210,36 +203,22 @@
           card.classList.remove('fade-in');
         }
       });
-      if (countEl) countEl.textContent = visible + ' produit' + (visible > 1 ? 's' : '');
+      if (countEl) countEl.textContent = visible ? visible + ' produit' + (visible > 1 ? 's' : '') : 'Aucun produit dans cette sélection pour le moment.';
     }
 
-    filterBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        filterBtns.forEach(function (b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        activeCat = btn.getAttribute('data-filter');
-        applyFilters();
-      });
-    });
+    window.catalogueFilter = function (cats) {
+      activeCats = (cats && cats.length) ? cats : null;
+      applyFilters();
+    };
 
-    if (inputMin && inputMax) {
-      inputMin.addEventListener('input', function () {
-        var v = parseInt(inputMin.value);
-        if (v > activeMax) { inputMin.value = activeMax; v = activeMax; }
-        activeMin = v;
-        if (labelMin) labelMin.textContent = v + ' €';
-        updateFill();
-        applyFilters();
+    // Boutons de filtre éventuels (compatibilité)
+    if (filtersContainer) {
+      filtersContainer.querySelectorAll('.catalogue__filter').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var f = btn.getAttribute('data-filter');
+          window.catalogueFilter(f === 'all' ? null : [f]);
+        });
       });
-      inputMax.addEventListener('input', function () {
-        var v = parseInt(inputMax.value);
-        if (v < activeMin) { inputMax.value = activeMin; v = activeMin; }
-        activeMax = v;
-        if (labelMax) labelMax.textContent = v === MAX ? v + ' €+' : v + ' €';
-        updateFill();
-        applyFilters();
-      });
-      updateFill();
     }
 
     applyFilters();
@@ -420,6 +399,11 @@
       observeCards(allCards);
       initFilters(allCards);
       initLightbox(allCards);
+
+      // Nombre de produits par rayon, pour les sous-catégories de la page
+      var parCat = {};
+      produits.forEach(function (p) { parCat[p.categorie] = (parCat[p.categorie] || 0) + 1; });
+      if (window.onCatalogueReady) window.onCatalogueReady(parCat);
     })
     .catch(function (err) {
       console.warn('catalogue.js :', err);
