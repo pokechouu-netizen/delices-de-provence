@@ -11,6 +11,12 @@
       "nom": "Confitures",
       "icone": "confitures.svg",
       "actif": true
+    },
+    {
+      "id": "autour-olive",
+      "nom": "Autour de l'Olive",
+      "icone": "autour-olive.svg",
+      "actif": true
     }
   ]
 }
