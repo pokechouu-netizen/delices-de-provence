@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Boutique — Délices de Provence, Épicerie Fine à Valréas</title>
+  <title>Nos produits — Délices de Provence, Épicerie Fine à Valréas</title>
   <meta name="description" content="Explorez nos rayons : vins, confitures, miel, huile d'olive, terrines, chocolat et bien plus. Épicerie fine artisanale à Valréas.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -264,7 +264,7 @@
     <a href="index.html" class="nav__brand nav__brand--l">Délices de Provence</a>
 
     <ul class="nav__links--c">
-        <li><a href="index.html#boutique" class="nav__link active">Boutique</a></li>
+        <li><a href="index.html#boutique" class="nav__link active">Nos produits</a></li>
         <li><a href="tresors.html" class="nav__link">Sélection du mois</a></li>
         <li><a href="entreprises.html" class="nav__link">Espace pro</a></li>
         <li><a href="qui-sommes-nous.html" class="nav__link">L'histoire</a></li>
@@ -281,7 +281,7 @@
 
     <div class="nav__menu">
       <ul class="nav__links">
-        <li><a href="index.html#boutique" class="nav__link active">Boutique</a></li>
+        <li><a href="index.html#boutique" class="nav__link active">Nos produits</a></li>
         <li><a href="tresors.html" class="nav__link">Sélection du mois</a></li>
         <li><a href="entreprises.html" class="nav__link">Espace pro</a></li>
         <li><a href="qui-sommes-nous.html" class="nav__link">L'histoire</a></li>
@@ -301,67 +301,32 @@
 
   </nav>
 
-  <!-- ===== BOUTIQUE HERO ===== -->
-  <header class="boutique-hero">
-    <a href="index.html" class="boutique-hero__back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
-      Retour à l'accueil
-    </a>
-    <div class="boutique-hero__inner">
-      <h1 class="boutique-hero__title">Nos Rayons</h1>
-    </div>
-  </header>
+  <!-- ===== NOS PRODUITS : UNIVERS GOURMANDS ===== -->
+  <main class="univers-page" id="catalogue">
+    <div class="univers-page__inner">
 
-  <!-- ===== CATALOGUE ===== -->
-  <section class="section shelves-section" id="catalogue">
-    <div class="section__inner shelves-wrapper">
-
-      <!-- Hidden filter buttons used by catalogue.js -->
-      <div id="catalogueFilters" style="position:absolute;visibility:hidden;pointer-events:none;height:0;overflow:hidden">
-        <button class="catalogue__filter active" data-filter="all">Tous</button>
-        <button class="catalogue__filter" data-filter="alcools">Alcools &amp; Champagnes</button>
-        <button class="catalogue__filter" data-filter="autour-olive">Autour de l'Olive</button>
-        <button class="catalogue__filter" data-filter="bieres">Bières</button>
-        <button class="catalogue__filter" data-filter="biscuits-sales">Biscuits Salés</button>
-        <button class="catalogue__filter" data-filter="biscuits-sucres">Biscuits Sucrés</button>
-        <button class="catalogue__filter" data-filter="cafe-the">Café, Thé &amp; Infusions</button>
-        <button class="catalogue__filter" data-filter="chocolat">Chocolat &amp; Confiseries</button>
-        <button class="catalogue__filter" data-filter="confitures">Confitures</button>
-        <button class="catalogue__filter" data-filter="epices">Épices &amp; Lavande</button>
-        <button class="catalogue__filter" data-filter="jus">Jus de Fruits</button>
-        <button class="catalogue__filter" data-filter="miel">Miel</button>
-        <button class="catalogue__filter" data-filter="pates-riz">Pâtes, Riz &amp; Ravioles</button>
-        <button class="catalogue__filter" data-filter="plats-cuisines">Plats Cuisinés</button>
-        <button class="catalogue__filter" data-filter="sel-camargue">Sel de Camargue</button>
-        <button class="catalogue__filter" data-filter="sirops">Sirops</button>
-        <button class="catalogue__filter" data-filter="terrines">Terrines &amp; Charcuteries</button>
-        <button class="catalogue__filter" data-filter="vins">Vins</button>
+      <!-- Accueil des univers -->
+      <div id="universHome">
+        <section class="univers-intro reveal visible">
+          <p class="univers-intro__label">Nos univers gourmands</p>
+          <h1 class="univers-intro__title" id="universTitre">Le goût de la Provence</h1>
+          <p class="univers-intro__text" id="universIntro">Des produits choisis avec soin, à découvrir au fil de vos envies.</p>
+        </section>
+        <div class="univers-grid" id="universGrid" aria-label="Nos univers"></div>
       </div>
 
-      <!-- ===== SVG SHELF UNIT ===== -->
-      <div class="shelves-frame" id="shelvesUnit">
-
-        <div class="shelves-cornice" aria-hidden="true"></div>
-
-        <div class="shelves-header">
-          <p class="shelves-header__title">Délices de Provence</p>
+      <!-- Intérieur d'un univers -->
+      <div id="universView" style="display:none">
+        <div class="univers-view__top">
+          <button class="univers-back" id="universBack" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+            Nos univers
+          </button>
         </div>
-
-        <div class="shelves-grid" id="shelvesGrid">
-          <!-- Chargé dynamiquement depuis data/rayons.json -->
-        </div>
-
-        <div class="shelves-plinth" aria-hidden="true"></div>
-
-      </div><!-- /.shelves-frame -->
-
-      <!-- ===== CATEGORY PRODUCT VIEW ===== -->
-      <div id="categoryView" style="display:none">
-        <button class="catalogue-back-btn" id="catalogueBack">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
-          Nos rayons
-        </button>
-        <h2 class="catalogue-cat-title" id="catalogueCatTitle"></h2>
+        <h2 class="univers-view__title" id="universViewTitle"></h2>
+        <p class="univers-view__sub" id="universViewSub"></p>
+        <div class="sous-cats" id="sousCats" aria-label="Sous-catégories"></div>
+        <p class="catalogue-count" id="catalogueCount"></p>
         <div class="catalogue__grid catalogue__grid--photos" id="catalogueGridPhotos">
           <div class="catalogue__loader">
             <div class="catalogue__spinner"></div>
@@ -371,7 +336,7 @@
       </div>
 
     </div>
-  </section>
+  </main>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer-mini">
@@ -441,119 +406,134 @@
 
   <script>
   (function () {
-    var shelvesUnit  = document.getElementById('shelvesUnit');
-    var shelvesGrid  = document.getElementById('shelvesGrid');
-    var categoryView = document.getElementById('categoryView');
-    var catTitle     = document.getElementById('catalogueCatTitle');
-    var backBtn      = document.getElementById('catalogueBack');
-    var CAT_NAMES    = {};
+    var home     = document.getElementById('universHome');
+    var view     = document.getElementById('universView');
+    var grid     = document.getElementById('universGrid');
+    var sousCats = document.getElementById('sousCats');
+    var vTitle   = document.getElementById('universViewTitle');
+    var vSub     = document.getElementById('universViewSub');
 
-    function buildPlank() {
-      var plank = document.createElement('div');
-      plank.className = 'shelves-plank';
-      plank.setAttribute('aria-hidden', 'true');
-      return plank;
+    var RAYONS = [], UNIVERS = [], counts = {};
+    var current = null, currentCat = 'all';
+
+    function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function rayon(id) { return RAYONS.find(function (r) { return r.id === id; }); }
+
+    /* Filtre produits : catalogue.js peut ne pas être prêt */
+    var pendingCats = null;
+    function filtrer(cats) {
+      if (window.catalogueFilter) window.catalogueFilter(cats);
+      else pendingCats = cats;
+    }
+    window.onCatalogueReady = function (cardsByCat) {
+      counts = cardsByCat || {};
+      if (pendingCats) { window.catalogueFilter(pendingCats); pendingCats = null; }
+      if (current) renderSousCats();
+      renderHome();
+    };
+
+    /* Univers effectifs : rayons actifs présents dans rayons.json ; les rayons
+       hors univers vont dans « Autres découvertes » ; univers vides masqués. */
+    function universEffectifs() {
+      var actifs = RAYONS.filter(function (r) { return r.actif !== false; });
+      var places = {};
+      var list = UNIVERS.map(function (u) {
+        var rs = (u.rayons || []).map(rayon).filter(function (r) { return r && r.actif !== false; });
+        rs.forEach(function (r) { places[r.id] = true; });
+        return { id: u.id, nom: u.nom, sous_titre: u.sous_titre || '', image: u.image || '', rayons: rs };
+      });
+      var restants = actifs.filter(function (r) { return !places[r.id]; });
+      if (restants.length) list.push({ id: 'autres', nom: 'Autres découvertes', sous_titre: restants.map(function (r) { return r.nom; }).join(' • '), image: 'assets/images/ardoise-produits.jpg', rayons: restants });
+      return list.filter(function (u) { return u.rayons.length; });
     }
 
-    function buildShelf(rayon, i) {
-      var a = document.createElement('a');
-      a.className = 'shelf-cat';
-      a.href = 'boutique.html?cat=' + rayon.id;
-      a.style.setProperty('--i', Math.min(i, 12));
-      var medal = document.createElement('span');
-      medal.className = 'shelf-cat__medal';
-      var img = document.createElement('img');
-      img.className = 'shelf-cat__icon';
-      img.src = 'assets/icons/' + rayon.icone;
-      img.alt = '';
-      medal.appendChild(img);
-      var nameSpan = document.createElement('span');
-      nameSpan.className = 'shelf-cat__name';
-      nameSpan.textContent = rayon.nom;
-      var arrow = document.createElement('span');
-      arrow.className = 'shelf-cat__arrow';
-      arrow.setAttribute('aria-hidden', 'true');
-      arrow.textContent = '→';
-      a.appendChild(medal);
-      a.appendChild(nameSpan);
-      a.appendChild(arrow);
-      return a;
-    }
-
-    var lastRayons = [], lastCols = 0;
-    function gridCols() {
-      var cols = getComputedStyle(shelvesGrid).gridTemplateColumns.split(' ').filter(Boolean).length;
-      return cols || 1;
-    }
-    function renderShelves(rayons) {
-      if (!shelvesGrid) return;
-      lastRayons = rayons;
-      shelvesGrid.innerHTML = '';
-      var cols = gridCols();
-      lastCols = cols;
-      rayons.forEach(function(rayon, i) {
-        CAT_NAMES[rayon.id] = rayon.nom;
-        shelvesGrid.appendChild(buildShelf(rayon, i));
-        if (i % cols === cols - 1 || i === rayons.length - 1) {
-          shelvesGrid.appendChild(buildPlank());
-        }
+    function renderHome() {
+      var list = universEffectifs();
+      grid.innerHTML = '';
+      if (!list.length) {
+        grid.innerHTML = '<p class="univers-empty" style="grid-column:1/-1">Nos rayons sont en cours de mise en place — revenez très vite !</p>';
+        return;
+      }
+      list.forEach(function (u, i) {
+        var a = document.createElement('a');
+        a.className = 'univers-card';
+        a.href = 'boutique.html?univers=' + encodeURIComponent(u.id);
+        a.style.setProperty('--i', i);
+        var sub = u.sous_titre || u.rayons.map(function (r) { return r.nom; }).join(' • ');
+        a.innerHTML =
+          (u.image ? '<img class="univers-card__img" src="' + esc(u.image) + '" alt="" loading="lazy">' : '<div class="univers-card__img"></div>') +
+          '<div class="univers-card__body">' +
+            '<h2 class="univers-card__title">' + esc(u.nom) + '</h2>' +
+            '<p class="univers-card__sub">' + esc(sub) + '</p>' +
+            '<span class="univers-card__link">Découvrir <span aria-hidden="true">→</span></span>' +
+          '</div>';
+        a.addEventListener('click', function (ev) { ev.preventDefault(); openUnivers(u.id, 'all', true); });
+        grid.appendChild(a);
       });
     }
-    var resizeT;
-    window.addEventListener('resize', function () {
-      clearTimeout(resizeT);
-      resizeT = setTimeout(function () {
-        if (lastRayons.length && gridCols() !== lastCols) renderShelves(lastRayons);
-      }, 150);
-    });
 
-    function ensureFilterBtn(cat) {
-      var existing = document.querySelector('#catalogueFilters [data-filter="' + cat + '"]');
-      if (existing) return existing;
-      var btn = document.createElement('button');
-      btn.className = 'catalogue__filter';
-      btn.setAttribute('data-filter', cat);
-      btn.textContent = cat;
-      document.getElementById('catalogueFilters').appendChild(btn);
-      return btn;
-    }
-
-    function showCategory(cat) {
-      shelvesUnit.style.display  = 'none';
-      categoryView.style.display = 'block';
-      catTitle.textContent = CAT_NAMES[cat] || cat;
-      var tryFilter = function () {
-        var btn = ensureFilterBtn(cat);
-        btn.click();
+    function renderSousCats() {
+      sousCats.innerHTML = '';
+      var total = current.rayons.reduce(function (n, r) { return n + (counts[r.id] || 0); }, 0);
+      var mk = function (id, label, icone, n) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'sous-cat' + (currentCat === id ? ' is-active' : '');
+        b.innerHTML = (icone ? '<img src="assets/icons/' + esc(icone) + '" alt="">' : '') + esc(label) +
+          (n != null ? ' <span class="sous-cat__n">(' + n + ')</span>' : '');
+        b.addEventListener('click', function () { openUnivers(current.id, id, true); });
+        sousCats.appendChild(b);
       };
-      tryFilter();
-      var grid = document.getElementById('catalogueGridPhotos');
-      var obs = new MutationObserver(function () {
-        obs.disconnect();
-        tryFilter();
-      });
-      obs.observe(grid, { childList: true });
+      mk('all', "Tout l'univers", null, total);
+      current.rayons.forEach(function (r) { mk(r.id, r.nom, r.icone, counts[r.id] || 0); });
     }
 
-    // Load rayons from JSON then check URL
-    fetch('data/rayons.json')
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        renderShelves((data.rayons || []).filter(function(r){ return r.actif !== false; }));
-        var urlCat = new URLSearchParams(window.location.search).get('cat');
-        if (urlCat) { showCategory(urlCat); }
-      })
-      .catch(function() {
-        if (shelvesGrid) shelvesGrid.innerHTML = '<p style="color:#FFF5E0;padding:2rem;grid-column:1/-1;text-align:center">Rayons momentanément indisponibles.</p>';
-      });
+    function openUnivers(id, cat, pushUrl) {
+      var u = universEffectifs().find(function (x) { return x.id === id; });
+      if (!u) { showHome(pushUrl); return; }
+      current = u; currentCat = cat || 'all';
+      home.style.display = 'none';
+      view.style.display = '';
+      vTitle.textContent = u.nom;
+      vSub.textContent = currentCat === 'all' ? (u.sous_titre || '') : ((rayon(currentCat) || {}).nom || '');
+      renderSousCats();
+      filtrer(currentCat === 'all' ? u.rayons.map(function (r) { return r.id; }) : [currentCat]);
+      if (pushUrl) history.pushState(null, '', 'boutique.html?univers=' + encodeURIComponent(u.id) + (currentCat !== 'all' ? '&cat=' + encodeURIComponent(currentCat) : ''));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-    // Back to shelves
-    backBtn.addEventListener('click', function () {
-      history.pushState(null, '', 'boutique.html');
-      categoryView.style.display = 'none';
-      shelvesUnit.style.display  = '';
-      var allBtn = document.querySelector('#catalogueFilters [data-filter="all"]');
-      if (allBtn) allBtn.click();
+    function showHome(pushUrl) {
+      current = null; currentCat = 'all';
+      view.style.display = 'none';
+      home.style.display = '';
+      if (pushUrl) history.pushState(null, '', 'boutique.html');
+    }
+
+    function route() {
+      var q = new URLSearchParams(window.location.search);
+      var uid = q.get('univers'), cat = q.get('cat');
+      if (!uid && cat) {
+        var u = universEffectifs().find(function (x) { return x.rayons.some(function (r) { return r.id === cat; }); });
+        uid = u ? u.id : null;
+      }
+      if (uid) openUnivers(uid, cat || 'all', false); else showHome(false);
+    }
+
+    document.getElementById('universBack').addEventListener('click', function () { showHome(true); });
+    window.addEventListener('popstate', route);
+
+    Promise.all([
+      fetch('data/rayons.json?v=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); }),
+      fetch('data/univers.json?v=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return { univers: [] }; })
+    ]).then(function (res) {
+      RAYONS = res[0].rayons || [];
+      UNIVERS = res[1].univers || [];
+      if (res[1].titre) document.getElementById('universTitre').textContent = res[1].titre;
+      if (res[1].intro) document.getElementById('universIntro').textContent = res[1].intro;
+      renderHome();
+      route();
+    }).catch(function () {
+      grid.innerHTML = '<p class="univers-empty" style="grid-column:1/-1">Rayons momentanément indisponibles.</p>';
     });
   })();
   </script>
