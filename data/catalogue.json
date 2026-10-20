@@ -64,35 +64,6 @@
       }
     },
     {
-      "id": "olive-07",
-      "nom": "Classic AOP Provence",
-      "categorie": "autour-olive",
-      "description": "Oliviers de variété Aglandau et Salonenque plantés sur le terroir très aride de la Crau sèche avec galets, typique du terroir de l’AOP Provence. Classic AOP Provence présente un nez végétal. C’est en bouche qu’elle dévoile son caractère de fruité vert aux notes d’amande fraîche et son léger poivré.",
-      "legende": "",
-      "image": "assets/catalogue/1792157534407_castelas-aop-provence-recadre.jpg",
-      "best_seller": false,
-      "prix": "",
-      "contenance": "",
-      "prix_unitaire": "",
-      "visible": true,
-      "suggestion_active": true,
-      "suggestion": "Classic AOP Provence est une huile d’olive plaisir qui s’associe très bien à l’assaisonnement des salades, légumes et poisson tout au long de l’année.",
-      "nutrition": {
-        "actif": true,
-        "portion": "100 g",
-        "note": "",
-        "lignes": [
-          "Energie : 3700 kj / 900 kcal",
-          "Matières grasses : 100g",
-          "dont acides gras saturés : 17g",
-          "Glucides : <0,5g",
-          "dont sucres : <0,5g",
-          "Protéines : <0,5g",
-          "Sel : 0,02g"
-        ]
-      }
-    },
-    {
       "id": "confiture-01",
       "nom": "Gelée de Groseille",
       "categorie": "confitures",
