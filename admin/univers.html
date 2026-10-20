@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico?v=3">
+  <title>Univers — Délices de Provence</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    :root { --bg:#f8f5f0; --surface:#fff; --border:#e5ddd4; --primary:#c4913a; --text:#2c1810; --muted:#8b6e5a; --danger:#d94f4f; --success:#3a9a5c; --r:8px; --shadow:0 2px 8px rgba(44,24,16,.1); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size:14px; background:var(--bg); color:var(--text); min-height:100vh; }
+    #loginScreen { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; gap:1rem; }
+    #loginScreen h1 { font-size:1.3rem; } #loginScreen p { color:var(--muted); font-size:.9rem; }
+    .btn-login { padding:.65rem 2rem; background:var(--primary); color:#fff; border:none; border-radius:var(--r); font-size:1rem; cursor:pointer; }
+    #adminScreen { display:none; }
+    .topbar { background:var(--surface); border-bottom:1px solid var(--border); padding:.65rem 1.25rem; display:flex; align-items:center; gap:.75rem; position:sticky; top:0; z-index:100; box-shadow:var(--shadow); flex-wrap:wrap; }
+    .topbar h1 { font-size:1rem; font-weight:600; flex:1; min-width:120px; }
+    .status { font-size:.78rem; padding:.25rem .65rem; border-radius:50px; }
+    .status.saving { color:var(--primary); background:rgba(196,145,58,.12); }
+    .status.saved { color:var(--success); background:rgba(58,154,92,.12); }
+    .status.error { color:var(--danger); background:rgba(217,79,79,.12); }
+    .btn { padding:.45rem .9rem; border:none; border-radius:var(--r); font-size:.83rem; font-weight:500; cursor:pointer; transition:opacity .15s; }
+    .btn:hover { opacity:.85; } .btn:disabled { opacity:.5; cursor:default; }
+    .btn-primary { background:var(--primary); color:#fff; } .btn-danger { background:var(--danger); color:#fff; }
+    .btn-ghost { background:transparent; border:1.5px solid var(--border); color:var(--text); } .btn-sm { padding:.28rem .55rem; font-size:.75rem; }
+    .btn-text { background:none; border:none; color:var(--muted); font-size:.8rem; cursor:pointer; text-decoration:underline; }
+    .content { max-width:980px; margin:0 auto; padding:1.25rem; }
+    .hint { font-size:.76rem; color:var(--muted); line-height:1.45; }
+    .intro-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1rem 1.25rem; margin-bottom:1rem; box-shadow:var(--shadow); }
+    .intro-card .fg { display:flex; flex-direction:column; gap:.3rem; margin-top:.6rem; }
+    label { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+    input[type=text], textarea { padding:.48rem .65rem; border:1.5px solid var(--border); border-radius:6px; font-size:.9rem; font-family:inherit; outline:none; background:#fff; width:100%; }
+    input[type=text]:focus, textarea:focus { border-color:var(--primary); }
+    .univ { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1rem 1.25rem; margin-bottom:.9rem; box-shadow:var(--shadow); display:grid; grid-template-columns:150px 1fr auto; gap:1rem; align-items:start; }
+    .univ__photo { position:relative; aspect-ratio:16/10; border-radius:8px; overflow:hidden; background:#f0ece6; border:2px dashed var(--border); cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:.75rem; text-align:center; }
+    .univ__photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .univ__photo input { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+    .univ__photo:hover { border-color:var(--primary); }
+    .univ__fields { display:flex; flex-direction:column; gap:.55rem; min-width:0; }
+    .univ__row { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+    .univ__rayons { display:flex; flex-wrap:wrap; gap:.4rem; }
+    .chk { display:inline-flex; align-items:center; gap:.35rem; padding:.3rem .65rem .3rem .45rem; border:1.5px solid var(--border); border-radius:50px; background:#fff; font-size:.8rem; cursor:pointer; user-select:none; }
+    .chk input { accent-color:var(--primary); }
+    .chk.is-on { border-color:var(--primary); background:rgba(196,145,58,.12); }
+    .chk.is-elsewhere { opacity:.55; }
+    .chk img { width:16px; height:16px; object-fit:contain; }
+    .univ__actions { display:flex; flex-direction:column; gap:.3rem; }
+    .univ__actions button { width:34px; height:30px; }
+    .save-bar { position:sticky; bottom:0; background:linear-gradient(to top,var(--bg) 70%,transparent); padding:1rem 0 .4rem; text-align:center; }
+    .unsaved { font-size:.76rem; color:#b35c00; min-height:1em; margin-bottom:.4rem; }
+    .orphans { margin:0 0 1rem; padding:.7rem 1rem; border:1.5px solid #e9c46a; background:#fff8e6; border-radius:10px; font-size:.84rem; }
+    @media (max-width:700px) { .univ { grid-template-columns:1fr; } .univ__actions { flex-direction:row; } .univ__row { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div id="loginScreen">
+    <h1>Administration — Délices de Provence</h1>
+    <p>Connectez-vous pour gérer les univers de la page Nos produits</p>
+    <button class="btn-login" onclick="netlifyIdentity.open()">Se connecter</button>
+  </div>
+
+  <div id="adminScreen">
+    <div class="topbar">
+      <h1>🧭 Univers — page Nos produits</h1>
+      <span class="status" id="statusEl"></span>
+      <a href="index.html" class="btn btn-ghost btn-sm">← Admin</a>
+      <a href="rayons.html" class="btn btn-ghost btn-sm">Rayons</a>
+      <a href="../boutique.html" target="_blank" class="btn btn-ghost btn-sm">Voir la page ↗</a>
+      <button class="btn btn-primary btn-sm" onclick="addUnivers()">+ Ajouter un univers</button>
+      <button class="btn-text" onclick="netlifyIdentity.logout()">Déconnexion</button>
+    </div>
+
+    <div class="content">
+      <div class="intro-card">
+        <p class="hint">La page <strong>Nos produits</strong> présente d'abord les grandes familles (les univers), puis à l'intérieur les rayons en sous-catégories, puis les produits. Un rayon qui n'est rattaché à aucun univers apparaît automatiquement dans « Autres découvertes ».</p>
+        <div class="fg"><label>Titre en haut de page</label><input type="text" id="u_titre" placeholder="Le goût de la Provence"></div>
+        <div class="fg"><label>Phrase d'introduction</label><input type="text" id="u_intro" placeholder="Des produits choisis avec soin, à découvrir au fil de vos envies."></div>
+      </div>
+
+      <div class="orphans" id="orphansBox" style="display:none"></div>
+      <div id="universList"></div>
+
+      <div class="save-bar">
+        <div class="unsaved" id="unsavedMsg"></div>
+        <button class="btn btn-primary" style="padding:.75rem 2rem;font-size:.95rem" onclick="saveAll()">💾 Enregistrer les univers</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="recadrage.js"></script>
+  <script>
+  (function () {
+    'use strict';
+    var GIT = '/.netlify/functions/git-proxy/';
+    var FILE = 'data/univers.json';
+    var data = { titre: '', intro: '', univers: [] }, fileSha = '';
+    var RAYONS = [];
+    var dirty = false;
+
+    netlifyIdentity.on('init',  function (u) { if (u) boot(); });
+    netlifyIdentity.on('login', function () { netlifyIdentity.close(); boot(); });
+    netlifyIdentity.on('logout', function () {
+      document.getElementById('adminScreen').style.display = 'none';
+      document.getElementById('loginScreen').style.display = 'flex';
+    });
+
+    function jwt() { return netlifyIdentity.currentUser().jwt(); }
+    function gitGet(p) { return jwt().then(function (t) { return fetch(GIT + p, { headers: { 'Authorization': 'Bearer ' + t } }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }); }
+    function gitPut(p, b) { return jwt().then(function (t) { return fetch(GIT + p, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + t }, body: JSON.stringify(b) }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }); }
+    function dec(d) { return JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\n/g, ''))))); }
+
+    function boot() {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminScreen').style.display = 'block';
+      st('saving', 'Chargement…');
+      Promise.all([gitGet('data/rayons.json'), gitGet(FILE).catch(function () { return null; })])
+        .then(function (res) {
+          RAYONS = (dec(res[0]).rayons || []);
+          if (res[1]) { fileSha = res[1].sha; data = dec(res[1]); }
+          data.univers = data.univers || [];
+          document.getElementById('u_titre').value = data.titre || '';
+          document.getElementById('u_intro').value = data.intro || '';
+          st('', '');
+          render();
+        })
+        .catch(function () { st('error', 'Erreur de chargement'); });
+    }
+
+    function markDirty() {
+      dirty = true;
+      document.getElementById('unsavedMsg').textContent = 'Modifications non enregistrées — cliquez sur « Enregistrer les univers » pour publier.';
+    }
+    window.addEventListener('beforeunload', function (ev) { if (dirty) { ev.preventDefault(); ev.returnValue = ''; } });
+    document.getElementById('u_titre').addEventListener('input', markDirty);
+    document.getElementById('u_intro').addEventListener('input', markDirty);
+
+    function slugify(s) { return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
+    function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+    function whereIs(rid) { return data.univers.find(function (u) { return (u.rayons || []).indexOf(rid) !== -1; }); }
+
+    function render() {
+      var list = document.getElementById('universList');
+      list.innerHTML = '';
+      if (!data.univers.length) list.innerHTML = '<p class="hint" style="text-align:center;padding:1.5rem">Aucun univers. Cliquez sur « + Ajouter un univers ».</p>';
+      data.univers.forEach(function (u, i) {
+        var el = document.createElement('div');
+        el.className = 'univ';
+        el.innerHTML =
+          '<label class="univ__photo" title="Cliquer pour changer la photo">' +
+            (u.image ? '<img src="../' + esc(u.image) + '" alt="">' : '<span>📷 Cliquer pour ajouter une photo</span>') +
+            '<input type="file" accept="image/*" onchange="changePhoto(this,' + i + ')">' +
+          '</label>' +
+          '<div class="univ__fields">' +
+            '<div class="univ__row">' +
+              '<div><label>Nom de l\'univers</label><input type="text" value="' + esc(u.nom) + '" oninput="setField(' + i + ',\'nom\',this.value)"></div>' +
+              '<div><label>Sous-titre (facultatif)</label><input type="text" value="' + esc(u.sous_titre) + '" placeholder="Ex : Olives, biscuits salés, terrines" oninput="setField(' + i + ',\'sous_titre\',this.value)"></div>' +
+            '</div>' +
+            '<div><label>Rayons rattachés</label><div class="univ__rayons">' +
+              RAYONS.map(function (r) {
+                var on = (u.rayons || []).indexOf(r.id) !== -1;
+                var ailleurs = !on && whereIs(r.id);
+                return '<label class="chk' + (on ? ' is-on' : '') + (ailleurs ? ' is-elsewhere' : '') + '" title="' + (ailleurs ? 'Déjà dans « ' + esc(ailleurs.nom) + ' »' : '') + '">' +
+                  '<input type="checkbox" ' + (on ? 'checked' : '') + ' onchange="toggleRayon(' + i + ',\'' + esc(r.id) + '\',this.checked)">' +
+                  '<img src="../assets/icons/' + esc(r.icone) + '" alt="">' + esc(r.nom) + (r.actif === false ? ' (suspendu)' : '') + '</label>';
+              }).join('') +
+              (RAYONS.length ? '' : '<span class="hint">Aucun rayon pour l\'instant — créez-les dans « Rayons ».</span>') +
+            '</div></div>' +
+          '</div>' +
+          '<div class="univ__actions">' +
+            '<button class="btn btn-ghost btn-sm" onclick="move(' + i + ',-1)" ' + (i === 0 ? 'disabled' : '') + ' title="Monter">▲</button>' +
+            '<button class="btn btn-ghost btn-sm" onclick="move(' + i + ',1)" ' + (i === data.univers.length - 1 ? 'disabled' : '') + ' title="Descendre">▼</button>' +
+            '<button class="btn btn-danger btn-sm" onclick="removeUnivers(' + i + ')" title="Supprimer">✕</button>' +
+          '</div>';
+        list.appendChild(el);
+      });
+      // Rayons sans univers
+      var box = document.getElementById('orphansBox');
+      var libres = RAYONS.filter(function (r) { return r.actif !== false && !whereIs(r.id); });
+      if (libres.length) {
+        box.style.display = '';
+        box.innerHTML = '<strong>ℹ️ Rayons sans univers :</strong> ' + libres.map(function (r) { return esc(r.nom); }).join(', ') +
+          '. <span class="hint">Ils apparaissent dans « Autres découvertes » tant qu\'ils ne sont pas cochés dans un univers.</span>';
+      } else { box.style.display = 'none'; }
+    }
+
+    window.setField = function (i, k, v) { data.univers[i][k] = v; markDirty(); };
+    window.toggleRayon = function (i, rid, on) {
+      data.univers.forEach(function (u, j) {
+        u.rayons = (u.rayons || []).filter(function (x) { return x !== rid; });
+        if (on && j === i) u.rayons.push(rid);
+      });
+      markDirty(); render();
+    };
+    window.move = function (i, dir) {
+      var j = i + dir; if (j < 0 || j >= data.univers.length) return;
+      var t = data.univers[i]; data.univers[i] = data.univers[j]; data.univers[j] = t;
+      markDirty(); render();
+    };
+    window.removeUnivers = function (i) {
+      if (!confirm('Supprimer l\'univers « ' + data.univers[i].nom + ' » ? Ses rayons ne sont pas supprimés, ils iront dans « Autres découvertes ».')) return;
+      data.univers.splice(i, 1); markDirty(); render();
+    };
+    window.addUnivers = function () {
+      var nom = prompt('Nom du nouvel univers :');
+      if (!nom || !nom.trim()) return;
+      nom = nom.trim();
+      var id = slugify(nom) || ('univers-' + Date.now());
+      if (data.univers.some(function (u) { return u.id === id; })) id += '-' + Date.now();
+      data.univers.push({ id: id, nom: nom, sous_titre: '', image: '', rayons: [] });
+      markDirty(); render();
+      window.scrollTo(0, document.body.scrollHeight);
+    };
+    window.changePhoto = function (input, i) {
+      if (!input.files || !input.files[0]) return;
+      var f = input.files[0]; input.value = '';
+      Recadreur.open(f, { ratio: 'large' }).then(function (out) {
+        if (!out) return;
+        st('saving', 'Envoi de la photo…');
+        var r = new FileReader();
+        r.onload = function (ev) {
+          var b64 = ev.target.result.split(',')[1];
+          var name = 'univers-' + Date.now() + '_' + out.name.replace(/[^a-z0-9.\-_]/gi, '-').toLowerCase();
+          gitPut('assets/images/' + name, { message: 'Photo univers : ' + name, content: b64 })
+            .then(function () { data.univers[i].image = 'assets/images/' + name; st('saved', 'Photo envoyée ✓ — pensez à enregistrer'); markDirty(); render(); })
+            .catch(function () { st('error', 'Erreur envoi photo'); });
+        };
+        r.readAsDataURL(out);
+      });
+    };
+
+    window.saveAll = function () {
+      data.titre = document.getElementById('u_titre').value.trim();
+      data.intro = document.getElementById('u_intro').value.trim();
+      data.univers.forEach(function (u) { u.nom = (u.nom || '').trim() || 'Univers'; });
+      st('saving', 'Enregistrement…');
+      var content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+      gitPut(FILE, { message: 'Mise à jour des univers', sha: fileSha || undefined, content: content })
+        .then(function (d) {
+          fileSha = d.content ? d.content.sha : fileSha;
+          dirty = false;
+          document.getElementById('unsavedMsg').textContent = '';
+          st('saved', '✓ Enregistré — en ligne dans quelques secondes');
+          setTimeout(function () { st('', ''); }, 5000);
+          gitGet('data/infos.json').then(function (d) { var h = dec(d).netlify_hook; if (h) fetch(h, { method: 'POST' }).catch(function () {}); }).catch(function () {});
+        })
+        .catch(function (e) { st('error', 'Erreur d\'enregistrement (' + e.message + ') — rechargez la page et réessayez'); });
+    };
+
+    function st(type, msg) { var el = document.getElementById('statusEl'); el.className = 'status' + (type ? ' ' + type : ''); el.textContent = msg; }
+  })();
+  </script>
+</body>
+</html>
