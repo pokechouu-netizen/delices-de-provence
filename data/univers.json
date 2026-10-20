@@ -1,0 +1,42 @@
+{
+  "_commentaire": "Les 5 univers de la page Nos produits. Chaque univers regroupe des rayons (identifiants de data/rayons.json). Un rayon absent de tout univers est rangé automatiquement dans « Autres découvertes ».",
+  "titre": "Le goût de la Provence",
+  "intro": "Des produits choisis avec soin, à découvrir au fil de vos envies.",
+  "univers": [
+    {
+      "id": "aperitif-sale",
+      "nom": "L'Apéritif & le Salé",
+      "sous_titre": "Olives, biscuits salés, terrines & charcuteries",
+      "image": "assets/images/produit-saucisson-planche.jpg",
+      "rayons": ["autour-olive", "biscuits-sales", "terrines"]
+    },
+    {
+      "id": "douceurs-sucrees",
+      "nom": "Les Douceurs Sucrées",
+      "sous_titre": "Biscuits, chocolats, confitures & miels",
+      "image": "assets/images/produit-calissons.jpg",
+      "rayons": ["biscuits-sucres", "chocolat", "confitures", "miel"]
+    },
+    {
+      "id": "cuisine-terroir",
+      "nom": "La Cuisine & le Terroir",
+      "sous_titre": "Pâtes, riz, plats cuisinés, épices & lavande",
+      "image": "assets/images/produit-riz-camargue.jpg",
+      "rayons": ["pates-riz", "plats-cuisines", "epices", "sel-camargue"]
+    },
+    {
+      "id": "cave",
+      "nom": "La Cave",
+      "sous_titre": "Vins, alcools, champagnes & bières",
+      "image": "assets/images/produit-champagne.jpg",
+      "rayons": ["vins", "alcools", "bieres"]
+    },
+    {
+      "id": "boissons-pause",
+      "nom": "Boissons & Instants de Pause",
+      "sous_titre": "Cafés, thés, infusions, jus & sirops",
+      "image": "assets/images/produit-sirop-boutique.jpg",
+      "rayons": ["cafe-the", "jus", "sirops"]
+    }
+  ]
+}
